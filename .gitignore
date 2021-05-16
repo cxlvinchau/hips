@@ -1,8 +1,0 @@
-.idea/
-__pycache__/
-dist
-MANIFEST
-build
-src/hips/hips_integer_programming.egg-info
-src/hips_integer_programming.egg-info
-../src/.idea/workspace.xml
