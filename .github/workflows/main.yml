@@ -23,9 +23,11 @@ jobs:
     - name: Install cbc
       run: |
         conda create -n cbc coin-or-cbc -c conda-forge
+    - run: |
+        conda init bash
     - name: Activate cbc
       run: |
-        source activate cbc
+        conda activate cbc
     - name: Install cylp
       run: |
         pip install cylp
