@@ -15,6 +15,12 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
+    - name: Install requirements
+    - run: |
+        pip install numpy
+        conda create -n cbc coin-or-cbc -c conda-forge
+        pip install cylp
+    
     - uses: actions/checkout@v1
     - uses: ammaraskar/sphinx-action@master
       with:
