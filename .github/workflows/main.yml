@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: Install requirements
-    - run: |
+      run: |
         pip install numpy
         conda create -n cbc coin-or-cbc -c conda-forge
         pip install cylp
