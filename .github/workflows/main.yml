@@ -1,4 +1,4 @@
-name: Build Doc
+name: Documentation
 
 # Controls when the action will run. 
 on:
@@ -17,10 +17,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     
-    - name: Install requirements
+    - name: Install numpy
       run: |
         pip install numpy
+    - name: Install cbc
+      run: |
         conda create -n cbc coin-or-cbc -c conda-forge
+    - name: Install cylp
+      run: |
         pip install cylp
     
     - uses: ammaraskar/sphinx-action@master
