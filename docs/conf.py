@@ -16,7 +16,8 @@ import mock
 import sys
 
 MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot', 'scipy.interpolate', 'pysmps', 'pulp',
-                'gurobipy', 'gurobipy.GRB', 'cylp', 'cylp.cy', 'cylp.py.modeling.CyLPModel']
+                'gurobipy', 'gurobipy.GRB', 'cylp', 'cylp.cy', 'cylp.py.modeling.CyLPModel', 'scipy.optimize', 'pysmps.smps_loader',
+                ]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 
