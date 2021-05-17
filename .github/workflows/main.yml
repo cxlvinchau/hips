@@ -27,10 +27,19 @@ jobs:
     - name: Install cylp
       run: |
         pip install --pre cylp
+        pip install numpy
+        pip install -U Sphinx
+        pip install sphinx_rtd_theme
+        pip install scipy~=1.5.4
+        pip install pysmps~=1.5.6
+        pip install pulp~=2.4
+        pip install matplotlib~=3.3.2
     
-    - uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs/"
+    - name: Build documentation
+      run: |
+        cd docs
+        sphinx-apidoc --force ../src -o .
+        make clean html
         
     - name: Commit documentation changes
       run: |
