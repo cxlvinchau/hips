@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -93,7 +95,7 @@
 <li class="toctree-l3"><a class="reference internal" href="hips.heuristics.html">hips.heuristics package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hips.loader.html">hips.loader package</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">hips.models package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-hips.models">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="hips.solver.html">hips.solver package</a></li>
@@ -101,8 +103,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="hips.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hips.html#hips-constants-module">hips.constants module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hips.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hips.html#module-hips.constants">hips.constants module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hips.html#module-hips">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -176,8 +178,220 @@
             
   <div class="section" id="hips-models-package">
 <h1>hips.models package<a class="headerlink" href="#hips-models-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-hips.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hips.models" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.models.Constraint">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">Constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.Constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a linear constraint of an LP</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.Constraint.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_solutions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0002</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.Constraint.eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.models.HIPSArray">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">HIPSArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wrapper class for numpy array</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.HIPSArray.reshape">
+<span class="sig-name descname"><span class="pre">reshape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray.reshape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.HIPSArray.to_np">
+<span class="sig-name descname"><span class="pre">to_np</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray.to_np" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.HIPSArray.to_numpy">
+<span class="sig-name descname"><span class="pre">to_numpy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray.to_numpy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.models.LPModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">LPModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_solver</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Representation of a linear program</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.add_constraint">
+<span class="sig-name descname"><span class="pre">add_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constraint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.add_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a constraint to the linear program</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.add_variable">
+<span class="sig-name descname"><span class="pre">add_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.add_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a variable to the linear program</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.get_objective_value">
+<span class="sig-name descname"><span class="pre">get_objective_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.get_objective_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the optimal value of the linear program</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.get_status">
+<span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.get_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.get_variables">
+<span class="sig-name descname"><span class="pre">get_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.get_variables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.is_feasible">
+<span class="sig-name descname"><span class="pre">is_feasible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_solutions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.is_feasible" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizes the linear program</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.remove_constraint">
+<span class="sig-name descname"><span class="pre">remove_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.remove_constraint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.remove_variable">
+<span class="sig-name descname"><span class="pre">remove_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.remove_variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.set_lp_sense">
+<span class="sig-name descname"><span class="pre">set_lp_sense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_sense</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.html#hips.constants.LPSense" title="hips.constants.LPSense"><span class="pre">hips.constants.LPSense</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.set_lp_sense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the type of the linear program, i.e. minimization or maximization. Use LPSense.MAX or LPSense.MIN</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.set_objective">
+<span class="sig-name descname"><span class="pre">set_objective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.set_objective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the objective of the linear program</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.variable_solution">
+<span class="sig-name descname"><span class="pre">variable_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.variable_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the optimal value for the given variable</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.models.LinExpr">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">LinExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LinExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a linear expression, used as lhs of a constraint</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LinExpr.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_solutions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LinExpr.eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.models.MIPModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">MIPModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary_variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integer_variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a mixed-integer program. In contrast to the <code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code>, this
+class allows for specification of the variable types, i.e. continuous, binary or integer. Under the hood, the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code> is used.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.MIPModel.add_constraint">
+<span class="sig-name descname"><span class="pre">add_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constraint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.add_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a linear constraint to the mixed-integer program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>constraint</strong> – Constraint of type <code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.MIPModel.add_variable">
+<span class="sig-name descname"><span class="pre">add_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em>, <em class="sig-param"><span class="pre">var_type=&lt;VarTypes.CONTINUOUS:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">lb=0</span></em>, <em class="sig-param"><span class="pre">ub=None</span></em>, <em class="sig-param"><span class="pre">dim=1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.add_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a variable to the mixed-integer program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the variable</p></li>
+<li><p><strong>var_type</strong> – Type of the variable, either continuous, binary or integer. See <a class="reference internal" href="hips.html#hips.constants.VarTypes" title="hips.constants.VarTypes"><code class="xref py py-class docutils literal notranslate"><span class="pre">VarTypes</span></code></a>.</p></li>
+<li><p><strong>lb</strong> – Lower bound of the variable, by default 0.</p></li>
+<li><p><strong>ub</strong> – Upper bound of the variable, by default the variable is unbounded. Note that an integer variable has to be bounded from above.</p></li>
+<li><p><strong>dim</strong> – dimension of the variable, by default 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.MIPModel.is_feasible">
+<span class="sig-name descname"><span class="pre">is_feasible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_solutions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.is_feasible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the given solution is feasible for the MIP</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>variable_solutions</strong> – Dictionary mapping variables to solutions</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if solution is feasible else False</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.MIPModel.set_mip_sense">
+<span class="sig-name descname"><span class="pre">set_mip_sense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_sense</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.set_mip_sense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the type of the mixed-integer program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lp_sense</strong> – <a class="reference internal" href="hips.html#hips.constants.LPSense" title="hips.constants.LPSense"><code class="xref py py-class docutils literal notranslate"><span class="pre">LPSense</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.MIPModel.set_objective">
+<span class="sig-name descname"><span class="pre">set_objective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.set_objective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the objective function of the mixed-integer program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>objective</strong> – A linear expression of type <code class="xref py py-class docutils literal notranslate"><span class="pre">LinExpr</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.models.Variable">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em>, <em class="sig-param"><span class="pre">id=0</span></em>, <em class="sig-param"><span class="pre">var_type=&lt;VarTypes.CONTINUOUS:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">lb=0</span></em>, <em class="sig-param"><span class="pre">ub=None</span></em>, <em class="sig-param"><span class="pre">dim=1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.Variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a variable in an LP</p>
+</dd></dl>
+
 </div>
 </div>
 
