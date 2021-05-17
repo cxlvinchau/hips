@@ -22,13 +22,11 @@ jobs:
         pip install numpy
     - name: Install cbc
       run: |
-        conda create -n cbc coin-or-cbc -c conda-forge
-    - uses: conda-incubator/setup-miniconda@v2
-      with:
-        activate-environment: cbc
+        sudo apt-get install -y git pkg-config coinor-libcbc-dev coinor-libosi-dev coinor-libcoinutils-dev coinor-libcgl-dev
+        export COIN_INSTALL_DIR=/usr/
     - name: Install cylp
       run: |
-        pip install cylp
+        pip3 install --pre cylp
     
     - uses: ammaraskar/sphinx-action@master
       with:
