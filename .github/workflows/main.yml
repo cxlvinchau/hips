@@ -26,7 +26,7 @@ jobs:
         export COIN_INSTALL_DIR=/usr/
     - name: Install cylp
       run: |
-        pip3 install --pre cylp
+        pip install --pre cylp
     
     - uses: ammaraskar/sphinx-action@master
       with:
