@@ -95,9 +95,9 @@
 <li class="toctree-l3"><a class="reference internal" href="hips.heuristics.html">hips.heuristics package</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">hips.loader package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hips-loader-mps-loader-module">hips.loader.mps_loader module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hips-loader-old-loader-module">hips.loader.old_loader module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-hips.loader.mps_loader">hips.loader.mps_loader module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-hips.loader.old_loader">hips.loader.old_loader module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-hips.loader">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="hips.models.html">hips.models package</a></li>
@@ -184,14 +184,77 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="hips-loader-mps-loader-module">
-<h2>hips.loader.mps_loader module<a class="headerlink" href="#hips-loader-mps-loader-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-hips.loader.mps_loader">
+<span id="hips-loader-mps-loader-module"></span><h2>hips.loader.mps_loader module<a class="headerlink" href="#module-hips.loader.mps_loader" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="hips.loader.mps_loader.bounds_set">
+<span class="sig-prename descclassname"><span class="pre">hips.loader.mps_loader.</span></span><span class="sig-name descname"><span class="pre">bounds_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.loader.mps_loader.bounds_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hips.loader.mps_loader.load_mps_advanced">
+<span class="sig-prename descclassname"><span class="pre">hips.loader.mps_loader.</span></span><span class="sig-name descname"><span class="pre">load_mps_advanced</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.loader.mps_loader.load_mps_advanced" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.
+This method uses multidimensional variables to create the model.
+If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set.
+Makes use of the library <a href="#id1"><span class="problematic" id="id2">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mip_model</strong> – The mip_model, in which the MIP problem should be loaded.</p></li>
+<li><p><strong>path</strong> – The path to the .mps file. This can be either relative to the current working directory or absolute.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hips.loader.mps_loader.load_mps_primitive">
+<span class="sig-prename descclassname"><span class="pre">hips.loader.mps_loader.</span></span><span class="sig-name descname"><span class="pre">load_mps_primitive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.loader.mps_loader.load_mps_primitive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.
+This method only uses 1-dimensional variables to create the model.
+If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set.
+Makes use of the library <a href="#id3"><span class="problematic" id="id4">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mip_model</strong> – The mip_model, in which the MIP problem should be loaded.</p></li>
+<li><p><strong>path</strong> – The path to the .mps file. This can be either relative to the current working directory or absolute.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
-<div class="section" id="hips-loader-old-loader-module">
-<h2>hips.loader.old_loader module<a class="headerlink" href="#hips-loader-old-loader-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-hips.loader.old_loader">
+<span id="hips-loader-old-loader-module"></span><h2>hips.loader.old_loader module<a class="headerlink" href="#module-hips.loader.old_loader" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="hips.loader.old_loader.load_mps">
+<span class="sig-prename descclassname"><span class="pre">hips.loader.old_loader.</span></span><span class="sig-name descname"><span class="pre">load_mps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">abs_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.loader.old_loader.load_mps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mip_model</strong> – The mip_model, in which the MIP problem should be loaded.</p></li>
+<li><p><strong>abs_path</strong> – The absolute path to the .mps or .cor file.</p></li>
+<li><p><strong>rel_path</strong> – The relative path to the .mps or .cor file starting in the examples/mps_files directory.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-hips.loader">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hips.loader" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
