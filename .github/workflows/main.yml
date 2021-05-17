@@ -16,25 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    
-    - name: Install numpy
+    - name: Install dependencies
       run: |
-        pip install numpy
-    - name: Install cbc
-      run: |
-        sudo apt-get install -y git pkg-config coinor-libcbc-dev coinor-libosi-dev coinor-libcoinutils-dev coinor-libcgl-dev
-        export COIN_INSTALL_DIR=/usr/
-    - name: Install cylp
-      run: |
-        pip install --pre cylp
         pip install numpy
         pip install -U Sphinx
         pip install sphinx_rtd_theme
-        pip install scipy~=1.5.4
-        pip install pysmps~=1.5.6
-        pip install pulp~=2.4
-        pip install matplotlib~=3.3.2
-    
+        pip install mock
+        
     - name: Build documentation
       run: |
         cd docs
