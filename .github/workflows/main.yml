@@ -22,7 +22,10 @@ jobs:
         pip install numpy
     - name: Install cbc
       run: |
-        conda install coin-or-cbc -c conda-forge
+        conda create -n cbc coin-or-cbc -c conda-forge
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: cbc
     - name: Install cylp
       run: |
         pip install cylp
