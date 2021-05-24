@@ -1,5 +1,5 @@
 # HIPS
-[![Documentation](https://github.com/cxlvinchau/hips/actions/workflows/main.yml/badge.svg)](https://github.com/cxlvinchau/hips)
+[![Documentation](https://github.com/cxlvinchau/hips/actions/workflows/main.yml/badge.svg)](https://cxlvinchau.github.io/hips)
 
 A Python library for heuristically solving mixed integer programs.
 
