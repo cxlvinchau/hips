@@ -51,7 +51,8 @@ release = '0.0.1'
 import sphinx_rtd_theme
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx_rtd_theme'
+    'sphinx_rtd_theme',
+    'sphinx.ext.autosummary'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -76,7 +77,8 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'api/hips.rst']
+
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
@@ -194,3 +196,12 @@ def remove_module_docstring(app, what, name, obj, options, lines):
 
 def setup(app):
     app.connect("autodoc-process-docstring", remove_module_docstring)
+
+autosummary_generate = True
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'special-members': '',
+    'undoc-members': True,
+    'exclude-members': '__weakref__'
+}

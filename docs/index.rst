@@ -5,13 +5,16 @@
 
 HIPS Documentation
 ================================
+A Python library for heuristically solving mixed integer programs.
+
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   installation
    getting_started
-   hips
+   api
 
 
 
