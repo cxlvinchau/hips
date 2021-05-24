@@ -1,5 +1,6 @@
 import numpy as np
 from hips.models import HIPSArray
+from hips.utils.tracking import Tracker
 # Define global constants
 
 REL_TOLERANCE = 1e-05

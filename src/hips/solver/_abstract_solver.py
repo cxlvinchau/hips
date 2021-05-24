@@ -34,8 +34,7 @@ class AbstractSolver(ABC):
     @abstractmethod
     def add_variable(self, var: Variable):
         """
-        Adds a variable to the model.
-           Use the var.id as a name in the concrete solver implementation to prevent duplicate names.
+        Adds a variable to the model. Use the var.id as a name in the concrete solver implementation to prevent duplicate names.
 
         :param var: Variable to be added
         :return: None
