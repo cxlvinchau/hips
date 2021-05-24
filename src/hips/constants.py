@@ -33,3 +33,7 @@ class LPStatus(Enum):
 class LPSense(Enum):
     MAX = -1
     MIN = 1
+
+class VariableBound:
+    LB = 0
+    UB = 1

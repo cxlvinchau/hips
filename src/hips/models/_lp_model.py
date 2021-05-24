@@ -1,4 +1,4 @@
-from hips.constants import Comparator, VarTypes, LPStatus, LPSense, NUMERICAL_TYPES
+from hips.constants import Comparator, VarTypes, LPStatus, LPSense, NUMERICAL_TYPES, VariableBound
 import numpy as np
 
 
@@ -70,6 +70,10 @@ class LPModel:
         self.vars.remove(var)
         # Remove variable from concrete solver
         self.concrete_solver.remove_variable(var)
+
+    def set_variable_bound(self, var, bound: VariableBound, value):
+        #TODO implement me here and in concrete solvers
+        pass
 
     def set_objective(self, objective):
         """Sets the objective of the linear program"""
