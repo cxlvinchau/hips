@@ -1,0 +1,27 @@
+﻿hips.models.MIPModel
+====================
+
+.. currentmodule:: hips.models
+
+.. autoclass:: MIPModel
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MIPModel.__init__
+      ~MIPModel.add_constraint
+      ~MIPModel.add_variable
+      ~MIPModel.is_feasible
+      ~MIPModel.set_mip_sense
+      ~MIPModel.set_objective
+   
+   
+
+   
+   
+   

@@ -1,0 +1,32 @@
+﻿hips.solver.ClpSolver
+=====================
+
+.. currentmodule:: hips.solver
+
+.. autoclass:: ClpSolver
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ClpSolver.__init__
+      ~ClpSolver.add_constraint
+      ~ClpSolver.add_variable
+      ~ClpSolver.get_objective_value
+      ~ClpSolver.get_status
+      ~ClpSolver.optimize
+      ~ClpSolver.remove_constraint
+      ~ClpSolver.remove_variable
+      ~ClpSolver.set_lp_sense
+      ~ClpSolver.set_objective
+      ~ClpSolver.variable_solution
+   
+   
+
+   
+   
+   

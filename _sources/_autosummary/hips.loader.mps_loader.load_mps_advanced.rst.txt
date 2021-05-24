@@ -1,0 +1,6 @@
+﻿hips.loader.mps\_loader.load\_mps\_advanced
+===========================================
+
+.. currentmodule:: hips.loader.mps_loader
+
+.. autofunction:: load_mps_advanced

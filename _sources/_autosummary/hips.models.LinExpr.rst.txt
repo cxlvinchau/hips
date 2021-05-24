@@ -1,0 +1,23 @@
+﻿hips.models.LinExpr
+===================
+
+.. currentmodule:: hips.models
+
+.. autoclass:: LinExpr
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LinExpr.__init__
+      ~LinExpr.eval
+   
+   
+
+   
+   
+   

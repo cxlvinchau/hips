@@ -1,0 +1,23 @@
+﻿hips.models.Constraint
+======================
+
+.. currentmodule:: hips.models
+
+.. autoclass:: Constraint
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Constraint.__init__
+      ~Constraint.eval
+   
+   
+
+   
+   
+   

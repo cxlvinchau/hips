@@ -1,0 +1,35 @@
+﻿hips.models.LPModel
+===================
+
+.. currentmodule:: hips.models
+
+.. autoclass:: LPModel
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LPModel.__init__
+      ~LPModel.add_constraint
+      ~LPModel.add_variable
+      ~LPModel.get_objective_value
+      ~LPModel.get_status
+      ~LPModel.get_variables
+      ~LPModel.is_feasible
+      ~LPModel.optimize
+      ~LPModel.remove_constraint
+      ~LPModel.remove_variable
+      ~LPModel.set_lp_sense
+      ~LPModel.set_objective
+      ~LPModel.set_variable_bound
+      ~LPModel.variable_solution
+   
+   
+
+   
+   
+   

@@ -1,0 +1,25 @@
+﻿hips.models.HIPSArray
+=====================
+
+.. currentmodule:: hips.models
+
+.. autoclass:: HIPSArray
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~HIPSArray.__init__
+      ~HIPSArray.reshape
+      ~HIPSArray.to_np
+      ~HIPSArray.to_numpy
+   
+   
+
+   
+   
+   

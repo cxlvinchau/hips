@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>API Documentation &mdash; HIPS 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="hips.models.LPModel" href="_autosummary/hips.models.LPModel.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HIPS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing HIPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#models">Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.models.LPModel.html">hips.models.LPModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.models.MIPModel.html">hips.models.MIPModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.models.HIPSArray.html">hips.models.HIPSArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.models.Variable.html">hips.models.Variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.models.LinExpr.html">hips.models.LinExpr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.models.Constraint.html">hips.models.Constraint</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#solver">Solver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.solver.GurobiSolver.html">hips.solver.GurobiSolver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.solver.ClpSolver.html">hips.solver.ClpSolver</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#heuristics">Heuristics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.FeasibilityPump.html">hips.heuristics.FeasibilityPump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.HeuristicBounds.html">hips.heuristics.HeuristicBounds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.AbstractDiving.html">hips.heuristics.AbstractDiving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.FractionalDivingHeuristic.html">hips.heuristics.FractionalDivingHeuristic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#loader-and-tracker">Loader and Tracker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps_advanced.html">hips.loader.mps_loader.load_mps_advanced</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps_primitive.html">hips.loader.mps_loader.load_mps_primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.utils.Tracker.html">hips.utils.Tracker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HIPS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>API Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-documentation">
+<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Documentation of the API.</p>
+<div class="section" id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a></p></td>
+<td><p>Representation of a linear program</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.MIPModel</span></code></a></p></td>
+<td><p>Represents a mixed-integer program.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p></td>
+<td><p>Wrapper class for numpy array</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p></td>
+<td><p>Represents a variable in an LP</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.models.LinExpr.html#hips.models.LinExpr" title="hips.models.LinExpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.LinExpr</span></code></a></p></td>
+<td><p>Represents a linear expression, used as lhs of a constraint</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.models.Constraint.html#hips.models.Constraint" title="hips.models.Constraint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.Constraint</span></code></a></p></td>
+<td><p>Represents a linear constraint of an LP</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="solver">
+<h2>Solver<a class="headerlink" href="#solver" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver" title="hips.solver.GurobiSolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.solver.GurobiSolver</span></code></a></p></td>
+<td><p>Realization of the LP model using Gurobi LP solver</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver" title="hips.solver.ClpSolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.solver.ClpSolver</span></code></a></p></td>
+<td><p>Implements the IConcreteSolver class and wraps CyLP.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="heuristics">
+<h2>Heuristics<a class="headerlink" href="#heuristics" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics.FeasibilityPump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.FeasibilityPump</span></code></a></p></td>
+<td><p>The feasibility pump is a heuristic for solving integer programs (MIPs) proposed by Fischetti et al. in 2005 ( <a class="reference external" href="https://link.springer.com/article/10.1007/s10107-004-0570-3">https://link.springer.com/article/10.1007/s10107-004-0570-3</a>).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.HeuristicBounds.html#hips.heuristics.HeuristicBounds" title="hips.heuristics.HeuristicBounds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.HeuristicBounds</span></code></a></p></td>
+<td><p>This heuristic is implemented after the scipopt primal heuristic ‘heur_bounds.h’.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving" title="hips.heuristics.AbstractDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.AbstractDiving</span></code></a></p></td>
+<td><p>Implements an abstract version of diving heuristics.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.FractionalDivingHeuristic.html#hips.heuristics.FractionalDivingHeuristic" title="hips.heuristics.FractionalDivingHeuristic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDivingHeuristic</span></code></a></p></td>
+<td><p>Implements a concrete diving heuristic, that bounds the variable x_j with lowest fractionality f(x_j) to the nearest integer.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="loader-and-tracker">
+<h2>Loader and Tracker<a class="headerlink" href="#loader-and-tracker" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps_advanced.html#hips.loader.mps_loader.load_mps_advanced" title="hips.loader.mps_loader.load_mps_advanced"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.loader.mps_loader.load_mps_advanced</span></code></a></p></td>
+<td><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path. This method uses multidimensional variables to create the model. If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set. Makes use of the library <a href="#id1"><span class="problematic" id="id2">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps_primitive.html#hips.loader.mps_loader.load_mps_primitive" title="hips.loader.mps_loader.load_mps_primitive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.loader.mps_loader.load_mps_primitive</span></code></a></p></td>
+<td><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path. This method only uses 1-dimensional variables to create the model. If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set. Makes use of the library <a href="#id3"><span class="problematic" id="id4">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.utils.Tracker.html#hips.utils.Tracker" title="hips.utils.Tracker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.utils.Tracker</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_autosummary/hips.models.LPModel.html" class="btn btn-neutral float-right" title="hips.models.LPModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Calvin Chau.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
