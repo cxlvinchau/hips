@@ -26,7 +26,6 @@ jobs:
     - name: Build documentation
       run: |
         cd docs
-        sphinx-apidoc --force ../src -o .
         make clean html
         
     - name: Commit documentation changes
