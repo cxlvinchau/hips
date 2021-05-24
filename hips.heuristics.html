@@ -181,6 +181,47 @@
 <div class="section" id="module-hips.heuristics">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hips.heuristics" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
+<dt class="sig sig-object py" id="hips.heuristics.AbstractDiving">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">AbstractDiving</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.AbstractDiving" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></p>
+<p>Implements an abstract version of diving heuristics. It consists of a general framework for
+branch-and-bound-tree traversal and stopping criteria. The branching criteria should be implemented in a
+corresponding subclass. This implementation roughly follows the algorithm seen in
+Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 17, “Algorithm 1: A General Diving heuristic”;</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.AbstractDiving.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.AbstractDiving.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the optimal solution with the heuristic algorithm.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.AbstractDiving.get_objective_value">
+<span class="sig-name descname"><span class="pre">get_objective_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#hips.heuristics.AbstractDiving.get_objective_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return objective value determined by the heuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>optimal value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.AbstractDiving.variable_solution">
+<span class="sig-name descname"><span class="pre">variable_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.AbstractDiving.variable_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the solution found by the heuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var</strong> – Variable</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Optimal solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="hips.heuristics.FeasibilityPump">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">FeasibilityPump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FeasibilityPump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></p>
@@ -236,6 +277,14 @@ the more we optimize towards the original objective function.</p></li>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.heuristics.FractionalDivingHeuristic">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">FractionalDivingHeuristic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDivingHeuristic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hips.heuristics.AbstractDiving" title="hips.heuristics._heur_abstract_diving.AbstractDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._heur_abstract_diving.AbstractDiving</span></code></a></p>
+<p>Implements a concrete diving heuristic, that bounds the variable x_j with lowest fractionality f(x_j) to the nearest
+integer. The idea is based on Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 17;</p>
 </dd></dl>
 
 <dl class="py class">
