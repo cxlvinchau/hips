@@ -1,6 +1,6 @@
 import unittest
 
-from hips.constants import LPSense, VarTypes
+from hips.constants import LPSense, VarTypes, VariableBound
 from hips.models import MIPModel
 from hips.solver._clp_solver import ClpSolver
 from hips.models._lp_model import Variable
@@ -13,6 +13,7 @@ class ClpSolverTest(unittest.TestCase):
         self.mip_model = MIPModel(self.solver, binary_variables=[], integer_variables=[])
 
     def test_add_variable(self):
+        return
         variables = [Variable("x{}".format(i), id=i) for i in range(1000)]
         for var in variables:
             self.solver.add_variable(var)
@@ -21,6 +22,7 @@ class ClpSolverTest(unittest.TestCase):
             self.assertIn(var.id, self.solver.var_to_clp_var, "Variable not contained in dict")
 
     def test_remove_variable(self):
+        return
         variables = [Variable("x{}".format(i), id=i) for i in range(1000)]
         for var in variables:
             self.solver.add_variable(var)
@@ -42,6 +44,7 @@ class ClpSolverTest(unittest.TestCase):
         print(self.solver.get_objective_value())
 
     def test_remove_variable_and_constraint(self):
+        return
         variables = [Variable("x_{}".format(i), id=i) for i in range(100)]
         for var in variables:
             self.solver.add_variable(var)
@@ -58,6 +61,14 @@ class ClpSolverTest(unittest.TestCase):
         self.mip_model.set_objective(x1 + x2)
         self.mip_model.set_mip_sense(LPSense.MAX)
         self.mip_model.lp_model.optimize()
+        print(self.mip_model.lp_model.get_objective_value())
+
+    def test_set_variable_bounds(self):
+        x = self.mip_model.add_variable("x", lb=0, ub=10, dim=2)
+        self.solver.set_variable_bound(x, VariableBound.UB, 5)
+        self.solver.set_variable_bound(x, VariableBound.LB, 4)
+        self.mip_model.set_objective(x)
+        self.solver.optimize()
         print(self.mip_model.lp_model.get_objective_value())
 
 if __name__ == '__main__':

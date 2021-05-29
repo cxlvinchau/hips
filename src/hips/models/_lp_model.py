@@ -327,17 +327,17 @@ class Variable:
         if type(other) == Variable:
             return self.name == other.name and self.id == other.id
         if type(other) == int:
-            return LinExpr(set([self]), {self: HIPSArray((np.identity(self.dim), self.dim))}) == other
+            return LinExpr(set([self]), {self: HIPSArray(np.identity(self.dim))}) == other
         return False
 
     def __ge__(self, other):
-        if isinstance(other, NUMERICAL_TYPES):
-            return LinExpr(set([self]), {self: HIPSArray((np.identity(self.dim), self.dim))}) >= other
+        if isinstance(other, NUMERICAL_TYPES) or isinstance(other, HIPSArray):
+            return LinExpr(set([self]), {self: HIPSArray(np.identity(self.dim))}) >= other
         return NotImplemented
 
     def __le__(self, other):
-        if isinstance(other, NUMERICAL_TYPES):
-            return LinExpr(set([self]), {self: HIPSArray((np.identity(self.dim), self.dim))}) <= other
+        if isinstance(other, NUMERICAL_TYPES) or isinstance(other, HIPSArray):
+            return LinExpr(set([self]), {self: HIPSArray(np.identity(self.dim))}) <= other
         return NotImplemented
 
     def __hash__(self):

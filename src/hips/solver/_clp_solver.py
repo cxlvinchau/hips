@@ -4,9 +4,9 @@ from cylp.cy import CyClpSimplex
 from cylp.py.modeling.CyLPModel import CyLPArray
 
 from hips.solver._abstract_solver import AbstractSolver
-from hips.constants import Comparator
+from hips.constants import Comparator, VariableBound
 from hips.constants import LPStatus, LPSense
-from hips.models import HIPSArray
+from hips.models import HIPSArray, Variable
 
 
 class ClpSolver(AbstractSolver):
@@ -31,12 +31,16 @@ class ClpSolver(AbstractSolver):
         self.var_to_nconstr = {}
         # Maps constr to variables
         self.constr_to_vars = {}
+        # Map vars to lower/upper bound constraint
+        self.var_to_lower = {}
+        self.var_to_upper = {}
 
     def _to_clp_lin_expr(self, lin_expr):
         """
         Converts a HIPS linear expression to a CLP linear expression
         """
-        return sum(CyLPArray(lin_expr.coefficients[var].to_numpy()) * self.var_to_clp_var[var.id] for var in lin_expr.vars)
+        return sum(
+            CyLPArray(lin_expr.coefficients[var].to_numpy()) * self.var_to_clp_var[var.id] for var in lin_expr.vars)
 
     def _to_clp_constr(self, constraint):
         """
@@ -51,11 +55,13 @@ class ClpSolver(AbstractSolver):
 
     def add_variable(self, var):
         self.var_to_clp_var[var.id] = self.model.addVariable("var{}".format(var.id), var.dim)
-        if var.lb is not None:
-            self.model.addConstraint(self.var_to_clp_var[var.id] >= CyLPArray(var.lb.array))
-        if var.ub is not None:
-            self.model.addConstraint(self.var_to_clp_var[var.id] <= CyLPArray(var.ub.array))
         self.var_to_nconstr[var.id] = 0
+        if var.lb is not None:
+            self.var_to_lower[var.id] = var >= var.lb
+            self.add_constraint(self.var_to_lower[var.id])
+        if var.ub is not None:
+            self.var_to_upper[var.id] = var <= var.ub
+            self.add_constraint(self.var_to_upper[var.id])
 
     def add_constraint(self, constraint, name=None):
         # Compute clp constraint
@@ -119,3 +125,15 @@ class ClpSolver(AbstractSolver):
         clp_var = self.var_to_clp_var[var.id]
         self.model.removeVariable(clp_var.name)
         del self.var_to_clp_var[var.id]
+
+    def set_variable_bound(self, var: Variable, bound: VariableBound, value: HIPSArray):
+        if bound == VariableBound.LB:
+            if var.id in self.var_to_lower:
+                self.remove_constraint(self.var_to_lower[var.id])
+            self.var_to_lower[var.id] = var >= value
+            self.add_constraint(self.var_to_lower[var.id])
+        if bound == VariableBound.UB:
+            if var.id in self.var_to_upper:
+                self.remove_constraint(self.var_to_upper[var.id])
+            self.var_to_upper[var.id] = var <= value
+            self.add_constraint(self.var_to_upper[var.id])
