@@ -18,4 +18,4 @@ mip_model.set_mip_sense(LPSense.MAX)
 
 heur = FractionalDivingHeuristic(mip_model)
 heur.compute()
-#heur.tracker.plot("objective value")
+heur.tracker.plot("objective value")

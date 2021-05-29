@@ -27,12 +27,10 @@ class FractionalDivingHeuristic(AbstractDiving):
         """
         fractionality = {}
         for frac_var in self.fractional_index_set:
-            variable_value = self.variable_solution(frac_var[0]).to_numpy()[frac_var[1]]
+            variable_value = self._x[frac_var[0]].to_numpy()[frac_var[1]]
             fractionality[frac_var] = min(abs(variable_value-math.floor(variable_value)), abs(variable_value-math.ceil(variable_value)))
         lowest_frac_var_index = sorted(fractionality, key=fractionality.get)[0]
-        #LOGGING
-        print("Branching on Var {}: Val {}".format(str(lowest_frac_var_index[0]), str(self.variable_solution(lowest_frac_var_index[0]))))
-        lfv_value = self.variable_solution(lowest_frac_var_index[0]).to_numpy()[lowest_frac_var_index[1]]
+        lfv_value = self._x[lowest_frac_var_index[0]].to_numpy()[lowest_frac_var_index[1]]
         if abs(lfv_value-math.floor(lfv_value)) <= abs(lfv_value-math.ceil(lfv_value)):
             # Bound upper bound to floor of variable_value
             new_bound = np.copy(lowest_frac_var_index[0].ub.to_numpy())

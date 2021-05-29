@@ -1,6 +1,7 @@
 import abc
 import math
 
+from hips import HIPSArray
 from hips.utils import is_close
 from hips.constants import LPStatus
 from hips.heuristics._heuristic import Heuristic
@@ -20,36 +21,49 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         self.current_best_objective = current_best_objective
         self.discovered_solution = None
         self.fractional_index_set = set()
+        self._x = None
 
     def compute(self, max_iter=100):
         current_lp_solution = None
+        feasible_solution_found = False
         self.relaxation.optimize()
+        if self.relaxation.get_status() == LPStatus.INFEASIBLE:
+            return
+        current_lp_solution = self.get_objective_value()
+        self._x = {x: self.relaxation.variable_solution(x) for x in self.relaxation.vars}
+        self.discovered_solution = self.relaxation.get_objective_value()
+        self._compute_fractional_index_set()
+        if self.mip_model.is_feasible(self._x):
+            feasible_solution_found = True
+        if self._round_trivially():
+            feasible_solution_found = True
         # --- LOGGING ---
         self.tracker.log("objective value", self.get_objective_value())
         # --- ------- ---
-        if self.relaxation.get_status() == LPStatus.INFEASIBLE:
+        if feasible_solution_found:
             return
-        if self.mip_model.is_feasible({x: self.variable_solution(x) for x in self.relaxation.vars}) or self._round_trivially():
-            self.discovered_solution = self.get_objective_value()
-            return
-        current_lp_solution = self.get_objective_value()
         while self.iteration <= max_iter:
             if self.current_best_objective is not None:
                 if current_lp_solution < self.current_best_objectve:
                     break
             self.iteration += 1
-            self._compute_fractional_index_set()
             self._dive()
             self.relaxation.optimize()
-            # --- LOGGING ---
-            self.tracker.log("objective value", self.get_objective_value())
-            # --- ------- ---
             if self.relaxation.get_status() == LPStatus.INFEASIBLE:
                 break
             else:
                 current_lp_solution = self.get_objective_value()
-            if self.mip_model.is_feasible({x: self.variable_solution(x) for x in self.relaxation.vars}) or self._round_trivially():
-                self.discovered_solution = self.get_objective_value()
+            self._x = {x: self.relaxation.variable_solution(x) for x in self.relaxation.vars}
+            self.discovered_solution = self.relaxation.get_objective_value()
+            self._compute_fractional_index_set()
+            if self.mip_model.is_feasible(self._x):
+                feasible_solution_found = True
+            if self._round_trivially():
+                feasible_solution_found = True
+            # --- LOGGING ---
+            self.tracker.log("objective value", self.get_objective_value())
+            # --- ------- ---
+            if feasible_solution_found:
                 break
         self._revert()
 
@@ -64,7 +78,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         """
         fractional_index_set = set()
         for int_var in self.integer + self.binary:
-            variable_value = self.variable_solution(int_var)
+            variable_value = self.relaxation.variable_solution(int_var)
             for i in range(int_var.dim):
                 variable_index_value = variable_value.to_numpy()[i]
                 if not is_close(variable_index_value, math.floor(variable_index_value)) and not is_close(variable_index_value, math.ceil(variable_index_value)):
@@ -79,11 +93,23 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
 
         :return: True, if current relaxation solution is trivially roundable, else False
         """
+        return False
         trivially_down_roundable, trivially_up_roundable = self.mip_model._trivially_roundable()
-        objective_function = self.relaxation.objective
-        trivially_rounded_solution = 0
+        # TODO Überlegen ob man nicht immer trivial rundet sodass nicht auf trivially roundable variablen gebrancht wird (diese müssen ja nicht dringend integer werden)
         for frac_var in self.fractional_index_set:
-            pass
+            if not trivially_down_roundable[frac_var[0]][frac_var[1]] and not trivially_up_roundable[frac_var[0]][frac_var[1]]:
+                return False
+        for frac_var in self.fractional_index_set:
+            # Case down-roundable:
+            if trivially_down_roundable[frac_var[0]][frac_var[1]]:
+                x_rounded = self._x[frac_var[0]].to_numpy()
+                x_rounded[frac_var[1]] = math.floor(x_rounded[frac_var[1]])
+            # Case up-roundable
+            if trivially_up_roundable[frac_var[0]][frac_var[1]]:
+                x_rounded = self._x[frac_var[0]].to_numpy()
+                x_rounded[frac_var[1]] = math.floor(x_rounded[frac_var[1]])
+        self.discovered_solution = self.relaxation.objective.eval(self._x).reshape(-1).to_numpy()[0]
+        return True
 
     @abc.abstractmethod
     def _dive(self):
@@ -106,7 +132,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         pass
 
     def variable_solution(self, var: Variable):
-        return self.relaxation.variable_solution(var)
+        return self._x[var]
 
     def get_objective_value(self) -> float:
         return self.discovered_solution

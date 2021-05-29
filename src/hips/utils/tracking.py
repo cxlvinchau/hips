@@ -17,7 +17,7 @@ class Tracker:
     def plot(self, metric: str, x: str = "iteration"):
         values = [value_dict[metric] for value_dict in self._metrics[metric]]
         x_values = [value_dict[x] for value_dict in self._metrics[metric]]
-        plt.plot(x_values, values)
+        plt.plot(x_values, values, marker='o', markersize=5)
         plt.xlabel(x)
         plt.ylabel(metric)
         plt.show()

@@ -112,17 +112,18 @@ class MIPModel:
         trivially_up_roundable = {x: np.repeat(True, x.dim) for x in self.integer_variables + self.binary_variables}
         trivially_down_roundable = {x: np.repeat(True, x.dim) for x in self.integer_variables + self.binary_variables}
         for constraint in self.lp_model.constraints:
-            for var, coefficient in zip(constraint.lhs.vars, constraint.lhs.coefficients):
+            for var in constraint.lhs.vars:
                 if var not in self.integer_variables + self.binary_variables:
                     continue
+                coefficients = constraint.lhs.coefficients
                 if constraint.comparator == Comparator.LESS_EQUALS:
-                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [coefficient[var][i] >= 0 for i in var.dim])]
-                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [coefficient[i] <= 0 for i in var.dim])]
+                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [all(coefficients[var].to_numpy()[:,i] >= 0) for i in range(var.dim)])]
+                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [all(coefficients[var].to_numpy()[:,i] <= 0) for i in range(var.dim)])]
                 elif constraint.comparator == Comparator.GREATER_EQUALS:
-                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [coefficient[i] <= 0 for i in var.dim])]
-                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [coefficient[i] >= 0 for i in var.dim])]
+                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [all(coefficients[var].to_numpy()[:,i] <= 0) for i in range(var.dim)])]
+                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [all(coefficients[var].to_numpy()[:,i] >= 0) for i in range(var.dim)])]
                 else: # constraint.comparator == Comparator.EQUALS
-                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [coefficient[i] == 0 for i in var.dim])]
-                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [coefficient[i] == 0 for i in var.dim])]
+                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [all(coefficients[var].to_numpy()[:,i] == 0) for i in range(var.dim)])]
+                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [all(coefficients[var].to_numpy()[:,i] == 0) for i in range(var.dim)])]
         return trivially_down_roundable, trivially_up_roundable
 
