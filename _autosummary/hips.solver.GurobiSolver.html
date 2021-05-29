@@ -220,7 +220,10 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_objective</span></code>(objective)</p></td>
 <td><p>Sets the linear objective function</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.variable_solution" title="hips.solver.GurobiSolver.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.set_variable_bound" title="hips.solver.GurobiSolver.set_variable_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_variable_bound</span></code></a>(var, bound, value)</p></td>
+<td><p>Sets the specified bound of variable var to the specified value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.variable_solution" title="hips.solver.GurobiSolver.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
 <td><p>Returns the optimal value for the given variable.</p></td>
 </tr>
 </tbody>
@@ -237,7 +240,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p></p>
 </dd>
 </dl>
 </dd></dl>
@@ -257,7 +260,7 @@
 <dd class="field-odd"><p><strong>var</strong> – Variable to be added</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p></p>
 </dd>
 </dl>
 </dd></dl>
@@ -271,7 +274,25 @@
 <dd class="field-odd"><p><strong>var</strong> – Variable to be removed from the LP</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.solver.GurobiSolver.set_variable_bound">
+<span class="sig-name descname"><span class="pre">set_variable_bound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">hips.constants.VariableBound</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models._lp_model.HIPSArray"><span class="pre">hips.models._lp_model.HIPSArray</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.set_variable_bound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the specified bound of variable var to the specified value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var</strong> – The variable to set the bound on</p></li>
+<li><p><strong>bound</strong> – Specifies if the lower (VariableBound.LB) or upper (VariableBound.UB) bound is set</p></li>
+<li><p><strong>value</strong> – The value to set as the new bound on the variable as HIPSArray</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
 </dl>
 </dd></dl>
@@ -320,7 +341,7 @@ an optimal solution, it is advised to use <code class="xref py py-func docutils 
 <dd><p>Optimizes the LP</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p></p>
 </dd>
 </dl>
 </dd></dl>

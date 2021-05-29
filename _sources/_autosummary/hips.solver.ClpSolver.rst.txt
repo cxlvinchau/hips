@@ -23,6 +23,7 @@
       ~ClpSolver.remove_variable
       ~ClpSolver.set_lp_sense
       ~ClpSolver.set_objective
+      ~ClpSolver.set_variable_bound
       ~ClpSolver.variable_solution
    
    

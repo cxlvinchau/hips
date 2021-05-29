@@ -23,6 +23,7 @@
       ~GurobiSolver.remove_variable
       ~GurobiSolver.set_lp_sense
       ~GurobiSolver.set_objective
+      ~GurobiSolver.set_variable_bound
       ~GurobiSolver.variable_solution
    
    
