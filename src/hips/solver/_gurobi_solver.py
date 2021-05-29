@@ -1,5 +1,5 @@
 from hips.solver._abstract_solver import AbstractSolver
-from hips.constants import Comparator
+from hips.constants import Comparator, VariableBound
 from hips.models._lp_model import Constraint, Variable, LinExpr, HIPSArray
 import gurobipy as gb
 from gurobipy import GRB
@@ -75,6 +75,12 @@ class GurobiSolver(AbstractSolver):
         self.model.remove(self.var_to_gurobi_var[var.id])
         del self.var_to_gurobi_var[var.id]
         self.model.update()
+
+    def set_variable_bound(self, var: Variable, bound: VariableBound, value: HIPSArray):
+        if bound == VariableBound.UB:
+            self.var_to_gurobi_var[var.id].setAttr(GRB.Attr.UB, value.to_numpy())
+        else:
+            self.var_to_gurobi_var[var.id].setAttr(GRB.Attr.LB, value.to_numpy())
 
     def variable_solution(self, var: Variable) -> float:
         gurobivar = self.var_to_gurobi_var[var.id]

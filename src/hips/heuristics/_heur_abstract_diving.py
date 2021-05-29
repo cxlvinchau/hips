@@ -17,53 +17,41 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
 
     def __init__(self, mip_model: MIPModel, current_best_objective: float = None):
         super().__init__(mip_model)
-        self.current_best_objectve = current_best_objective
+        self.current_best_objective = current_best_objective
         self.discovered_solution = None
-        self.fractional_index_set = {}
+        self.fractional_index_set = set()
 
-    def compute(self, max_iter=None):
-        iter = 0
+    def compute(self, max_iter=100):
         current_lp_solution = None
         self.relaxation.optimize()
+        # --- LOGGING ---
+        self.tracker.log("objective value", self.get_objective_value())
+        # --- ------- ---
         if self.relaxation.get_status() == LPStatus.INFEASIBLE:
             return
-        if self.mip_model.is_feasible({x: self.variable_solution(x) for x in self.relaxation.vars}) or self.round_trivially():
+        if self.mip_model.is_feasible({x: self.variable_solution(x) for x in self.relaxation.vars}) or self._round_trivially():
             self.discovered_solution = self.get_objective_value()
             return
         current_lp_solution = self.get_objective_value()
-        while iter <= max_iter:
+        while self.iteration <= max_iter:
             if self.current_best_objective is not None:
                 if current_lp_solution < self.current_best_objectve:
                     break
-            iter += 1
-            self.compute_fractional_index_set()
-            self.dive()
+            self.iteration += 1
+            self._compute_fractional_index_set()
+            self._dive()
             self.relaxation.optimize()
+            # --- LOGGING ---
+            self.tracker.log("objective value", self.get_objective_value())
+            # --- ------- ---
             if self.relaxation.get_status() == LPStatus.INFEASIBLE:
                 break
             else:
                 current_lp_solution = self.get_objective_value()
-            if self.mip_model.is_feasible({x: self.variable_solution(x) for x in self.relaxation.vars}) or self.round_trivially():
+            if self.mip_model.is_feasible({x: self.variable_solution(x) for x in self.relaxation.vars}) or self._round_trivially():
                 self.discovered_solution = self.get_objective_value()
                 break
-        self.revert()
-
-    def _round_trivially(self):
-        """
-        Checks if the all variables of the model are trivially roundable. If so, fix the variables to the rounded values
-        and optimize, such that the corresponding objective value can be fetched.
-
-        1. A variable x_j is called trivially down-roundable, if all coefficients a_ij of the corresponding column of the
-        matrix A are non negative, hence A_j >= 0.
-        2. A variable x_j is called trivially up-roundable, if all coefficients a_ij of the corresponding column of the
-        matrix A are non positive, hence A_j <= 0.
-        3. A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.
-        - Source: Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;
-
-        :return: True, if every variable of the model can be rounded trivially; False, else
-        """
-        #TODO implement me
-        return False
+        self._revert()
 
     def _compute_fractional_index_set(self):
         """
@@ -74,15 +62,28 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
 
         :return:
         """
-        fractional_index_set = {}
-        for int_var in self.mip_model.integer_variables + self.mip_model.binary_variables:
+        fractional_index_set = set()
+        for int_var in self.integer + self.binary:
             variable_value = self.variable_solution(int_var)
             for i in range(int_var.dim):
                 variable_index_value = variable_value.to_numpy()[i]
                 if not is_close(variable_index_value, math.floor(variable_index_value)) and not is_close(variable_index_value, math.ceil(variable_index_value)):
-                    fractional_index_set += {(int_var, i)}
+                    fractional_index_set.add((int_var, i))
         self.fractional_index_set = fractional_index_set
 
+    def _round_trivially(self):
+        """
+        Checks if the current solution of the relaxation is trivially roundable according to
+        :func:`mip_model._trivially_roundable <hips.models._mip_model.MIPModel._trivially_roundable>`.
+        If so, it sets the discovered solution to the corresponding objective value of the rounded solution.
+
+        :return: True, if current relaxation solution is trivially roundable, else False
+        """
+        trivially_down_roundable, trivially_up_roundable = self.mip_model._trivially_roundable()
+        objective_function = self.relaxation.objective
+        trivially_rounded_solution = 0
+        for frac_var in self.fractional_index_set:
+            pass
 
     @abc.abstractmethod
     def _dive(self):
@@ -108,5 +109,4 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         return self.relaxation.variable_solution(var)
 
     def get_objective_value(self) -> float:
-        return self.relaxation.get_objective_value()
-
+        return self.discovered_solution

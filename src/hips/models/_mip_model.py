@@ -1,4 +1,4 @@
-from hips.constants import VarTypes
+from hips.constants import VarTypes, Comparator
 from hips.models import LPModel
 from hips.utils import is_close
 import numpy as np
@@ -93,4 +93,36 @@ class MIPModel:
                     return False
         return True
 
+    def _trivially_roundable(self):
+        """
+        Checks if the all variables of the model are trivially roundable. If so, fix the variables to the rounded values
+        and optimize, such that the corresponding objective value can be fetched.
+
+        1. A variable x_j is called trivially down-roundable, if all coefficients a_ij of the corresponding column of the
+        matrix A are non negative, hence A_j >= 0.
+        2. A variable x_j is called trivially up-roundable, if all coefficients a_ij of the corresponding column of the
+        matrix A are non positive, hence A_j <= 0.
+        3. A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.
+        - Source: Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;
+
+        :return: A tuple containing the dictionaries trivially_down_roundable, trivially_up_roundable
+                 trivially_down_roundable:      key: Variable, element: array(Boolean)
+                 trivially_up_roundable:        key: Variable, element: array(Boolean)
+        """
+        trivially_up_roundable = {x: np.repeat(True, x.dim) for x in self.integer_variables + self.binary_variables}
+        trivially_down_roundable = {x: np.repeat(True, x.dim) for x in self.integer_variables + self.binary_variables}
+        for constraint in self.lp_model.constraints:
+            for var, coefficient in zip(constraint.lhs.vars, constraint.lhs.coefficients):
+                if var not in self.integer_variables + self.binary_variables:
+                    continue
+                if constraint.comparator == Comparator.LESS_EQUALS:
+                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [coefficient[var][i] >= 0 for i in var.dim])]
+                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [coefficient[i] <= 0 for i in var.dim])]
+                elif constraint.comparator == Comparator.GREATER_EQUALS:
+                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [coefficient[i] <= 0 for i in var.dim])]
+                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [coefficient[i] >= 0 for i in var.dim])]
+                else: # constraint.comparator == Comparator.EQUALS
+                    trivially_down_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_down_roundable[var], [coefficient[i] == 0 for i in var.dim])]
+                    trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [coefficient[i] == 0 for i in var.dim])]
+        return trivially_down_roundable, trivially_up_roundable
 

@@ -72,8 +72,19 @@ class LPModel:
         self.concrete_solver.remove_variable(var)
 
     def set_variable_bound(self, var, bound: VariableBound, value):
-        #TODO implement me here and in concrete solvers
-        pass
+        if isinstance(value, NUMERICAL_TYPES):
+            value = value * HIPSArray(np.ones(var.dim))
+        if not isinstance(value, HIPSArray):
+            value = HIPSArray(value)
+        if not var.dim == value.shape[0]:
+            raise Exception("The specified bound does not have the same dimension as the specified variable.")
+        if bound == VariableBound.UB:
+            var.ub = value
+        elif bound == VariableBound.LB:
+            var.lb = value
+        else:
+            return
+        self.concrete_solver.set_variable_bound(var, bound, value)
 
     def set_objective(self, objective):
         """Sets the objective of the linear program"""

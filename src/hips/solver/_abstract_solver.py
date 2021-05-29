@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from hips.constants import LPSense, LPStatus
-from hips.models._lp_model import Constraint, Variable, LinExpr
+from hips.constants import LPSense, LPStatus, VariableBound
+from hips.models._lp_model import Constraint, Variable, LinExpr, HIPSArray
 
 
 class AbstractSolver(ABC):
@@ -18,7 +18,7 @@ class AbstractSolver(ABC):
 
         :param constraint: A constraint of type :py:class:`Constraint <hips.models.lp_model.Constraint>`
         :param name: Name of the constraint, optional
-        :return: None
+        :return:
         """
 
     @abstractmethod
@@ -28,7 +28,7 @@ class AbstractSolver(ABC):
 
         :param name: Name of the constraint
         :param constraint: Constraint to be deleted
-        :return: None
+        :return:
         """
 
     @abstractmethod
@@ -37,7 +37,7 @@ class AbstractSolver(ABC):
         Adds a variable to the model. Use the var.id as a name in the concrete solver implementation to prevent duplicate names.
 
         :param var: Variable to be added
-        :return: None
+        :return:
         """
 
     @abstractmethod
@@ -46,7 +46,18 @@ class AbstractSolver(ABC):
         Removes variable from model
 
         :param var: Variable to be removed from the LP
-        :return: None
+        :return:
+        """
+
+    @abstractmethod
+    def set_variable_bound(self, var: Variable, bound: VariableBound, value: HIPSArray):
+        """
+        Sets the specified bound of variable var to the specified value.
+
+        :param var: The variable to set the bound on
+        :param bound: Specifies if the lower (VariableBound.LB) or upper (VariableBound.UB) bound is set
+        :param value: The value to set as the new bound on the variable as HIPSArray
+        :return:
         """
 
     def set_objective(self, objective: LinExpr):
@@ -54,7 +65,7 @@ class AbstractSolver(ABC):
         Sets the linear objective function
 
         :param objective: Objective function
-        :return: None
+        :return:
         """
         self.objective = objective
 
@@ -90,7 +101,7 @@ class AbstractSolver(ABC):
         """
         Optimizes the LP
 
-        :return: None
+        :return:
         """
 
     @abstractmethod
