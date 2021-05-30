@@ -26,3 +26,7 @@ def is_close(a, b):
     if isinstance(b, HIPSArray):
         b = b.to_numpy()
     return np.isclose(a, b, rtol=REL_TOLERANCE, atol=ABS_TOLERANCE)
+
+
+def is_integer(a):
+    return np.isclose(a.array, np.rint(a.array))
