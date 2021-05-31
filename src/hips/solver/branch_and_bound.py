@@ -93,7 +93,6 @@ if __name__ == "__main__":
     x1 = mip_model.add_variable("x1", var_type=VarTypes.BINARY, dim=10)
     x2 = mip_model.add_variable("x2", var_type=VarTypes.BINARY)
     mip_model.add_constraint(2 * x1 + 10*x2 <= 8)
-    print(2 * x1 + 10*x2 <= 8)
     mip_model.add_constraint(20 * x1 + 10 * x2 <= 25)
     mip_model.set_objective(x1 + x2)
     mip_model.set_mip_sense(LPSense.MAX)

@@ -179,10 +179,10 @@ class Constraint:
             for var in self.lhs.coefficients:
                 if var not in other.lhs.coefficients:
                     return False
-                if not np.array_equal(self.lhs.coefficients[var], other.lhs.coefficients[var]):
+                if not np.allclose(self.lhs.coefficients[var].to_numpy(), other.lhs.coefficients[var].to_numpy(), rtol=1e-05, atol=1e-08):
                     return False
             # Compare rhs
-            return np.array_equal(self.rhs, other.rhs)
+            return np.allclose(self.rhs.to_numpy(), other.rhs.to_numpy(), rtol=1e-05, atol=1e-08)
         return False
 
     def eval(self, variable_solutions: dict, eps=0.0002):
