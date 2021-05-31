@@ -18,19 +18,20 @@ class BranchAndBound:
         self._incumbent = None
         self._incumbent_val = None
 
-    def _optimize(self, node):
+    def _optimize(self, node, level=0):
+        print(bb._incumbent_val)
         node.init_node()
         node.optimize_relaxation()
         if node.status != LPStatus.OPTIMAL:
             pass
         elif node.is_integer() and (
-                self._incumbent_val is None or self.sense.value * node.obj_val < self._incumbent_val):
+                self._incumbent_val is None or self.sense.value * node.obj_val < self.sense.value * self._incumbent_val):
             self._incumbent = node.solution
             self._incumbent_val = node.obj_val
-        elif self._incumbent_val is None or self.sense.value * node.obj_val < self._incumbent_val:
+        elif not node.is_integer() and (self._incumbent_val is None or self.sense.value * node.obj_val < self.sense.value * self._incumbent_val):
             l_node, r_node = node.get_children()
-            self._optimize(l_node)
-            self._optimize(r_node)
+            self._optimize(l_node, level=level+1)
+            self._optimize(r_node, level=level+1)
         node.backtrack()
 
     def optimize(self):
@@ -61,7 +62,6 @@ class Node:
 
     def backtrack(self):
         if self.constraint is not None:
-            print(self.constraint)
             self.lp_model.remove_constraint(constraint=self.constraint)
 
     def is_integer(self):
@@ -90,12 +90,21 @@ class Node:
 
 if __name__ == "__main__":
     mip_model = MIPModel(GurobiSolver())
-    x1 = mip_model.add_variable("x1", var_type=VarTypes.INTEGER, lb=0, ub=8)
-    x2 = mip_model.add_variable("x2", var_type=VarTypes.INTEGER, lb=0, ub=8)
-    mip_model.add_constraint(2 * x1 + x2 <= 8)
-    mip_model.add_constraint(-2 * x1 + 10 * x2 <= 25)
+    x1 = mip_model.add_variable("x1", var_type=VarTypes.BINARY, dim=10)
+    x2 = mip_model.add_variable("x2", var_type=VarTypes.BINARY)
+    mip_model.add_constraint(2 * x1 + 10*x2 <= 8)
+    print(2 * x1 + 10*x2 <= 8)
+    mip_model.add_constraint(20 * x1 + 10 * x2 <= 25)
     mip_model.set_objective(x1 + x2)
     mip_model.set_mip_sense(LPSense.MAX)
     bb = BranchAndBound(mip_model)
     bb.optimize()
     print(bb._incumbent)
+    print(bb._incumbent_val)
+
+    #mip_model = MIPModel(GurobiSolver())
+    #load_mps_advanced(mip_model, path="../../examples/mps_files/10teams.mps")
+    #mip_model.set_mip_sense(LPSense.MIN)
+    #bb = BranchAndBound(mip_model)
+    #bb.optimize()
+    #print(bb._incumbent_val)
