@@ -1,4 +1,5 @@
 import os
+import warnings
 
 from hips import HIPSArray
 from hips.constants import LPStatus, VarTypes, LPSense
@@ -19,7 +20,7 @@ class BranchAndBound:
         self._incumbent_val = None
 
     def _optimize(self, node, level=0):
-        print(bb._incumbent_val)
+        print(node)
         node.init_node()
         node.optimize_relaxation()
         if node.status != LPStatus.OPTIMAL:
@@ -89,21 +90,21 @@ class Node:
 
 
 if __name__ == "__main__":
-    mip_model = MIPModel(GurobiSolver())
-    x1 = mip_model.add_variable("x1", var_type=VarTypes.BINARY, dim=10)
-    x2 = mip_model.add_variable("x2", var_type=VarTypes.BINARY)
-    mip_model.add_constraint(2 * x1 + 10*x2 <= 8)
-    mip_model.add_constraint(20 * x1 + 10 * x2 <= 25)
-    mip_model.set_objective(x1 + x2)
-    mip_model.set_mip_sense(LPSense.MAX)
-    bb = BranchAndBound(mip_model)
-    bb.optimize()
-    print(bb._incumbent)
-    print(bb._incumbent_val)
-
     #mip_model = MIPModel(GurobiSolver())
-    #load_mps_advanced(mip_model, path="../../examples/mps_files/10teams.mps")
-    #mip_model.set_mip_sense(LPSense.MIN)
+    #x1 = mip_model.add_variable("x1", var_type=VarTypes.BINARY)
+    #x2 = mip_model.add_variable("x2", var_type=VarTypes.BINARY)
+    #mip_model.add_constraint(2 * x1 + 10*x2 <= 8)
+    #mip_model.add_constraint(20 * x1 + 10 * x2 <= 25)
+    #mip_model.set_objective(x1 + x2)
+    #mip_model.set_mip_sense(LPSense.MAX)
     #bb = BranchAndBound(mip_model)
     #bb.optimize()
+    #print(bb._incumbent)
     #print(bb._incumbent_val)
+
+    mip_model = MIPModel(GurobiSolver())
+    load_mps_advanced(mip_model, path="../../examples/mps_files/markshare_4_0.mps")
+    mip_model.set_mip_sense(LPSense.MIN)
+    bb = BranchAndBound(mip_model)
+    bb.optimize()
+    print(bb._incumbent_val)

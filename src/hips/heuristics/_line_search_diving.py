@@ -14,6 +14,7 @@ class LineSearchDiving(AbstractDiving):
         self.root_node_solution = None
         self.q = None
         self.rng = np.random.default_rng(seed=seed)
+        self.added_constraints = []
 
     def _dive(self):
         if self.root_node_solution is None:
@@ -33,7 +34,9 @@ class LineSearchDiving(AbstractDiving):
             diagonal[idx] = 1
             rhs = np.zeros(var.dim)
             rhs[idx] = np.rint(self._x[var].array[idx])
-            self.relaxation.add_constraint(HIPSArray(np.diag(diagonal)) * var == HIPSArray(rhs))
+            constr = HIPSArray(np.diag(diagonal)) * var == HIPSArray(rhs)
+            self.relaxation.add_constraint(constr)
+            self.added_constraints.append(constr)
         else:
             var, idx = min(q, key=q.get)
             current_val, root_val = self._x[var].array[idx], self.root_node_solution[var].array[idx]
@@ -42,14 +45,20 @@ class LineSearchDiving(AbstractDiving):
                 diagonal[idx] = 1
                 rhs = np.zeros(var.dim)
                 rhs[idx] = np.floor(self._x[var].array[idx])
-                self.relaxation.add_constraint(HIPSArray(np.diag(diagonal)) * var >= HIPSArray(rhs))
+                constr = HIPSArray(np.diag(diagonal)) * var == HIPSArray(rhs)
+                self.relaxation.add_constraint(constr)
+                self.added_constraints.append(constr)
             else:
                 diagonal = np.zeros(var.dim)
                 diagonal[idx] = 1
                 rhs = np.zeros(var.dim)
                 rhs[idx] = np.ceil(self._x[var].array[idx])
-                self.relaxation.add_constraint(HIPSArray(np.diag(diagonal)) * var <= HIPSArray(rhs))
+                constr = HIPSArray(np.diag(diagonal)) * var == HIPSArray(rhs)
+                self.relaxation.add_constraint(constr)
+                self.added_constraints.append(constr)
 
 
     def _revert(self):
         pass
+        # TODO
+        # Currently, added constraints are not removed
