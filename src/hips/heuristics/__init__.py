@@ -20,5 +20,6 @@ from hips.heuristics._heur_feasibility_pump import FeasibilityPump
 from hips.heuristics._heur_bounds import HeuristicBounds
 from hips.heuristics._heur_abstract_diving import AbstractDiving
 from hips.heuristics._heur_fractional_diving import FractionalDivingHeuristic
+from hips.heuristics._line_search_diving import LineSearchDiving
 
 __all__ = ["FeasibilityPump", "HeuristicBounds", "AbstractDiving", "FractionalDivingHeuristic"]
