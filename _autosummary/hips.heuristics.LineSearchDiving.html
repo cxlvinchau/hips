@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>hips.heuristics.FractionalDivingHeuristic &mdash; HIPS 0.0.1 documentation</title>
+  <title>hips.heuristics.LineSearchDiving &mdash; HIPS 0.0.1 documentation</title>
   
 
   
@@ -41,8 +41,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="hips.heuristics.LineSearchDiving" href="hips.heuristics.LineSearchDiving.html" />
-    <link rel="prev" title="hips.heuristics.AbstractDiving" href="hips.heuristics.AbstractDiving.html" /> 
+    <link rel="next" title="hips.loader.mps_loader.load_mps_advanced" href="hips.loader.mps_loader.load_mps_advanced.html" />
+    <link rel="prev" title="hips.heuristics.FractionalDivingHeuristic" href="hips.heuristics.FractionalDivingHeuristic.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -98,8 +98,8 @@
 <li class="toctree-l3"><a class="reference internal" href="hips.heuristics.FeasibilityPump.html">hips.heuristics.FeasibilityPump</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hips.heuristics.HeuristicBounds.html">hips.heuristics.HeuristicBounds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hips.heuristics.AbstractDiving.html">hips.heuristics.AbstractDiving</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.heuristics.FractionalDivingHeuristic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hips.heuristics.LineSearchDiving.html">hips.heuristics.LineSearchDiving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.heuristics.FractionalDivingHeuristic.html">hips.heuristics.FractionalDivingHeuristic</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.heuristics.LineSearchDiving</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
@@ -155,13 +155,13 @@
         
           <li><a href="../api.html">API Documentation</a> &raquo;</li>
         
-      <li>hips.heuristics.FractionalDivingHeuristic</li>
+      <li>hips.heuristics.LineSearchDiving</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/_autosummary/hips.heuristics.FractionalDivingHeuristic.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/hips.heuristics.LineSearchDiving.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -174,16 +174,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hips-heuristics-fractionaldivingheuristic">
-<h1>hips.heuristics.FractionalDivingHeuristic<a class="headerlink" href="#hips-heuristics-fractionaldivingheuristic" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hips-heuristics-linesearchdiving">
+<h1>hips.heuristics.LineSearchDiving<a class="headerlink" href="#hips-heuristics-linesearchdiving" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="hips.heuristics.FractionalDivingHeuristic">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">FractionalDivingHeuristic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDivingHeuristic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Implements a concrete diving heuristic, that bounds the variable x_j with lowest fractionality f(x_j) to the nearest
-integer. The idea is based on Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 17;</p>
+<dt class="sig sig-object py" id="hips.heuristics.LineSearchDiving">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">LineSearchDiving</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.LineSearchDiving" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class implements the diving heuristic called line search diving.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="hips.heuristics.FractionalDivingHeuristic.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDivingHeuristic.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="hips.heuristics.LineSearchDiving.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.LineSearchDiving.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -194,7 +193,7 @@ integer. The idea is based on Berthold_Primal_Heuristics_For_Mixed_Integer_Progr
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.__init__" title="hips.heuristics.FractionalDivingHeuristic.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(mip_model[, current_best_objective])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.LineSearchDiving.__init__" title="hips.heuristics.LineSearchDiving.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(mip_model[, …])</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code>([max_iter])</p></td>
@@ -218,8 +217,8 @@ integer. The idea is based on Berthold_Primal_Heuristics_For_Mixed_Integer_Progr
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hips.heuristics.LineSearchDiving.html" class="btn btn-neutral float-right" title="hips.heuristics.LineSearchDiving" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="hips.heuristics.AbstractDiving.html" class="btn btn-neutral float-left" title="hips.heuristics.AbstractDiving" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hips.loader.mps_loader.load_mps_advanced.html" class="btn btn-neutral float-right" title="hips.loader.mps_loader.load_mps_advanced" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hips.heuristics.FractionalDivingHeuristic.html" class="btn btn-neutral float-left" title="hips.heuristics.FractionalDivingHeuristic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

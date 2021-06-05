@@ -1,0 +1,25 @@
+﻿hips.heuristics.LineSearchDiving
+================================
+
+.. currentmodule:: hips.heuristics
+
+.. autoclass:: LineSearchDiving
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LineSearchDiving.__init__
+      ~LineSearchDiving.compute
+      ~LineSearchDiving.get_objective_value
+      ~LineSearchDiving.variable_solution
+   
+   
+
+   
+   
+   
