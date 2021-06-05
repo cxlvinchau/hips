@@ -1,5 +1,6 @@
 import abc
 import math
+import warnings
 
 from hips import HIPSArray
 from hips.utils import is_close
@@ -28,6 +29,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         feasible_solution_found = False
         self.relaxation.optimize()
         if self.relaxation.get_status() == LPStatus.INFEASIBLE:
+            warnings.warn("Problem is infeasible")
             return
         current_lp_solution = self.get_objective_value()
         self._x = {x: self.relaxation.variable_solution(x) for x in self.relaxation.vars}
@@ -43,6 +45,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         if feasible_solution_found:
             return
         while self.iteration <= max_iter:
+            print(self.iteration)
             if self.current_best_objective is not None:
                 if current_lp_solution < self.current_best_objectve:
                     break
@@ -50,6 +53,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
             self._dive()
             self.relaxation.optimize()
             if self.relaxation.get_status() == LPStatus.INFEASIBLE:
+                warnings.warn("Infeasible")
                 break
             else:
                 current_lp_solution = self.get_objective_value()
@@ -79,6 +83,8 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         fractional_index_set = set()
         for int_var in self.integer + self.binary:
             variable_value = self.relaxation.variable_solution(int_var)
+            # FIXME
+            # Do not iterate over indices, make use of numpy methods, also maybe a dictionary would be better than set
             for i in range(int_var.dim):
                 variable_index_value = variable_value.to_numpy()[i]
                 if not is_close(variable_index_value, math.floor(variable_index_value)) and not is_close(variable_index_value, math.ceil(variable_index_value)):
@@ -124,7 +130,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def _revert(self):
         """
-        This method is used to revert any changes (fixing or bounding variables), that the heurisitc may have applied
+        This method is used to revert any changes (fixing or bounding variables), that the heuristic may have applied
         to the model while diving down one B&B tree branch.
 
         :return:

@@ -298,21 +298,21 @@ class Variable:
         elif type(other) == Variable:
             coefficients = dict()
             if self == other:
-                coefficients[self] = HIPSArray((1, self.dim))
+                coefficients[self] = HIPSArray(np.identity(self.dim))
             else:
-                coefficients[self] = HIPSArray((1, self.dim))
-                coefficients[other] = HIPSArray((1, other.dim))
+                coefficients[self] = HIPSArray(np.identity(self.dim))
+                coefficients[other] = HIPSArray(np.identity(other.dim))
             return LinExpr(set([self, other]), coefficients)
         return NotImplemented
 
     def __mul__(self, other):
         if isinstance(other, NUMERICAL_TYPES):
-            return LinExpr(set([self]), {self: other * HIPSArray((1, self.dim))})
+            return LinExpr(set([self]), {self: other * HIPSArray(np.identity(self.dim))})
         return NotImplemented
 
     def __rmul__(self, other):
         if isinstance(other, NUMERICAL_TYPES):
-            return LinExpr(set([self]), {self: other * HIPSArray((1, self.dim))})
+            return LinExpr(set([self]), {self: other * HIPSArray(np.identity(self.dim))})
         return NotImplemented
 
     def __str__(self):
