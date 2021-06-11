@@ -16,10 +16,11 @@ def skip_when_clp_solver(func):
 
     return wrapper
 
-from hips.heuristics._heur_feasibility_pump import FeasibilityPump
-from hips.heuristics._heur_bounds import HeuristicBounds
-from hips.heuristics._heur_abstract_diving import AbstractDiving
-from hips.heuristics._heur_fractional_diving import FractionalDivingHeuristic
+from hips.heuristics._feasibility_pump import FeasibilityPump
+from hips.heuristics._bounds import HeuristicBounds
+from hips.heuristics._abstract_diving import AbstractDiving
+from hips.heuristics._fractional_diving import FractionalDivingHeuristic
 from hips.heuristics._line_search_diving import LineSearchDiving
+from hips.heuristics._rens import RENS
 
-__all__ = ["FeasibilityPump", "HeuristicBounds", "AbstractDiving", "FractionalDivingHeuristic"]
+__all__ = ["FeasibilityPump", "HeuristicBounds", "AbstractDiving", "FractionalDivingHeuristic", "RENS"]

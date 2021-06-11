@@ -233,10 +233,11 @@ class FeasibilityPump(Heuristic):
                 if not all(is_close(self.relaxation.variable_solution(var), new_x_tilde_bin[var])):
                     is_integer_solution = False
                     break
-            for var in self.integer:
-                if not all(is_close(self.relaxation.variable_solution(var), new_x_tilde_int[var])):
-                    is_integer_solution = True
-                    break
+            if is_integer_solution:
+                for var in self.integer:
+                    if not all(is_close(self.relaxation.variable_solution(var), new_x_tilde_int[var])):
+                        is_integer_solution = False
+                        break
             if is_integer_solution:
                 self.logger.info("Stopping early")
                 break

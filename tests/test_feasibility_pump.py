@@ -1,7 +1,7 @@
 import unittest
 from parameterized import parameterized_class
 
-from hips.heuristics._heur_feasibility_pump import FeasibilityPump
+from hips.heuristics._feasibility_pump import FeasibilityPump
 from hips.constants import VarTypes
 from hips.solver import GurobiSolver, ClpSolver
 from hips.models._lp_model import LPModel

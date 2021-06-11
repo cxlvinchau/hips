@@ -5,7 +5,6 @@ import os
 import timeit
 import numpy as np
 import pysmps.smps_loader as loader
-from definitions import SRC_ROOT_DIRECTORY
 from hips.models._mip_model import MIPModel
 from hips.models._lp_model import HIPSArray
 from hips.constants import VarTypes, LPSense

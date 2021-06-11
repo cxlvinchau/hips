@@ -179,6 +179,8 @@ class Constraint:
             for var in self.lhs.coefficients:
                 if var not in other.lhs.coefficients:
                     return False
+                if self.lhs.coefficients[var].to_numpy().shape != other.lhs.coefficients[var].to_numpy().shape:
+                    return False
                 if not np.allclose(self.lhs.coefficients[var].to_numpy(), other.lhs.coefficients[var].to_numpy(), rtol=1e-05, atol=1e-08):
                     return False
             # Compare rhs

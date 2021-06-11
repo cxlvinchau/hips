@@ -1,4 +1,4 @@
-from ._heur_abstract_diving import AbstractDiving
+from ._abstract_diving import AbstractDiving
 from .. import HIPSArray
 from ..models import MIPModel
 import numpy as np

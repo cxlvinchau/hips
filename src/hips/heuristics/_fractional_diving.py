@@ -4,7 +4,7 @@ import numpy as np
 
 from hips import HIPSArray
 from hips.constants import VariableBound
-from hips.heuristics._heur_abstract_diving import AbstractDiving
+from hips.heuristics._abstract_diving import AbstractDiving
 from hips.models import MIPModel
 
 

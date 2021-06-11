@@ -80,6 +80,7 @@ class MIPModel:
         """
         # Check if relaxation is feasible
         if not self.lp_model.is_feasible(variable_solutions):
+            print("LP infeasible")
             return False
         # Check if binary variables are 0 and 1
         for variable in self.binary_variables:
