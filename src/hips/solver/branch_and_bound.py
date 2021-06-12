@@ -72,54 +72,25 @@ class Node:
         return True
 
     def get_children(self):
+        min_var, min_idx, min_dist = None, None, None
         for var in self.model.integer_variables + self.model.binary_variables:
             mask = is_integer(self.lp_model.variable_solution(var))
             if all(mask):
                 continue
-            idx = np.argwhere(~mask)[0]
-            diag = np.zeros(var.dim)
-            diag[idx] = 1
-            diag = np.diag(diag)
-            rhs = np.zeros(var.dim)
-            rhs[idx] = np.floor(self.lp_model.variable_solution(var).array[idx])
-            left_node = Node(self.model, parent=self, constraint=HIPSArray(diag) * var <= HIPSArray(rhs))
-            rhs = np.zeros(var.dim)
-            rhs[idx] = np.ceil(self.lp_model.variable_solution(var).array[idx])
-            right_node = Node(self.model, parent=self, constraint=HIPSArray(diag) * var >= HIPSArray(rhs))
-            return left_node, right_node
+            for idx in np.argwhere(~mask):
+                val = self.lp_model.variable_solution(var).array[idx]
+                if min_dist is None or abs(val - np.rint(val)) < min_dist:
+                    min_var = var
+                    min_idx = idx
+                    min_dist = abs(val - np.rint(val))
 
-
-if __name__ == "__main__":
-    #mip_model = MIPModel(GurobiSolver())
-    #x1 = mip_model.add_variable("x1", var_type=VarTypes.BINARY)
-    #x2 = mip_model.add_variable("x2", var_type=VarTypes.BINARY)
-    #mip_model.add_constraint(1 * x1 + 1*x2 <= 1)
-    #mip_model.add_constraint(1 * x1 + 1 * x2 <= 2)
-    #mip_model.set_objective(x1 + x2)
-    #mip_model.set_mip_sense(LPSense.MAX)
-    #bb = BranchAndBound(mip_model)
-    #bb.optimize()
-    #print(bb._incumbent)
-    #print(bb._incumbent_val)
-
-    #import sys
-    #sys.exit(0)
-
-    import gurobipy as gb
-    import time
-
-    # start = time.time()
-    # model = gb.read("../../examples/mps_files/flugpl.mps")
-    # print("Finished loading")
-    # model.optimize()
-    # print(model.objVal)
-    # print(f"GRB: {time.time() - start}")
-
-    start = time.time()
-    mip_model = MIPModel(GurobiSolver())
-    load_mps_advanced(mip_model, path="../../examples/mps_files/data.mps")
-    mip_model.set_mip_sense(LPSense.MIN)
-    bb = BranchAndBound(mip_model)
-    bb.optimize()
-    print(bb._incumbent_val)
-    print(f"HIPS B&B: {time.time() - start}")
+        diag = np.zeros(min_var.dim)
+        diag[min_idx] = 1
+        diag = np.diag(diag)
+        rhs = np.zeros(min_var.dim)
+        rhs[min_idx] = np.floor(self.lp_model.variable_solution(min_var).array[min_idx])
+        left_node = Node(self.model, parent=self, constraint=HIPSArray(diag) * min_var <= HIPSArray(rhs))
+        rhs = np.zeros(min_var.dim)
+        rhs[min_idx] = np.ceil(self.lp_model.variable_solution(min_var).array[min_idx])
+        right_node = Node(self.model, parent=self, constraint=HIPSArray(diag) * min_var >= HIPSArray(rhs))
+        return left_node, right_node

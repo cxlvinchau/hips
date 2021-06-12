@@ -69,13 +69,13 @@ class ClpSolver(AbstractSolver):
         # Map LP constraint to corresponding clp constraint
         self.constr_to_clp_constr[constraint] = constr
         # Generate name for constraint
-        self.clp_constr_to_name[constr] = ("c" + str(self.constraint_counter)) if name is None else name
+        self.clp_constr_to_name[constraint] = ("c" + str(self.constraint_counter)) if name is None else name
         # Memorize which variables are present in the given constraint
-        self.constr_to_vars[self.clp_constr_to_name[constr]] = constraint.vars
+        self.constr_to_vars[self.clp_constr_to_name[constraint]] = constraint.vars
         for var in constraint.vars:
             self.var_to_nconstr[var.id] += 1
         # Add constraint to CLP model
-        self.model.addConstraint(constr, name=self.clp_constr_to_name[constr])
+        self.model.addConstraint(constr, name=self.clp_constr_to_name[constraint])
         self.constraint_counter += 1
 
     def variable_solution(self, var):
@@ -100,7 +100,7 @@ class ClpSolver(AbstractSolver):
 
     def remove_constraint(self, name=None, constraint=None):
         try:
-            name = name if name else self.clp_constr_to_name[self._to_clp_constr(constraint)]
+            name = name if name else self.clp_constr_to_name[constraint]
             variables = self.constr_to_vars[name]
             if not variables.intersection(set(self.var_to_clp_var.keys())):
                 for var in variables:
