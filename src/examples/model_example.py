@@ -27,4 +27,4 @@ mip_model.set_mip_sense(LPSense.MAX)
 
 heur = RENS(mip_model)
 heur.compute(100)
-print(heur.mip_solver._incumbent)
+print(heur.mip_solver.incumbent)

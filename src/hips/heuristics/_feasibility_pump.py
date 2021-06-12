@@ -207,7 +207,7 @@ class FeasibilityPump(Heuristic):
 
         :param max_iter: The maximum number of iterations that should be performed. If the number of iterations is
                             reached, the computation terminated.
-        :param T: Perturbation parameter.
+        :param t: Perturbation parameter.
         :param alpha: If alpha is set, the feasibility pump will try to optimize towards the objective function. The higher alpha,
                         the more we optimize towards the original objective function.
         :return: None
