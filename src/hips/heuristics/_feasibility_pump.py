@@ -57,7 +57,7 @@ class FeasibilityPump(Heuristic):
 
         :return: None
         """
-        self.logger.info("Computing relaxation")
+        # self.logger.info("Computing relaxation")
         if self._original_obj is None:
             self._original_obj = self.relaxation.objective
         self.relaxation.optimize()
@@ -88,7 +88,7 @@ class FeasibilityPump(Heuristic):
         # Create variables and constraints for integer variables
         self.added_constraints = []
         for var in self.x_tilde_int:
-            self.logger.info("Creating constraints and variables for {}".format(var.name))
+            # self.logger.info("Creating constraints and variables for {}".format(var.name))
             var_id = self._var_counter
             # Create slack variables
             var_pos = self.positive_vars.setdefault(var, self.relaxation.add_variable(
@@ -125,7 +125,7 @@ class FeasibilityPump(Heuristic):
         # Updates the objective function
         self.relaxation.set_objective(objective_bin + objective_int)
         # Logging
-        self.logger.info("Updated objective to {}".format(self.relaxation.objective))
+        # self.logger.info("Updated objective to {}".format(self.relaxation.objective))
 
     def _remove_added_constraints(self):
         """
@@ -136,7 +136,7 @@ class FeasibilityPump(Heuristic):
         for constr_name in self.added_constraints:
             self.relaxation.remove_constraint(name=constr_name)
         self.added_constraints = []
-        self.logger.info("Removed added constraints")
+        # self.logger.info("Removed added constraints")
 
     @skip_when_clp_solver
     def _remove_added_variables(self):
@@ -149,7 +149,7 @@ class FeasibilityPump(Heuristic):
             self.mip_model.lp_model.remove_variable(var)
         self.positive_vars = {}
         self.negative_vars = {}
-        self.logger.info("Removed added variables")
+        # self.logger.info("Removed added variables")
 
     def _check_cycling(self, bin_sol, int_sol):
         """
@@ -160,10 +160,10 @@ class FeasibilityPump(Heuristic):
 
         # TODO naive implementation for now
         for var in bin_sol:
-            if not any(is_close(bin_sol[var], self.x_tilde_bin[var])):
+            if not all(is_close(bin_sol[var], self.x_tilde_bin[var])):
                 return False
         for var in int_sol:
-            if not any(is_close(int_sol[var], self.x_tilde_int[var])):
+            if not all(is_close(int_sol[var], self.x_tilde_int[var])):
                 return False
         return True
 
@@ -173,7 +173,7 @@ class FeasibilityPump(Heuristic):
             # Check if solution is equal to previous solution
             exist_long_cycle_iteration = True
             for var in bin_sol:
-                if not any(is_close(bin_sol[var], x_tilde_bin[var])):
+                if not all(is_close(bin_sol[var], x_tilde_bin[var])):
                     exist_long_cycle_iteration = False
                     break
             if exist_long_cycle_iteration:
@@ -212,11 +212,11 @@ class FeasibilityPump(Heuristic):
                         the more we optimize towards the original objective function.
         :return: None
         """
-        self.logger.info("Starting computation of feasibility pump")
+        # self.logger.info("Starting computation of feasibility pump")
         t = math.ceil(len(self.mip_model.binary_variables) / 2) if t is None else t
         self.iteration = 0
         while self.iteration < max_iter:
-            self.logger.info("Iteration {}".format(self.iteration))
+            # self.logger.info("Iteration {}".format(self.iteration))
             # compute relaxation
             self._compute_relaxation()
 
@@ -239,21 +239,29 @@ class FeasibilityPump(Heuristic):
                         is_integer_solution = False
                         break
             if is_integer_solution:
-                self.logger.info("Stopping early")
-                break
+                if self.mip_model.is_feasible({var: self.relaxation.variable_solution(var) for var in self.relaxation.vars}):
+                    self.logger.info("Stopping early")
+                    break
+                else:
+                    self.logger.info("Found integer solution, but was not feasible.")
 
             # Check cycling
             if self.iteration > 0 and self._check_cycling(new_x_tilde_bin, new_x_tilde_int):
                 self._perturb(t=t)
+                self.x_tilde_int = new_x_tilde_int
+                self._history.append((new_x_tilde_bin, new_x_tilde_int))
             elif self.iteration > 3 and self._check_long_cycle(new_x_tilde_bin, new_x_tilde_int):
-                self.logger.info("Perform aggressive perturbation")
+                # self.logger.info("Perform aggressive perturbation")
                 # Aggressive perturbation
                 for var in new_x_tilde_bin:
-                    rho = self._rng.uniform(-0.3, 0.7)[0]
+                    rho = self._rng.uniform(-0.3, 0.7)
                     # Compute masks, indicating which components to flip
-                    mask = (abs((self.relaxation.variable_solution(var) - self.x_tilde_bin[var]).to_numpy()) + max(rho, 0) >= 0.3).astype(int)
+                    mask = (abs((self.relaxation.variable_solution(var) - self.x_tilde_bin[var]).to_numpy()) + max(rho, 0) >= 0.5).astype(int)
                     # Flip values
                     new_x_tilde_bin[var] = HIPSArray(abs(mask - new_x_tilde_bin[var].to_numpy()))
+                    self.x_tilde_bin = new_x_tilde_bin
+                    self.x_tilde_int = new_x_tilde_int
+                    self._history.append((new_x_tilde_bin, new_x_tilde_int))
             else:
                 # No cycling, update current solution
                 self.x_tilde_bin = new_x_tilde_bin
@@ -297,7 +305,7 @@ class FeasibilityPump(Heuristic):
 
         # FIXME implement for integer variables (pretty non-trivial though)
 
-        self.logger.info("Perturb to avoid cycling")
+        # self.logger.info("Perturb to avoid cycling")
         # Enumerate binary variables
         binary_variables = list(enumerate(self.binary))
         # If there are no binary variables, then no flipping can be done
@@ -315,7 +323,7 @@ class FeasibilityPump(Heuristic):
         arg_sorted = bin_dist.argsort()
         # Determine the number of components to flip
         tt = min(self._rng.integers(math.floor(t / 2), math.floor(1.5 * t), 1)[0], len(var_index))
-        self.logger.info("Flipped {} values".format(tt))
+        # self.logger.info("Flipped {} values".format(tt))
         # Select the tt largest
         var_index = var_index.astype(int)[arg_sorted][-tt:]
         comp_index = comp_index.astype(int)[arg_sorted][-tt:]
