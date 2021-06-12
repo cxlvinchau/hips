@@ -13,7 +13,7 @@ from hips.loader.old_loader import load_mps
 start = time.time()
 mip_model = MIPModel(GurobiSolver())
 # Advanced
-load_mps_advanced(mip_model, path=os.getcwd() + "/mps_files/10teams.mps")
+load_mps_advanced(mip_model, path=os.getcwd() + "/mps_files/ej.mps")
 mip_model.set_mip_sense(lp_sense=LPSense.MIN)
 print(f"Number of binary variables: {len(mip_model.binary_variables)}")
 print(f"Number of constraints: {len(mip_model.lp_model.constraints)}")

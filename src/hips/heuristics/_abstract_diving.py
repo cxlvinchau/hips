@@ -23,6 +23,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         self.discovered_solution = None
         self.fractional_index_set = set()
         self._x = None
+        self._trivially_down_roundable, self._trivially_up_roundable = mip_model._trivially_roundable()
 
     def compute(self, max_iter=100):
         current_lp_solution = None
@@ -45,7 +46,6 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         if feasible_solution_found:
             return
         while self.iteration <= max_iter:
-            print(self.iteration)
             if self.current_best_objective is not None:
                 if current_lp_solution < self.current_best_objectve:
                     break
@@ -61,8 +61,10 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
             self.discovered_solution = self.relaxation.get_objective_value()
             self._compute_fractional_index_set()
             if self.mip_model.is_feasible(self._x):
+                print("Feasible solution found!")
                 feasible_solution_found = True
             if self._round_trivially():
+                print("Trivially rounding is possible!")
                 feasible_solution_found = True
             # --- LOGGING ---
             self.tracker.log("objective value", self.get_objective_value())
@@ -99,19 +101,17 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
 
         :return: True, if current relaxation solution is trivially roundable, else False
         """
-        return False
-        trivially_down_roundable, trivially_up_roundable = self.mip_model._trivially_roundable()
         # TODO Überlegen ob man nicht immer trivial rundet sodass nicht auf trivially roundable variablen gebrancht wird (diese müssen ja nicht dringend integer werden)
         for frac_var in self.fractional_index_set:
-            if not trivially_down_roundable[frac_var[0]][frac_var[1]] and not trivially_up_roundable[frac_var[0]][frac_var[1]]:
+            if not self._trivially_down_roundable[frac_var[0]][frac_var[1]] and not self._trivially_up_roundable[frac_var[0]][frac_var[1]]:
                 return False
         for frac_var in self.fractional_index_set:
             # Case down-roundable:
-            if trivially_down_roundable[frac_var[0]][frac_var[1]]:
+            if self._trivially_down_roundable[frac_var[0]][frac_var[1]]:
                 x_rounded = self._x[frac_var[0]].to_numpy()
                 x_rounded[frac_var[1]] = math.floor(x_rounded[frac_var[1]])
             # Case up-roundable
-            if trivially_up_roundable[frac_var[0]][frac_var[1]]:
+            if self._trivially_up_roundable[frac_var[0]][frac_var[1]]:
                 x_rounded = self._x[frac_var[0]].to_numpy()
                 x_rounded[frac_var[1]] = math.floor(x_rounded[frac_var[1]])
         self.discovered_solution = self.relaxation.objective.eval(self._x).reshape(-1).to_numpy()[0]
