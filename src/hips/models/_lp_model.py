@@ -166,7 +166,7 @@ class Constraint:
 
     def __hash__(self):
         return int(sum([np.sum(arr.to_numpy().reshape(-1)) for arr in self.lhs.coefficients.values()]) *
-                   + np.sum(self.rhs.to_numpy().reshape(-1)) + self.comparator.value)
+                   + hash(np.sum(self.rhs.to_numpy().reshape(-1))) + self.comparator.value)
 
     def __eq__(self, other):
         if isinstance(other, Constraint):
