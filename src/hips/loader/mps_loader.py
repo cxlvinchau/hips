@@ -3,6 +3,8 @@ import re
 import os
 
 import timeit
+
+import numpy
 import numpy as np
 import pysmps.smps_loader as loader
 from hips.models._mip_model import MIPModel
@@ -10,7 +12,7 @@ from hips.models._lp_model import HIPSArray
 from hips.constants import VarTypes, LPSense
 from hips.solver import GurobiSolver
 
-def bounds_set(path):
+def _bounds_set(path):
     bounds_defined = False
     with open(path, "r") as file:
         for line in file:
@@ -38,7 +40,7 @@ def load_mps_primitive(mip_model : MIPModel, path):
     n = len(col_names)
     x = []
     # Check if bounds were defined, as :func:`pysmps <pysmps.smps_loader.py.load_mps>` does not check for missing bounds definition
-    bounds_defined = bounds_set(path)
+    bounds_defined = _bounds_set(path)
     lb_vec, ub_vec = [], []
     if not bounds_defined:
         lb_vec, ub_vec = np.zeros(n), np.repeat(math.inf, n)
@@ -53,8 +55,7 @@ def load_mps_primitive(mip_model : MIPModel, path):
     objective_function = sum([c_i*x_i for c_i,x_i in zip(c,x)])
     mip_model.set_objective(objective_function)
     # constraints
-    rhs_name = rhs_names[0]
-    b = rhs[rhs_name]
+    b = rhs[rhs_names[0]] if len(rhs_names) > 0 else numpy.zeros(len(row_names))
     for row, row_index in [(A_row, row_index) for row_index, (A_row,type) in enumerate(zip(A,types)) if type == "E"]:
         curr_lhs = sum([a_i*x_i for a_i,x_i in zip(row,x) if a_i>0 or a_i<0])
         curr_constraint = curr_lhs == float(b[row_index])
@@ -89,7 +90,7 @@ def load_mps_advanced(mip_model : MIPModel, path):
     bin_indices = []
     n = len(col_names)
     # Check if bounds were defined, as :func:`pysmps <pysmps.smps_loader.py.load_mps>` does not check for missing bounds definition
-    bounds_defined = bounds_set(path)
+    bounds_defined = _bounds_set(path)
     lb_vec, ub_vec = [], []
     if not bounds_defined:
         lb_vec, ub_vec = np.zeros(n), np.repeat(math.inf, n)
@@ -122,9 +123,7 @@ def load_mps_advanced(mip_model : MIPModel, path):
     objective_function = sum([c_cont*x_cont if not empty["cont"] else 0, c_int*x_int if not empty["int"] else 0, c_bin*x_bin if not empty["bin"] else 0])
     mip_model.set_objective(objective=objective_function)
     # constraints
-    rhs_name = rhs_names[0]
-    b = rhs[rhs_name]
-
+    b = rhs[rhs_names[0]] if len(rhs_names) > 0 else numpy.zeros(len(row_names))
     A_E = np.array([A[i] for i,typestr in enumerate(types) if typestr == "E"])
     if not A_E.shape[0] == 0:
         b_E = HIPSArray(np.array([b[i] for i,typestr in enumerate(types) if typestr == "E"]))
