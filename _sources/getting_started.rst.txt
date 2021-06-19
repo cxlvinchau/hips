@@ -1,4 +1,2 @@
 Getting started
 ===============
-
-.. bibliography::

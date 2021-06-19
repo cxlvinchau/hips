@@ -15,6 +15,7 @@ A Python library for heuristically solving mixed integer programs.
    installation
    getting_started
    api
+   references
 
 
 
