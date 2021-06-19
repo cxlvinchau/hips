@@ -368,6 +368,12 @@ class TwoStageFeasibilityPump(Heuristic):
     This class implements a version of the feasibility pump that is applicable to general mixed integer programs, i.e.
     programs containing binary and integer variables, as proposed by Bertacco, Fischetti and Lodi. In contrast, the original
     feasibility pump only works with mixed integer programs containing binary variables only.
+
+    The basic idea of this feasibility pump is to handle binary and integer variables in two different stages. In the first stage,
+    the integer variables are ignored, i.e. treated as if they were continuous, and only the binary variables are considered.
+    The first stage is completed once a feasible solution w.r.t. the binary variables has been found or when the maximum iteration
+    has been reached. Afterwards, in the second stage, the integer variables are considered. Note that the original feasibility
+    pump can also handle integer variables, but might be less suited for this purpose.
     """
 
     def __init__(self, model: MIPModel, **kwargs):
@@ -375,6 +381,13 @@ class TwoStageFeasibilityPump(Heuristic):
         self.feasibility_pump = FeasibilityPump(model, **kwargs)
 
     def compute(self, max_iter):
+        """
+        Executes the computation of the feasibility pump.
+
+        :param max_iter: The maximum iteration in the two stages, respectively. This means that the total max iteration
+        will be 2*max_iteration
+        :return:
+        """
         # First stage
         # In this stage we only consider the binary variables
         integer_variables = self.mip_model.integer_variables
