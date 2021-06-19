@@ -41,6 +41,7 @@ __________
    :recursive:
 
    hips.heuristics.FeasibilityPump
+   hips.heuristics.TwoStageFeasibilityPump
    hips.heuristics.HeuristicBounds
    hips.heuristics.AbstractDiving
    hips.heuristics.FractionalDivingHeuristic

@@ -16,6 +16,7 @@ class MIPModel:
         self.lp_model = LPModel(solver)
         self.integer_variables = integer_variables
         self.binary_variables = binary_variables
+        self.variables = self.lp_model.vars
 
     def add_constraint(self, constraint):
         """
@@ -80,7 +81,6 @@ class MIPModel:
         """
         # Check if relaxation is feasible
         if not self.lp_model.is_feasible(variable_solutions):
-            print("LP infeasible")
             return False
         # Check if binary variables are 0 and 1
         for variable in self.binary_variables:

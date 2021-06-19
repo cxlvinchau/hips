@@ -8,6 +8,7 @@ def skip_when_clp_solver(func):
     :param func: The function to be decorated
     :return: function
     """
+
     def wrapper(*args, **kwargs):
         if isinstance(args[0].relaxation.concrete_solver, ClpSolver):
             return
@@ -16,11 +17,12 @@ def skip_when_clp_solver(func):
 
     return wrapper
 
-from hips.heuristics._feasibility_pump import FeasibilityPump
+
+from hips.heuristics._feasibility_pump import FeasibilityPump, TwoStageFeasibilityPump
 from hips.heuristics._bounds import HeuristicBounds
 from hips.heuristics._abstract_diving import AbstractDiving
 from hips.heuristics._fractional_diving import FractionalDivingHeuristic
 from hips.heuristics._line_search_diving import LineSearchDiving
 from hips.heuristics._rens import RENS
 
-__all__ = ["FeasibilityPump", "HeuristicBounds", "AbstractDiving", "FractionalDivingHeuristic", "RENS"]
+__all__ = ["FeasibilityPump", "HeuristicBounds", "AbstractDiving", "FractionalDivingHeuristic", "RENS", "TwoStageFeasibilityPump"]

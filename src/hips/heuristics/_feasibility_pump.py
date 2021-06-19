@@ -2,7 +2,7 @@ import math
 
 from hips.heuristics._heuristic import Heuristic
 from hips.models._lp_model import LPSense
-from hips.models import MIPModel, HIPSArray
+from hips.models import MIPModel, HIPSArray, Variable
 from hips import REL_TOLERANCE, ABS_TOLERANCE, is_close
 from hips.heuristics import skip_when_clp_solver
 from hips.constants import LPStatus
@@ -21,9 +21,10 @@ class FeasibilityPump(Heuristic):
     This class implements the basic feasibility pump as described in the paper above.
     """
 
-    def __init__(self, mip_model: MIPModel, T=0.5, seed=None):
+    def __init__(self, mip_model: MIPModel, t=None, alpha=None, seed=None):
         super().__init__(mip_model)
-        self.T = T
+        self.t = t
+        self.alpha = alpha
         self.x_tilde_bin = dict()
         self.x_tilde_int = dict()
         self.positive_vars = {}
@@ -87,7 +88,7 @@ class FeasibilityPump(Heuristic):
 
         # Create variables and constraints for integer variables
         self.added_constraints = []
-        for var in self.x_tilde_int:
+        for var in [v for v in self.x_tilde_int if v not in self.positive_vars]:
             # self.logger.info("Creating constraints and variables for {}".format(var.name))
             var_id = self._var_counter
             # Create slack variables
@@ -103,7 +104,6 @@ class FeasibilityPump(Heuristic):
                           var])
             # Add constraints to relaxation
             self.relaxation.add_constraint(constr, name="_combination_constr{}".format(var_id))
-            self.added_constraints.append("_combination_constr{}".format(var_id))
 
             # Increment the var counter
             self._var_counter += 1
@@ -189,19 +189,19 @@ class FeasibilityPump(Heuristic):
         :param alpha: Weighting factor between 0 and 1
         :return: None
         """
-        if self.iteration > 2:
+        if self.iteration > 30:
             current_optimal_value = self.get_objective_value()
             if self._relaxation_sense == LPSense.MIN:
-                self.relaxation.add_constraint(self._original_obj <= (alpha*self._relaxation_optimal_value
-                                               + (1-alpha) * current_optimal_value),
+                self.relaxation.add_constraint(self._original_obj <= (alpha * self._relaxation_optimal_value
+                                                                      + (1 - alpha) * current_optimal_value),
                                                name="_objective_constr_alpha_{}".format(alpha))
             else:
                 self.relaxation.add_constraint(self._original_obj >= (alpha * self._relaxation_optimal_value
-                                               + (1 - alpha) * current_optimal_value),
+                                                                      + (1 - alpha) * current_optimal_value),
                                                name="_objective_constr_alpha_{}".format(alpha))
             self.added_constraints.append("_objective_constr_alpha_{}".format(alpha))
 
-    def compute(self, max_iter=None, t=None, alpha=None):
+    def compute(self, max_iter=100):
         """
         Starts the computation of the feasibility pump.
 
@@ -213,7 +213,7 @@ class FeasibilityPump(Heuristic):
         :return: None
         """
         # self.logger.info("Starting computation of feasibility pump")
-        t = math.ceil(len(self.mip_model.binary_variables) / 2) if t is None else t
+        t = math.ceil(len(self.mip_model.binary_variables) / 2) if self.t is None else self.t
         self.iteration = 0
         while self.iteration < max_iter:
             # self.logger.info("Iteration {}".format(self.iteration))
@@ -239,7 +239,8 @@ class FeasibilityPump(Heuristic):
                         is_integer_solution = False
                         break
             if is_integer_solution:
-                if self.mip_model.is_feasible({var: self.relaxation.variable_solution(var) for var in self.relaxation.vars}):
+                if self.mip_model.is_feasible(
+                        {var: self.relaxation.variable_solution(var) for var in self.relaxation.vars}):
                     self.logger.info("Stopping early")
                     break
                 else:
@@ -247,16 +248,20 @@ class FeasibilityPump(Heuristic):
 
             # Check cycling
             if self.iteration > 0 and self._check_cycling(new_x_tilde_bin, new_x_tilde_int):
-                self._perturb(t=t)
-                self.x_tilde_int = new_x_tilde_int
+                self._perturb_binary(t=t)
+                # self.x_tilde_int = new_x_tilde_int
+                self._perturb_integer()
                 self._history.append((new_x_tilde_bin, new_x_tilde_int))
             elif self.iteration > 3 and self._check_long_cycle(new_x_tilde_bin, new_x_tilde_int):
                 # self.logger.info("Perform aggressive perturbation")
                 # Aggressive perturbation
+                self._perturb_integer()
                 for var in new_x_tilde_bin:
                     rho = self._rng.uniform(-0.3, 0.7)
                     # Compute masks, indicating which components to flip
-                    mask = (abs((self.relaxation.variable_solution(var) - self.x_tilde_bin[var]).to_numpy()) + max(rho, 0) >= 0.5).astype(int)
+                    mask = (abs((self.relaxation.variable_solution(var) - self.x_tilde_bin[var]).to_numpy()) + max(rho,
+                                                                                                                   0) >= 0.5).astype(
+                        int)
                     # Flip values
                     new_x_tilde_bin[var] = HIPSArray(abs(mask - new_x_tilde_bin[var].to_numpy()))
                     self.x_tilde_bin = new_x_tilde_bin
@@ -283,8 +288,8 @@ class FeasibilityPump(Heuristic):
                 # Update objective function
                 self._update_objective()
                 # Add constraint to improve objective value if alpha is set
-                if alpha is not None:
-                    self._add_objective_constraint(alpha)
+                if self.alpha is not None:
+                    self._add_objective_constraint(self.alpha)
 
         self.logger.info("Finished computation in {} iteration(s)".format(self.iteration))
 
@@ -295,17 +300,13 @@ class FeasibilityPump(Heuristic):
         if self._original_obj:
             self.relaxation.set_objective(self._original_obj)
 
-    def _perturb(self, t):
+    def _perturb_binary(self, t):
         """
-        Perturbs the value of the solutions to prevent cycling.
+        Perturbs the value of binary variables to prevent cycling.
 
         :param t: Perturbation parameter
         :return: None
         """
-
-        # FIXME implement for integer variables (pretty non-trivial though)
-
-        # self.logger.info("Perturb to avoid cycling")
         # Enumerate binary variables
         binary_variables = list(enumerate(self.binary))
         # If there are no binary variables, then no flipping can be done
@@ -337,10 +338,55 @@ class FeasibilityPump(Heuristic):
             arr = np.zeros(self.x_tilde_bin[var_to_index[v_idx]].shape[0])
             arr[l] = 1
             # Flip the values
-            self.x_tilde_bin[var_to_index[v_idx]] = HIPSArray(abs(arr - self.x_tilde_bin[var_to_index[v_idx]].to_numpy()))
+            self.x_tilde_bin[var_to_index[v_idx]] = HIPSArray(
+                abs(arr - self.x_tilde_bin[var_to_index[v_idx]].to_numpy()))
+
+    def _perturb_integer(self):
+        """
+        Perturbs integer variables to prevent cycling
+
+        :param p: Probability of perturbing a non-integer variable
+        :return:
+        """
+        for var in self.mip_model.integer_variables:
+            solution = self.relaxation.variable_solution(var)
+            mask = ~is_close(solution, HIPSArray(np.rint(solution.array)))
+            if not np.any(mask):
+                continue
+            self.x_tilde_int[var].array[mask] += self._rng.choice([-1, 0, 1], len(mask[mask]))
 
     def variable_solution(self, var):
         return self._x[var]
 
     def get_objective_value(self) -> float:
         return self._original_obj.eval(self._x).reshape(-1).to_numpy()[0]
+
+
+class TwoStageFeasibilityPump(Heuristic):
+    """This class implements the feasibility pump for general mixed integer programs.
+
+    This class implements a version of the feasibility pump that is applicable to general mixed integer programs, i.e.
+    programs containing binary and integer variables, as proposed by Bertacco, Fischetti and Lodi. In contrast, the original
+    feasibility pump only works with mixed integer programs containing binary variables only.
+    """
+
+    def __init__(self, model: MIPModel, **kwargs):
+        super().__init__(model)
+        self.feasibility_pump = FeasibilityPump(model, **kwargs)
+
+    def compute(self, max_iter):
+        # First stage
+        # In this stage we only consider the binary variables
+        integer_variables = self.mip_model.integer_variables
+        self.mip_model.integer_variables = []
+        self.feasibility_pump.compute(max_iter)
+        # Second stage
+        # In this stage we add the integer variables to the problem
+        self.mip_model.integer_variables = integer_variables
+        self.feasibility_pump.compute(max_iter)
+
+    def variable_solution(self, var: Variable):
+        return self.feasibility_pump.variable_solution(var)
+
+    def get_objective_value(self) -> float:
+        return self.feasibility_pump.get_objective_value()

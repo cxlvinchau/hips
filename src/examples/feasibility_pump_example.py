@@ -4,7 +4,7 @@ from hips.constants import LPSense
 from hips.loader import load_mps_advanced
 from hips.models import MIPModel
 from hips.solver import GurobiSolver, ClpSolver
-from hips.heuristics import FeasibilityPump
+from hips.heuristics import FeasibilityPump, TwoStageFeasibilityPump
 import time
 
 print("Start experiment")
@@ -19,8 +19,8 @@ for i in range(5):
     mip_model.set_mip_sense(LPSense.MIN)
     start = time.time()
 
-    fs = FeasibilityPump(mip_model)
-    fs.compute(1000, t=10)
+    fs = FeasibilityPump(mip_model, t=10)
+    fs.compute(1000)
 
     end = time.time()
     # print(fs.cycle_its)
