@@ -366,7 +366,7 @@ class TwoStageFeasibilityPump(Heuristic):
     """This class implements the feasibility pump for general mixed integer programs.
 
     This class implements a version of the feasibility pump that is applicable to general mixed integer programs, i.e.
-    programs containing binary and integer variables, as proposed by Bertacco, Fischetti and Lodi. In contrast, the original
+    programs containing binary and integer variables, as proposed by :cite:p:`BERTACCO200763`. In contrast, the original
     feasibility pump only works with mixed integer programs containing binary variables only.
 
     The basic idea of this feasibility pump is to handle binary and integer variables in two different stages. In the first stage,
