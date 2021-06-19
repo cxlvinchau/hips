@@ -1,0 +1,25 @@
+﻿hips.heuristics.TwoStageFeasibilityPump
+=======================================
+
+.. currentmodule:: hips.heuristics
+
+.. autoclass:: TwoStageFeasibilityPump
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TwoStageFeasibilityPump.__init__
+      ~TwoStageFeasibilityPump.compute
+      ~TwoStageFeasibilityPump.get_objective_value
+      ~TwoStageFeasibilityPump.variable_solution
+   
+   
+
+   
+   
+   

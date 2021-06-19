@@ -108,6 +108,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#heuristics">Heuristics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.FeasibilityPump.html">hips.heuristics.FeasibilityPump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.TwoStageFeasibilityPump.html">hips.heuristics.TwoStageFeasibilityPump</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.HeuristicBounds.html">hips.heuristics.HeuristicBounds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.AbstractDiving.html">hips.heuristics.AbstractDiving</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.FractionalDivingHeuristic.html">hips.heuristics.FractionalDivingHeuristic</a></li>
@@ -249,16 +250,19 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics.FeasibilityPump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.FeasibilityPump</span></code></a></p></td>
 <td><p>The feasibility pump is a heuristic for solving integer programs (MIPs) proposed by Fischetti et al. in 2005 ( <a class="reference external" href="https://link.springer.com/article/10.1007/s10107-004-0570-3">https://link.springer.com/article/10.1007/s10107-004-0570-3</a>).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.HeuristicBounds.html#hips.heuristics.HeuristicBounds" title="hips.heuristics.HeuristicBounds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.HeuristicBounds</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.TwoStageFeasibilityPump.html#hips.heuristics.TwoStageFeasibilityPump" title="hips.heuristics.TwoStageFeasibilityPump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.TwoStageFeasibilityPump</span></code></a></p></td>
+<td><p>This class implements the feasibility pump for general mixed integer programs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.HeuristicBounds.html#hips.heuristics.HeuristicBounds" title="hips.heuristics.HeuristicBounds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.HeuristicBounds</span></code></a></p></td>
 <td><p>This heuristic is implemented after the scipopt primal heuristic ‘heur_bounds.h’.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving" title="hips.heuristics.AbstractDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.AbstractDiving</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving" title="hips.heuristics.AbstractDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.AbstractDiving</span></code></a></p></td>
 <td><p>Implements an abstract version of diving heuristics.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.FractionalDivingHeuristic.html#hips.heuristics.FractionalDivingHeuristic" title="hips.heuristics.FractionalDivingHeuristic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDivingHeuristic</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.FractionalDivingHeuristic.html#hips.heuristics.FractionalDivingHeuristic" title="hips.heuristics.FractionalDivingHeuristic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDivingHeuristic</span></code></a></p></td>
 <td><p>Implements a concrete diving heuristic, that bounds the variable x_j with lowest fractionality f(x_j) to the nearest integer.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.LineSearchDiving</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.LineSearchDiving</span></code></a></p></td>
 <td><p>This class implements the diving heuristic called line search diving.</p></td>
 </tr>
 </tbody>
