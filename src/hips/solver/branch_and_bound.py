@@ -9,13 +9,18 @@ import numpy as np
 
 class BranchAndBound:
 
-    def __init__(self, model: MIPModel, incumbent=None, incumbent_val=None, stop_early=False):
+    def __init__(self, model: MIPModel, incumbent=None, incumbent_val=None, max_nodes=None):
         self.model = model
         self.sense = model.lp_model.lp_sense
         self.incumbent = incumbent
         self.incumbent_val = incumbent_val
+        self.visited_nodes = 0
+        self.max_nodes = max_nodes
 
     def _optimize(self, node, level=0):
+        if self.max_nodes and self.visited_nodes > self.max_nodes:
+            return
+        self.visited_nodes += 1
         node.init_node()
         node.optimize_relaxation()
         if node.status != LPStatus.OPTIMAL:

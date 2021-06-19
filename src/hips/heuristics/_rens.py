@@ -12,10 +12,16 @@ class RENS(Heuristic):
 
     def __init__(self, mip_model: MIPModel):
         super().__init__(mip_model)
-        self.mip_solver = None
+        self.mip_solver = BranchAndBound(self.mip_model)
         self.added_constraints = []
 
-    def compute(self, max_iter):
+    def compute(self, max_iter=None):
+        """
+        Execute the computation of RENS
+
+        :param max_iter: The maximum number of nodes that are visited in the Branch and Bound search.
+        :return:
+        """
         # Compute relaxation
         self.relaxation.optimize()
         solution = {var: self.relaxation.variable_solution(var) for var in self.integer + self.binary}
@@ -26,7 +32,7 @@ class RENS(Heuristic):
             constr = var >= HIPSArray(np.floor(sol.array))
             self.added_constraints.append(constr)
             self.mip_model.add_constraint(constr)
-        self.mip_solver = BranchAndBound(self.mip_model)
+        self.mip_solver.max_nodes=max_iter
         self.mip_solver.optimize()
         if self.mip_solver.incumbent is None:
             warnings.warn("RENS could not find a feasible solution")

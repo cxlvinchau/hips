@@ -17,7 +17,7 @@ class Heuristic(metaclass=abc.ABCMeta):
         self.tracker = Tracker(self)
 
     @abc.abstractmethod
-    def compute(self, max_iter):
+    def compute(self, max_iter=None):
         """Compute the optimal solution with the heuristic algorithm."""
         pass
 
