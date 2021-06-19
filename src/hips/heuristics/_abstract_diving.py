@@ -13,7 +13,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
     """
     Implements an abstract version of diving heuristics. It consists of a general framework for
     branch-and-bound-tree traversal and stopping criteria. The branching criteria should be implemented in a
-    corresponding subclass. This implementation roughly follows the algorithm seen in :cite:'berthold2006primal' on page 17.
+    corresponding subclass. This implementation roughly follows the algorithm seen in :cite:t:'2006:berthold' on page 17.
     """
 
     def __init__(self, mip_model: MIPModel, current_best_objective: float = None):

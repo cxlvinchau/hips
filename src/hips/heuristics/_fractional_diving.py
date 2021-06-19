@@ -11,7 +11,7 @@ from hips.models import MIPModel
 class FractionalDivingHeuristic(AbstractDiving):
     """
     Implements a concrete diving heuristic, that bounds the variable x_j with lowest fractionality f(x_j) to the nearest
-    integer. The idea is based on page 17 of :cite:'berthold2006primal'.
+    integer. The idea is based on page 17 of :cite:p:`2006:berthold`.
     """
 
     def __init__(self, mip_model: MIPModel, current_best_objective: float = None):
