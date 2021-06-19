@@ -184,6 +184,11 @@
 <p>This class implements a version of the feasibility pump that is applicable to general mixed integer programs, i.e.
 programs containing binary and integer variables, as proposed by Bertacco, Fischetti and Lodi. In contrast, the original
 feasibility pump only works with mixed integer programs containing binary variables only.</p>
+<p>The basic idea of this feasibility pump is to handle binary and integer variables in two different stages. In the first stage,
+the integer variables are ignored, i.e. treated as if they were continuous, and only the binary variables are considered.
+The first stage is completed once a feasible solution w.r.t. the binary variables has been found or when the maximum iteration
+has been reached. Afterwards, in the second stage, the integer variables are considered. Note that the original feasibility
+pump can also handle integer variables, but might be less suited for this purpose.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.heuristics.TwoStageFeasibilityPump.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.TwoStageFeasibilityPump.__init__" title="Permalink to this definition">¶</a></dt>
@@ -201,7 +206,7 @@ feasibility pump only works with mixed integer programs containing binary variab
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.TwoStageFeasibilityPump.compute" title="hips.heuristics.TwoStageFeasibilityPump.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>(max_iter)</p></td>
-<td><p>Compute the optimal solution with the heuristic algorithm.</p></td>
+<td><p>Executes the computation of the feasibility pump.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.TwoStageFeasibilityPump.get_objective_value" title="hips.heuristics.TwoStageFeasibilityPump.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
 <td><p>Return objective value determined by the heuristic</p></td>
@@ -214,7 +219,14 @@ feasibility pump only works with mixed integer programs containing binary variab
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.heuristics.TwoStageFeasibilityPump.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.TwoStageFeasibilityPump.compute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the optimal solution with the heuristic algorithm.</p>
+<dd><p>Executes the computation of the feasibility pump.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_iter</strong> – The maximum iteration in the two stages, respectively. This means that the total max iteration</p>
+</dd>
+</dl>
+<p>will be 2*max_iteration
+:return:</p>
 </dd></dl>
 
 <dl class="py method">
