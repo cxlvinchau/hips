@@ -13,8 +13,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
     """
     Implements an abstract version of diving heuristics. It consists of a general framework for
     branch-and-bound-tree traversal and stopping criteria. The branching criteria should be implemented in a
-    corresponding subclass. This implementation roughly follows the algorithm seen in
-    Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 17, "Algorithm 1: A General Diving heuristic";
+    corresponding subclass. This implementation roughly follows the algorithm seen in :cite:'berthold2006primal' on page 17.
     """
 
     def __init__(self, mip_model: MIPModel, current_best_objective: float = None):
@@ -101,7 +100,6 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
 
         :return: True, if current relaxation solution is trivially roundable, else False
         """
-        # TODO Überlegen ob man nicht immer trivial rundet sodass nicht auf trivially roundable variablen gebrancht wird (diese müssen ja nicht dringend integer werden)
         for frac_var in self.fractional_index_set:
             if not self._trivially_down_roundable[frac_var[0]][frac_var[1]] and not self._trivially_up_roundable[frac_var[0]][frac_var[1]]:
                 return False

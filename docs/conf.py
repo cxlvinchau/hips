@@ -52,7 +52,8 @@ import sphinx_rtd_theme
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx_rtd_theme',
-    'sphinx.ext.autosummary'
+    'sphinx.ext.autosummary',
+    'sphinxcontrib.bibtex'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -148,6 +149,8 @@ latex_documents = [
      'Calvin Chau', 'manual'),
 ]
 
+# La Biblioteca
+bibtex_bibfiles = ['refs.bib']
 
 # -- Options for manual page output ------------------------------------------
 
