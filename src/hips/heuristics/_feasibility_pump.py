@@ -11,7 +11,7 @@ import numpy as np
 
 class FeasibilityPump(Heuristic):
     """
-    The feasibility pump is a heuristic for solving integer programs (MIPs) proposed by :cite:p:`Fischetti2005`in 2005 (
+    The feasibility pump is a heuristic for solving integer programs (MIPs) proposed by :cite:p:`Fischetti2005` in 2005 (
     https://link.springer.com/article/10.1007/s10107-004-0570-3). The basic idea is to repeatedly solve the MIP's
     relaxation, i.e. the MIP without integer constraints, round the obtained relaxed solution to the nearest integer
     and then find a solution that minimizes the distance to that rounded point. The process is repeated until a
