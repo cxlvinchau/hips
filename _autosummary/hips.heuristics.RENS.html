@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>hips.heuristics.RENS &mdash; HIPS 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hips.loader.mps_loader.load_mps_advanced" href="hips.loader.mps_loader.load_mps_advanced.html" />
+    <link rel="prev" title="hips.heuristics.LineSearchDiving" href="hips.heuristics.LineSearchDiving.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> HIPS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing HIPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api.html#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#solver">Solver</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#heuristics">Heuristics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="hips.heuristics.FeasibilityPump.html">hips.heuristics.FeasibilityPump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.heuristics.TwoStageFeasibilityPump.html">hips.heuristics.TwoStageFeasibilityPump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.heuristics.HeuristicBounds.html">hips.heuristics.HeuristicBounds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.heuristics.AbstractDiving.html">hips.heuristics.AbstractDiving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.heuristics.FractionalDivingHeuristic.html">hips.heuristics.FractionalDivingHeuristic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.heuristics.LineSearchDiving.html">hips.heuristics.LineSearchDiving</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.heuristics.RENS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HIPS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../api.html">API Documentation</a> &raquo;</li>
+        
+      <li>hips.heuristics.RENS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_autosummary/hips.heuristics.RENS.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hips-heuristics-rens">
+<h1>hips.heuristics.RENS<a class="headerlink" href="#hips-heuristics-rens" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.heuristics.RENS">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">RENS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.RENS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of the relaxation enforced neighbourhood search (RENS)</p>
+<p>This class implements the relaxation enforced neighborhood search, or short RENS, introduced by <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span>.
+This heuristic can be used to heuristically solve mixed-integer programs with binary and integer variables. The idea is
+to solve the relaxation of the problem and use the solution of the relaxed solution to introduce new bounds.</p>
+<p>W.l.o.g. suppose the feasible region of a relaxation of a problem is given by <span class="math">Ax \leq b</span> and let <span class="math">x^*</span> be
+the optimal solution of the problem. RENS adds the constraints <span class="math">{x \leq \lceil x^* \rceil}</span> and <span class="math">{x \geq \lfloor x^* \rfloor}</span>
+to the original problem and solves it using a mixed-integer program solver. Note that the computed solution, if it exists,
+gives us the best solution that can be obtained from rounding the solution of the relaxation.</p>
+<p>In this implementation a naive branch and bound algorithm is used as exact mixed-integer program solver.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.RENS.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.RENS.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.RENS.__init__" title="hips.heuristics.RENS.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(mip_model)</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.RENS.compute" title="hips.heuristics.RENS.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>([max_iter])</p></td>
+<td><p>Execute the computation of RENS</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.RENS.get_objective_value" title="hips.heuristics.RENS.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
+<td><p>Return objective value determined by the heuristic</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.RENS.variable_solution" title="hips.heuristics.RENS.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
+<td><p>Return the solution found by the heuristic</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.RENS.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.RENS.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the computation of RENS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_iter</strong> – The maximum number of nodes that are visited in the Branch and Bound search.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.RENS.variable_solution">
+<span class="sig-name descname"><span class="pre">variable_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.RENS.variable_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the solution found by the heuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var</strong> – Variable</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Optimal solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.RENS.get_objective_value">
+<span class="sig-name descname"><span class="pre">get_objective_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#hips.heuristics.RENS.get_objective_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return objective value determined by the heuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>optimal value</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="hips.loader.mps_loader.load_mps_advanced.html" class="btn btn-neutral float-right" title="hips.loader.mps_loader.load_mps_advanced" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hips.heuristics.LineSearchDiving.html" class="btn btn-neutral float-left" title="hips.heuristics.LineSearchDiving" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Calvin Chau.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -46,6 +46,7 @@ __________
    hips.heuristics.AbstractDiving
    hips.heuristics.FractionalDivingHeuristic
    hips.heuristics.LineSearchDiving
+   hips.heuristics.RENS
 
 
 Loader and Tracker
