@@ -54,7 +54,7 @@ extensions = [
     'sphinx_rtd_theme',
     'sphinx.ext.autosummary',
     'sphinxcontrib.bibtex',
-    'sphinx.ext.imgmath'
+    'sphinx.ext.mathjax'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
