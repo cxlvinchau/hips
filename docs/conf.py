@@ -53,7 +53,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx_rtd_theme',
     'sphinx.ext.autosummary',
-    'sphinxcontrib.bibtex'
+    'sphinxcontrib.bibtex',
+    'sphinx.ext.imgmath'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
