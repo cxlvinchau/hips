@@ -10,18 +10,25 @@ import numpy as np
 
 
 class FeasibilityPump(Heuristic):
-    """
-    The feasibility pump is a heuristic for solving integer programs (MIPs) proposed by :cite:p:`Fischetti2005` in 2005 (
-    https://link.springer.com/article/10.1007/s10107-004-0570-3). The basic idea is to repeatedly solve the MIP's
-    relaxation, i.e. the MIP without integer constraints, round the obtained relaxed solution to the nearest integer
-    and then find a solution that minimizes the distance to that rounded point. The process is repeated until a
-    feasible point to the original MIP is found or some other stopping criterion is satisfied. Further,
-    small perturbations are used to combat cycling.
+    """Implementation of the original feasibility pump
 
-    This class implements the basic feasibility pump as described in the paper above.
+    The feasibility pump is a heuristic for solving integer programs (MIPs) proposed by :cite:p:`Fischetti2005`.
+    The basic idea is to repeatedly solve the MIP's relaxation, i.e. the MIP without integer constraints, round the
+    obtained relaxed solution to the nearest integer and then find a solution that minimizes the distance to that rounded point.
+    The process is repeated until a feasible point to the original MIP is found or some other stopping criterion is satisfied. Further,
+    small perturbations are used to combat cycling.
     """
 
     def __init__(self, mip_model: MIPModel, t=None, alpha=None, seed=None):
+        r"""Constructor
+
+        :param mip_model: Mixed integer program model, instance of :class:`hips.models.MIPModel`
+        :param t: Perturbation parameter, the greater the parameter the stronger the perturbation. By default ``None`` and
+            the parameter is chosen to be n_binary_variables/2
+        :param alpha: A value between 0 and 1 that determines how much the original objective should be taken into account.
+            By default the original objective is ignored
+        :param seed: Seed to enable reproducible results
+        """
         super().__init__(mip_model)
         self.t = t
         self.alpha = alpha
@@ -207,9 +214,6 @@ class FeasibilityPump(Heuristic):
 
         :param max_iter: The maximum number of iterations that should be performed. If the number of iterations is
                             reached, the computation terminated.
-        :param t: Perturbation parameter.
-        :param alpha: If alpha is set, the feasibility pump will try to optimize towards the objective function. The higher alpha,
-                        the more we optimize towards the original objective function.
         :return: None
         """
         # self.logger.info("Starting computation of feasibility pump")
@@ -363,11 +367,12 @@ class FeasibilityPump(Heuristic):
 
 
 class TwoStageFeasibilityPump(Heuristic):
-    """This class implements the feasibility pump for general mixed integer programs.
+    r"""Implementation of feasibility pump with two stages
 
     This class implements a version of the feasibility pump that is applicable to general mixed integer programs, i.e.
     programs containing binary and integer variables, as proposed by :cite:p:`BERTACCO200763`. In contrast, the original
-    feasibility pump only works with mixed integer programs containing binary variables only.
+    feasibility pump is only designed for mixed integer programs containing binary variables only. However, note that our
+    implementation of the original feasibility pump is able to work with general mixed-integer programs.
 
     The basic idea of this feasibility pump is to handle binary and integer variables in two different stages. In the first stage,
     the integer variables are ignored, i.e. treated as if they were continuous, and only the binary variables are considered.
@@ -377,6 +382,11 @@ class TwoStageFeasibilityPump(Heuristic):
     """
 
     def __init__(self, model: MIPModel, **kwargs):
+        """Constructor
+
+        :param model: Mixed integer program, instance of :class:`hips.models.MIPModel`
+        :param kwargs: Additional arguments that are passed to the underlying original feasibility pump (see :class:`hips.heuristics.FeasibilityPump`).
+        """
         super().__init__(model)
         self.feasibility_pump = FeasibilityPump(model, **kwargs)
 

@@ -5,8 +5,17 @@ import numpy as np
 
 
 class LineSearchDiving(AbstractDiving):
-    """
-    This class implements the diving heuristic called line search diving.
+    """Implementation of line search diving heuristic
+
+    This class implements the line search diving heuristic as presented by :cite:`Hendel2011`. As the name suggests, this
+    heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
+    explore a branch of a branch and bound tree. In this implementation, the selected variable in each step is fixed to a value.
+
+    The choice of the variable that is fixed is made as follows. Suppose :math:`x^R` is the solution found at the root
+    node :math:`R` in the branch and bound algorithm. Let :math:`N` be an arbitrary node within the branch and bound tree
+    (i.e. not the root node) and :math:`x^N` the corresponding solution. At :math:`N` line search diving considers the line
+    between :math:`x^N` and :math:`x^R` and conceptually moves towards :math:`x^R` and checks which variable becomes integer first.
+    This variable is then selected and fixed.
     """
 
     def __init__(self, mip_model: MIPModel, current_best_objective: float = None, seed=0):

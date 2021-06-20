@@ -34,7 +34,7 @@ copyright = '2021, Calvin Chau'
 author = 'Calvin Chau'
 
 # The short X.Y version
-version = ''
+version = 'latest'
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'
 
@@ -54,7 +54,9 @@ extensions = [
     'sphinx_rtd_theme',
     'sphinx.ext.autosummary',
     'sphinxcontrib.bibtex',
-    'sphinx.ext.mathjax'
+    'sphinx.ext.mathjax',
+    'sphinx_toggleprompt',
+    'sphinx_copybutton'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -209,3 +211,5 @@ autodoc_default_options = {
     'undoc-members': True,
     'exclude-members': '__weakref__'
 }
+
+toggleprompt_offset_right = 40

@@ -3,9 +3,18 @@ import numpy as np
 
 
 class LPModel:
-    """Representation of a linear program"""
+    """Representation of a linear program
+
+    This class implements a representation of a linear program. It provides a simple interface to create, update and
+    optimize linear programs.
+    """
 
     def __init__(self, lp_solver):
+        """Constructor
+
+        :param lp_solver: A concrete implementation of linear program solver. ``lp_solver`` has to be an instance of
+            :class:`hips.solver.GurobiSolver` or :class:`hips.solver.ClpSolver`
+        """
         self.status = LPStatus.UNKNOWN
         self.constraint_counter = 0
         self.constraint_names = dict()
@@ -18,7 +27,13 @@ class LPModel:
         self.concrete_solver = lp_solver
 
     def add_constraint(self, constraint, name=None):
-        """Adds a constraint to the linear program"""
+        """Adds a constraint to the linear program
+
+        This method adds the given constraint to the linear program.
+
+        :param constraint: A constraint, an instance of :class:`hips.models.Constraint`
+        :param name: Name of the constraint. This argument is optional.
+        """
         if name in self.constraint_names.keys():
             raise Exception("Cannot add two constraints with the same name.")
         if not (constraint.vars - self.vars):
@@ -35,6 +50,13 @@ class LPModel:
             raise Exception("Illegal constraint")
 
     def remove_constraint(self, name=None, constraint=None):
+        """Removes a constraint
+
+        This method removes a constraint. Either the constraint is given or its name.
+
+        :param name: Name of the constraint
+        :param constraint: A constraint, an instance of :class:`hips.models.Constraint
+        """
         if name is None and constraint is None:
             raise Exception("Neither name nor constraint were specified for removal.")
         # Case name = None, fetch name by constraint
@@ -54,7 +76,19 @@ class LPModel:
         self.concrete_solver.remove_constraint(name=name, constraint=constraint)
 
     def add_variable(self, name, lb=0, ub=None, dim=1):
-        """Adds a variable to the linear program"""
+        """Adds a variable to the linear program
+
+        This method adds a variable to the linear program. Variables can be high-dimensional and can have lower and higher
+        bounds. For more details, please see :class:`hips.models.Variable`.
+
+        :param name: Name of the variable
+        :param lb: Lower bound of the variable. By default the lower bound is :math:`0`. To set the bound to :math:`-\infty`
+            set ``lb`` to ``None``. ``lb`` has to be an instance of :class:`hips.models.HIPSArray` if the variable has a dimension greater than :math:`1`
+        :param ub: Upper bound of the variable. By default the upper bound is :math:`\infty`. ``ub`` has to be an instance
+            of :class:`hips.models.HIPSArray` if the variable has a dimension greater than :math:`1`
+        :param dim: Dimension of the variable. By default the variable has dimension :math:`1`
+        :return: A variable, an instance of :class:`hips.models.Variable`
+        """
         if name in [v.name for v in self.vars]:
             raise Exception("Cannot add two variables with the same name")
         var = Variable(name, id=self.id_counter, lb=lb, ub=ub, dim=dim)
@@ -65,6 +99,12 @@ class LPModel:
         return var
 
     def remove_variable(self, var):
+        """Removes a given variable
+
+        This method removes a given variable from the linear program.
+
+        :param var: Variable to be removed. Instance of :class:`hips.models.Variable`
+        """
         if var not in self.vars:
             raise Exception("Cannot remove a non existing variable")
         self.vars.remove(var)
@@ -72,6 +112,14 @@ class LPModel:
         self.concrete_solver.remove_variable(var)
 
     def set_variable_bound(self, var, bound: VariableBound, value):
+        """Sets/updates the bound of a variable
+
+        This method sets/updates the bound of the given variable.
+
+        :param var: Variable whose bound should be set/updated. Instance of :class:`hips.models.Variable`
+        :param bound: Species whether the lower or upper bound should be set/updated.
+        :param value: Value of the bound. Instance of :class:`hips.models.HIPSArray`
+        """
         if isinstance(value, NUMERICAL_TYPES):
             value = value * HIPSArray(np.ones(var.dim))
         if not isinstance(value, HIPSArray):
@@ -87,7 +135,12 @@ class LPModel:
         self.concrete_solver.set_variable_bound(var, bound, value)
 
     def set_objective(self, objective):
-        """Sets the objective of the linear program"""
+        """Sets the objective of the linear program
+
+        This method sets the objective function of the linear program.
+
+        :param objective: Objective function of the linear program. Instance of :class:`hips.models.LinExpr`
+        """
         if type(objective) == Variable:
             objective = LinExpr(vars={objective}, coefficients={objective: objective.coefficient})
         if type(objective) != LinExpr:
@@ -98,7 +151,13 @@ class LPModel:
             self.concrete_solver.set_objective(objective)
 
     def set_lp_sense(self, lp_sense: LPSense):
-        """Sets the type of the linear program, i.e. minimization or maximization. Use LPSense.MAX or LPSense.MIN"""
+        """Sets the sense of the linear program
+
+        This method specifies the sense of the linear program, i.e. whether the program should be minimized or maximized.
+
+        :param lp_sense: The sense of the linear program. Enum of :class:`hips.LPSense`
+        :return:
+        """
         if lp_sense not in [LPSense.MAX, LPSense.MIN]:
             raise Exception("Illegal LP type")
         else:
@@ -118,16 +177,36 @@ class LPModel:
         return self.concrete_solver.get_objective_value()
 
     def optimize(self):
-        """Optimizes the linear program"""
+        """Optimizes the linear program
+
+        This method optimizes the linear program with the linear program solver specified in the constructor.
+        """
         self.concrete_solver.optimize()
 
     def get_variables(self):
+        """Returns the variables of the linear program
+
+        :return: Variables of the linear program, given as list of :class:`hips.models.Variable`
+        """
         return self.vars
 
     def get_status(self):
+        """Returns the status of the linear program
+
+        This method returns the status of the linear program. E.g. a linear program might be infeasible, unbounded or
+        optimal.
+
+        :return: Status of the linear program
+        """
         return self.concrete_solver.get_status()
 
     def is_feasible(self, variable_solutions: dict):
+        """Checks whether a given solution is feasible for the linear program
+
+        :param variable_solutions: A :class:`dict` object that maps variables to their solution. The keys of this dictionary
+            are instances of :class:`hips.models.Variable` and the keys are instances of :class:`hips.models.HIPSArray`
+        :return: ``True`` if the solution is feasible, otherwise ``False``
+        """
         for constr in self.constraints:
             if not all(constr.eval(variable_solutions)):
                 return False
@@ -140,9 +219,19 @@ class LPModel:
 
 
 class Constraint:
-    """Represents a linear constraint of an LP"""
+    """Representation a linear constraint
+
+    This class implements a representation of a linear constraint of a linear program. Typically, a constraint is not
+    created with the constructor but rather implicitly.
+    """
 
     def __init__(self, lhs, comparator, rhs):
+        """Constructor
+
+        :param lhs: Left-hand side of the constraint. Has to be an instance of :class:`hips.models.LinExpr`
+        :param comparator: A comparator, i.e. less equal, equal or greater equal (see :class:`hips.Comparator`)
+        :param rhs: Right-hand side of the constraint. Has to be an instance of :class:`hips.models.LinExpr`
+        """
         self.MAP = {Comparator.LESS_EQUALS: "<=", Comparator.EQUALS: "=", Comparator.GREATER_EQUALS: ">="}
         if type(lhs) != LinExpr and type(lhs) != Variable:
             raise TypeError("lhs is not a linear expression or variable")
@@ -188,6 +277,15 @@ class Constraint:
         return False
 
     def eval(self, variable_solutions: dict, eps=0.0002):
+        """Evaluate constraint
+
+        This method evaluates whether constraint is satisfied under the given solution
+
+        :param variable_solutions: ions: A :class:`dict` object that maps variables to their solution. The keys of this dictionary
+            are instances of :class:`hips.models.Variable` and the keys are instances of :class:`hips.models.HIPSArray`
+        :param eps: Absolute error tolerance. This is only relevant for inequality constraints
+        :return: ``True`` if the constraint is satisfied, otherwise ``False``
+        """
         from hips.utils import is_close
         eval_lhs = self.lhs.eval(variable_solutions)
         if self.comparator == Comparator.LESS_EQUALS:
@@ -200,9 +298,23 @@ class Constraint:
 
 
 class LinExpr:
-    """Represents a linear expression, used as lhs of a constraint"""
+    """Representation of a linear expression
+
+    This class implements a representation of a linear expression. Suppose we have variables :math:`x_0, \dots, x_n` and
+    coefficients :math:`a_0, \dots, a_n` with dimensions :math:`d_0, \dots, d_n`. Then a linear expression of the form
+    :math:`{a_0}^T x_0 + \dots + {a_n}^T x_n` can be represented with this class. For more details, please refer to
+    :class:`hips.models.Variable`.
+
+    Typically, a linear expression is not created explicitly with constructor, but rather implicitly.
+    """
 
     def __init__(self, vars=set(), coefficients=dict()):
+        """Constructor
+
+        :param vars: Variables in the linear expression. A set of instances of :class:`hips.models.Variable`
+        :param coefficients: A :class:`dict` object that maps variables to coefficients. The keys have to be instances of
+            :class:`hips.models.Variable` and values instances of :class:`hips.models.HIPSArray`
+        """
         self.vars = vars
         self.coefficients = coefficients
         # Check if dimension match
@@ -263,6 +375,14 @@ class LinExpr:
             raise Exception("Illegal equality operator used on LinExp")
 
     def eval(self, variable_solutions: dict):
+        """Evaluates the linear expression
+
+        This method evaluates the linear expression with the given variable assignment
+
+        :param variable_solutions: A :class:`dict` object that maps variables to their solution. The keys of this dictionary
+            are instances of :class:`hips.models.Variable` and the keys are instances of :class:`hips.models.HIPSArray`
+        :return: The value of this linear expression. Instance of :class:`hips.models.HIPSArray`
+        """
         result = 0
         for var in self.vars:
             solution = variable_solutions[var]
@@ -271,10 +391,35 @@ class LinExpr:
 
 
 class Variable:
-    """Represents a variable in an LP"""
+    """Representation of a variable
+
+    This class implements a representation of a variable in the context of linear programming. A variable has an assigned
+    name. A variable has a type, i.e. continuous, integer or binary (see :class:`hips.VarTypes`). Furthermore, a variable
+    has a lower and upper bound, i.e. the minimum and maximum value a variable may attain. Lastly, each variable has a dimension.
+    If a variable :math:`x` has dimension :math:`n`, then it can be thought of as a column vector containing :math:`1`-dimensional
+    variables :math:`x_j` with :math:`j \in \{1, \dots, n\}`.
+
+    Note that it is not recommended to explicitly construct a variable via the constructor. Instead use the method
+    :py:meth:`hips.models.LPModel.add_variable` provided by :class:`hips.models.LPModel`.
+
+    :Example:
+        >>> from hips.models import LPModel
+        >>> from hips.solver import GurobiSolver
+        >>> model = LPModel(GurobiSolver())
+        >>> # Creating variables x and y
+        >>> x, y = model.add_variable("x", dim=10), model.add_variable("y")
+    """
 
     def __init__(self, name, id=0, var_type=VarTypes.CONTINUOUS, lb=0, ub=None, dim=1):
-        """By default the variable is continuous and 1-dimensional"""
+        """Constructor
+
+        :param name: Name of the variable
+        :param id: Id of the variable. By default the ``id`` is 0
+        :param var_type: Type of the variable, either continuous, integer or binary (see :class:`hips.VarTypes`)
+        :param lb: Lower bound of the variable. Has to be of type :class:`hips.models.HIPSArray`
+        :param ub: Upper bound of the variable. Has to be of type :class:`hips.models.HIPSArray`
+        :param dim: Dimension of the variable. By default the dimension is :math:`1`
+        """
         self.name = name
         self.coefficient = HIPSArray((1, dim))
         self.id = id
@@ -347,11 +492,35 @@ class Variable:
 
 
 class HIPSArray:
-    """
-    Wrapper class for numpy array
+    """Wrapper class for numpy array
+
+    This class acts as a wrapper for a numpy array. The wrapping is necessary for overriding the different Python operators.
+    The underlying array can be accessed with the ``array`` attribute. For more details, please consult the
+    `numpy documentation <https://numpy.org/doc/stable/contents.html>`_.
+
+
+    :Example:
+        >>> import numpy as np
+        >>> from hips.models import HIPSArray
+        >>> # Creating a 2x2 HIPSArray with ones
+        >>> HIPSArray((2, 2))
+        HIPSArray([[1. 1.]
+         [1. 1.]])
+        >>> # Creating a 3x3 identity matrix
+        >>> HIPSArray(np.identity(3))
+        HIPSArray([[1. 0. 0.]
+         [0. 1. 0.]
+         [0. 0. 1.]])
     """
 
     def __init__(self, arg):
+        """
+        Constructor
+
+        :param arg: Either an array-like object or a :class:`tuple`. In the former case the created :class:`hips.models.HIPSArray`
+            object's array will correspond the argument. In the latter case, the instance contains an array with ones with specified
+            shape
+        """
         if type(arg) in [list, np.ndarray]:
             array = arg
             self.array = np.array(array)
@@ -360,6 +529,9 @@ class HIPSArray:
         if len(self.array.shape) > 2:
             raise ValueError("HIPSArray with illegal shape {}".format(self.array.shape))
         self.shape = self.array.shape
+
+    def __getitem__(self, item):
+        return self.array.__getitem__(item)
 
     def __abs__(self):
         return abs(self.array)
@@ -424,10 +596,17 @@ class HIPSArray:
         return self.array == other
 
     def to_numpy(self):
+        """Returns the underlying numpy array
+
+        :return: Underlying numpy array
+        """
         return self.array
 
-    def to_np(self):
-        return self.to_numpy()
-
     def reshape(self, shape):
+        """Reshapes the array
+
+        :param shape: Shape given as tuple. For details, please consult the
+            `numpy documentation <https://numpy.org/doc/stable/reference/generated/numpy.reshape.html>`_
+        :return: An instance of :class:`hips.models.HIPSArray` with the specified shape and same data
+        """
         return HIPSArray(self.array.reshape(shape))

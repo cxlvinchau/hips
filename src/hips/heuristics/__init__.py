@@ -1,4 +1,4 @@
-from hips.solver._clp_solver import ClpSolver
+from hips.solver import ClpSolver
 
 
 def skip_when_clp_solver(func):
@@ -24,5 +24,3 @@ from hips.heuristics._abstract_diving import AbstractDiving
 from hips.heuristics._fractional_diving import FractionalDivingHeuristic
 from hips.heuristics._line_search_diving import LineSearchDiving
 from hips.heuristics._rens import RENS
-
-__all__ = ["FeasibilityPump", "HeuristicBounds", "AbstractDiving", "FractionalDivingHeuristic", "RENS", "TwoStageFeasibilityPump"]

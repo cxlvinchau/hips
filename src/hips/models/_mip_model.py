@@ -6,16 +6,21 @@ import math
 
 
 class MIPModel:
-    """
+    """Representation of a mixed-integer program
+
     Represents a mixed-integer program. In contrast to the :py:class:`LPModel <hips.models.lp_model.LPModel>`, this
     class allows for specification of the variable types, i.e. continuous, binary or integer. Under the hood, the
     :py:class:`LPModel <hips.models.lp_model.LPModel>` is used.
     """
 
-    def __init__(self, solver, binary_variables=[], integer_variables=[]):
+    def __init__(self, solver):
+        """Constructor
+
+        :param solver: A linear program solver
+        """
         self.lp_model = LPModel(solver)
-        self.integer_variables = integer_variables
-        self.binary_variables = binary_variables
+        self.integer_variables = []
+        self.binary_variables = []
         self.variables = self.lp_model.vars
 
     def add_constraint(self, constraint):
@@ -23,7 +28,6 @@ class MIPModel:
         Adds a linear constraint to the mixed-integer program.
 
         :param constraint: Constraint of type :py:class:`Constraint <hips.models.lp_model.Constraint>`
-        :return: None
         """
         self.lp_model.add_constraint(constraint)
 
@@ -36,7 +40,7 @@ class MIPModel:
         :param lb: Lower bound of the variable, by default 0.
         :param ub: Upper bound of the variable, by default the variable is unbounded. Note that an integer variable has to be bounded from above.
         :param dim: dimension of the variable, by default 1
-        :return: :py:class:`Variable <hips.models.lp_model.Variable>`
+        :return: A variable, instance of :py:class:`Variable <hips.models.lp_model.Variable>`
         """
         # Set bounds for binary variables
         if var_type == VarTypes.BINARY:
@@ -56,7 +60,6 @@ class MIPModel:
         Sets the objective function of the mixed-integer program.
 
         :param objective: A linear expression of type :py:class:`LinExpr <hips.models.lp_model.LinExpr>`
-        :return: None
         """
         self.lp_model.set_objective(objective)
 
@@ -64,8 +67,7 @@ class MIPModel:
         """
         Sets the type of the mixed-integer program.
 
-        :param lp_sense: :py:class:`LPSense <hips.constants.LPSense>`
-        :return: None
+        :param lp_sense: Specifies the sense of the linear program, see :py:class:`LPSense <hips.constants.LPSense>`
         """
         self.lp_model.set_lp_sense(lp_sense)
 
@@ -77,7 +79,7 @@ class MIPModel:
         Checks whether the given solution is feasible for the MIP
 
         :param variable_solutions: Dictionary mapping variables to solutions
-        :return: True if solution is feasible else False
+        :return: ``True`` if solution is feasible else ``False``
         """
         # Check if relaxation is feasible
         if not self.lp_model.is_feasible(variable_solutions):

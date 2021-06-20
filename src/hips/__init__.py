@@ -1,5 +1,6 @@
 import numpy as np
 from hips.models import HIPSArray
+from hips.constants import LPSense, Comparator, VarTypes, VariableBound, NUMERICAL_TYPES, LPSolver, LPStatus
 # Define global constants
 
 REL_TOLERANCE = 1e-05
