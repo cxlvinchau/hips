@@ -35,6 +35,7 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -186,8 +187,8 @@
 <p>This class implements the relaxation enforced neighborhood search, or short RENS, introduced by <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span>.
 This heuristic can be used to heuristically solve mixed-integer programs with binary and integer variables. The idea is
 to solve the relaxation of the problem and use the solution of the relaxed solution to introduce new bounds.</p>
-<p>W.l.o.g. suppose the feasible region of a relaxation of a problem is given by <span class="math">Ax \leq b</span> and let <span class="math">x^*</span> be
-the optimal solution of the problem. RENS adds the constraints <span class="math">{x \leq \lceil x^* \rceil}</span> and <span class="math">{x \geq \lfloor x^* \rfloor}</span>
+<p>W.l.o.g. suppose the feasible region of a relaxation of a problem is given by <span class="math notranslate nohighlight">\(Ax \leq b\)</span> and let <span class="math notranslate nohighlight">\(x^*\)</span> be
+the optimal solution of the problem. RENS adds the constraints <span class="math notranslate nohighlight">\({x \leq \lceil x^* \rceil}\)</span> and <span class="math notranslate nohighlight">\({x \geq \lfloor x^* \rfloor}\)</span>
 to the original problem and solves it using a mixed-integer program solver. Note that the computed solution, if it exists,
 gives us the best solution that can be obtained from rounding the solution of the relaxation.</p>
 <p>In this implementation a naive branch and bound algorithm is used as exact mixed-integer program solver.</p>
