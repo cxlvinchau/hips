@@ -23,6 +23,8 @@ jobs:
         pip install sphinx_rtd_theme
         pip install sphinxcontrib-bibtex
         pip install mock
+        pip install sphinx-toggleprompt
+        pip install sphinx-copybutton
         
     - name: Build documentation
       run: |
