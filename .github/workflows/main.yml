@@ -23,6 +23,7 @@ jobs:
         pip install sphinx_rtd_theme
         pip install sphinxcontrib-bibtex
         pip install mock
+        sudo apt install texlive-base
         
     - name: Build documentation
       run: |
