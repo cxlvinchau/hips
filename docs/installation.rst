@@ -77,7 +77,7 @@ COIN-OR dependencies have to be installed.
 - For Linux/Ubuntu users this `GitHub issue <https://github.com/coin-or/CyLP/issues/47#issuecomment-545120587>`_ might be helpful.
 - You might need to install numpy before installing cylp. Simply run ``pip install numpy``.
 
-3.0 Installing HIPS
+3. Installing HIPS
 -------------------
 Finally, we can install HIPS. There are two ways to install HIPS, either from the Python Package Index or from the GitHub repository.
 
