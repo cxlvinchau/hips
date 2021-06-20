@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Installing HIPS &mdash; HIPS 0.0.1 documentation</title>
+  <title>Installation &mdash; HIPS 0.0.1 documentation</title>
   
 
   
@@ -97,7 +97,20 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing HIPS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-virtual-environment-optional">1. Creating a virtual environment (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-a-solver">2. Installing a solver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-gurobi">Installing Gurobi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-cylp">Installing CyLP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-hips">3.0 Installing HIPS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-from-the-python-package-index">Installing from the Python Package Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-from-the-github-repository">Installing from the GitHub repository</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -149,7 +162,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Installing HIPS</li>
+      <li>Installation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -168,8 +181,90 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="installing-hips">
-<h1>Installing HIPS<a class="headerlink" href="#installing-hips" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>In the following we describe how to setup a environment to work with HIPS.</p>
+<div class="section" id="creating-a-virtual-environment-optional">
+<h2>1. Creating a virtual environment (optional)<a class="headerlink" href="#creating-a-virtual-environment-optional" title="Permalink to this headline">¶</a></h2>
+<p>Typically, when working on different Python projects it is advisable to create
+virtual environments to separate the dependencies of the different projects.
+While this step is optional, we highly recommend setting up a virtual environment.
+If virtual environments are not familiar to you, please consult the
+<a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">Python documentation</a> or
+<a class="reference external" href="https://realpython.com/python-virtual-environments-a-primer/">Python Virtual Environments: A Primer</a>.</p>
+<p>First, we create a directory <code class="docutils literal notranslate"><span class="pre">my_project</span></code> where we would like to create
+the virtual environment. Navigate into this directory, then run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m venv my_venv</span>
+</pre></div>
+</div>
+<p>The code above creates a virtual environment with the name <code class="docutils literal notranslate"><span class="pre">my_venv</span></code> in our project
+directory. Afterwards, we have to activate the environment.</p>
+<p>On Windows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">my_venv\Scripts\activate.bat</span>
+</pre></div>
+</div>
+<p>On Unix or MacOS:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">source my_venv/bin/activate</span>
+</pre></div>
+</div>
+<p>Now we can install packages without affecting other dependencies in other projects.</p>
+</div>
+<div class="section" id="installing-a-solver">
+<h2>2. Installing a solver<a class="headerlink" href="#installing-a-solver" title="Permalink to this headline">¶</a></h2>
+<p>HIPS supports two of the most popular solvers for linear programming,
+<a class="reference external" href="https://www.gurobi.com/">Gurobi</a> <span id="id1">[<a class="reference internal" href="references.html#id8" title="Gurobi Optimization, LLC. Gurobi Optimizer Reference Manual. 2021. URL: https://www.gurobi.com.">GurobiOptimizationLLC21</a>]</span> and
+<a class="reference external" href="https://github.com/coin-or/Clp">Clp</a> <span id="id2">[<a class="reference internal" href="references.html#id7" title="johnjforrest, Stefan Vigerske, Ted Ralphs, Lou Hafer, jpfasano, Haroldo Gambini Santos, Matthew Saltzman, h-i-gassmann, Bjarni Kristjansson, and Alan King. Coin-or/clp: version 1.17.6. April 2020. URL: https://doi.org/10.5281/zenodo.3748677, doi:10.5281/zenodo.3748677.">jVR+20</a>]</span>.
+Note that you do not need to install both solvers. The presence of one solver
+is sufficient. Generally, we recommend the installation of both solvers though.</p>
+<div class="section" id="installing-gurobi">
+<h3>Installing Gurobi<a class="headerlink" href="#installing-gurobi" title="Permalink to this headline">¶</a></h3>
+<p>Gurobi is a commercial solver for linear programming but also quadratic programming,
+mixed integer programming and more. However, within HIPS we only make use of
+its linear programming capabilities. While the usage of Gurobi is generally not free,
+academic licenses can be obtained <a class="reference external" href="https://www.gurobi.com/academia/academic-program-and-licenses/">here</a>. Once you have
+obtained a license you need to activate it. To this end, please follow the instructions on <a class="reference external" href="https://support.gurobi.com/hc/en-us">Gurobi’s website</a>.</p>
+<p>Then, run the following line to install Gurobi.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install gurobipy</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-cylp">
+<h3>Installing CyLP<a class="headerlink" href="#installing-cylp" title="Permalink to this headline">¶</a></h3>
+<p>Clp is an open source solver for linear programming and licensed under the Eclipse Public License. It is part of the larger
+open source <a class="reference external" href="https://www.coin-or.org/">COIN-OR project</a>. To use Clp, we install its Python interface
+<a class="reference external" href="https://github.com/coin-or/CyLP">cylp</a>. Please follow the instructions in the <em>Prerequisites</em> section on the
+<a class="reference external" href="https://github.com/coin-or/CyLP">GitHub</a> page.</p>
+<p>Then, once the steps described in the <em>Prerequisites</em> are done, we can install cylp.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install cylp</span>
+</pre></div>
+</div>
+<p><strong>Troubleshooting:</strong>
+The installation of Clp can be quite cumbersome and might not be as smooth as the Gurobi installation because various
+COIN-OR dependencies have to be installed.</p>
+<ul class="simple">
+<li><p>For Linux/Ubuntu users this <a class="reference external" href="https://github.com/coin-or/CyLP/issues/47#issuecomment-545120587">GitHub issue</a> might be helpful.</p></li>
+<li><p>You might need to install numpy before installing cylp. Simply run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy</span></code>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="installing-hips">
+<h2>3.0 Installing HIPS<a class="headerlink" href="#installing-hips" title="Permalink to this headline">¶</a></h2>
+<p>Finally, we can install HIPS. There are two ways to install HIPS, either from the Python Package Index or from the GitHub repository.</p>
+<div class="section" id="installing-from-the-python-package-index">
+<h3>Installing from the Python Package Index<a class="headerlink" href="#installing-from-the-python-package-index" title="Permalink to this headline">¶</a></h3>
+<p>The installation is straightforward. Run the following line to install HIPS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">hips</span><span class="o">-</span><span class="n">mip</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-from-the-github-repository">
+<h3>Installing from the GitHub repository<a class="headerlink" href="#installing-from-the-github-repository" title="Permalink to this headline">¶</a></h3>
+<p>For the latest version of HIPS, we can install the version from the repository.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cxlvinchau</span><span class="o">/</span><span class="n">hips</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">master</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
 
