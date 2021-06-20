@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
 
   
   
@@ -35,6 +36,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/toggleprompt.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -64,6 +68,10 @@
 
           
             
+            
+              <div class="version">
+                latest
+              </div>
             
           
 
@@ -114,6 +122,14 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.FractionalDivingHeuristic.html">hips.heuristics.FractionalDivingHeuristic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.LineSearchDiving.html">hips.heuristics.LineSearchDiving</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.RENS.html">hips.heuristics.RENS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.LPSense.html">hips.LPSense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.LPStatus.html">hips.LPStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.Comparator.html">hips.Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.VarTypes.html">hips.VarTypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.VariableBound.html">hips.VariableBound</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#loader-and-tracker">Loader and Tracker</a><ul>
@@ -207,19 +223,19 @@
 <td><p>Representation of a linear program</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.MIPModel</span></code></a></p></td>
-<td><p>Represents a mixed-integer program.</p></td>
+<td><p>Representation of a mixed-integer program</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p></td>
 <td><p>Wrapper class for numpy array</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p></td>
-<td><p>Represents a variable in an LP</p></td>
+<td><p>Representation of a variable</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.models.LinExpr.html#hips.models.LinExpr" title="hips.models.LinExpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.LinExpr</span></code></a></p></td>
-<td><p>Represents a linear expression, used as lhs of a constraint</p></td>
+<td><p>Representation of a linear expression</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.models.Constraint.html#hips.models.Constraint" title="hips.models.Constraint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.models.Constraint</span></code></a></p></td>
-<td><p>Represents a linear constraint of an LP</p></td>
+<td><p>Representation a linear constraint</p></td>
 </tr>
 </tbody>
 </table>
@@ -250,10 +266,10 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics.FeasibilityPump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.FeasibilityPump</span></code></a></p></td>
-<td><p>The feasibility pump is a heuristic for solving integer programs (MIPs) proposed by <span id="id1">[<a class="reference internal" href="references.html#id3" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span> in 2005 ( <a class="reference external" href="https://link.springer.com/article/10.1007/s10107-004-0570-3">https://link.springer.com/article/10.1007/s10107-004-0570-3</a>).</p></td>
+<td><p>Implementation of the original feasibility pump</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.TwoStageFeasibilityPump.html#hips.heuristics.TwoStageFeasibilityPump" title="hips.heuristics.TwoStageFeasibilityPump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.TwoStageFeasibilityPump</span></code></a></p></td>
-<td><p>This class implements the feasibility pump for general mixed integer programs.</p></td>
+<td><p>Implementation of feasibility pump with two stages</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.HeuristicBounds.html#hips.heuristics.HeuristicBounds" title="hips.heuristics.HeuristicBounds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.HeuristicBounds</span></code></a></p></td>
 <td><p>This heuristic is implemented after the scipopt primal heuristic ‘heur_bounds.h’.</p></td>
@@ -265,10 +281,36 @@
 <td><p>Implements a concrete diving heuristic, that bounds the variable x_j with lowest fractionality f(x_j) to the nearest integer.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.LineSearchDiving</span></code></a></p></td>
-<td><p>This class implements the diving heuristic called line search diving.</p></td>
+<td><p>Implementation of line search diving heuristic</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.RENS.html#hips.heuristics.RENS" title="hips.heuristics.RENS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.RENS</span></code></a></p></td>
 <td><p>Implementation of the relaxation enforced neighbourhood search (RENS)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="constants">
+<h2>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.LPSense.html#hips.LPSense" title="hips.LPSense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.LPSense</span></code></a></p></td>
+<td><p>An enumeration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.LPStatus.html#hips.LPStatus" title="hips.LPStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.LPStatus</span></code></a></p></td>
+<td><p>An enumeration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.Comparator.html#hips.Comparator" title="hips.Comparator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.Comparator</span></code></a></p></td>
+<td><p>An enumeration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.VarTypes.html#hips.VarTypes" title="hips.VarTypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.VarTypes</span></code></a></p></td>
+<td><p>An enumeration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.VariableBound.html#hips.VariableBound" title="hips.VariableBound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.VariableBound</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -282,10 +324,10 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps_advanced.html#hips.loader.mps_loader.load_mps_advanced" title="hips.loader.mps_loader.load_mps_advanced"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.loader.mps_loader.load_mps_advanced</span></code></a></p></td>
-<td><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path. This method uses multidimensional variables to create the model. If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set. Makes use of the library <a href="#id2"><span class="problematic" id="id3">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p></td>
+<td><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path. This method uses multidimensional variables to create the model. If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set. Makes use of the library <a href="#id1"><span class="problematic" id="id2">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps_primitive.html#hips.loader.mps_loader.load_mps_primitive" title="hips.loader.mps_loader.load_mps_primitive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.loader.mps_loader.load_mps_primitive</span></code></a></p></td>
-<td><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path. This method only uses 1-dimensional variables to create the model. If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set. Makes use of the library <a href="#id4"><span class="problematic" id="id5">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p></td>
+<td><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path. This method only uses 1-dimensional variables to create the model. If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set. Makes use of the library <a href="#id3"><span class="problematic" id="id4">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.utils.Tracker.html#hips.utils.Tracker" title="hips.utils.Tracker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.utils.Tracker</span></code></a></p></td>
 <td><p></p></td>

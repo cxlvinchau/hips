@@ -1,0 +1,23 @@
+﻿hips.LPSense
+============
+
+.. currentmodule:: hips
+
+.. autoclass:: LPSense
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LPSense.MAX
+      ~LPSense.MIN
+   
+   

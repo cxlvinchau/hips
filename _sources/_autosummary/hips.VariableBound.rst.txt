@@ -1,0 +1,29 @@
+﻿hips.VariableBound
+==================
+
+.. currentmodule:: hips
+
+.. autoclass:: VariableBound
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~VariableBound.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~VariableBound.LB
+      ~VariableBound.UB
+   
+   

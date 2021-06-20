@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
@@ -35,6 +36,10 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/toggleprompt.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -64,6 +69,10 @@
 
           
             
+            
+              <div class="version">
+                latest
+              </div>
             
           
 
@@ -103,6 +112,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#solver">Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#heuristics">Heuristics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
 </ul>
 </li>
@@ -182,10 +192,18 @@
 <dt class="sig sig-object py" id="hips.models.LPModel">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">LPModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_solver</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representation of a linear program</p>
+<p>This class implements a representation of a linear program. It provides a simple interface to create, update and
+optimize linear programs.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_solver</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lp_solver</strong> – A concrete implementation of linear program solver. <code class="docutils literal notranslate"><span class="pre">lp_solver</span></code> has to be an instance of
+<a class="reference internal" href="hips.solver.GurobiSolver.html#hips.solver.GurobiSolver" title="hips.solver.GurobiSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.GurobiSolver</span></code></a> or <a class="reference internal" href="hips.solver.ClpSolver.html#hips.solver.ClpSolver" title="hips.solver.ClpSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.ClpSolver</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -196,7 +214,7 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.__init__" title="hips.models.LPModel.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(lp_solver)</p></td>
-<td><p>Initialize self.</p></td>
+<td><p>Constructor</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.add_constraint" title="hips.models.LPModel.add_constraint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_constraint</span></code></a>(constraint[, name])</p></td>
 <td><p>Adds a constraint to the linear program</p></td>
@@ -208,31 +226,31 @@
 <td><p>Returns the optimal value of the linear program</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.get_status" title="hips.models.LPModel.get_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_status</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>Returns the status of the linear program</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.get_variables" title="hips.models.LPModel.get_variables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_variables</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>Returns the variables of the linear program</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.is_feasible" title="hips.models.LPModel.is_feasible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_feasible</span></code></a>(variable_solutions)</p></td>
-<td><p></p></td>
+<td><p>Checks whether a given solution is feasible for the linear program</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.optimize" title="hips.models.LPModel.optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize</span></code></a>()</p></td>
 <td><p>Optimizes the linear program</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.remove_constraint" title="hips.models.LPModel.remove_constraint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_constraint</span></code></a>([name, constraint])</p></td>
-<td><p></p></td>
+<td><p>Removes a constraint</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.remove_variable" title="hips.models.LPModel.remove_variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_variable</span></code></a>(var)</p></td>
-<td><p></p></td>
+<td><p>Removes a given variable</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.set_lp_sense" title="hips.models.LPModel.set_lp_sense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_lp_sense</span></code></a>(lp_sense)</p></td>
-<td><p>Sets the type of the linear program, i.e. minimization or maximization.</p></td>
+<td><p>Sets the sense of the linear program</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.set_objective" title="hips.models.LPModel.set_objective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_objective</span></code></a>(objective)</p></td>
 <td><p>Sets the objective of the linear program</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.set_variable_bound" title="hips.models.LPModel.set_variable_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_variable_bound</span></code></a>(var, bound, value)</p></td>
-<td><p></p></td>
+<td><p>Sets/updates the bound of a variable</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.variable_solution" title="hips.models.LPModel.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
 <td><p>Returns the optimal value for the given variable</p></td>
@@ -243,39 +261,108 @@
 <dt class="sig sig-object py" id="hips.models.LPModel.add_constraint">
 <span class="sig-name descname"><span class="pre">add_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constraint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.add_constraint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a constraint to the linear program</p>
+<p>This method adds the given constraint to the linear program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>constraint</strong> – A constraint, an instance of <a class="reference internal" href="hips.models.Constraint.html#hips.models.Constraint" title="hips.models.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Constraint</span></code></a></p></li>
+<li><p><strong>name</strong> – Name of the constraint. This argument is optional.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.remove_constraint">
 <span class="sig-name descname"><span class="pre">remove_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.remove_constraint" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Removes a constraint</p>
+<p>This method removes a constraint. Either the constraint is given or its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the constraint</p></li>
+<li><p><strong>constraint</strong> – A constraint, an instance of :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>hips.models.Constraint</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.add_variable">
 <span class="sig-name descname"><span class="pre">add_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.add_variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a variable to the linear program</p>
+<p>This method adds a variable to the linear program. Variables can be high-dimensional and can have lower and higher
+bounds. For more details, please see <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the variable</p></li>
+<li><p><strong>lb</strong> – Lower bound of the variable. By default the lower bound is <span class="math notranslate nohighlight">\(0\)</span>. To set the bound to <span class="math notranslate nohighlight">\(-\infty\)</span>
+set <code class="docutils literal notranslate"><span class="pre">lb</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code>. <code class="docutils literal notranslate"><span class="pre">lb</span></code> has to be an instance of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a> if the variable has a dimension greater than <span class="math notranslate nohighlight">\(1\)</span></p></li>
+<li><p><strong>ub</strong> – Upper bound of the variable. By default the upper bound is <span class="math notranslate nohighlight">\(\infty\)</span>. <code class="docutils literal notranslate"><span class="pre">ub</span></code> has to be an instance
+of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a> if the variable has a dimension greater than <span class="math notranslate nohighlight">\(1\)</span></p></li>
+<li><p><strong>dim</strong> – Dimension of the variable. By default the variable has dimension <span class="math notranslate nohighlight">\(1\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A variable, an instance of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.remove_variable">
 <span class="sig-name descname"><span class="pre">remove_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.remove_variable" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Removes a given variable</p>
+<p>This method removes a given variable from the linear program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var</strong> – Variable to be removed. Instance of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.set_variable_bound">
-<span class="sig-name descname"><span class="pre">set_variable_bound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">hips.constants.VariableBound</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.set_variable_bound" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">set_variable_bound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.VariableBound.html#hips.VariableBound" title="hips.constants.VariableBound"><span class="pre">hips.constants.VariableBound</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.set_variable_bound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets/updates the bound of a variable</p>
+<p>This method sets/updates the bound of the given variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var</strong> – Variable whose bound should be set/updated. Instance of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p></li>
+<li><p><strong>bound</strong> – Species whether the lower or upper bound should be set/updated.</p></li>
+<li><p><strong>value</strong> – Value of the bound. Instance of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.set_objective">
 <span class="sig-name descname"><span class="pre">set_objective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.set_objective" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the objective of the linear program</p>
+<p>This method sets the objective function of the linear program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>objective</strong> – Objective function of the linear program. Instance of <a class="reference internal" href="hips.models.LinExpr.html#hips.models.LinExpr" title="hips.models.LinExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LinExpr</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.set_lp_sense">
-<span class="sig-name descname"><span class="pre">set_lp_sense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_sense</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">hips.constants.LPSense</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.set_lp_sense" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the type of the linear program, i.e. minimization or maximization. Use LPSense.MAX or LPSense.MIN</p>
+<span class="sig-name descname"><span class="pre">set_lp_sense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_sense</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.LPSense.html#hips.LPSense" title="hips.constants.LPSense"><span class="pre">hips.constants.LPSense</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.set_lp_sense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the sense of the linear program</p>
+<p>This method specifies the sense of the linear program, i.e. whether the program should be minimized or maximized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lp_sense</strong> – The sense of the linear program. Enum of <a class="reference internal" href="hips.LPSense.html#hips.LPSense" title="hips.LPSense"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.LPSense</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -294,22 +381,47 @@
 <dt class="sig sig-object py" id="hips.models.LPModel.optimize">
 <span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.optimize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optimizes the linear program</p>
+<p>This method optimizes the linear program with the linear program solver specified in the constructor.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.get_variables">
 <span class="sig-name descname"><span class="pre">get_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.get_variables" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the variables of the linear program</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Variables of the linear program, given as list of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.get_status">
 <span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.get_status" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the status of the linear program</p>
+<p>This method returns the status of the linear program. E.g. a linear program might be infeasible, unbounded or
+optimal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Status of the linear program</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.is_feasible">
 <span class="sig-name descname"><span class="pre">is_feasible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_solutions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.is_feasible" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Checks whether a given solution is feasible for the linear program</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>variable_solutions</strong> – A <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> object that maps variables to their solution. The keys of this dictionary
+are instances of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a> and the keys are instances of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the solution is feasible, otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

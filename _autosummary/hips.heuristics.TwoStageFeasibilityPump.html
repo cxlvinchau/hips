@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
@@ -35,6 +36,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/toggleprompt.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -64,6 +68,10 @@
 
           
             
+            
+              <div class="version">
+                latest
+              </div>
             
           
 
@@ -104,6 +112,7 @@
 <li class="toctree-l3"><a class="reference internal" href="hips.heuristics.RENS.html">hips.heuristics.RENS</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
 </ul>
 </li>
@@ -182,10 +191,11 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="hips.heuristics.TwoStageFeasibilityPump">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">TwoStageFeasibilityPump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.TwoStageFeasibilityPump" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class implements the feasibility pump for general mixed integer programs.</p>
+<dd><p>Implementation of feasibility pump with two stages</p>
 <p>This class implements a version of the feasibility pump that is applicable to general mixed integer programs, i.e.
 programs containing binary and integer variables, as proposed by <span id="id1">[<a class="reference internal" href="../references.html#id4" title="Livio Bertacco, Matteo Fischetti, and Andrea Lodi. A feasibility pump heuristic for general mixed-integer problems. Discrete Optimization, 4(1):63-76, 2007. Mixed Integer Programming. URL: https://www.sciencedirect.com/science/article/pii/S1572528606000855, doi:https://doi.org/10.1016/j.disopt.2006.10.001.">BFL07</a>]</span>. In contrast, the original
-feasibility pump only works with mixed integer programs containing binary variables only.</p>
+feasibility pump is only designed for mixed integer programs containing binary variables only. However, note that our
+implementation of the original feasibility pump is able to work with general mixed-integer programs.</p>
 <p>The basic idea of this feasibility pump is to handle binary and integer variables in two different stages. In the first stage,
 the integer variables are ignored, i.e. treated as if they were continuous, and only the binary variables are considered.
 The first stage is completed once a feasible solution w.r.t. the binary variables has been found or when the maximum iteration
@@ -194,7 +204,15 @@ pump can also handle integer variables, but might be less suited for this purpos
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.heuristics.TwoStageFeasibilityPump.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.TwoStageFeasibilityPump.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – Mixed integer program, instance of <a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.MIPModel</span></code></a></p></li>
+<li><p><strong>kwargs</strong> – Additional arguments that are passed to the underlying original feasibility pump (see <a class="reference internal" href="hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics.FeasibilityPump"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.FeasibilityPump</span></code></a>).</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -205,7 +223,7 @@ pump can also handle integer variables, but might be less suited for this purpos
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.TwoStageFeasibilityPump.__init__" title="hips.heuristics.TwoStageFeasibilityPump.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(model, **kwargs)</p></td>
-<td><p>Initialize self.</p></td>
+<td><p>Constructor</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.TwoStageFeasibilityPump.compute" title="hips.heuristics.TwoStageFeasibilityPump.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>(max_iter)</p></td>
 <td><p>Executes the computation of the feasibility pump.</p></td>

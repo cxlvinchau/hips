@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
@@ -35,6 +36,10 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/toggleprompt.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -64,6 +69,10 @@
 
           
             
+            
+              <div class="version">
+                latest
+              </div>
             
           
 
@@ -103,6 +112,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#solver">Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#heuristics">Heuristics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
 </ul>
 </li>
@@ -181,11 +191,25 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="hips.models.LinExpr">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">LinExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LinExpr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represents a linear expression, used as lhs of a constraint</p>
+<dd><p>Representation of a linear expression</p>
+<p>This class implements a representation of a linear expression. Suppose we have variables <span class="math notranslate nohighlight">\(x_0, \dots, x_n\)</span> and
+coefficients <span class="math notranslate nohighlight">\(a_0, \dots, a_n\)</span> with dimensions <span class="math notranslate nohighlight">\(d_0, \dots, d_n\)</span>. Then a linear expression of the form
+<span class="math notranslate nohighlight">\({a_0}^T x_0 + \dots + {a_n}^T x_n\)</span> can be represented with this class. For more details, please refer to
+<a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a>.</p>
+<p>Typically, a linear expression is not created explicitly with constructor, but rather implicitly.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LinExpr.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LinExpr.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vars</strong> – Variables in the linear expression. A set of instances of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p></li>
+<li><p><strong>coefficients</strong> – A <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> object that maps variables to coefficients. The keys have to be instances of
+<a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a> and values instances of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -196,17 +220,28 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LinExpr.__init__" title="hips.models.LinExpr.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([vars, coefficients])</p></td>
-<td><p>Initialize self.</p></td>
+<td><p>Constructor</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LinExpr.eval" title="hips.models.LinExpr.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(variable_solutions)</p></td>
-<td><p></p></td>
+<td><p>Evaluates the linear expression</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LinExpr.eval">
 <span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_solutions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LinExpr.eval" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Evaluates the linear expression</p>
+<p>This method evaluates the linear expression with the given variable assignment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>variable_solutions</strong> – A <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> object that maps variables to their solution. The keys of this dictionary
+are instances of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a> and the keys are instances of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of this linear expression. Instance of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

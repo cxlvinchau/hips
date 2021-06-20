@@ -1,0 +1,26 @@
+﻿hips.LPStatus
+=============
+
+.. currentmodule:: hips
+
+.. autoclass:: LPStatus
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LPStatus.ERROR
+      ~LPStatus.INFEASIBLE
+      ~LPStatus.OPTIMAL
+      ~LPStatus.UNBOUNDED
+      ~LPStatus.UNKNOWN
+   
+   

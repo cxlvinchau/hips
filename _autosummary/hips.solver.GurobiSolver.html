@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
@@ -35,6 +36,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/toggleprompt.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -64,6 +68,10 @@
 
           
             
+            
+              <div class="version">
+                latest
+              </div>
             
           
 
@@ -99,6 +107,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#heuristics">Heuristics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
 </ul>
 </li>
@@ -282,7 +291,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver.set_variable_bound">
-<span class="sig-name descname"><span class="pre">set_variable_bound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">hips.constants.VariableBound</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models._lp_model.HIPSArray"><span class="pre">hips.models._lp_model.HIPSArray</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.set_variable_bound" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_variable_bound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.VariableBound.html#hips.VariableBound" title="hips.constants.VariableBound"><span class="pre">hips.constants.VariableBound</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models._lp_model.HIPSArray"><span class="pre">hips.models._lp_model.HIPSArray</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.set_variable_bound" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the specified bound of variable var to the specified value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -327,7 +336,7 @@ an optimal solution, it is advised to use <code class="xref py py-func docutils 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver.get_status">
-<span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">hips.constants.LPStatus</span><a class="headerlink" href="#hips.solver.GurobiSolver.get_status" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="hips.LPStatus.html#hips.LPStatus" title="hips.constants.LPStatus"><span class="pre">hips.constants.LPStatus</span></a><a class="headerlink" href="#hips.solver.GurobiSolver.get_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the status of an LP, e.g. infeasible or optimal</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>

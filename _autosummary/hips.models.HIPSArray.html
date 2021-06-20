@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
@@ -35,6 +36,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/toggleprompt.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -64,6 +68,10 @@
 
           
             
+            
+              <div class="version">
+                latest
+              </div>
             
           
 
@@ -103,6 +111,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#solver">Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#heuristics">Heuristics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
 </ul>
 </li>
@@ -182,10 +191,37 @@
 <dt class="sig sig-object py" id="hips.models.HIPSArray">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">HIPSArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper class for numpy array</p>
+<p>This class acts as a wrapper for a numpy array. The wrapping is necessary for overriding the different Python operators.
+The underlying array can be accessed with the <code class="docutils literal notranslate"><span class="pre">array</span></code> attribute. For more details, please consult the
+<a class="reference external" href="https://numpy.org/doc/stable/contents.html">numpy documentation</a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hips.models</span> <span class="k">import</span> <span class="n">HIPSArray</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Creating a 2x2 HIPSArray with ones</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HIPSArray</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">HIPSArray([[1. 1.]</span>
+<span class="go"> [1. 1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Creating a 3x3 identity matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HIPSArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">HIPSArray([[1. 0. 0.]</span>
+<span class="go"> [0. 1. 0.]</span>
+<span class="go"> [0. 0. 1.]])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.HIPSArray.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>arg</strong> – Either an array-like object or a <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>. In the former case the created <a class="reference internal" href="#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a>
+object’s array will correspond the argument. In the latter case, the instance contains an array with ones with specified
+shape</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -196,33 +232,42 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.HIPSArray.__init__" title="hips.models.HIPSArray.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(arg)</p></td>
-<td><p>Initialize self.</p></td>
+<td><p>Constructor</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.HIPSArray.reshape" title="hips.models.HIPSArray.reshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reshape</span></code></a>(shape)</p></td>
-<td><p></p></td>
+<td><p>Reshapes the array</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.HIPSArray.to_np" title="hips.models.HIPSArray.to_np"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_np</span></code></a>()</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.HIPSArray.to_numpy" title="hips.models.HIPSArray.to_numpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_numpy</span></code></a>()</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.HIPSArray.to_numpy" title="hips.models.HIPSArray.to_numpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_numpy</span></code></a>()</p></td>
+<td><p>Returns the underlying numpy array</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.HIPSArray.to_numpy">
 <span class="sig-name descname"><span class="pre">to_numpy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray.to_numpy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="hips.models.HIPSArray.to_np">
-<span class="sig-name descname"><span class="pre">to_np</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray.to_np" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the underlying numpy array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Underlying numpy array</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.HIPSArray.reshape">
 <span class="sig-name descname"><span class="pre">reshape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.HIPSArray.reshape" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Reshapes the array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>shape</strong> – <p>Shape given as tuple. For details, please consult the
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.reshape.html">numpy documentation</a></p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An instance of <a class="reference internal" href="#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a> with the specified shape and same data</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

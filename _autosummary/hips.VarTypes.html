@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>hips.loader.mps_loader.load_mps_advanced &mdash; HIPS 0.0.1 documentation</title>
+  <title>hips.VarTypes &mdash; HIPS 0.0.1 documentation</title>
   
 
   
@@ -45,8 +45,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="hips.loader.mps_loader.load_mps_primitive" href="hips.loader.mps_loader.load_mps_primitive.html" />
-    <link rel="prev" title="hips.VariableBound" href="hips.VariableBound.html" /> 
+    <link rel="next" title="hips.VariableBound" href="hips.VariableBound.html" />
+    <link rel="prev" title="hips.Comparator" href="hips.Comparator.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -103,13 +103,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../api.html#models">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#solver">Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#heuristics">Heuristics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.loader.mps_loader.load_mps_advanced</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hips.loader.mps_loader.load_mps_primitive.html">hips.loader.mps_loader.load_mps_primitive</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hips.utils.Tracker.html">hips.utils.Tracker</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#constants">Constants</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="hips.LPSense.html">hips.LPSense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.LPStatus.html">hips.LPStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.Comparator.html">hips.Comparator</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.VarTypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.VariableBound.html">hips.VariableBound</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -163,13 +165,13 @@
         
           <li><a href="../api.html">API Documentation</a> &raquo;</li>
         
-      <li>hips.loader.mps_loader.load_mps_advanced</li>
+      <li>hips.VarTypes</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/_autosummary/hips.loader.mps_loader.load_mps_advanced.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/hips.VarTypes.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -182,26 +184,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hips-loader-mps-loader-load-mps-advanced">
-<h1>hips.loader.mps_loader.load_mps_advanced<a class="headerlink" href="#hips-loader-mps-loader-load-mps-advanced" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="hips.loader.mps_loader.load_mps_advanced">
-<span class="sig-prename descclassname"><span class="pre">hips.loader.mps_loader.</span></span><span class="sig-name descname"><span class="pre">load_mps_advanced</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.loader.mps_loader.load_mps_advanced" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.
-This method uses multidimensional variables to create the model.
-If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set.
-Makes use of the library <a href="#id1"><span class="problematic" id="id2">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mip_model</strong> – The mip_model, in which the MIP problem should be loaded.</p></li>
-<li><p><strong>path</strong> – The path to the .mps file. This can be either relative to the current working directory or absolute.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
+  <div class="section" id="hips-vartypes">
+<h1>hips.VarTypes<a class="headerlink" href="#hips-vartypes" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.VarTypes">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.</span></span><span class="sig-name descname"><span class="pre">VarTypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.VarTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>An enumeration.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.VarTypes.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.VarTypes.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.VarTypes.BINARY" title="hips.VarTypes.BINARY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BINARY</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.VarTypes.CONTINUOUS" title="hips.VarTypes.CONTINUOUS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CONTINUOUS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.VarTypes.INTEGER" title="hips.VarTypes.INTEGER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">INTEGER</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hips.VarTypes.CONTINUOUS">
+<span class="sig-name descname"><span class="pre">CONTINUOUS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#hips.VarTypes.CONTINUOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hips.VarTypes.BINARY">
+<span class="sig-name descname"><span class="pre">BINARY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#hips.VarTypes.BINARY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hips.VarTypes.INTEGER">
+<span class="sig-name descname"><span class="pre">INTEGER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#hips.VarTypes.INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -212,8 +239,8 @@ Makes use of the library <a href="#id1"><span class="problematic" id="id2">:py:`
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hips.loader.mps_loader.load_mps_primitive.html" class="btn btn-neutral float-right" title="hips.loader.mps_loader.load_mps_primitive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="hips.VariableBound.html" class="btn btn-neutral float-left" title="hips.VariableBound" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hips.VariableBound.html" class="btn btn-neutral float-right" title="hips.VariableBound" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hips.Comparator.html" class="btn btn-neutral float-left" title="hips.Comparator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
@@ -35,6 +36,10 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/toggleprompt.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -64,6 +69,10 @@
 
           
             
+            
+              <div class="version">
+                latest
+              </div>
             
           
 
@@ -103,6 +112,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#solver">Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#heuristics">Heuristics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
 </ul>
 </li>
@@ -181,11 +191,41 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="hips.models.Variable">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em>, <em class="sig-param"><span class="pre">id=0</span></em>, <em class="sig-param"><span class="pre">var_type=&lt;VarTypes.CONTINUOUS:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">lb=0</span></em>, <em class="sig-param"><span class="pre">ub=None</span></em>, <em class="sig-param"><span class="pre">dim=1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.Variable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represents a variable in an LP</p>
+<dd><p>Representation of a variable</p>
+<p>This class implements a representation of a variable in the context of linear programming. A variable has an assigned
+name. A variable has a type, i.e. continuous, integer or binary (see <a class="reference internal" href="hips.VarTypes.html#hips.VarTypes" title="hips.VarTypes"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.VarTypes</span></code></a>). Furthermore, a variable
+has a lower and upper bound, i.e. the minimum and maximum value a variable may attain. Lastly, each variable has a dimension.
+If a variable <span class="math notranslate nohighlight">\(x\)</span> has dimension <span class="math notranslate nohighlight">\(n\)</span>, then it can be thought of as a column vector containing <span class="math notranslate nohighlight">\(1\)</span>-dimensional
+variables <span class="math notranslate nohighlight">\(x_j\)</span> with <span class="math notranslate nohighlight">\(j \in \{1, \dots, n\}\)</span>.</p>
+<p>Note that it is not recommended to explicitly construct a variable via the constructor. Instead use the method
+<a class="reference internal" href="hips.models.LPModel.html#hips.models.LPModel.add_variable" title="hips.models.LPModel.add_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hips.models.LPModel.add_variable()</span></code></a> provided by <a class="reference internal" href="hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hips.models</span> <span class="k">import</span> <span class="n">LPModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hips.solver</span> <span class="k">import</span> <span class="n">GurobiSolver</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">LPModel</span><span class="p">(</span><span class="n">GurobiSolver</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Creating variables x and y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.Variable.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em>, <em class="sig-param"><span class="pre">id=0</span></em>, <em class="sig-param"><span class="pre">var_type=&lt;VarTypes.CONTINUOUS:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">lb=0</span></em>, <em class="sig-param"><span class="pre">ub=None</span></em>, <em class="sig-param"><span class="pre">dim=1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.Variable.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>By default the variable is continuous and 1-dimensional</p>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the variable</p></li>
+<li><p><strong>id</strong> – Id of the variable. By default the <code class="docutils literal notranslate"><span class="pre">id</span></code> is 0</p></li>
+<li><p><strong>var_type</strong> – Type of the variable, either continuous, integer or binary (see <a class="reference internal" href="hips.VarTypes.html#hips.VarTypes" title="hips.VarTypes"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.VarTypes</span></code></a>)</p></li>
+<li><p><strong>lb</strong> – Lower bound of the variable. Has to be of type <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p></li>
+<li><p><strong>ub</strong> – Upper bound of the variable. Has to be of type <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p></li>
+<li><p><strong>dim</strong> – Dimension of the variable. By default the dimension is <span class="math notranslate nohighlight">\(1\)</span></p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -196,7 +236,7 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.Variable.__init__" title="hips.models.Variable.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(name[, id, var_type, lb, ub, dim])</p></td>
-<td><p>By default the variable is continuous and 1-dimensional</p></td>
+<td><p>Constructor</p></td>
 </tr>
 </tbody>
 </table>

@@ -15,7 +15,6 @@
    
       ~HIPSArray.__init__
       ~HIPSArray.reshape
-      ~HIPSArray.to_np
       ~HIPSArray.to_numpy
    
    

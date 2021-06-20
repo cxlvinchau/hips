@@ -49,6 +49,20 @@ __________
    hips.heuristics.RENS
 
 
+Constants
+_________
+.. autosummary::
+   :toctree: _autosummary
+   :nosignatures:
+   :recursive:
+
+   hips.LPSense
+   hips.LPStatus
+   hips.Comparator
+   hips.VarTypes
+   hips.VariableBound
+
+
 Loader and Tracker
 ______
 .. autosummary::
