@@ -5,4 +5,3 @@ setuptools~=51.0.0
 pysmps~=1.5.6
 pulp~=2.4
 matplotlib~=3.3.2
-cylp~=0.91.0
