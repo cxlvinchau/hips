@@ -195,7 +195,8 @@ hood, HIPS adds variables and constraints directly to the concrete solver to inc
 \text{maximize }   &amp; 2 x_1 + 4 x_2  \\
 \text{subject to } &amp; x_1 + 2 x_2 \leq 20 \\
                    &amp; 3 x_1 - x_2 \leq 10 \\
-                   &amp; x_1, x_2 \geq 0
+                   &amp; x_1, x_2 \geq 0 \\
+                   &amp; x_1, x_2 \in \mathbb{R}
 \end{array}\end{split}\]</div>
 <p>In HIPS, we can express the program as follows.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">ProblemSense</span>

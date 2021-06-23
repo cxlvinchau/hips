@@ -17,7 +17,8 @@ Suppose we are given the following linear program:
     \text{maximize }   & 2 x_1 + 4 x_2  \\
     \text{subject to } & x_1 + 2 x_2 \leq 20 \\
                        & 3 x_1 - x_2 \leq 10 \\
-                       & x_1, x_2 \geq 0
+                       & x_1, x_2 \geq 0 \\
+                       & x_1, x_2 \in \mathbb{R}
     \end{array}
 
 In HIPS, we can express the program as follows.
