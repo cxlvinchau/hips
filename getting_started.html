@@ -39,6 +39,7 @@
         <script src="_static/toggleprompt.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -46,7 +47,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API Documentation" href="api.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
+    <link rel="prev" title="Installation and Requirements" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,8 +98,18 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Requirements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-simple-linear-program">A simple linear program</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defining-the-program">Defining the program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimizing-the-program">Optimizing the program</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#high-dimensional-constraints">High-dimensional constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mixed-integer-programs">Mixed integer programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-mps-files">Loading mps files</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
@@ -170,6 +181,107 @@
             
   <div class="section" id="getting-started">
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>On this page we show you how to get started with HIPS. We assume that you have successfully completed the setup.</p>
+<div class="section" id="a-simple-linear-program">
+<h2>A simple linear program<a class="headerlink" href="#a-simple-linear-program" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="defining-the-program">
+<h3>Defining the program<a class="headerlink" href="#defining-the-program" title="Permalink to this headline">¶</a></h3>
+<p>Let us start with defining a linear program in HIPS. First, we need to decide which solver we would like to use. In this
+example we use the <a class="reference internal" href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver" title="hips.solver.GurobiSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">GurobiSolver</span></code></a>, but any other supported solver also works. Under the
+hood, HIPS adds variables and constraints directly to the concrete solver to increase efficiency.</p>
+<p>Suppose we are given the following linear program:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{lr&#64;{}c&#64;{}r&#64;{}l}
+\text{maximize }   &amp; 2 x_1 + 4 x_2  \\
+\text{subject to } &amp; x_1 + 2 x_2 \leq 20 \\
+                   &amp; 3 x_1 - x_2 \leq 10 \\
+                   &amp; x_1, x_2 \geq 0
+\end{array}\end{split}\]</div>
+<p>In HIPS, we can express the program as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">ProblemSense</span>
+<span class="kn">from</span> <span class="nn">hips.solver</span> <span class="kn">import</span> <span class="n">GurobiSolver</span>
+<span class="kn">from</span> <span class="nn">hips.models</span> <span class="kn">import</span> <span class="n">LPModel</span>
+
+<span class="c1"># Create solver</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">GurobiSolver</span><span class="p">()</span>
+<span class="c1"># Create LP model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LPModel</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
+<span class="c1"># Create variables</span>
+<span class="n">x_1</span><span class="p">,</span> <span class="n">x_2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x_1&quot;</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x_2&quot;</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Set sense</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_lp_sense</span><span class="p">(</span><span class="n">ProblemSense</span><span class="o">.</span><span class="n">MAX</span><span class="p">)</span>
+<span class="c1"># Set objective</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_objective</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x_1</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x_2</span><span class="p">)</span>
+<span class="c1"># Add constraints</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">x_1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x_2</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x_1</span> <span class="o">-</span> <span class="n">x_2</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As you can see the definition of linear programs is very straightforward. However, for larger linear programs, this might
+be a little bit cumbersome. Particularly, when we have many variables. Therefore, HIPS supports high-dimensional variables.
+Below you can see the same linear program expressed with a single 2 dimensional variable.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">ProblemSense</span>
+<span class="kn">from</span> <span class="nn">hips.solver</span> <span class="kn">import</span> <span class="n">GurobiSolver</span>
+<span class="kn">from</span> <span class="nn">hips.models</span> <span class="kn">import</span> <span class="n">LPModel</span><span class="p">,</span> <span class="n">HIPSArray</span>
+
+<span class="c1"># Create solver</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">GurobiSolver</span><span class="p">()</span>
+<span class="c1"># Create LP model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LPModel</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
+<span class="c1"># Create 2 dim. variable with lower bound 0</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Set sense</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_lp_sense</span><span class="p">(</span><span class="n">ProblemSense</span><span class="o">.</span><span class="n">MAX</span><span class="p">)</span>
+<span class="c1"># Set objective</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_objective</span><span class="p">(</span><span class="n">HIPSArray</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="c1"># Add constraint</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">HIPSArray</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span> <span class="o">*</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">HIPSArray</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>Observe that we have additionally imported <a class="reference internal" href="_autosummary/hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">HIPSArray</span></code></a> to work with the 2 dimensional variable.
+In contrast to the code above, we essentially work with vectors/matrices containing the coefficients for the variables.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Due to vectorization, it is often more efficient to use high-dimensional variables. Particularly, the implemented solvers
+and heuristics strongly benefit from high-dimensional variables.</p>
+</div>
+</div>
+<div class="section" id="optimizing-the-program">
+<h3>Optimizing the program<a class="headerlink" href="#optimizing-the-program" title="Permalink to this headline">¶</a></h3>
+<p>Now, let us optimize the program and output the objective value and values for the variables.</p>
+<p>The code for the first model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize the program</span>
+<span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+<span class="c1"># Print the objective value</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Objective value: {model.get_objective_value()}&quot;</span><span class="p">)</span>
+<span class="c1"># Print the values of the variables</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;x_1: {model.variable_solution(x_1)}&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;x_2: {model.variable_solution(x_2)}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The code for the second model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize the program</span>
+<span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+<span class="c1"># Print the objective value</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Objective value: {model.get_objective_value()}&quot;</span><span class="p">)</span>
+<span class="c1"># Print the values of the variables</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;x: {model.variable_solution(x)}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="high-dimensional-constraints">
+<h2>High-dimensional constraints<a class="headerlink" href="#high-dimensional-constraints" title="Permalink to this headline">¶</a></h2>
+<p>As you have seen in the previous section, HIPS can work with matrices and vectors. In this section, we explain how work
+with high-dimensional constraints in more detail.</p>
+<p>TODO</p>
+</div>
+<div class="section" id="mixed-integer-programs">
+<h2>Mixed integer programs<a class="headerlink" href="#mixed-integer-programs" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="loading-mps-files">
+<h2>Loading mps files<a class="headerlink" href="#loading-mps-files" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -179,14 +291,14 @@
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation and Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, Calvin Chau.
+        &#169; Copyright 2021, Severin Bals and Calvin Chau.
 
     </p>
   </div>

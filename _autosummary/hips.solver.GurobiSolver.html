@@ -97,7 +97,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation and Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api.html#models">Models</a></li>
@@ -186,7 +186,9 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.solver.</span></span><span class="sig-name descname"><span class="pre">GurobiSolver</span></span><a class="headerlink" href="#hips.solver.GurobiSolver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Realization of the LP model using Gurobi LP solver</p>
+<dd><p>Implementation of a linear programming solver using the Gurobi solver.</p>
+<p>This class implements an LP solver using the Gurobi solver <span id="id1">[<a class="reference internal" href="../references.html#id8" title="Gurobi Optimization, LLC. Gurobi Optimizer Reference Manual. 2021. URL: https://www.gurobi.com.">GurobiOptimizationLLC21</a>]</span>. This solver needs a <code class="docutils literal notranslate"><span class="pre">gurobipy</span></code>
+installation and does not work without it. Please note that you also need an active Gurobi license.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.__init__" title="Permalink to this definition">¶</a></dt>
@@ -204,7 +206,7 @@
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.add_constraint" title="hips.solver.GurobiSolver.add_constraint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_constraint</span></code></a>(constraint[, name])</p></td>
-<td><p>Gets a constraint of type Constraint</p></td>
+<td><p>Adds a constraint of type <a class="reference internal" href="hips.models.Constraint.html#hips.models.Constraint" title="hips.models.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Constraint</span></code></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.add_variable" title="hips.solver.GurobiSolver.add_variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_variable</span></code></a>(var)</p></td>
 <td><p>Adds a variable to the model.</p></td>
@@ -216,18 +218,18 @@
 <td><p>Returns the status of an LP, e.g.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.optimize" title="hips.solver.GurobiSolver.optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize</span></code></a>()</p></td>
-<td><p>Optimizes the LP</p></td>
+<td><p>Optimizes the linear program</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.remove_constraint" title="hips.solver.GurobiSolver.remove_constraint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_constraint</span></code></a>([name, constraint])</p></td>
-<td><p>This method assumes, that the user only removes constraints by name, that were also added with a name</p></td>
+<td><p>Remove constraint based on its name or the constraint directly.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.remove_variable" title="hips.solver.GurobiSolver.remove_variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_variable</span></code></a>(var)</p></td>
 <td><p>Removes variable from model</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_lp_sense</span></code>(lp_sense)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.set_lp_sense" title="hips.solver.GurobiSolver.set_lp_sense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_lp_sense</span></code></a>(lp_sense)</p></td>
 <td><p>Sets the type of the LP, either LPSense.MAX or LPSense.MIN</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_objective</span></code>(objective)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.set_objective" title="hips.solver.GurobiSolver.set_objective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_objective</span></code></a>(objective)</p></td>
 <td><p>Sets the linear objective function</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.solver.GurobiSolver.set_variable_bound" title="hips.solver.GurobiSolver.set_variable_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_variable_bound</span></code></a>(var, bound, value)</p></td>
@@ -241,12 +243,26 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver.add_constraint">
 <span class="sig-name descname"><span class="pre">add_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constraint</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Constraint.html#hips.models.Constraint" title="hips.models._lp_model.Constraint"><span class="pre">hips.models._lp_model.Constraint</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.add_constraint" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets a constraint of type Constraint</p>
+<dd><p>Adds a constraint of type <a class="reference internal" href="hips.models.Constraint.html#hips.models.Constraint" title="hips.models.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Constraint</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>constraint</strong> – A constraint of type <code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></p></li>
-<li><p><strong>name</strong> – Name of the constraint, optional</p></li>
+<li><p><strong>constraint</strong> – A constraint of type <a class="reference internal" href="hips.models.Constraint.html#hips.models.Constraint" title="hips.models.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></a></p></li>
+<li><p><strong>name</strong> – Name of the constraint. This argument is optional.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.solver.GurobiSolver.remove_constraint">
+<span class="sig-name descname"><span class="pre">remove_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraint</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="hips.models.Constraint.html#hips.models.Constraint" title="hips.models._lp_model.Constraint"><span class="pre">hips.models._lp_model.Constraint</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.remove_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove constraint based on its name or the constraint directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the constraint</p></li>
+<li><p><strong>constraint</strong> – Constraint to be deleted</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -256,21 +272,12 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hips.solver.GurobiSolver.remove_constraint">
-<span class="sig-name descname"><span class="pre">remove_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraint</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="hips.models.Constraint.html#hips.models.Constraint" title="hips.models._lp_model.Constraint"><span class="pre">hips.models._lp_model.Constraint</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.remove_constraint" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method assumes, that the user only removes constraints by name, that were also added with a name</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver.add_variable">
 <span class="sig-name descname"><span class="pre">add_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.add_variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a variable to the model. Use the var.id as a name in the concrete solver implementation to prevent duplicate names.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>var</strong> – Variable to be added</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dd class="field-odd"><p><strong>var</strong> – Variable to be added. Instance of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -281,10 +288,7 @@
 <dd><p>Removes variable from model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>var</strong> – Variable to be removed from the LP</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dd class="field-odd"><p><strong>var</strong> – Variable to be removed from the LP. Instance of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -296,13 +300,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>var</strong> – The variable to set the bound on</p></li>
-<li><p><strong>bound</strong> – Specifies if the lower (VariableBound.LB) or upper (VariableBound.UB) bound is set</p></li>
-<li><p><strong>value</strong> – The value to set as the new bound on the variable as HIPSArray</p></li>
+<li><p><strong>var</strong> – The variable to set the bound on. Instance of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p></li>
+<li><p><strong>bound</strong> – Specifies if the lower (VariableBound.LB) or upper (VariableBound.UB) bound is set. Either
+<a class="reference internal" href="hips.VariableBound.html#hips.VariableBound.LB" title="hips.VariableBound.LB"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hips.VariableBound.LB</span></code></a> or <a class="reference internal" href="hips.VariableBound.html#hips.VariableBound.UB" title="hips.VariableBound.UB"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hips.VariableBound.UB</span></code></a>.</p></li>
+<li><p><strong>value</strong> – The value to set as the new bound on the variable. Needs to be an instance of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">HIPSArray</span></code>.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
 </dd>
 </dl>
 </dd></dl>
@@ -311,10 +314,11 @@
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver.variable_solution">
 <span class="sig-name descname"><span class="pre">variable_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#hips.solver.GurobiSolver.variable_solution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the optimal value for the given variable. Note that this method does not check whether the LP has
-an optimal solution, it is advised to use <code class="xref py py-func docutils literal notranslate"><span class="pre">get_status()</span></code> before calling this method.</p>
+an optimal solution, it is recommended to use <a class="reference internal" href="#hips.solver.GurobiSolver.get_status" title="hips.solver.GurobiSolver.get_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_status()</span></code></a> before calling this method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>var</strong> – Variable for which the solution should be returned</p>
+<dd class="field-odd"><p><strong>var</strong> – Variable for which the solution should be returned. Needs to be an instance of
+<a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Value in the optimal solution</p>
@@ -326,7 +330,7 @@ an optimal solution, it is advised to use <code class="xref py py-func docutils 
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver.get_objective_value">
 <span class="sig-name descname"><span class="pre">get_objective_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#hips.solver.GurobiSolver.get_objective_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the optimal objective value. Note that this method does not check whether the LP has
-an optimal solution, it is advised to use <code class="xref py py-func docutils literal notranslate"><span class="pre">get_status()</span></code> before calling this method.</p>
+an optimal solution, it is recommended to use <a class="reference internal" href="#hips.solver.GurobiSolver.get_status" title="hips.solver.GurobiSolver.get_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_status()</span></code></a> before calling this method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Optimal objective value.</p>
@@ -340,7 +344,7 @@ an optimal solution, it is advised to use <code class="xref py py-func docutils 
 <dd><p>Returns the status of an LP, e.g. infeasible or optimal</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Status of the LP</p>
+<dd class="field-odd"><p>Status of the linear program. <a class="reference internal" href="hips.LPStatus.html#hips.LPStatus" title="hips.LPStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.LPStatus</span></code></a> enum.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -348,10 +352,27 @@ an optimal solution, it is advised to use <code class="xref py py-func docutils 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.solver.GurobiSolver.optimize">
 <span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.optimize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optimizes the LP</p>
+<dd><p>Optimizes the linear program</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.solver.GurobiSolver.set_lp_sense">
+<span class="sig-name descname"><span class="pre">set_lp_sense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_sense</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.ProblemSense.html#hips.ProblemSense" title="hips.constants.ProblemSense"><span class="pre">hips.constants.ProblemSense</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.set_lp_sense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the type of the LP, either LPSense.MAX or LPSense.MIN</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lp_sense</strong> – Either <code class="xref py py-class docutils literal notranslate"><span class="pre">LPSense.MAX</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">LPSense.MIN</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.solver.GurobiSolver.set_objective">
+<span class="sig-name descname"><span class="pre">set_objective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.LinExpr.html#hips.models.LinExpr" title="hips.models._lp_model.LinExpr"><span class="pre">hips.models._lp_model.LinExpr</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.GurobiSolver.set_objective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the linear objective function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>objective</strong> – Objective function. Needs to be an instance of <a class="reference internal" href="hips.models.LinExpr.html#hips.models.LinExpr" title="hips.models.LinExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LinExpr</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -374,7 +395,7 @@ an optimal solution, it is advised to use <code class="xref py py-func docutils 
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, Calvin Chau.
+        &#169; Copyright 2021, Severin Bals and Calvin Chau.
 
     </p>
   </div>

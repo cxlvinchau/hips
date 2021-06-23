@@ -97,7 +97,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation and Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api.html#models">Models</a></li>
@@ -209,17 +209,48 @@ integer. The idea is based on page 17 of <span id="id1">[<a class="reference int
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.__init__" title="hips.heuristics.FractionalDivingHeuristic.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(mip_model[, current_best_objective])</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code>([max_iter])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.compute" title="hips.heuristics.FractionalDivingHeuristic.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>([max_iter])</p></td>
 <td><p>Compute the optimal solution with the heuristic algorithm.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.get_objective_value" title="hips.heuristics.FractionalDivingHeuristic.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
 <td><p>Return objective value determined by the heuristic</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code>(var)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.variable_solution" title="hips.heuristics.FractionalDivingHeuristic.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
 <td><p>Return the solution found by the heuristic</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.FractionalDivingHeuristic.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDivingHeuristic.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the optimal solution with the heuristic algorithm.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.FractionalDivingHeuristic.get_objective_value">
+<span class="sig-name descname"><span class="pre">get_objective_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#hips.heuristics.FractionalDivingHeuristic.get_objective_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return objective value determined by the heuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>optimal value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.FractionalDivingHeuristic.variable_solution">
+<span class="sig-name descname"><span class="pre">variable_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDivingHeuristic.variable_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the solution found by the heuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var</strong> – Variable</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Optimal solution</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -238,7 +269,7 @@ integer. The idea is based on page 17 of <span id="id1">[<a class="reference int
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, Calvin Chau.
+        &#169; Copyright 2021, Severin Bals and Calvin Chau.
 
     </p>
   </div>

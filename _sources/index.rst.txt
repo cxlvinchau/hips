@@ -4,9 +4,14 @@
    contain the root `toctree` directive.
 
 HIPS Documentation
-================================
-A Python library for heuristically solving mixed integer programs.
+==================
+HIPS is a Python library for heuristically solving mixed integer programs. HIPS implements wrappers for popular linear programming
+solvers like Gurobi :cite:`gurobi` and Clp :cite:`johnjforrest_2020_3748677`, and thereby allows for easily switching
+solvers. At its core, HIPS implements various well-established heuristics for mixed-integer programming, e.g. the
+feasibility pump :cite:`Fischetti2005`, RENS :cite:`Berthold2013` and various diving heuristics.
 
+HIPS is designed to be easily extensible and user-friendly. Adding new heuristics or solvers can be done by implementing
+the corresponding interfaces.
 
 .. toctree::
    :maxdepth: 2
@@ -23,12 +28,9 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
 Authors
 =======
-Developed and maintained by Severin Bals and Calvin Chau at the
-`Technical University of Munich`_
-
-.. _Technical University of Munich: https://www.in.tum.de/startseite/
+HIPS is developed and maintained by Severin Bals and `Calvin Chau <https://cxlvinchau.github.io/>`_ from the
+`Department of Informatics <https://www.in.tum.de/en/cover-page/>`_ at the `Technical University of Munich <https://www.tum.de/en/>`_.

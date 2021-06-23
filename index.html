@@ -45,7 +45,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="installation.html" /> 
+    <link rel="next" title="Installation and Requirements" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,7 +96,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -169,17 +169,28 @@
             
   <div class="section" id="hips-documentation">
 <h1>HIPS Documentation<a class="headerlink" href="#hips-documentation" title="Permalink to this headline">¶</a></h1>
-<p>A Python library for heuristically solving mixed integer programs.</p>
+<p>HIPS is a Python library for heuristically solving mixed integer programs. HIPS implements wrappers for popular linear programming
+solvers like Gurobi <span id="id1">[<a class="reference internal" href="references.html#id8" title="Gurobi Optimization, LLC. Gurobi Optimizer Reference Manual. 2021. URL: https://www.gurobi.com.">GurobiOptimizationLLC21</a>]</span> and Clp <span id="id2">[<a class="reference internal" href="references.html#id7" title="johnjforrest, Stefan Vigerske, Ted Ralphs, Lou Hafer, jpfasano, Haroldo Gambini Santos, Matthew Saltzman, h-i-gassmann, Bjarni Kristjansson, and Alan King. Coin-or/clp: version 1.17.6. April 2020. URL: https://doi.org/10.5281/zenodo.3748677, doi:10.5281/zenodo.3748677.">jVR+20</a>]</span>, and thereby allows for easily switching
+solvers. At its core, HIPS implements various well-established heuristics for mixed-integer programming, e.g. the
+feasibility pump <span id="id3">[<a class="reference internal" href="references.html#id3" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, RENS <span id="id4">[<a class="reference internal" href="references.html#id5" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span> and various diving heuristics.</p>
+<p>HIPS is designed to be easily extensible and user-friendly. Adding new heuristics or solvers can be done by implementing
+the corresponding interfaces.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Requirements</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#creating-a-virtual-environment-optional">1. Creating a virtual environment (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#installing-a-solver">2. Installing a solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#installing-hips">3. Installing HIPS</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#a-simple-linear-program">A simple linear program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#high-dimensional-constraints">High-dimensional constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#mixed-integer-programs">Mixed integer programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#loading-mps-files">Loading mps files</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#models">Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#solver">Solver</a></li>
@@ -196,14 +207,13 @@
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </div>
 <div class="section" id="authors">
 <h1>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h1>
-<p>Developed and maintained by Severin Bals and Calvin Chau at the
-<a class="reference external" href="https://www.in.tum.de/startseite/">Technical University of Munich</a></p>
+<p>HIPS is developed and maintained by Severin Bals and <a class="reference external" href="https://cxlvinchau.github.io/">Calvin Chau</a> from the
+<a class="reference external" href="https://www.in.tum.de/en/cover-page/">Department of Informatics</a> at the <a class="reference external" href="https://www.tum.de/en/">Technical University of Munich</a>.</p>
 </div>
 
 
@@ -212,14 +222,14 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation and Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, Calvin Chau.
+        &#169; Copyright 2021, Severin Bals and Calvin Chau.
 
     </p>
   </div>
