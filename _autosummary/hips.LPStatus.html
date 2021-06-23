@@ -46,7 +46,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="hips.Comparator" href="hips.Comparator.html" />
-    <link rel="prev" title="hips.LPSense" href="hips.LPSense.html" /> 
+    <link rel="prev" title="hips.ProblemSense" href="hips.ProblemSense.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -104,7 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api.html#solver">Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#heuristics">Heuristics</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#constants">Constants</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="hips.LPSense.html">hips.LPSense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.ProblemSense.html">hips.ProblemSense</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">hips.LPStatus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hips.Comparator.html">hips.Comparator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hips.VarTypes.html">hips.VarTypes</a></li>
@@ -189,7 +189,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="hips.LPStatus">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.</span></span><span class="sig-name descname"><span class="pre">LPStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.LPStatus" title="Permalink to this definition">¶</a></dt>
-<dd><p>An enumeration.</p>
+<dd><p>Enum for status of linear program, i.e. unbounded, infeasible, optimal, unknown or error</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.LPStatus.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.LPStatus.__init__" title="Permalink to this definition">¶</a></dt>
@@ -204,46 +204,51 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.LPStatus.ERROR" title="hips.LPStatus.ERROR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ERROR</span></code></a></p></td>
-<td><p></p></td>
+<td><p>An error occurred</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.LPStatus.INFEASIBLE" title="hips.LPStatus.INFEASIBLE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">INFEASIBLE</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Problem is infeasible</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.LPStatus.OPTIMAL" title="hips.LPStatus.OPTIMAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OPTIMAL</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Problem has been solved and an optimal solution has been found</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.LPStatus.UNBOUNDED" title="hips.LPStatus.UNBOUNDED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UNBOUNDED</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Problem is unbounded</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.LPStatus.UNKNOWN" title="hips.LPStatus.UNKNOWN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UNKNOWN</span></code></a></p></td>
-<td><p></p></td>
+<td><p>The status of the problem is unknown</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hips.LPStatus.UNBOUNDED">
 <span class="sig-name descname"><span class="pre">UNBOUNDED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#hips.LPStatus.UNBOUNDED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Problem is unbounded</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hips.LPStatus.INFEASIBLE">
 <span class="sig-name descname"><span class="pre">INFEASIBLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#hips.LPStatus.INFEASIBLE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Problem is infeasible</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hips.LPStatus.OPTIMAL">
 <span class="sig-name descname"><span class="pre">OPTIMAL</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#hips.LPStatus.OPTIMAL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Problem has been solved and an optimal solution has been found</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hips.LPStatus.UNKNOWN">
 <span class="sig-name descname"><span class="pre">UNKNOWN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#hips.LPStatus.UNKNOWN" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The status of the problem is unknown</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hips.LPStatus.ERROR">
 <span class="sig-name descname"><span class="pre">ERROR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#hips.LPStatus.ERROR" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>An error occurred</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -256,7 +261,7 @@
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="hips.Comparator.html" class="btn btn-neutral float-right" title="hips.Comparator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="hips.LPSense.html" class="btn btn-neutral float-left" title="hips.LPSense" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hips.ProblemSense.html" class="btn btn-neutral float-left" title="hips.ProblemSense" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

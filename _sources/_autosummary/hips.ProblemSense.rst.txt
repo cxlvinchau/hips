@@ -1,0 +1,23 @@
+﻿hips.ProblemSense
+=================
+
+.. currentmodule:: hips
+
+.. autoclass:: ProblemSense
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ProblemSense.MAX
+      ~ProblemSense.MIN
+   
+   

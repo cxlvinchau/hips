@@ -194,17 +194,17 @@ If virtual environments are not familiar to you, please consult the
 <a class="reference external" href="https://realpython.com/python-virtual-environments-a-primer/">Python Virtual Environments: A Primer</a>.</p>
 <p>First, we create a directory <code class="docutils literal notranslate"><span class="pre">my_project</span></code> where we would like to create
 the virtual environment. Navigate into this directory, then run the following command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m venv my_venv</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">my_venv</span>
 </pre></div>
 </div>
 <p>The code above creates a virtual environment with the name <code class="docutils literal notranslate"><span class="pre">my_venv</span></code> in our project
 directory. Afterwards, we have to activate the environment.</p>
 <p>On Windows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">my_venv\Scripts\activate.bat</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_venv</span>\<span class="n">Scripts</span>\<span class="n">activate</span><span class="o">.</span><span class="n">bat</span>
 </pre></div>
 </div>
 <p>On Unix or MacOS:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">source my_venv/bin/activate</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">my_venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
 <p>Now we can install packages without affecting other dependencies in other projects.</p>
@@ -224,7 +224,7 @@ its linear programming capabilities. While the usage of Gurobi is generally not 
 academic licenses can be obtained <a class="reference external" href="https://www.gurobi.com/academia/academic-program-and-licenses/">here</a>. Once you have
 obtained a license you need to activate it. To this end, please follow the instructions on <a class="reference external" href="https://support.gurobi.com/hc/en-us">Gurobi’s website</a>.</p>
 <p>Then, run the following line to install Gurobi.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install gurobipy</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">gurobipy</span>
 </pre></div>
 </div>
 </div>
@@ -235,7 +235,7 @@ open source <a class="reference external" href="https://www.coin-or.org/">COIN-O
 <a class="reference external" href="https://github.com/coin-or/CyLP">cylp</a>. Please follow the instructions in the <em>Prerequisites</em> section on the
 <a class="reference external" href="https://github.com/coin-or/CyLP">GitHub</a> page.</p>
 <p>Then, once the steps described in the <em>Prerequisites</em> are done, we can install cylp.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install cylp</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">cylp</span>
 </pre></div>
 </div>
 <p><strong>Troubleshooting:</strong>
