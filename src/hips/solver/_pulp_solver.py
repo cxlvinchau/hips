@@ -1,6 +1,6 @@
 import pulp as pl
 
-from hips.constants import LPStatus, LPSense
+from hips.constants import LPStatus, ProblemSense
 from hips.models._lp_model import Variable, LinExpr, Constraint
 from hips.solver._abstract_solver import AbstractSolver
 from hips.constants import Comparator, LPStatus
@@ -20,7 +20,7 @@ class PulpSolver(AbstractSolver):
         self._var_to_pulp_var = dict()
         self.status = LPStatus.UNKNOWN
         self.solver = solver
-        self.lp_sense = LPSense.MAX
+        self.lp_sense = ProblemSense.MAX
         self.objective = None
         self._constr_to_name = dict()
         self._constr_counter = 0
@@ -76,7 +76,7 @@ class PulpSolver(AbstractSolver):
         obj = self.__to_pulp_expr(objective)
         self.model.setObjective(obj)
 
-    def set_lp_sense(self, lp_sense: LPSense):
+    def set_lp_sense(self, lp_sense: ProblemSense):
         if lp_sense != self.lp_sense:
             self.lp_sense = lp_sense
             self.objective = -1 * self.objective

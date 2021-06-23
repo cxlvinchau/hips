@@ -9,7 +9,7 @@ import numpy as np
 import pysmps.smps_loader as loader
 from hips.models._mip_model import MIPModel
 from hips.models._lp_model import HIPSArray
-from hips.constants import VarTypes, LPSense
+from hips.constants import VarTypes, ProblemSense
 from hips.solver import GurobiSolver
 
 def _bounds_set(path):
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     starttime1 = timeit.default_timer()
     load_mps_primitive(mip_model, path="../../examples/mps_files/10teams.mps")
     endtime1 = timeit.default_timer()
-    mip_model.set_mip_sense(LPSense.MIN)
+    mip_model.set_mip_sense(ProblemSense.MIN)
     starttime2 = timeit.default_timer()
     mip_model.lp_model.optimize()
     endtime2 = timeit.default_timer()
@@ -172,7 +172,7 @@ if __name__ == "__main__":
     starttime3 = timeit.default_timer()
     load_mps_advanced(mip_model, path="../../examples/mps_files/10teams.mps")
     endtime3 = timeit.default_timer()
-    mip_model.set_mip_sense(LPSense.MIN)
+    mip_model.set_mip_sense(ProblemSense.MIN)
     starttime4 = timeit.default_timer()
     mip_model.lp_model.optimize()
     endtime4 = timeit.default_timer()

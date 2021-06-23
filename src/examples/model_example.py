@@ -1,7 +1,7 @@
 import os
 
 from hips import HIPSArray
-from hips.constants import VarTypes, LPSense
+from hips.constants import VarTypes, ProblemSense
 from hips.heuristics._line_search_diving import LineSearchDiving
 from hips.heuristics._rens import RENS
 from hips.loader import load_mps_advanced
@@ -23,7 +23,7 @@ mip_model.add_constraint(constr1)
 mip_model.add_constraint(constr2)
 obj_func = HIPSArray([1,2])*x
 mip_model.set_objective(obj_func)
-mip_model.set_mip_sense(LPSense.MAX)
+mip_model.set_mip_sense(ProblemSense.MAX)
 
 heur = RENS(mip_model)
 heur.compute(100)

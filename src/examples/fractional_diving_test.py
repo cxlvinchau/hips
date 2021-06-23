@@ -1,7 +1,7 @@
 import os
 
 from hips import HIPSArray
-from hips.constants import LPSense, VarTypes
+from hips.constants import ProblemSense, VarTypes
 from hips.heuristics import FractionalDivingHeuristic
 from hips.loader import load_mps_advanced
 from hips.models import MIPModel

@@ -1,7 +1,7 @@
 import math
 
 from hips.heuristics._heuristic import Heuristic
-from hips.models._lp_model import LPSense
+from hips.models._lp_model import ProblemSense
 from hips.models import MIPModel, HIPSArray, Variable
 from hips import REL_TOLERANCE, ABS_TOLERANCE, is_close
 from hips.heuristics import skip_when_clp_solver
@@ -128,7 +128,7 @@ class FeasibilityPump(Heuristic):
             objective_int += coef * self.positive_vars[var] + coef * self.negative_vars[var]
 
         # Changes the relaxation to minimization
-        self.relaxation.set_lp_sense(LPSense.MIN)
+        self.relaxation.set_lp_sense(ProblemSense.MIN)
         # Updates the objective function
         self.relaxation.set_objective(objective_bin + objective_int)
         # Logging
@@ -198,7 +198,7 @@ class FeasibilityPump(Heuristic):
         """
         if self.iteration > 30:
             current_optimal_value = self.get_objective_value()
-            if self._relaxation_sense == LPSense.MIN:
+            if self._relaxation_sense == ProblemSense.MIN:
                 self.relaxation.add_constraint(self._original_obj <= (alpha * self._relaxation_optimal_value
                                                                       + (1 - alpha) * current_optimal_value),
                                                name="_objective_constr_alpha_{}".format(alpha))

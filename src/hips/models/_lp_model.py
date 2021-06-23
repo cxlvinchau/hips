@@ -1,4 +1,4 @@
-from hips.constants import Comparator, VarTypes, LPStatus, LPSense, NUMERICAL_TYPES, VariableBound
+from hips.constants import Comparator, VarTypes, LPStatus, ProblemSense, NUMERICAL_TYPES, VariableBound
 import numpy as np
 
 
@@ -22,7 +22,7 @@ class LPModel:
         self.vars = set()
         self.id_counter = 0
         self.objective = None
-        self.lp_sense = LPSense.MAX
+        self.lp_sense = ProblemSense.MAX
         self.objective_value = None
         self.concrete_solver = lp_solver
 
@@ -150,7 +150,7 @@ class LPModel:
             # Set objective in concrete solver
             self.concrete_solver.set_objective(objective)
 
-    def set_lp_sense(self, lp_sense: LPSense):
+    def set_lp_sense(self, lp_sense: ProblemSense):
         """Sets the sense of the linear program
 
         This method specifies the sense of the linear program, i.e. whether the program should be minimized or maximized.
@@ -158,7 +158,7 @@ class LPModel:
         :param lp_sense: The sense of the linear program. Enum of :class:`hips.LPSense`
         :return:
         """
-        if lp_sense not in [LPSense.MAX, LPSense.MIN]:
+        if lp_sense not in [ProblemSense.MAX, ProblemSense.MIN]:
             raise Exception("Illegal LP type")
         else:
             self.lp_sense = lp_sense

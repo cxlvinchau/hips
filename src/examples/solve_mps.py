@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-from hips.constants import LPSense
+from hips.constants import ProblemSense
 from hips.loader.mps_loader import load_mps_advanced
 from hips.models import MIPModel
 from hips.solver import GurobiSolver, ClpSolver
@@ -14,7 +14,7 @@ start = time.time()
 mip_model = MIPModel(GurobiSolver())
 # Advanced
 load_mps_advanced(mip_model, path=os.getcwd() + "/mps_files/ej.mps")
-mip_model.set_mip_sense(lp_sense=LPSense.MIN)
+mip_model.set_mip_sense(lp_sense=ProblemSense.MIN)
 print(f"Number of binary variables: {len(mip_model.binary_variables)}")
 print(f"Number of constraints: {len(mip_model.lp_model.constraints)}")
 from hips.heuristics._feasibility_pump import FeasibilityPump

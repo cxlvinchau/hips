@@ -14,7 +14,7 @@ If virtual environments are not familiar to you, please consult the
 First, we create a directory ``my_project`` where we would like to create
 the virtual environment. Navigate into this directory, then run the following command:
 
-.. code-block:: console
+.. code-block::
 
     python -m venv my_venv
 
@@ -23,13 +23,13 @@ directory. Afterwards, we have to activate the environment.
 
 On Windows:
 
-.. code-block:: console
+.. code-block::
 
     my_venv\Scripts\activate.bat
 
 On Unix or MacOS:
 
-.. code-block:: console
+.. code-block::
 
     source my_venv/bin/activate
 
@@ -53,7 +53,7 @@ obtained a license you need to activate it. To this end, please follow the instr
 
 Then, run the following line to install Gurobi.
 
-.. code-block:: console
+.. code-block::
 
     pip install gurobipy
 
@@ -66,7 +66,7 @@ open source `COIN-OR project <https://www.coin-or.org/>`_. To use Clp, we instal
 
 Then, once the steps described in the *Prerequisites* are done, we can install cylp.
 
-.. code-block:: console
+.. code-block::
 
     pip install cylp
 

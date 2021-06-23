@@ -6,7 +6,7 @@ from hips.constants import VarTypes
 from hips.solver import GurobiSolver, ClpSolver
 from hips.models._lp_model import LPModel
 from hips.models._mip_model import MIPModel
-from hips.constants import LPSense
+from hips.constants import ProblemSense
 import numpy as np
 from hips.models import HIPSArray
 
@@ -30,7 +30,7 @@ class FeasibilityPumpTest(unittest.TestCase):
         x = self.mip_model.add_variable("x", var_type=VarTypes.INTEGER, lb=4, ub=10)
         y = self.mip_model.add_variable("y", var_type=VarTypes.BINARY)
         self.mip_model.set_objective(2 * x + y)
-        self.mip_model.set_mip_sense(LPSense.MAX)
+        self.mip_model.set_mip_sense(ProblemSense.MAX)
         # Run feasibility pump
         self.fs.compute(max_iter=10)
         # Assert
@@ -42,7 +42,7 @@ class FeasibilityPumpTest(unittest.TestCase):
         y = self.mip_model.add_variable("y", var_type=VarTypes.BINARY, dim=60)
         self.mip_model.add_constraint(HIPSArray(np.identity(50)) * x + HIPSArray((50, 60)) * y <= 10)
         self.mip_model.set_objective(x + y)
-        self.mip_model.set_mip_sense(LPSense.MIN)
+        self.mip_model.set_mip_sense(ProblemSense.MIN)
         # Run feasibility pump
         self.fs.compute(max_iter=10)
         print(self.fs.get_objective_value())
@@ -53,7 +53,7 @@ class FeasibilityPumpTest(unittest.TestCase):
         self.mip_model.add_constraint(2 * x1 + x2 <= 8)
         self.mip_model.add_constraint(-2 * x1 + 10 * x2 <= 25)
         self.mip_model.set_objective(x1 + x2)
-        self.mip_model.set_mip_sense(LPSense.MAX)
+        self.mip_model.set_mip_sense(ProblemSense.MAX)
         # Run feasibility pump
         self.fs.compute(max_iter=10)
         # Print results
@@ -81,7 +81,7 @@ class FeasibilityPumpTest(unittest.TestCase):
                 self.mip_model.set_objective(lin_expr)
             else:
                 self.mip_model.add_constraint(lin_expr <= r.randint(10, 1000))
-        self.mip_model.set_mip_sense(LPSense.MAX)
+        self.mip_model.set_mip_sense(ProblemSense.MAX)
         self.fs.compute(max_iter=100)
 
 

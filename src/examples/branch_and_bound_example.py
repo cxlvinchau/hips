@@ -1,6 +1,6 @@
 import os
 
-from hips.constants import LPSense
+from hips.constants import ProblemSense
 from hips.loader import load_mps_advanced
 from hips.models import MIPModel
 from hips.solver import GurobiSolver, ClpSolver
@@ -10,7 +10,7 @@ from hips.heuristics import FeasibilityPump
 mip_model = MIPModel(GurobiSolver())
 # Advanced
 load_mps_advanced(mip_model, path=os.getcwd() + "/mps_files/pure-binary/acc-tight2.mps")
-mip_model.set_mip_sense(LPSense.MIN)
+mip_model.set_mip_sense(ProblemSense.MIN)
 
 import time
 

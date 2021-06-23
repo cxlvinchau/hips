@@ -3,7 +3,7 @@ from hips.constants import Comparator, VariableBound
 from hips.models._lp_model import Constraint, Variable, LinExpr, HIPSArray
 import gurobipy as gb
 from gurobipy import GRB
-from hips.constants import LPStatus, LPSense
+from hips.constants import LPStatus, ProblemSense
 import numpy as np
 
 
@@ -94,7 +94,7 @@ class GurobiSolver(AbstractSolver):
 
     def optimize(self):
         objective = self.__to_gurobi_lin_expr(self.objective)
-        sense = GRB.MAXIMIZE if self.lp_sense == LPSense.MAX else GRB.MINIMIZE
+        sense = GRB.MAXIMIZE if self.lp_sense == ProblemSense.MAX else GRB.MINIMIZE
         self.model.setObjective(objective, sense)
         self.model.optimize()
         gurobi_status = self.model.status

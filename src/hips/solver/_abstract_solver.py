@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from hips.constants import LPSense, LPStatus, VariableBound
+from hips.constants import ProblemSense, LPStatus, VariableBound
 from hips.models._lp_model import Constraint, Variable, LinExpr, HIPSArray
 
 
@@ -8,7 +8,7 @@ class AbstractSolver(ABC):
     """Abstract class/interface for concrete solver, such as Gurobi or CLP. By default, it solves a maximization problem"""
 
     def __init__(self):
-        self.lp_sense = LPSense.MAX
+        self.lp_sense = ProblemSense.MAX
         self.objective = None
 
     @abstractmethod
@@ -69,7 +69,7 @@ class AbstractSolver(ABC):
         """
         self.objective = objective
 
-    def set_lp_sense(self, lp_sense: LPSense):
+    def set_lp_sense(self, lp_sense: ProblemSense):
         """
         Sets the type of the LP, either LPSense.MAX or LPSense.MIN
 

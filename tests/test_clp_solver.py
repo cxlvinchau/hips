@@ -1,6 +1,6 @@
 import unittest
 
-from hips.constants import LPSense, VarTypes, VariableBound
+from hips.constants import ProblemSense, VarTypes, VariableBound
 from hips.models import MIPModel
 from hips.solver._clp_solver import ClpSolver
 from hips.models._lp_model import Variable
@@ -38,7 +38,7 @@ class ClpSolverTest(unittest.TestCase):
         self.solver.add_variable(x)
         self.solver.add_variable(y)
         self.solver.add_constraint(x + y <= 10)
-        self.solver.set_lp_sense(LPSense.MAX)
+        self.solver.set_lp_sense(ProblemSense.MAX)
         self.solver.set_objective(1 * x + y)
         self.solver.optimize()
         print(self.solver.get_objective_value())
@@ -59,7 +59,7 @@ class ClpSolverTest(unittest.TestCase):
         self.mip_model.add_constraint(2 * x1 + x2 <= 8)
         self.mip_model.add_constraint(-2 * x1 + 10 * x2 <= 25)
         self.mip_model.set_objective(x1 + x2)
-        self.mip_model.set_mip_sense(LPSense.MAX)
+        self.mip_model.set_mip_sense(ProblemSense.MAX)
         self.mip_model.lp_model.optimize()
         print(self.mip_model.lp_model.get_objective_value())
 

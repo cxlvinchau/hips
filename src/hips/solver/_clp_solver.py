@@ -5,7 +5,7 @@ from cylp.py.modeling.CyLPModel import CyLPArray
 
 from hips.solver._abstract_solver import AbstractSolver
 from hips.constants import Comparator, VariableBound
-from hips.constants import LPStatus, LPSense
+from hips.constants import LPStatus, ProblemSense
 from hips.models import HIPSArray, Variable
 
 

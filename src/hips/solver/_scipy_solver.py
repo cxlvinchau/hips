@@ -1,7 +1,7 @@
 from scipy.optimize import linprog
 import numpy as np
 
-from hips.constants import LPStatus, Comparator, LPSense
+from hips.constants import LPStatus, Comparator, ProblemSense
 from hips.solver._abstract_solver import AbstractSolver
 from hips.models._lp_model import Constraint, Variable, LinExpr
 
@@ -41,7 +41,7 @@ class ScipySolver(AbstractSolver):
     def set_objective(self, objective : LinExpr):
         self.objective = objective
 
-    def set_lp_sense(self, lp_sense : LPSense):
+    def set_lp_sense(self, lp_sense : ProblemSense):
         self.lp_sense = lp_sense
 
     def variable_solution(self, var : Variable) -> float:

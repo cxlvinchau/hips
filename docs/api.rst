@@ -56,7 +56,7 @@ _________
    :nosignatures:
    :recursive:
 
-   hips.LPSense
+   hips.ProblemSense
    hips.LPStatus
    hips.Comparator
    hips.VarTypes
