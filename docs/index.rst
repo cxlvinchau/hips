@@ -13,12 +13,18 @@ feasibility pump :cite:`Fischetti2005`, RENS :cite:`Berthold2013` and various di
 HIPS is designed to be easily extensible and user-friendly. Adding new heuristics or solvers can be done by implementing
 the corresponding interfaces.
 
+The code for this project is on `GitHub <https://github.com/cxlvinchau/hips>`_. Feel free to discuss any open issues with us.
+
+If you are not familiar with linear or mixed-integer programming, consider reading `this <https://en.wikipedia.org/wiki/Linear_programming>`_
+and `this <https://en.wikipedia.org/wiki/Integer_programming>`_ Wikipedia article.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    installation
    getting_started
+   heuristics
    api
    references
 
