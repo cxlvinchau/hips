@@ -46,7 +46,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Documentation" href="api.html" />
+    <link rel="next" title="Heuristics" href="heuristics.html" />
     <link rel="prev" title="Installation and Requirements" href="installation.html" /> 
 </head>
 
@@ -105,11 +105,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#optimizing-the-program">Optimizing the program</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#high-dimensional-constraints">High-dimensional constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#high-dimensional-constraints">High-dimensional constraints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#numpy-support">NumPy support</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#mixed-integer-programs">Mixed integer programs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#loading-mps-files">Loading mps files</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="heuristics.html">Heuristics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
@@ -218,7 +222,7 @@ hood, HIPS adds variables and constraints directly to the concrete solver to inc
 <span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x_1</span> <span class="o">-</span> <span class="n">x_2</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>As you can see the definition of linear programs is very straightforward. However, for larger linear programs, this might
+<p>As you can see, the definition of linear programs is straightforward. However, for larger linear programs, this might
 be a little bit cumbersome. Particularly, when we have many variables. Therefore, HIPS supports high-dimensional variables.
 Below you can see the same linear program expressed with a single 2 dimensional variable.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">ProblemSense</span>
@@ -275,10 +279,111 @@ and heuristics strongly benefit from high-dimensional variables.</p>
 <h2>High-dimensional constraints<a class="headerlink" href="#high-dimensional-constraints" title="Permalink to this headline">¶</a></h2>
 <p>As you have seen in the previous section, HIPS can work with matrices and vectors. In this section, we explain how work
 with high-dimensional constraints in more detail.</p>
-<p>TODO</p>
+<p>Generally, we can express high-dimensional constraints with multiple variables in HIPS, i.e. we can express constraints
+of the following type:</p>
+<div class="math notranslate nohighlight">
+\[A_1 x_1 + \dots + A_n x_n \ \mathrm{?} \ b\]</div>
+<p>where <span class="math notranslate nohighlight">\(b \in \mathbb{Q}^m\)</span>, <span class="math notranslate nohighlight">\(\mathrm{?} \in \{\leq, =, \geq\}\)</span> <span class="math notranslate nohighlight">\(A_i \in \mathbb{Q}^{m \times d_i}\)</span> and
+variable <span class="math notranslate nohighlight">\(x_i\)</span> has dimension <span class="math notranslate nohighlight">\(d_i\)</span>.</p>
+<p>Consider the example below:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix}
+1 &amp; 1 \\
+2 &amp; 0
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix} +
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+1 &amp; 0 &amp; 1
+\end{pmatrix}
+\begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3
+\end{pmatrix}
+\geq
+\begin{pmatrix}
+10 \\
+20
+\end{pmatrix}\end{split}\]</div>
+<p>The corresponding code in HIPS:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips.models</span> <span class="kn">import</span> <span class="n">LPModel</span><span class="p">,</span> <span class="n">HIPSArray</span>
+<span class="kn">from</span> <span class="nn">hips.solver</span> <span class="kn">import</span> <span class="n">ClpSolver</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LPModel</span><span class="p">(</span><span class="n">ClpSolver</span><span class="p">())</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">HIPSArray</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">HIPSArray</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">HIPSArray</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">constr</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">b</span>
+</pre></div>
+</div>
+<div class="section" id="numpy-support">
+<h3>NumPy support<a class="headerlink" href="#numpy-support" title="Permalink to this headline">¶</a></h3>
+<p>NumPy is the de facto standard library for scientific computing with multi-dimensional arrays and matrices in Python.
+You can find more information about NumPy <a class="reference external" href="https://numpy.org/">here</a>. HIPS supports the usage of NumPy arrays, because
+<a class="reference internal" href="_autosummary/hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">HIPSArray</span></code></a> is essentially a wrapper for NumPy arrays.</p>
+<p>Thus, instead of passing lists to the constructor of <a class="reference internal" href="_autosummary/hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a>, we can also pass <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> objects.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hips.models</span> <span class="k">import</span> <span class="n">HIPSArray</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Creating a 4x4 identity matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HIPSArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">[[1. 0. 0. 0.]</span>
+<span class="go"> [0. 1. 0. 0.]</span>
+<span class="go"> [0. 0. 1. 0.]</span>
+<span class="go"> [0. 0. 0. 1.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Creating a 2x3 matrix with zeros</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HIPSArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="go">[[0. 0. 0.]</span>
+<span class="go"> [0. 0. 0.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># A simple numpy array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HIPSArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="mixed-integer-programs">
 <h2>Mixed integer programs<a class="headerlink" href="#mixed-integer-programs" title="Permalink to this headline">¶</a></h2>
+<p>Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with additional constraints.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{lr&#64;{}c&#64;{}r&#64;{}l}
+\text{maximize }   &amp; 2 x_1 + 4 x_2  \\
+\text{subject to } &amp; x_1 + 2 x_2 \leq 20 \\
+                   &amp; 3 x_1 - x_2 \leq 10 \\
+                   &amp; x_1, x_2 \geq 0 \\
+                   &amp; \color{red} {x_1 \in \mathbb{Z}}, x_2 \in \mathbb{R} \\
+\end{array}\end{split}\]</div>
+<p>Compared to the example above, we have introduced the constraint <span class="math notranslate nohighlight">\(\color{red} {x_1 \in \mathbb{Z}}\)</span>. This means
+that our program contains an integer and real variable. Thus, it is no longer a linear program, but a mixed-integer program.</p>
+<p>In HIPS can write the problem as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create solver</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">ClpSolver</span><span class="p">()</span>
+<span class="c1"># Create LP model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">MIPModel</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
+<span class="c1"># Create variables with lower bound 0</span>
+<span class="n">x_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x_1&quot;</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">var_type</span><span class="o">=</span><span class="n">VarTypes</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">)</span>
+<span class="n">x_2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x_2&quot;</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Set sense</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_mip_sense</span><span class="p">(</span><span class="n">ProblemSense</span><span class="o">.</span><span class="n">MAX</span><span class="p">)</span>
+<span class="c1"># Set objective</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_objective</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x_1</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x_2</span><span class="p">)</span>
+<span class="c1"># Add constraints</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">x_1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x_2</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x_1</span> <span class="o">-</span> <span class="n">x_2</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we need to replace the <a class="reference internal" href="_autosummary/hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code></a> with the <a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MIPModel</span></code></a>.
+In HIPS there is a separation between these two program types to emphasize that heuristics are only applied to mixed-integer programs.
+In terms of defining the program, the two classes share many similarities and barely differ. Please refer to the API documentation for details.
+However, in contrast, the <a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MIPModel</span></code></a> has no <code class="docutils literal notranslate"><span class="pre">optimize()</span></code> method and needs heuristics or the branch and bound
+solver for optimization.</p>
+<p>Note that we have added an upper bound for variable <code class="docutils literal notranslate"><span class="pre">x_1</span></code>. In HIPS it is necessary to add bounds to integer variables
+because many heuristics explicitly require bounds. However, this does not actually impose a limitation, as also mentioned in
+<span id="id1">[<a class="reference internal" href="references.html#id3" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, because solvable mixed-integer programs cannot have unbounded variables.</p>
 </div>
 <div class="section" id="loading-mps-files">
 <h2>Loading mps files<a class="headerlink" href="#loading-mps-files" title="Permalink to this headline">¶</a></h2>
@@ -291,7 +396,7 @@ with high-dimensional constraints in more detail.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="heuristics.html" class="btn btn-neutral float-right" title="Heuristics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation and Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

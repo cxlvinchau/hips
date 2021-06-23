@@ -43,7 +43,7 @@ In HIPS, we can express the program as follows.
     model.add_constraint(x_1 + 2*x_2 <= 20)
     model.add_constraint(3*x_1 - x_2 <= 10)
 
-As you can see the definition of linear programs is very straightforward. However, for larger linear programs, this might
+As you can see, the definition of linear programs is straightforward. However, for larger linear programs, this might
 be a little bit cumbersome. Particularly, when we have many variables. Therefore, HIPS supports high-dimensional variables.
 Below you can see the same linear program expressed with a single 2 dimensional variable.
 
@@ -106,10 +106,126 @@ High-dimensional constraints
 As you have seen in the previous section, HIPS can work with matrices and vectors. In this section, we explain how work
 with high-dimensional constraints in more detail.
 
-TODO
+Generally, we can express high-dimensional constraints with multiple variables in HIPS, i.e. we can express constraints
+of the following type:
+
+.. math::
+
+    A_1 x_1 + \dots + A_n x_n \ \mathrm{?} \ b
+
+where :math:`b \in \mathbb{Q}^m`, :math:`\mathrm{?} \in \{\leq, =, \geq\}` :math:`A_i \in \mathbb{Q}^{m \times d_i}` and
+variable :math:`x_i` has dimension :math:`d_i`.
+
+Consider the example below:
+
+.. math::
+
+    \begin{pmatrix}
+    1 & 1 \\
+    2 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+    x_1 \\
+    x_2
+    \end{pmatrix} +
+    \begin{pmatrix}
+    1 & 2 & 3 \\
+    1 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+    y_1 \\
+    y_2 \\
+    y_3
+    \end{pmatrix}
+    \geq
+    \begin{pmatrix}
+    10 \\
+    20
+    \end{pmatrix}
+
+The corresponding code in HIPS:
+
+.. code-block:: python
+
+    from hips.models import LPModel, HIPSArray
+    from hips.solver import ClpSolver
+
+    model = LPModel(ClpSolver())
+    x, y = model.add_variable("x", dim=2), model.add_variable("y", dim=3)
+    A = HIPSArray([[1, 1], [2, 0]])
+    B = HIPSArray([[1, 2, 3], [1, 0, 1]])
+    b = HIPSArray([10, 20])
+    constr = A*x + B*y >= b
+
+
+NumPy support
+_____________
+NumPy is the de facto standard library for scientific computing with multi-dimensional arrays and matrices in Python.
+You can find more information about NumPy `here <https://numpy.org/>`_. HIPS supports the usage of NumPy arrays, because
+:class:`HIPSArray <hips.models.HIPSArray>` is essentially a wrapper for NumPy arrays.
+
+Thus, instead of passing lists to the constructor of :class:`hips.models.HIPSArray`, we can also pass ``numpy.ndarray`` objects.
+
+>>> from hips.models import HIPSArray
+>>> import numpy as np
+>>> # Creating a 4x4 identity matrix
+>>> HIPSArray(np.identity(4))
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+>>> # Creating a 2x3 matrix with zeros
+>>> HIPSArray(np.zeros((2, 3)))
+[[0. 0. 0.]
+ [0. 0. 0.]]
+>>> # A simple numpy array
+>>> HIPSArray(np.array([1, 2, 3]))
+[1, 2, 3]
 
 Mixed integer programs
 ----------------------
+Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with additional constraints.
+
+.. math::
+    \begin{array}{lr@{}c@{}r@{}l}
+    \text{maximize }   & 2 x_1 + 4 x_2  \\
+    \text{subject to } & x_1 + 2 x_2 \leq 20 \\
+                       & 3 x_1 - x_2 \leq 10 \\
+                       & x_1, x_2 \geq 0 \\
+                       & \color{red} {x_1 \in \mathbb{Z}}, x_2 \in \mathbb{R} \\
+    \end{array}
+
+Compared to the example above, we have introduced the constraint :math:`\color{red} {x_1 \in \mathbb{Z}}`. This means
+that our program contains an integer and real variable. Thus, it is no longer a linear program, but a mixed-integer program.
+
+In HIPS can write the problem as follows:
+
+.. code-block:: python
+
+    # Create solver
+    solver = ClpSolver()
+    # Create LP model
+    model = MIPModel(solver)
+    # Create variables with lower bound 0
+    x_1 = model.add_variable("x_1", lb=0, ub=20, var_type=VarTypes.INTEGER)
+    x_2 = model.add_variable("x_2", lb=0)
+    # Set sense
+    model.set_mip_sense(ProblemSense.MAX)
+    # Set objective
+    model.set_objective(2*x_1 + 4*x_2)
+    # Add constraints
+    model.add_constraint(x_1 + 2*x_2 <= 20)
+    model.add_constraint(3*x_1 - x_2 <= 10)
+
+Here, we need to replace the :class:`LPModel <hips.models.LPModel>` with the :class:`MIPModel <hips.models.MIPModel>`.
+In HIPS there is a separation between these two program types to emphasize that heuristics are only applied to mixed-integer programs.
+In terms of defining the program, the two classes share many similarities and barely differ. Please refer to the API documentation for details.
+However, in contrast, the :class:`MIPModel <hips.models.MIPModel>` has no ``optimize()`` method and needs heuristics or the branch and bound
+solver for optimization.
+
+Note that we have added an upper bound for variable ``x_1``. In HIPS it is necessary to add bounds to integer variables
+because many heuristics explicitly require bounds. However, this does not actually impose a limitation, as also mentioned in
+:cite:`Fischetti2005`, because solvable mixed-integer programs cannot have unbounded variables.
 
 Loading mps files
 -----------------
