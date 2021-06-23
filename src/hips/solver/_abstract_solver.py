@@ -14,11 +14,10 @@ class AbstractSolver(ABC):
     @abstractmethod
     def add_constraint(self, constraint: Constraint, name=None):
         """
-        Gets a constraint of type Constraint
+        Adds a constraint of type :class:`hips.models.Constraint`
 
-        :param constraint: A constraint of type :py:class:`Constraint <hips.models.lp_model.Constraint>`
-        :param name: Name of the constraint, optional
-        :return:
+        :param constraint: A constraint of type :class:`Constraint <hips.models.Constraint>`
+        :param name: Name of the constraint. This argument is optional.
         """
 
     @abstractmethod
@@ -36,8 +35,7 @@ class AbstractSolver(ABC):
         """
         Adds a variable to the model. Use the var.id as a name in the concrete solver implementation to prevent duplicate names.
 
-        :param var: Variable to be added
-        :return:
+        :param var: Variable to be added. Instance of :class:`Variable <hips.models.Variable>`.
         """
 
     @abstractmethod
@@ -45,8 +43,7 @@ class AbstractSolver(ABC):
         """
         Removes variable from model
 
-        :param var: Variable to be removed from the LP
-        :return:
+        :param var: Variable to be removed from the LP. Instance of :class:`Variable <hips.models.Variable>`
         """
 
     @abstractmethod
@@ -54,18 +51,18 @@ class AbstractSolver(ABC):
         """
         Sets the specified bound of variable var to the specified value.
 
-        :param var: The variable to set the bound on
-        :param bound: Specifies if the lower (VariableBound.LB) or upper (VariableBound.UB) bound is set
-        :param value: The value to set as the new bound on the variable as HIPSArray
-        :return:
+        :param var: The variable to set the bound on. Instance of :class:`Variable <hips.models.Variable>`
+        :param bound: Specifies if the lower (VariableBound.LB) or upper (VariableBound.UB) bound is set. Either
+            :attr:`hips.VariableBound.LB` or :attr:`hips.VariableBound.UB`.
+        :param value: The value to set as the new bound on the variable. Needs to be an instance of
+            :class:`HIPSArray <hips.models.HIPSArrays>`.
         """
 
     def set_objective(self, objective: LinExpr):
         """
         Sets the linear objective function
 
-        :param objective: Objective function
-        :return:
+        :param objective: Objective function. Needs to be an instance of :class:`hips.models.LinExpr`.
         """
         self.objective = objective
 
@@ -81,9 +78,10 @@ class AbstractSolver(ABC):
     def variable_solution(self, var: Variable) -> float:
         """
         Returns the optimal value for the given variable. Note that this method does not check whether the LP has
-        an optimal solution, it is advised to use :func:`~IConcreteSolver.get_status` before calling this method.
+        an optimal solution, it is recommended to use :meth:`get_status` before calling this method.
 
-        :param var: Variable for which the solution should be returned
+        :param var: Variable for which the solution should be returned. Needs to be an instance of
+            :class:`hips.models.Variable`
         :return: Value in the optimal solution
         """
 
@@ -91,7 +89,7 @@ class AbstractSolver(ABC):
     def get_objective_value(self) -> float:
         """
         Returns the optimal objective value. Note that this method does not check whether the LP has
-        an optimal solution, it is advised to use :func:`~IConcreteSolver.get_status` before calling this method.
+        an optimal solution, it is recommended to use :meth:`get_status` before calling this method.
 
         :return: Optimal objective value.
         """
@@ -99,9 +97,7 @@ class AbstractSolver(ABC):
     @abstractmethod
     def optimize(self):
         """
-        Optimizes the LP
-
-        :return:
+        Optimizes the linear program
         """
 
     @abstractmethod
@@ -109,5 +105,5 @@ class AbstractSolver(ABC):
         """
         Returns the status of an LP, e.g. infeasible or optimal
 
-        :return: Status of the LP
+        :return: Status of the linear program. :class:`hips.LPStatus` enum.
         """

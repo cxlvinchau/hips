@@ -338,6 +338,9 @@ class LinExpr:
         else:
             raise Exception("Not a variable or linear expression")
 
+    def __sub__(self, other):
+        return self.__add__(-1 * other)
+
     def __radd__(self, other):
         return self.__add__(other)
 
@@ -451,6 +454,9 @@ class Variable:
                 coefficients[other] = HIPSArray(np.identity(other.dim))
             return LinExpr(set([self, other]), coefficients)
         return NotImplemented
+
+    def __sub__(self, other):
+        return self.__add__(-1 * other)
 
     def __mul__(self, other):
         if isinstance(other, NUMERICAL_TYPES):

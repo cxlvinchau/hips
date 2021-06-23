@@ -10,10 +10,11 @@ from hips.models import HIPSArray, Variable
 
 
 class ClpSolver(AbstractSolver):
-    """
-    Implements the IConcreteSolver class and wraps CyLP. Note that the ClpSolver may require
-    special attention when it comes to removing variables because the implementation of CyLP is not particularly stable.
-    See open GitHub issues: https://github.com/coin-or/CyLP/issues.
+    """Implementation of a linear programming solver using the Clp solver.
+
+    Implementation of a linear programming solver using Clp :cite:`johnjforrest_2020_3748677`, more specifically CyLP.
+    Note that the ClpSolver may require special attention when it comes to removing variables because the implementation
+    of CyLP is not particularly stable. See open GitHub issues: https://github.com/coin-or/CyLP/issues.
     """
 
     def __init__(self):

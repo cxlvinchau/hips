@@ -8,7 +8,11 @@ import numpy as np
 
 
 class GurobiSolver(AbstractSolver):
-    '''Realization of the LP model using Gurobi LP solver'''
+    """Implementation of a linear programming solver using the Gurobi solver.
+
+    This class implements an LP solver using the Gurobi solver :cite:`gurobi`. This solver needs a ``gurobipy``
+    installation and does not work without it. Please note that you also need an active Gurobi license.
+    """
 
     def __init__(self):
         super().__init__()
@@ -55,7 +59,7 @@ class GurobiSolver(AbstractSolver):
         self.model.update()
 
     def remove_constraint(self, name: str = None, constraint: Constraint = None):
-        """This method assumes, that the user only removes constraints by name, that were also added with a name"""
+        # This method assumes, that the user only removes constraints by name, that were also added with a name
         gurobi_constraint = None
         if name is not None:
             constraint = self.name_to_hips_constraint[name]

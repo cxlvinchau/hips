@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.abspath('../src'))
 # -- Project information -----------------------------------------------------
 
 project = 'HIPS'
-copyright = '2021, Calvin Chau'
+copyright = '2021, Severin Bals and Calvin Chau'
 author = 'Calvin Chau'
 
 # The short X.Y version
@@ -209,7 +209,8 @@ autodoc_default_options = {
     'member-order': 'bysource',
     'special-members': '',
     'undoc-members': True,
-    'exclude-members': '__weakref__'
+    'exclude-members': '__weakref__',
+    'inherited-members': True
 }
 
 toggleprompt_offset_right = 40
