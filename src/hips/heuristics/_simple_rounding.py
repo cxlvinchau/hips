@@ -7,7 +7,6 @@ from hips.models import MIPModel, Variable
 class SimpleRounding(Heuristic):
     """
     Implements a simple rounding heuristic, that rounds each integer variable to the closest integer of the relaxation LP solution.
-
     """
 
     def __init__(self, mip_model: MIPModel):
