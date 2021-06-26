@@ -1,4 +1,4 @@
-from hips.solver import ClpSolver
+from hips import GUROBI_AVAILABLE, CLP_AVAILABLE
 
 
 def skip_when_clp_solver(func):
@@ -10,10 +10,14 @@ def skip_when_clp_solver(func):
     """
 
     def wrapper(*args, **kwargs):
-        if isinstance(args[0].relaxation.concrete_solver, ClpSolver):
-            return
+        if CLP_AVAILABLE:
+            from hips.solver import ClpSolver
+            if isinstance(args[0].relaxation.concrete_solver, ClpSolver):
+                return
+            else:
+                return func(*args, **kwargs)
         else:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
 
     return wrapper
 
