@@ -118,6 +118,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../heur/rens.html">RENS</a></li>
 </ul>
 
             
@@ -210,7 +211,7 @@ pump can also handle integer variables, but might be less suited for this purpos
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> – Mixed integer program, instance of <a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.MIPModel</span></code></a></p></li>
-<li><p><strong>kwargs</strong> – Additional arguments that are passed to the underlying original feasibility pump (see <a class="reference internal" href="hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics.FeasibilityPump"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.FeasibilityPump</span></code></a>).</p></li>
+<li><p><strong>kwargs</strong> – Additional arguments that are passed to the underlying original feasibility pump (see <code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics_tmp.FeasibilityPump</span></code>).</p></li>
 </ul>
 </dd>
 </dl>
@@ -273,7 +274,7 @@ pump can also handle integer variables, but might be less suited for this purpos
 <dd><p>Return objective value determined by the heuristic</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>optimal value</p>
+<dd class="field-odd"><p>Value of the objective function</p>
 </dd>
 </dl>
 </dd></dl>

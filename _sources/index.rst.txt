@@ -28,6 +28,8 @@ and `this <https://en.wikipedia.org/wiki/Integer_programming>`_ Wikipedia articl
    api
    references
 
+   heur/rens
+
 
 
 Indices and tables
