@@ -65,7 +65,6 @@ class FeasibilityPump(Heuristic):
 
         :return: None
         """
-        # self.logger.info("Computing relaxation")
         if self._original_obj is None:
             self._original_obj = self.relaxation.objective
         self.relaxation.optimize()
@@ -96,7 +95,6 @@ class FeasibilityPump(Heuristic):
         # Create variables and constraints for integer variables
         self.added_constraints = []
         for var in [v for v in self.x_tilde_int if v not in self.positive_vars]:
-            # self.logger.info("Creating constraints and variables for {}".format(var.name))
             var_id = self._var_counter
             # Create slack variables
             var_pos = self.positive_vars.setdefault(var, self.relaxation.add_variable(
@@ -131,8 +129,6 @@ class FeasibilityPump(Heuristic):
         self.relaxation.set_lp_sense(ProblemSense.MIN)
         # Updates the objective function
         self.relaxation.set_objective(objective_bin + objective_int)
-        # Logging
-        # self.logger.info("Updated objective to {}".format(self.relaxation.objective))
 
     def _remove_added_constraints(self):
         """
@@ -143,7 +139,6 @@ class FeasibilityPump(Heuristic):
         for constr_name in self.added_constraints:
             self.relaxation.remove_constraint(name=constr_name)
         self.added_constraints = []
-        # self.logger.info("Removed added constraints")
 
     @skip_when_clp_solver
     def _remove_added_variables(self):
@@ -156,7 +151,6 @@ class FeasibilityPump(Heuristic):
             self.mip_model.lp_model.remove_variable(var)
         self.positive_vars = {}
         self.negative_vars = {}
-        # self.logger.info("Removed added variables")
 
     def _check_cycling(self, bin_sol, int_sol):
         """
@@ -216,11 +210,9 @@ class FeasibilityPump(Heuristic):
                             reached, the computation terminated.
         :return: None
         """
-        # self.logger.info("Starting computation of feasibility pump")
         t = math.ceil(len(self.mip_model.binary_variables) / 2) if self.t is None else self.t
         self.iteration = 0
         while self.iteration < max_iter:
-            # self.logger.info("Iteration {}".format(self.iteration))
             # compute relaxation
             self._compute_relaxation()
 
@@ -240,11 +232,9 @@ class FeasibilityPump(Heuristic):
             # Check cycling
             if self.iteration > 0 and self._check_cycling(new_x_tilde_bin, new_x_tilde_int):
                 self._perturb_binary(t=t)
-                # self.x_tilde_int = new_x_tilde_int
                 self._perturb_integer()
                 self._history.append((new_x_tilde_bin, new_x_tilde_int))
             elif self.iteration > 3 and self._check_long_cycle(new_x_tilde_bin, new_x_tilde_int):
-                # self.logger.info("Perform aggressive perturbation")
                 # Aggressive perturbation
                 self._perturb_integer()
                 for var in new_x_tilde_bin:
