@@ -9,7 +9,7 @@ from hips.constants import HeuristicStatus
 class Heuristic(metaclass=abc.ABCMeta):
 
     def __init__(self, mip_model: MIPModel):
-        self.logger = logging.getLogger("heuristics")
+        self.logger = logging.getLogger("heuristics_tmp")
         self.mip_model = mip_model
         self.relaxation = mip_model.lp_model
         self.binary = mip_model.binary_variables
@@ -36,7 +36,7 @@ class Heuristic(metaclass=abc.ABCMeta):
         """
         Return objective value determined by the heuristic
 
-        :return: optimal value
+        :return: Value of the objective function
         """
 
     @abc.abstractmethod
