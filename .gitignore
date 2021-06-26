@@ -6,3 +6,4 @@ build
 src/hips/hips_integer_programming.egg-info
 src/hips_integer_programming.egg-info
 ../src/.idea/workspace.xml
+src/hips_mip.egg-info
