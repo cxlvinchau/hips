@@ -10,10 +10,8 @@ the variable :math:`x_j` with lowest fractionality :math:`f(x_j)` with respect t
 to the closest integer value :math:`[x_j]`. This is done as follows:
 
 .. math::
-    \begin{array}{l@c@c@r}
-        if & & & x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
-        then & & & upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
-        else & & & lower\_bound(x_j) \leftarrow \lceil x_j \rceil
-    \end{array}
+        \mathbf{if} \qquad x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
+        \mathbf{then} \qquad upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
+        \mathbf{else} \quad lower\_bound(x_j) \leftarrow \lceil x_j \rceil
 
 The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.
