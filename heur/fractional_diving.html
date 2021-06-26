@@ -189,11 +189,9 @@ or an efficient direction of branching in the branch and bound.</p>
 the variable <span class="math notranslate nohighlight">\(x_j\)</span> with lowest fractionality <span class="math notranslate nohighlight">\(f(x_j)\)</span> with respect to the current relaxation solution is bound
 to the closest integer value <span class="math notranslate nohighlight">\([x_j]\)</span>. This is done as follows:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{l&#64;c&#64;c&#64;r}
-    if &amp; &amp; &amp; x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
-    then &amp; &amp; &amp; upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
-    else &amp; &amp; &amp; lower\_bound(x_j) \leftarrow \lceil x_j \rceil
-\end{array}\end{split}\]</div>
+\[\begin{split}\mathbf{if} \qquad x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
+\mathbf{then} \qquad upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
+\mathbf{else} \quad lower\_bound(x_j) \leftarrow \lceil x_j \rceil\end{split}\]</div>
 <p>The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.</p>
 </div>
 
