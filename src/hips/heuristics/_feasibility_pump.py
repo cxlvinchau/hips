@@ -390,7 +390,7 @@ class TwoStageFeasibilityPump(Heuristic):
         """Constructor
 
         :param model: Mixed integer program, instance of :class:`hips.models.MIPModel`
-        :param kwargs: Additional arguments that are passed to the underlying original feasibility pump (see :class:`hips.heuristics.FeasibilityPump`).
+        :param kwargs: Additional arguments that are passed to the underlying original feasibility pump (see :class:`hips.heuristics_tmp.FeasibilityPump`).
         """
         super().__init__(model)
         self.feasibility_pump = FeasibilityPump(model, **kwargs)

@@ -9,7 +9,7 @@ from hips.models import Variable, MIPModel
 
 class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
     """
-    Implements an abstract version of diving heuristics. It consists of a general framework for
+    Implements an abstract version of diving heuristics_tmp. It consists of a general framework for
     branch-and-bound-tree traversal and stopping criteria. The branching criteria should be implemented in a
     corresponding subclass. This implementation roughly follows the algorithm seen in :cite:t:'2006:berthold' on page 17.
     """
@@ -118,8 +118,8 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def _dive(self):
         """
-        Dive down the B&B tree. Specific diving heuristics have to override this method according to the
-        heuristics branching approach.
+        Dive down the B&B tree. Specific diving heuristics_tmp have to override this method according to the
+        heuristics_tmp branching approach.
 
         :return:
         """
