@@ -75,7 +75,7 @@ class AbstractSolver(ABC):
         self.lp_sense = lp_sense
 
     @abstractmethod
-    def variable_solution(self, var: Variable) -> float:
+    def variable_solution(self, var: Variable) -> HIPSArray:
         """
         Returns the optimal value for the given variable. Note that this method does not check whether the LP has
         an optimal solution, it is recommended to use :meth:`get_status` before calling this method.

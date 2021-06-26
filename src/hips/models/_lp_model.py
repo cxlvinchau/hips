@@ -156,7 +156,6 @@ class LPModel:
         This method specifies the sense of the linear program, i.e. whether the program should be minimized or maximized.
 
         :param lp_sense: The sense of the linear program. Enum of :class:`hips.LPSense`
-        :return:
         """
         if lp_sense not in [ProblemSense.MAX, ProblemSense.MIN]:
             raise Exception("Illegal LP type")
@@ -169,11 +168,23 @@ class LPModel:
         return "Objective:\n" + str(self.objective) + "\nConstraints:\n" + "\n".join([str(c) for c in self.constraints])
 
     def variable_solution(self, var):
-        """Returns the optimal value for the given variable"""
+        """
+        Returns the optimal value for the given variable. Note that this method does not check whether the LP has
+        an optimal solution, it is recommended to use :meth:`get_status` before calling this method.
+
+        :param var: Variable for which the solution should be returned. Needs to be an instance of
+            :class:`hips.models.Variable`
+        :return: Value in the optimal solution
+        """
         return self.concrete_solver.variable_solution(var)
 
     def get_objective_value(self):
-        """Returns the optimal value of the linear program"""
+        """
+        Returns the optimal objective value. Note that this method does not check whether the LP has
+        an optimal solution, it is recommended to use :meth:`get_status` before calling this method.
+
+        :return: Optimal objective value.
+        """
         return self.concrete_solver.get_objective_value()
 
     def optimize(self):
@@ -305,7 +316,7 @@ class LinExpr:
     :math:`{a_0}^T x_0 + \dots + {a_n}^T x_n` can be represented with this class. For more details, please refer to
     :class:`hips.models.Variable`.
 
-    Typically, a linear expression is not created explicitly with constructor, but rather implicitly.
+    Typically, a linear expression is not created explicitly with a constructor, but rather implicitly.
     """
 
     def __init__(self, vars=set(), coefficients=dict()):
