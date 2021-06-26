@@ -224,7 +224,7 @@ optimize linear programs.</p>
 <td><p>Adds a variable to the linear program</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.get_objective_value" title="hips.models.LPModel.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
-<td><p>Returns the optimal value of the linear program</p></td>
+<td><p>Returns the optimal objective value.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.get_status" title="hips.models.LPModel.get_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_status</span></code></a>()</p></td>
 <td><p>Returns the status of the linear program</p></td>
@@ -254,7 +254,7 @@ optimize linear programs.</p>
 <td><p>Sets/updates the bound of a variable</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.variable_solution" title="hips.models.LPModel.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
-<td><p>Returns the optimal value for the given variable</p></td>
+<td><p>Returns the optimal value for the given variable.</p></td>
 </tr>
 </tbody>
 </table>
@@ -360,22 +360,35 @@ of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HI
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>lp_sense</strong> – The sense of the linear program. Enum of <code class="xref py py-class docutils literal notranslate"><span class="pre">hips.LPSense</span></code></p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.variable_solution">
 <span class="sig-name descname"><span class="pre">variable_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.variable_solution" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the optimal value for the given variable</p>
+<dd><p>Returns the optimal value for the given variable. Note that this method does not check whether the LP has
+an optimal solution, it is recommended to use <a class="reference internal" href="#hips.models.LPModel.get_status" title="hips.models.LPModel.get_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_status()</span></code></a> before calling this method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var</strong> – Variable for which the solution should be returned. Needs to be an instance of
+<a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Value in the optimal solution</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.LPModel.get_objective_value">
 <span class="sig-name descname"><span class="pre">get_objective_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.get_objective_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the optimal value of the linear program</p>
+<dd><p>Returns the optimal objective value. Note that this method does not check whether the LP has
+an optimal solution, it is recommended to use <a class="reference internal" href="#hips.models.LPModel.get_status" title="hips.models.LPModel.get_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_status()</span></code></a> before calling this method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Optimal objective value.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

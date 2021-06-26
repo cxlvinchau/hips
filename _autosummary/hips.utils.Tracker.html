@@ -188,10 +188,16 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="hips.utils.Tracker">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.utils.</span></span><span class="sig-name descname"><span class="pre">Tracker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">heuristic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.utils.Tracker" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Utility class to track heuristics</p>
+<dl class="py method">
 <dt class="sig sig-object py" id="hips.utils.Tracker.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">heuristic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.utils.Tracker.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>heuristic</strong> – The heuristic to be tracked</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -202,25 +208,44 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.utils.Tracker.__init__" title="hips.utils.Tracker.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(heuristic)</p></td>
-<td><p>Initialize self.</p></td>
+<td><p>Constructor</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.utils.Tracker.log" title="hips.utils.Tracker.log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log</span></code></a>(metric, value, **kwargs)</p></td>
-<td><p></p></td>
+<td><p>Logs a given metric and additional arguments</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.utils.Tracker.plot" title="hips.utils.Tracker.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(metric[, x])</p></td>
-<td><p></p></td>
+<td><p>Plots a given metric</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.utils.Tracker.log">
-<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric:</span> <span class="pre">str,</span> <span class="pre">value:</span> <span class="pre">Union[int,</span> <span class="pre">float,</span> <span class="pre">&lt;Mock</span> <span class="pre">name='mock.float'</span> <span class="pre">id='140210101235664'&gt;,</span> <span class="pre">&lt;Mock</span> <span class="pre">name='mock.float64'</span> <span class="pre">id='140210101215872'&gt;],</span> <span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.utils.Tracker.log" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">metric:</span> <span class="pre">str,</span> <span class="pre">value:</span> <span class="pre">Union[int,</span> <span class="pre">float,</span> <span class="pre">&lt;Mock</span> <span class="pre">name='mock.float'</span> <span class="pre">id='139670294230832'&gt;,</span> <span class="pre">&lt;Mock</span> <span class="pre">name='mock.float64'</span> <span class="pre">id='139670294231408'&gt;],</span> <span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.utils.Tracker.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs a given metric and additional arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric</strong> – The metric whose value should be tracked</p></li>
+<li><p><strong>value</strong> – Value of the metric</p></li>
+<li><p><strong>kwargs</strong> – Additional metrics that should be tracked</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.utils.Tracker.plot">
 <span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'iteration'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.utils.Tracker.plot" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Plots a given metric</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric</strong> – Metric that should be plotted</p></li>
+<li><p><strong>x</strong> – x value, by default the iteration is used, any specified metric in the <a class="reference internal" href="#hips.utils.Tracker.log" title="hips.utils.Tracker.log"><code class="xref py py-func docutils literal notranslate"><span class="pre">log()</span></code></a> method also works.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
