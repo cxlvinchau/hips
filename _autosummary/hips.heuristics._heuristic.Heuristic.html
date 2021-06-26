@@ -103,7 +103,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../dev_api.html">Developer API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../dev_api.html#solver-package"><code class="docutils literal notranslate"><span class="pre">solver</span></code> package</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../dev_api.html#models-package"><code class="docutils literal notranslate"><span class="pre">models</span></code> package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../dev_api.html#models-package"><code class="docutils literal notranslate"><span class="pre">models</span></code> package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../dev_api.html#heuristics-package"><code class="docutils literal notranslate"><span class="pre">heuristics</span></code> package</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../dev_api.html#adding-general-mip-heuristics">Adding general MIP heuristics</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../dev_api.html#adding-diving-heuristics">Adding diving heuristics</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="hips.heuristics._abstract_diving.AbstractDiving.html">hips.heuristics._abstract_diving.AbstractDiving</a></li>
@@ -115,8 +116,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../heur/rens.html">RENS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../heur/line_search_diving.html">Linear search diving</a></li>
 </ul>
 
             
@@ -191,7 +190,22 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="hips.heuristics._heuristic.Heuristic">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics._heuristic.</span></span><span class="sig-name descname"><span class="pre">Heuristic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics._heuristic.Heuristic" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Abstract heuristic class</p>
+<p>Abstract heuristic class that implements basis structures for heuristics. Particularly, the different
+attributes should be used, so that the heuristic is fully integrated into HIPS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mip_model</strong> – The mixed-integer program model. Instance of <a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.MIPModel</span></code></a></p></li>
+<li><p><strong>relaxation</strong> – The relaxation of the mixed integer program. Instance of <a class="reference internal" href="hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a></p></li>
+<li><p><strong>binary</strong> – Binary variables</p></li>
+<li><p><strong>integer</strong> – Integer variables</p></li>
+<li><p><strong>iteration</strong> – Iteration of the heuristic. Initialized with 0 and should be updated once a single iteration of the
+heuristic is completed</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
 <dt class="sig sig-object py" id="hips.heuristics._heuristic.Heuristic.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics._heuristic.Heuristic.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
@@ -208,7 +222,7 @@
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics._heuristic.Heuristic.compute" title="hips.heuristics._heuristic.Heuristic.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>([max_iter])</p></td>
-<td><p>Compute the optimal solution with the heuristic algorithm.</p></td>
+<td><p>Compute the optimal solution with the heuristic algorithm</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics._heuristic.Heuristic.get_objective_value" title="hips.heuristics._heuristic.Heuristic.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
 <td><p>Return objective value determined by the heuristic</p></td>
@@ -224,7 +238,12 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.heuristics._heuristic.Heuristic.compute">
 <em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics._heuristic.Heuristic.compute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the optimal solution with the heuristic algorithm.</p>
+<dd><p>Compute the optimal solution with the heuristic algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_iter</strong> – Maximum iteration. Once the maximum iteration is reached, the computation is stopped.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

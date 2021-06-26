@@ -109,7 +109,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#models-package"><code class="docutils literal notranslate"><span class="pre">models</span></code> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#models-package"><code class="docutils literal notranslate"><span class="pre">models</span></code> package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#heuristics-package"><code class="docutils literal notranslate"><span class="pre">heuristics</span></code> package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#adding-general-mip-heuristics">Adding general MIP heuristics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#adding-diving-heuristics">Adding diving heuristics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html">hips.heuristics._abstract_diving.AbstractDiving</a></li>
@@ -121,8 +122,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="heur/rens.html">RENS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="heur/line_search_diving.html">Linear search diving</a></li>
 </ul>
 
             
@@ -231,19 +230,24 @@ and implements the different abstract methods. Please have a look at the documen
 <p>The <code class="docutils literal notranslate"><span class="pre">models</span></code> package contains all necessary classes to express linear and mixed integer programs in HIPS. As mentioned
 before, the <a class="reference internal" href="_autosummary/hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a> uses the solver interface to update the underlying linear program. Therefore, this
 has to be kept in mind when applying changes to the <code class="docutils literal notranslate"><span class="pre">models</span></code> package.</p>
-<p><code class="docutils literal notranslate"><span class="pre">heuristics</span></code> package
-The heuristics package contains the different heuristic implementations. Particularly, the two abstract classes <a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic" title="hips.heuristics._heuristic.Heuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></a>
+</div>
+<div class="section" id="heuristics-package">
+<h2><code class="docutils literal notranslate"><span class="pre">heuristics</span></code> package<a class="headerlink" href="#heuristics-package" title="Permalink to this headline">¶</a></h2>
+<p>The heuristics package contains the different heuristic implementations. Particularly, the two abstract classes <a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic" title="hips.heuristics._heuristic.Heuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></a>
 and <a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving" title="hips.heuristics._abstract_diving.AbstractDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving</span></code></a> are relevant when adding new heuristics.</p>
 <div class="section" id="adding-general-mip-heuristics">
 <h3>Adding general MIP heuristics<a class="headerlink" href="#adding-general-mip-heuristics" title="Permalink to this headline">¶</a></h3>
 <p>A new heuristic can be added by inheriting from the <a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic" title="hips.heuristics._heuristic.Heuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></a> class. The class has
 various abstract methods that need to implemented in the child class. Of particular interest is the
-<a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic.compute" title="hips.heuristics._heuristic.Heuristic.compute"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic.compute()</span></code></a> method that needs to be implement the computation of the heuristic.
+<a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic.compute" title="hips.heuristics._heuristic.Heuristic.compute"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic.compute()</span></code></a> method that needs to implement the computation of the heuristic.
 Please have a look at the documentation of the class for details.</p>
 </div>
 <div class="section" id="adding-diving-heuristics">
 <h3>Adding diving heuristics<a class="headerlink" href="#adding-diving-heuristics" title="Permalink to this headline">¶</a></h3>
-<p>When implementing diving he</p>
+<p>When implementing new diving heuristics, it might be more appropriate to inherit from the
+<a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving" title="hips.heuristics._abstract_diving.AbstractDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving</span></code></a> class and implement the abstract methods there.
+Particularly, only the <a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.dive" title="hips.heuristics._abstract_diving.AbstractDiving.dive"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving.dive()</span></code></a> and
+<a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.revert" title="hips.heuristics._abstract_diving.AbstractDiving.revert"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving.revert()</span></code></a> methods need to be overriden.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -254,7 +258,7 @@ Please have a look at the documentation of the class for details.</p>
 <td><p>Implements an abstract version of diving heuristics_tmp.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic" title="hips.heuristics._heuristic.Heuristic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Abstract heuristic class</p></td>
 </tr>
 </tbody>
 </table>

@@ -15,8 +15,10 @@
    
       ~LineSearchDiving.__init__
       ~LineSearchDiving.compute
+      ~LineSearchDiving.dive
       ~LineSearchDiving.get_objective_value
       ~LineSearchDiving.get_status
+      ~LineSearchDiving.revert
       ~LineSearchDiving.variable_solution
    
    

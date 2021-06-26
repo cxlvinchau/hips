@@ -119,8 +119,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../heur/rens.html">RENS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../heur/line_search_diving.html">Linear search diving</a></li>
 </ul>
 
             
@@ -214,13 +212,19 @@ integer. The idea is based on page 17 of <span id="id1">[<a class="reference int
 <td><p>Initialize self.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDiving.compute" title="hips.heuristics.FractionalDiving.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>([max_iter])</p></td>
-<td><p>Compute the optimal solution with the heuristic algorithm.</p></td>
+<td><p>Compute the optimal solution with the heuristic algorithm</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDiving.get_objective_value" title="hips.heuristics.FractionalDiving.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDiving.dive" title="hips.heuristics.FractionalDiving.dive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dive</span></code></a>()</p></td>
+<td><p>Compute the variable from the self.fractional_index_set with the lowest fractionality and bound it to the nearest integer.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDiving.get_objective_value" title="hips.heuristics.FractionalDiving.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
 <td><p>Return objective value determined by the heuristic</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDiving.get_status" title="hips.heuristics.FractionalDiving.get_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_status</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDiving.get_status" title="hips.heuristics.FractionalDiving.get_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_status</span></code></a>()</p></td>
 <td><p>Returns the status of the heuristic, either that a solution was found, no solution was found or that the heuristic encountered an error</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDiving.revert" title="hips.heuristics.FractionalDiving.revert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">revert</span></code></a>()</p></td>
+<td><p>Reverts the bounds set by the _dive() method to the start state of the heuristic.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDiving.variable_solution" title="hips.heuristics.FractionalDiving.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
 <td><p>Return the solution found by the heuristic</p></td>
@@ -228,9 +232,37 @@ integer. The idea is based on page 17 of <span id="id1">[<a class="reference int
 </tbody>
 </table>
 <dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.FractionalDiving.dive">
+<span class="sig-name descname"><span class="pre">dive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDiving.dive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the variable from the self.fractional_index_set with the lowest fractionality and bound it to the
+nearest integer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.FractionalDiving.revert">
+<span class="sig-name descname"><span class="pre">revert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDiving.revert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverts the bounds set by the _dive() method to the start state of the heuristic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="hips.heuristics.FractionalDiving.compute">
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDiving.compute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the optimal solution with the heuristic algorithm.</p>
+<dd><p>Compute the optimal solution with the heuristic algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_iter</strong> – Maximum iteration. Once the maximum iteration is reached, the computation is stopped.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

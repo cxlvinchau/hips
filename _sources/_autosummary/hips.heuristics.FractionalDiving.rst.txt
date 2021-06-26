@@ -15,8 +15,10 @@
    
       ~FractionalDiving.__init__
       ~FractionalDiving.compute
+      ~FractionalDiving.dive
       ~FractionalDiving.get_objective_value
       ~FractionalDiving.get_status
+      ~FractionalDiving.revert
       ~FractionalDiving.variable_solution
    
    

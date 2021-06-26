@@ -15,8 +15,10 @@
    
       ~AbstractDiving.__init__
       ~AbstractDiving.compute
+      ~AbstractDiving.dive
       ~AbstractDiving.get_objective_value
       ~AbstractDiving.get_status
+      ~AbstractDiving.revert
       ~AbstractDiving.variable_solution
    
    

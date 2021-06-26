@@ -43,6 +43,7 @@ before, the :class:`hips.models.LPModel` uses the solver interface to update the
 has to be kept in mind when applying changes to the ``models`` package.
 
 ``heuristics`` package
+----------------------
 The heuristics package contains the different heuristic implementations. Particularly, the two abstract classes :class:`hips.heuristics._heuristic.Heuristic`
 and :class:`hips.heuristics._abstract_diving.AbstractDiving` are relevant when adding new heuristics.
 
@@ -50,13 +51,16 @@ Adding general MIP heuristics
 _____________________________
 A new heuristic can be added by inheriting from the :class:`hips.heuristics._heuristic.Heuristic` class. The class has
 various abstract methods that need to implemented in the child class. Of particular interest is the
-:func:`hips.heuristics._heuristic.Heuristic.compute` method that needs to be implement the computation of the heuristic.
+:func:`hips.heuristics._heuristic.Heuristic.compute` method that needs to implement the computation of the heuristic.
 Please have a look at the documentation of the class for details.
 
 
 Adding diving heuristics
 ________________________
-When implementing diving he
+When implementing new diving heuristics, it might be more appropriate to inherit from the
+:class:`hips.heuristics._abstract_diving.AbstractDiving` class and implement the abstract methods there.
+Particularly, only the :func:`hips.heuristics._abstract_diving.AbstractDiving.dive` and
+:func:`hips.heuristics._abstract_diving.AbstractDiving.revert` methods need to be overriden.
 
 .. autosummary::
    :toctree: _autosummary
