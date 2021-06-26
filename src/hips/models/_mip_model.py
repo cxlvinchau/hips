@@ -130,3 +130,10 @@ class MIPModel:
                     trivially_up_roundable[var] = [B1 and B2 for B1,B2 in zip(trivially_up_roundable[var], [all(coefficients[var].to_numpy()[:,i] == 0) for i in range(var.dim)])]
         return trivially_down_roundable, trivially_up_roundable
 
+    def get_variables(self):
+        """Returns all variables of the problem
+
+        :return: A list of variables. Elements are instances of :class:`Variable <hips.models.Variable>`
+        """
+        return self.lp_model.get_variables()
+
