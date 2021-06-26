@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Linear search diving &mdash; HIPS 0.0.1 documentation</title>
+  <title>Fractional diving &mdash; HIPS 0.0.1 documentation</title>
   
 
   
@@ -46,8 +46,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API Documentation" href="../api.html" />
-    <link rel="prev" title="Fractional diving" href="fractional_diving.html" /> 
+    <link rel="next" title="Linear search diving" href="line_search_diving.html" />
+    <link rel="prev" title="RENS" href="rens.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -104,8 +104,8 @@
 <li class="toctree-l2"><a class="reference internal" href="simple_rounding.html">Simple Rounding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bounds.html">Bounds Heuristic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rens.html">RENS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fractional_diving.html">Fractional diving</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Linear search diving</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Fractional diving</a></li>
+<li class="toctree-l2"><a class="reference internal" href="line_search_diving.html">Linear search diving</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
@@ -161,13 +161,13 @@
         
           <li><a href="../heuristics.html">Heuristics</a> &raquo;</li>
         
-      <li>Linear search diving</li>
+      <li>Fractional diving</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/heur/line_search_diving.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/heur/fractional_diving.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -180,18 +180,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="linear-search-diving">
-<h1>Linear search diving<a class="headerlink" href="#linear-search-diving" title="Permalink to this headline">¶</a></h1>
-<p>Now we consider the line search diving heuristic as presented by <span id="id1">[<a class="reference internal" href="../references.html#id6" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011.">Hen11</a>]</span>. As the name suggests, this
-heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
-explore a branch of a branch and bound tree. In <a class="reference internal" href="../_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.LineSearchDiving</span></code></a>, the selected variable in each step is fixed to a value.</p>
-<p>The choice of the variable that is fixed is made as follows. Suppose <span class="math notranslate nohighlight">\(x^R\)</span> is the solution found at the root
-node <span class="math notranslate nohighlight">\(R\)</span> in the branch and bound algorithm. Let <span class="math notranslate nohighlight">\(N\)</span> be an arbitrary node within the branch and bound tree
-(i.e. not the root node) and <span class="math notranslate nohighlight">\(x^N\)</span> the corresponding solution. At <span class="math notranslate nohighlight">\(N\)</span> line search diving considers the line
-between <span class="math notranslate nohighlight">\(x^N\)</span> and <span class="math notranslate nohighlight">\(x^R\)</span> and conceptually moves towards <span class="math notranslate nohighlight">\(x^R\)</span> and checks which variable becomes integer first.
-This variable is then selected and fixed.</p>
-<p>Since our heuristic does not operate within a branch and bound algorithm, the initial variables that are fixed/selected
-are chosen randomly.</p>
+  <div class="section" id="fractional-diving">
+<h1>Fractional diving<a class="headerlink" href="#fractional-diving" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving" title="hips.heuristics.FractionalDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDiving</span></code></a> is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
+integer in each dive. The idea is based on page 17 of <span id="id1">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>. It can be used to find a quick initial solution
+or an efficient direction of branching in the branch and bound.</p>
+<p>The heuristic traverses one path of the branch and bound tree of the MIP model to the leaf node. At each branch of the tree,
+the variable <span class="math notranslate nohighlight">\(x_j\)</span> with lowest fractionality <span class="math notranslate nohighlight">\(f(x_j)\)</span> with respect to the current relaxation solution is bound
+to the closest integer value <span class="math notranslate nohighlight">\([x_j]\)</span>. This is done as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}if   x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
+then upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
+else lower\_bound(x_j) \leftarrow \lceil x_j \rceil\end{split}\]</div>
+<p>The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.</p>
 </div>
 
 
@@ -200,8 +201,8 @@ are chosen randomly.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="fractional_diving.html" class="btn btn-neutral float-left" title="Fractional diving" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="line_search_diving.html" class="btn btn-neutral float-right" title="Linear search diving" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="rens.html" class="btn btn-neutral float-left" title="RENS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
