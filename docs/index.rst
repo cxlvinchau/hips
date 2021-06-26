@@ -5,10 +5,10 @@
 
 HIPS Documentation
 ==================
-HIPS is a Python library for heuristically solving mixed integer programs. HIPS implements wrappers for popular linear programming
-solvers like Gurobi :cite:`gurobi` and Clp :cite:`johnjforrest_2020_3748677`, and thereby allows for easily switching
-solvers. At its core, HIPS implements various well-established heuristics for mixed-integer programming, e.g. the
-feasibility pump :cite:`Fischetti2005`, RENS :cite:`Berthold2013` and various diving heuristics.
+HIPS is a Python library for heuristically solving mixed integer programs. At its core, HIPS implements various
+well-established heuristics for mixed-integer programming, e.g. the feasibility pump :cite:`Fischetti2005`, RENS :cite:`Berthold2013`
+and various diving heuristics. Further, HIPS implements wrappers for popular linear programming solvers like Gurobi
+:cite:`gurobi` and Clp :cite:`johnjforrest_2020_3748677`, and thereby allows for easily switching solvers.
 
 HIPS is designed to be easily extensible and user-friendly. Adding new heuristics or solvers can be done by implementing
 the corresponding interfaces.
@@ -26,9 +26,11 @@ and `this <https://en.wikipedia.org/wiki/Integer_programming>`_ Wikipedia articl
    getting_started
    heuristics
    api
+   dev_api
    references
 
    heur/rens
+   heur/line_search_diving
 
 
 

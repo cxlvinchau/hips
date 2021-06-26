@@ -43,7 +43,6 @@ __________
    hips.heuristics.FeasibilityPump
    hips.heuristics.TwoStageFeasibilityPump
    hips.heuristics.HeuristicBounds
-   hips.heuristics.AbstractDiving
    hips.heuristics.FractionalDivingHeuristic
    hips.heuristics.LineSearchDiving
    hips.heuristics.RENS

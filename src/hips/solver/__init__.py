@@ -18,3 +18,5 @@ except ImportError:
 from hips.solver._scipy_solver import ScipySolver
 
 __all__ = ["GurobiSolver", "ClpSolver", "PulpSolver"]
+
+from hips.solver.branch_and_bound import BranchAndBound

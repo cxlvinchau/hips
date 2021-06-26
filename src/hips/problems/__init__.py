@@ -1,5 +1,6 @@
 import os
 
+from hips import ProblemSense
 from hips.models import MIPModel
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -34,6 +35,7 @@ def _get_solver():
 def load_problem_clp(problem_name):
     from hips.solver import ClpSolver
     problem = MIPModel(ClpSolver())
+    problem.set_mip_sense(ProblemSense.MIN)
     load_mps_advanced(problem, os.path.join(dir_path, "mps_files", f"{problem_name}.mps"))
     return problem
 
@@ -41,6 +43,7 @@ def load_problem_clp(problem_name):
 def load_problem_gurobi(problem_name):
     from hips.solver import GurobiSolver
     problem = MIPModel(GurobiSolver())
+    problem.set_mip_sense(ProblemSense.MIN)
     load_mps_advanced(problem, os.path.join(dir_path, "mps_files", f"{problem_name}.mps"))
     return problem
 
