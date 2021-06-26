@@ -66,7 +66,7 @@ def load_problem_clp(problem_name):
     return problem
 
 
-def load_problem_clp(problem_name):
+def load_problem_gurobi(problem_name):
     from hips.solver import GurobiSolver
     problem = MIPModel(GurobiSolver())
     load_mps_advanced(problem, os.path.join(dir_path, "mps_files", f"{problem_name}.mps"))
