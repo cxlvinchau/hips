@@ -1,5 +1,5 @@
 import numpy as np
-from hips import LPStatus, HIPSArray
+from hips import LPStatus, HIPSArray, HeuristicStatus
 from hips.heuristics._heuristic import Heuristic
 from hips.models import MIPModel, Variable
 
@@ -31,6 +31,18 @@ class SimpleRounding(Heuristic):
 
     def get_objective_value(self) -> float:
         self.relaxation.objective.eval(self._x).reshape(-1).to_numpy()[0]
+
+    def get_status(self):
+        lp_status = self.relaxation.get_status()
+        if lp_status == LPStatus.ERROR:
+            return HeuristicStatus.ERROR
+        elif lp_status != LPStatus.OPTIMAL:
+            return HeuristicStatus.NO_SOL_FOUND
+        else:
+            if self.mip_model.is_feasible(self._x):
+                return HeuristicStatus.SOL_FOUND
+            else:
+                return HeuristicStatus.NO_SOL_FOUND
 
 
 

@@ -3,7 +3,7 @@ import numpy as np
 from enum import Enum
 
 from hips import HIPSArray
-from hips.constants import LPStatus, VariableBound
+from hips.constants import LPStatus, VariableBound, HeuristicStatus
 from hips.heuristics._heuristic import Heuristic
 from hips.loader.mps_loader import load_mps_primitive
 from hips.models import MIPModel, Variable
@@ -63,3 +63,13 @@ class HeuristicBounds(Heuristic):
             print("WARNING: The fixed variables led to an empty feasible region.")
             return float("NaN")
         return self.relaxation.get_objective_value()
+
+    def get_status(self):
+        lp_status = self.relaxastion.get_status()
+        if lp_status == LPStatus.ERROR:
+            return HeuristicStatus.ERROR
+        elif lp_status == LPStatus.OPTIMAL:
+            return HeuristicStatus.SOL_FOUND
+        else:
+            return HeuristicStatus.NO_SOL_FOUND
+

@@ -5,7 +5,7 @@ from hips.models._lp_model import ProblemSense
 from hips.models import MIPModel, HIPSArray, Variable
 from hips.utils import REL_TOLERANCE, ABS_TOLERANCE, is_close
 from hips.heuristics import skip_when_clp_solver
-from hips.constants import LPStatus
+from hips.constants import LPStatus, HeuristicStatus
 import numpy as np
 
 
@@ -365,6 +365,11 @@ class FeasibilityPump(Heuristic):
     def get_objective_value(self) -> float:
         return self._original_obj.eval(self._x).reshape(-1).to_numpy()[0]
 
+    def get_status(self):
+        if self.mip_model.is_feasible({var: self.relaxation.variable_solution(var) for var in self.relaxation.vars}):
+            return HeuristicStatus.SOL_FOUND
+        else:
+            return HeuristicStatus.NO_SOL_FOUND
 
 class TwoStageFeasibilityPump(Heuristic):
     r"""Implementation of feasibility pump with two stages
@@ -413,3 +418,6 @@ class TwoStageFeasibilityPump(Heuristic):
 
     def get_objective_value(self) -> float:
         return self.feasibility_pump.get_objective_value()
+
+    def get_status(self):
+        return self.feasibility_pump.get_status()

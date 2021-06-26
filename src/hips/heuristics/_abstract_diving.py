@@ -2,7 +2,7 @@ import abc
 import math
 
 from hips.utils import is_close
-from hips.constants import LPStatus
+from hips.constants import LPStatus, HeuristicStatus
 from hips.heuristics._heuristic import Heuristic
 from hips.models import Variable, MIPModel
 
@@ -139,3 +139,11 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
 
     def get_objective_value(self) -> float:
         return self.discovered_solution
+
+    def get_status(self):
+        if (self.relaxation.get_status() == LPStatus.ERROR):
+            return HeuristicStatus.ERROR
+        elif self.discovered_solution is None:
+            return HeuristicStatus.NO_SOL_FOUND
+        else:
+            return HeuristicStatus.SOL_FOUND
