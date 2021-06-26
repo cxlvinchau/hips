@@ -222,13 +222,16 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.MIPModel.add_variable" title="hips.models.MIPModel.add_variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_variable</span></code></a>(name[, var_type, lb, ub, dim])</p></td>
 <td><p>Adds a variable to the mixed-integer program.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.MIPModel.is_feasible" title="hips.models.MIPModel.is_feasible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_feasible</span></code></a>(variable_solutions)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.MIPModel.get_variables" title="hips.models.MIPModel.get_variables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_variables</span></code></a>()</p></td>
+<td><p>Returns all variables of the problem</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.MIPModel.is_feasible" title="hips.models.MIPModel.is_feasible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_feasible</span></code></a>(variable_solutions)</p></td>
 <td><p>Checks whether the given solution is feasible for the MIP</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.MIPModel.set_mip_sense" title="hips.models.MIPModel.set_mip_sense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_mip_sense</span></code></a>(lp_sense)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.MIPModel.set_mip_sense" title="hips.models.MIPModel.set_mip_sense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_mip_sense</span></code></a>(lp_sense)</p></td>
 <td><p>Sets the type of the mixed-integer program.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.MIPModel.set_objective" title="hips.models.MIPModel.set_objective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_objective</span></code></a>(objective)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.MIPModel.set_objective" title="hips.models.MIPModel.set_objective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_objective</span></code></a>(objective)</p></td>
 <td><p>Sets the objective function of the mixed-integer program.</p></td>
 </tr>
 </tbody>
@@ -296,6 +299,17 @@ class allows for specification of the variable types, i.e. continuous, binary or
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if solution is feasible else <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.MIPModel.get_variables">
+<span class="sig-name descname"><span class="pre">get_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.get_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all variables of the problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of variables. Elements are instances of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

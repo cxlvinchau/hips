@@ -16,6 +16,7 @@
       ~MIPModel.__init__
       ~MIPModel.add_constraint
       ~MIPModel.add_variable
+      ~MIPModel.get_variables
       ~MIPModel.is_feasible
       ~MIPModel.set_mip_sense
       ~MIPModel.set_objective
