@@ -231,24 +231,11 @@ class FeasibilityPump(Heuristic):
             new_x_tilde_bin = {x: self._round_fs(self.relaxation.variable_solution(x)) for x in self.binary}
             new_x_tilde_int = {x: self._round_fs(self.relaxation.variable_solution(x)) for x in self.integer}
 
-            # Check if the found solution is integer
-            is_integer_solution = True
-            for var in self.binary:
-                if not all(is_close(self.relaxation.variable_solution(var), new_x_tilde_bin[var])):
-                    is_integer_solution = False
-                    break
-            if is_integer_solution:
-                for var in self.integer:
-                    if not all(is_close(self.relaxation.variable_solution(var), new_x_tilde_int[var])):
-                        is_integer_solution = False
-                        break
-            if is_integer_solution:
-                if self.mip_model.is_feasible(
-                        {var: self.relaxation.variable_solution(var) for var in self.relaxation.vars}):
-                    self.logger.info("Stopping early")
-                    break
-                else:
-                    self.logger.info("Found integer solution, but was not feasible.")
+            # Check if the found solution is feasible for the mip
+            if self.mip_model.is_feasible(
+                    {var: self.relaxation.variable_solution(var) for var in self.relaxation.vars}):
+                self.logger.info("Stopping early")
+                break
 
             # Check cycling
             if self.iteration > 0 and self._check_cycling(new_x_tilde_bin, new_x_tilde_int):

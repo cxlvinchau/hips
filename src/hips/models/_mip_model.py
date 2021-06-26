@@ -81,9 +81,6 @@ class MIPModel:
         :param variable_solutions: Dictionary mapping variables to solutions
         :return: ``True`` if solution is feasible else ``False``
         """
-        # Check if relaxation is feasible
-        if not self.lp_model.is_feasible(variable_solutions):
-            return False
         # Check if binary variables are 0 and 1
         for variable in self.binary_variables:
             for value in np.unique(variable_solutions[variable].to_numpy()):
@@ -94,6 +91,9 @@ class MIPModel:
             for value in np.unique(variable_solutions[variable].to_numpy()):
                 if not is_close(value, math.floor(value)) and not is_close(value, math.ceil(value)):
                     return False
+        # Check if relaxation is feasible
+        if not self.lp_model.is_feasible(variable_solutions):
+            return False
         return True
 
     def _trivially_roundable(self):
