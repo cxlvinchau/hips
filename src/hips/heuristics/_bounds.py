@@ -10,9 +10,9 @@ from hips.models import MIPModel, Variable
 from hips.solver import GurobiSolver
 
 
-class Direction(Enum):
-    DOWN = 0
-    UP = 1
+class BoundDirection(Enum):
+    LOWER = 0
+    UPPER = 1
     CLOSEST = 2
 
 
@@ -27,24 +27,24 @@ class HeuristicBounds(Heuristic):
     The 'CLOSEST' direction was added, to be able to fix the integer variable to the bound, closest to the initial relaxation LP solution.
     """
 
-    def __init__(self, mip_model: MIPModel, direction: Direction):
+    def __init__(self, mip_model: MIPModel, direction: BoundDirection):
         super().__init__(mip_model)
         self.direction = direction
 
     def compute(self, max_iter=None):
-        if self.direction == Direction.DOWN or self.direction == Direction.UP:
+        if self.direction == BoundDirection.LOWER or self.direction == BoundDirection.UPPER:
             for bin_var in self.binary:
-                fixed_value = 0 if self.direction == Direction.DOWN else 1
+                fixed_value = 0 if self.direction == BoundDirection.LOWER else 1
                 self.relaxation.set_variable_bound(bin_var, VariableBound.LB, fixed_value)
                 self.relaxation.set_variable_bound(bin_var, VariableBound.UB, fixed_value)
             for int_var in self.integer:
-                fixed_value = int_var.lb if self.direction == Direction.DOWN else int_var.ub
+                fixed_value = int_var.lb if self.direction == BoundDirection.LOWER else int_var.ub
                 if fixed_value is None or np.isin(fixed_value.to_numpy(), [np.inf, np.NINF]).any():
                     raise Exception(
                         "Can't fix integer variable to infinity .Please specify bounds for the integer variables.")
                 self.relaxation.set_variable_bound(int_var, VariableBound.LB, fixed_value)
                 self.relaxation.set_variable_bound(int_var, VariableBound.UB, fixed_value)
-        elif self.direction == Direction.CLOSEST:
+        elif self.direction == BoundDirection.CLOSEST:
             self.relaxation.optimize()
             for var in self.binary + self.integer:
                 var_value = self.relaxation.variable_solution(var).to_numpy()
@@ -65,7 +65,7 @@ class HeuristicBounds(Heuristic):
         return self.relaxation.get_objective_value()
 
     def get_status(self):
-        lp_status = self.relaxastion.get_status()
+        lp_status = self.relaxation.get_status()
         if lp_status == LPStatus.ERROR:
             return HeuristicStatus.ERROR
         elif lp_status == LPStatus.OPTIMAL:

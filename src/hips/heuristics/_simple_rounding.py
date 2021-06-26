@@ -27,10 +27,10 @@ class SimpleRounding(Heuristic):
             self.logger.info("SimpleRounding did not find an integer feasible solution.")
 
     def variable_solution(self, var: Variable):
-        self._x[var]
+        return self._x[var]
 
     def get_objective_value(self) -> float:
-        self.relaxation.objective.eval(self._x).reshape(-1).to_numpy()[0]
+        return self.relaxation.objective.eval(self._x).reshape(-1).to_numpy()[0]
 
     def get_status(self):
         lp_status = self.relaxation.get_status()

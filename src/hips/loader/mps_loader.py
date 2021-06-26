@@ -75,7 +75,7 @@ def load_mps_primitive(mip_model: MIPModel, path):
         mip_model.add_constraint(constraint=curr_constraint)
 
 
-def load_mps_advanced(mip_model: MIPModel, path):
+def load_mps(mip_model: MIPModel, path):
     """
     Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.
     This method uses multidimensional variables to create the model.

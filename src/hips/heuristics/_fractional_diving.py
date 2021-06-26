@@ -8,7 +8,7 @@ from hips.heuristics._abstract_diving import AbstractDiving
 from hips.models import MIPModel
 
 
-class FractionalDivingHeuristic(AbstractDiving):
+class FractionalDiving(AbstractDiving):
     """
     Implements a concrete diving heuristic, that bounds the variable x_j with lowest fractionality f(x_j) to the nearest
     integer. The idea is based on page 17 of :cite:p:`2006:berthold`.

@@ -43,9 +43,11 @@ __________
    hips.heuristics.FeasibilityPump
    hips.heuristics.TwoStageFeasibilityPump
    hips.heuristics.HeuristicBounds
-   hips.heuristics.FractionalDivingHeuristic
+   hips.heuristics.AbstractDiving
+   hips.heuristics.FractionalDiving
    hips.heuristics.LineSearchDiving
    hips.heuristics.RENS
+   hips.heuristics.SimpleRounding
 
 
 Constants

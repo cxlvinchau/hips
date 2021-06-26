@@ -2,7 +2,7 @@ import unittest
 
 from hips import ProblemSense
 from hips.heuristics import RENS
-from hips.loader import load_mps_advanced
+from hips.loader import load_mps
 from hips.models import MIPModel
 from hips.solver import GurobiSolver, ClpSolver
 
@@ -11,7 +11,7 @@ class RENSTest(unittest.TestCase):
 
     def test_clp(self):
         model = MIPModel(ClpSolver())
-        load_mps_advanced(model, "../../src/hips/problems/mps_files/gr4x6.mps")
+        load_mps(model, "../../src/hips/problems/mps_files/gr4x6.mps")
         model.set_mip_sense(lp_sense=ProblemSense.MIN)
         rens = RENS(model)
         rens.compute(10)
@@ -20,7 +20,7 @@ class RENSTest(unittest.TestCase):
 
     def test_gurobi(self):
         model = MIPModel(GurobiSolver())
-        load_mps_advanced(model, "../../src/hips/problems/mps_files/gr4x6.mps")
+        load_mps(model, "../../src/hips/problems/mps_files/gr4x6.mps")
         model.set_mip_sense(lp_sense=ProblemSense.MIN)
         rens = RENS(model)
         rens.compute(10)
