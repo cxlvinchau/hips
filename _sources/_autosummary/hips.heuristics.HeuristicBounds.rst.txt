@@ -16,6 +16,7 @@
       ~HeuristicBounds.__init__
       ~HeuristicBounds.compute
       ~HeuristicBounds.get_objective_value
+      ~HeuristicBounds.get_status
       ~HeuristicBounds.variable_solution
    
    

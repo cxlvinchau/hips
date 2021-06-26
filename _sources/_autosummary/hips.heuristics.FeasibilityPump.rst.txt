@@ -16,6 +16,7 @@
       ~FeasibilityPump.__init__
       ~FeasibilityPump.compute
       ~FeasibilityPump.get_objective_value
+      ~FeasibilityPump.get_status
       ~FeasibilityPump.variable_solution
    
    

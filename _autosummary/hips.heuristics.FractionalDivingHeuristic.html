@@ -216,7 +216,10 @@ integer. The idea is based on page 17 of <span id="id1">[<a class="reference int
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.get_objective_value" title="hips.heuristics.FractionalDivingHeuristic.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
 <td><p>Return objective value determined by the heuristic</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.variable_solution" title="hips.heuristics.FractionalDivingHeuristic.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.get_status" title="hips.heuristics.FractionalDivingHeuristic.get_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_status</span></code></a>()</p></td>
+<td><p>Returns the status of the heuristic, either that a solution was found, no solution was found or that the heuristic encountered an error</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.FractionalDivingHeuristic.variable_solution" title="hips.heuristics.FractionalDivingHeuristic.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
 <td><p>Return the solution found by the heuristic</p></td>
 </tr>
 </tbody>
@@ -234,6 +237,18 @@ integer. The idea is based on page 17 of <span id="id1">[<a class="reference int
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>optimal value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics.FractionalDivingHeuristic.get_status">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.FractionalDivingHeuristic.get_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the status of the heuristic, either that a solution was found, no solution was found or that the heuristic
+encountered an error</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Status of the heuristic. Enum of <code class="xref py py-class docutils literal notranslate"><span class="pre">HeuristicStatus</span></code></p>
 </dd>
 </dl>
 </dd></dl>

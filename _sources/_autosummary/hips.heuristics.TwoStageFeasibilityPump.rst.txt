@@ -16,6 +16,7 @@
       ~TwoStageFeasibilityPump.__init__
       ~TwoStageFeasibilityPump.compute
       ~TwoStageFeasibilityPump.get_objective_value
+      ~TwoStageFeasibilityPump.get_status
       ~TwoStageFeasibilityPump.variable_solution
    
    
