@@ -3,6 +3,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 from hips.models import Variable, MIPModel
 from hips.utils.tracking import Tracker
+from hips.constants import HeuristicStatus
 
 
 class Heuristic(metaclass=abc.ABCMeta):
@@ -36,4 +37,13 @@ class Heuristic(metaclass=abc.ABCMeta):
         Return objective value determined by the heuristic
 
         :return: optimal value
+        """
+
+    @abc.abstractmethod
+    def get_status(self):
+        """
+        Returns the status of the heuristic, either that a solution was found, no solution was found or that the heuristic
+        encountered an error
+
+        :return: Status of the heuristic. Enum of :class:`HeuristicStatus <hips.constants.HeuristicStatus>`
         """

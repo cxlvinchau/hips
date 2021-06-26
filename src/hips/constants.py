@@ -62,3 +62,15 @@ class VariableBound:
     """Lower bound"""
     UB = 1
     """Upper bound"""
+
+
+class HeuristicStatus(Enum):
+    """
+    Enum for status of heuristic
+    """
+    SOL_FOUND = 0
+    """Solution found"""
+    NO_SOL_FOUND = 1
+    """No solution found"""
+    ERROR = 2
+    """Error"""
