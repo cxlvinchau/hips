@@ -7,6 +7,18 @@ from hips.constants import HeuristicStatus
 
 
 class Heuristic(metaclass=abc.ABCMeta):
+    """Abstract heuristic class
+
+    Abstract heuristic class that implements basis structures for heuristics. Particularly, the different
+    attributes should be used, so that the heuristic is fully integrated into HIPS.
+
+    :ivar mip_model: The mixed-integer program model. Instance of :class:`hips.models.MIPModel`
+    :ivar relaxation: The relaxation of the mixed integer program. Instance of :class:`hips.models.LPModel`
+    :ivar binary: Binary variables
+    :ivar integer: Integer variables
+    :ivar iteration: Iteration of the heuristic. Initialized with 0 and should be updated once a single iteration of the
+        heuristic is completed
+    """
 
     def __init__(self, mip_model: MIPModel):
         self.logger = logging.getLogger("heuristics_tmp")
@@ -19,7 +31,11 @@ class Heuristic(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def compute(self, max_iter=None):
-        """Compute the optimal solution with the heuristic algorithm."""
+        """
+        Compute the optimal solution with the heuristic algorithm
+
+        :param max_iter: Maximum iteration. Once the maximum iteration is reached, the computation is stopped.
+        """
         pass
 
     @abc.abstractmethod

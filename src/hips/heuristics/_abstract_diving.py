@@ -45,7 +45,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
                 if current_lp_solution < self.current_best_objectve:
                     break
             self.iteration += 1
-            self._dive()
+            self.dive()
             self.relaxation.optimize()
             if self.relaxation.get_status() == LPStatus.INFEASIBLE:
                 self.logger.warn("Problem is Infeasible")
@@ -70,7 +70,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
             self.discovered_solution = None
         else:
             self.logger.info("{} found an integer feasible solution".format(self.__class__.__name__))
-        self._revert()
+        self.revert()
 
     def _compute_fractional_index_set(self):
         """
@@ -116,7 +116,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         return True
 
     @abc.abstractmethod
-    def _dive(self):
+    def dive(self):
         """
         Dive down the B&B tree. Specific diving heuristics_tmp have to override this method according to the
         heuristics_tmp branching approach.
@@ -126,7 +126,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def _revert(self):
+    def revert(self):
         """
         This method is used to revert any changes (fixing or bounding variables), that the heuristic may have applied
         to the model while diving down one B&B tree branch.

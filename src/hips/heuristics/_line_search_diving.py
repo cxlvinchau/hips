@@ -25,7 +25,7 @@ class LineSearchDiving(AbstractDiving):
         self.rng = np.random.default_rng(seed=seed)
         self.added_constraints = []
 
-    def _dive(self):
+    def dive(self):
         if self.root_node_solution is None:
             self.root_node_solution = self._x
         # Compute distance ratio between current node and root node
@@ -67,7 +67,7 @@ class LineSearchDiving(AbstractDiving):
                 self.added_constraints.append(constr)
 
 
-    def _revert(self):
+    def revert(self):
         pass
         # TODO
         # Currently, added constraints are not removed

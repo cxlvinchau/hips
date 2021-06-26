@@ -18,7 +18,7 @@ class FractionalDiving(AbstractDiving):
         super().__init__(mip_model, current_best_objective)
         self.revert_bounds = {}
 
-    def _dive(self):
+    def dive(self):
         """
         Compute the variable from the self.fractional_index_set with the lowest fractionality and bound it to the
         nearest integer.
@@ -48,7 +48,7 @@ class FractionalDiving(AbstractDiving):
             if not (lowest_frac_var_index[0], VariableBound.LB) in self.revert_bounds:
                 self.revert_bounds[(lowest_frac_var_index[0], VariableBound.LB)] = old_bound
 
-    def _revert(self):
+    def revert(self):
         """
         Reverts the bounds set by the _dive() method to the start state of the heuristic.
 

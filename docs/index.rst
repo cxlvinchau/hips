@@ -29,10 +29,6 @@ and `this <https://en.wikipedia.org/wiki/Integer_programming>`_ Wikipedia articl
    dev_api
    references
 
-   heur/rens
-   heur/line_search_diving
-
-
 
 Indices and tables
 ==================
