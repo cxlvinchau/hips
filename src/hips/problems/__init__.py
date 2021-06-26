@@ -36,9 +36,6 @@ problem_list = []
 TEN_TEAMS = None
 FLUGPL = None
 GR4X6 = None
-"""
-10 Teams example obtained from MIPLIB 2017 (https://miplib.zib.de/instance_details_10teams.html)
-"""
 
 if _solver_name is not None:
     # TODO Add new problems here
@@ -60,3 +57,17 @@ if _solver_name is not None:
     GR4X6 = MIPModel(solver)
     load_mps_advanced(GR4X6, os.path.join(dir_path, "mps_files", "gr4x6.mps"))
     problem_list.append(GR4X6)
+
+
+def load_problem_clp(problem_name):
+    from hips.solver import ClpSolver
+    problem = MIPModel(ClpSolver())
+    load_mps_advanced(problem, os.path.join(dir_path, "mps_files", f"{problem_name}.mps"))
+    return problem
+
+
+def load_problem_clp(problem_name):
+    from hips.solver import GurobiSolver
+    problem = MIPModel(GurobiSolver())
+    load_mps_advanced(problem, os.path.join(dir_path, "mps_files", f"{problem_name}.mps"))
+    return problem

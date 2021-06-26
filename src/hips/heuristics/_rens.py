@@ -1,6 +1,6 @@
 import warnings
 
-from hips import HIPSArray
+from hips import HIPSArray, HeuristicStatus
 from hips.heuristics._heuristic import Heuristic
 from hips.models import MIPModel, Variable
 import numpy as np
@@ -55,3 +55,10 @@ class RENS(Heuristic):
 
     def get_objective_value(self) -> float:
         return self.mip_solver.incumbent_val
+
+    def get_status(self):
+        if self.mip_solver.incumbent is None:
+            return HeuristicStatus.NO_SOL_FOUND
+        else:
+            return HeuristicStatus.SOL_FOUND
+
