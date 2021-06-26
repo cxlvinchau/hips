@@ -1,6 +1,8 @@
 import numpy as np
 
 from enum import Enum
+
+from hips import HIPSArray
 from hips.constants import LPStatus, VariableBound
 from hips.heuristics._heuristic import Heuristic
 from hips.loader.mps_loader import load_mps_primitive
@@ -22,7 +24,7 @@ class HeuristicBounds(Heuristic):
     The heuristic can be found in the scipopt library documentation under the following link:
     hyperlink: `heur_bound.h File Reference <https://www.scipopt.org/doc/html/heur__bound_8h.php>`_.
 
-    The 'CLOSEST' direction was added, to be able to fix the integer variable to their respective bound, closest to the initial LP solution.
+    The 'CLOSEST' direction was added, to be able to fix the integer variable to the bound, closest to the initial relaxation LP solution.
     """
 
     def __init__(self, mip_model: MIPModel, direction: Direction):
@@ -45,8 +47,8 @@ class HeuristicBounds(Heuristic):
         elif self.direction == Direction.CLOSEST:
             self.relaxation.optimize()
             for var in self.binary + self.integer:
-                var_value = self.relaxation.variable_solution(var)
-                fixed_value = min([var.lb, var.ub], key=lambda bound: abs(bound - var_value))
+                var_value = self.relaxation.variable_solution(var).to_numpy()
+                fixed_value = HIPSArray(np.rint(var_value))
                 self.relaxation.set_variable_bound(var, VariableBound.LB, fixed_value)
                 self.relaxation.set_variable_bound(var, VariableBound.UB, fixed_value)
         else:
