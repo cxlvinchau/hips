@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>hips.heuristics._abstract_diving.AbstractDiving &mdash; HIPS 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/toggleprompt.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hips.heuristics._heuristic.Heuristic" href="hips.heuristics._heuristic.Heuristic.html" />
+    <link rel="prev" title="hips.solver._abstract_solver.AbstractSolver" href="hips.solver._abstract_solver.AbstractSolver.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> HIPS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation and Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../heuristics.html">Heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../dev_api.html">Developer API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../dev_api.html#solver-package"><code class="docutils literal notranslate"><span class="pre">solver</span></code> package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../dev_api.html#models-package"><code class="docutils literal notranslate"><span class="pre">models</span></code> package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../dev_api.html#adding-general-mip-heuristics">Adding general MIP heuristics</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../dev_api.html#adding-diving-heuristics">Adding diving heuristics</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">hips.heuristics._abstract_diving.AbstractDiving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hips.heuristics._heuristic.Heuristic.html">hips.heuristics._heuristic.Heuristic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../heur/rens.html">RENS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../heur/line_search_diving.html">Linear search diving</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HIPS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../dev_api.html">Developer API</a> &raquo;</li>
+        
+      <li>hips.heuristics._abstract_diving.AbstractDiving</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_autosummary/hips.heuristics._abstract_diving.AbstractDiving.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hips-heuristics-abstract-diving-abstractdiving">
+<h1>hips.heuristics._abstract_diving.AbstractDiving<a class="headerlink" href="#hips-heuristics-abstract-diving-abstractdiving" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="hips.heuristics._abstract_diving.AbstractDiving">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics._abstract_diving.</span></span><span class="sig-name descname"><span class="pre">AbstractDiving</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics._abstract_diving.AbstractDiving" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements an abstract version of diving heuristics_tmp. It consists of a general framework for
+branch-and-bound-tree traversal and stopping criteria. The branching criteria should be implemented in a
+corresponding subclass. This implementation roughly follows the algorithm seen in :cite:t:’2006:berthold’ on page 17.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics._abstract_diving.AbstractDiving.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics._abstract_diving.AbstractDiving.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics._abstract_diving.AbstractDiving.__init__" title="hips.heuristics._abstract_diving.AbstractDiving.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(mip_model[, current_best_objective])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics._abstract_diving.AbstractDiving.compute" title="hips.heuristics._abstract_diving.AbstractDiving.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>([max_iter])</p></td>
+<td><p>Compute the optimal solution with the heuristic algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics._abstract_diving.AbstractDiving.get_objective_value" title="hips.heuristics._abstract_diving.AbstractDiving.get_objective_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_objective_value</span></code></a>()</p></td>
+<td><p>Return objective value determined by the heuristic</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics._abstract_diving.AbstractDiving.get_status" title="hips.heuristics._abstract_diving.AbstractDiving.get_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_status</span></code></a>()</p></td>
+<td><p>Returns the status of the heuristic, either that a solution was found, no solution was found or that the heuristic encountered an error</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics._abstract_diving.AbstractDiving.variable_solution" title="hips.heuristics._abstract_diving.AbstractDiving.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
+<td><p>Return the solution found by the heuristic</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics._abstract_diving.AbstractDiving.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics._abstract_diving.AbstractDiving.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the optimal solution with the heuristic algorithm.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics._abstract_diving.AbstractDiving.variable_solution">
+<span class="sig-name descname"><span class="pre">variable_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models._lp_model.Variable"><span class="pre">hips.models._lp_model.Variable</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics._abstract_diving.AbstractDiving.variable_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the solution found by the heuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var</strong> – Variable</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Optimal solution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics._abstract_diving.AbstractDiving.get_objective_value">
+<span class="sig-name descname"><span class="pre">get_objective_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#hips.heuristics._abstract_diving.AbstractDiving.get_objective_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return objective value determined by the heuristic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Value of the objective function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.heuristics._abstract_diving.AbstractDiving.get_status">
+<span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics._abstract_diving.AbstractDiving.get_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the status of the heuristic, either that a solution was found, no solution was found or that the heuristic
+encountered an error</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Status of the heuristic. Enum of <code class="xref py py-class docutils literal notranslate"><span class="pre">HeuristicStatus</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="hips.heuristics._heuristic.Heuristic.html" class="btn btn-neutral float-right" title="hips.heuristics._heuristic.Heuristic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hips.solver._abstract_solver.AbstractSolver.html" class="btn btn-neutral float-left" title="hips.solver._abstract_solver.AbstractSolver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Severin Bals and Calvin Chau.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

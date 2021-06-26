@@ -99,8 +99,10 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heuristics.html">Heuristics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_api.html">Developer API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heur/rens.html">RENS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heur/line_search_diving.html">Linear search diving</a></li>
 </ul>
 
             
@@ -196,6 +198,10 @@
       <li><a href="_autosummary/hips.Comparator.html#hips.Comparator.__init__">__init__() (hips.Comparator method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.__init__">(hips.heuristics._abstract_diving.AbstractDiving method)</a>
+</li>
+        <li><a href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic.__init__">(hips.heuristics._heuristic.Heuristic method)</a>
+</li>
         <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.__init__">(hips.heuristics.AbstractDiving method)</a>
 </li>
         <li><a href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump.__init__">(hips.heuristics.FeasibilityPump method)</a>
@@ -226,6 +232,8 @@
 </li>
         <li><a href="_autosummary/hips.ProblemSense.html#hips.ProblemSense.__init__">(hips.ProblemSense method)</a>
 </li>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.__init__">(hips.solver._abstract_solver.AbstractSolver method)</a>
+</li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.__init__">(hips.solver.ClpSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver.__init__">(hips.solver.GurobiSolver method)</a>
@@ -244,11 +252,19 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving">AbstractDiving (class in hips.heuristics)</a>
+
+      <ul>
+        <li><a href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving">(class in hips.heuristics._abstract_diving)</a>
+</li>
+      </ul></li>
+      <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver">AbstractSolver (class in hips.solver._abstract_solver)</a>
 </li>
       <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.add_constraint">add_constraint() (hips.models.LPModel method)</a>
 
       <ul>
         <li><a href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel.add_constraint">(hips.models.MIPModel method)</a>
+</li>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.add_constraint">(hips.solver._abstract_solver.AbstractSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.add_constraint">(hips.solver.ClpSolver method)</a>
 </li>
@@ -261,6 +277,8 @@
 
       <ul>
         <li><a href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel.add_variable">(hips.models.MIPModel method)</a>
+</li>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.add_variable">(hips.solver._abstract_solver.AbstractSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.add_variable">(hips.solver.ClpSolver method)</a>
 </li>
@@ -285,9 +303,13 @@
 </li>
       <li><a href="_autosummary/hips.Comparator.html#hips.Comparator">Comparator (class in hips)</a>
 </li>
-      <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.compute">compute() (hips.heuristics.AbstractDiving method)</a>
+      <li><a href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.compute">compute() (hips.heuristics._abstract_diving.AbstractDiving method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic.compute">(hips.heuristics._heuristic.Heuristic method)</a>
+</li>
+        <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.compute">(hips.heuristics.AbstractDiving method)</a>
+</li>
         <li><a href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump.compute">(hips.heuristics.FeasibilityPump method)</a>
 </li>
         <li><a href="_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving.compute">(hips.heuristics.FractionalDiving method)</a>
@@ -343,9 +365,13 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.get_objective_value">get_objective_value() (hips.heuristics.AbstractDiving method)</a>
+      <li><a href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.get_objective_value">get_objective_value() (hips.heuristics._abstract_diving.AbstractDiving method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic.get_objective_value">(hips.heuristics._heuristic.Heuristic method)</a>
+</li>
+        <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.get_objective_value">(hips.heuristics.AbstractDiving method)</a>
+</li>
         <li><a href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump.get_objective_value">(hips.heuristics.FeasibilityPump method)</a>
 </li>
         <li><a href="_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving.get_objective_value">(hips.heuristics.FractionalDiving method)</a>
@@ -360,14 +386,20 @@
 </li>
         <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.get_objective_value">(hips.models.LPModel method)</a>
 </li>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.get_objective_value">(hips.solver._abstract_solver.AbstractSolver method)</a>
+</li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.get_objective_value">(hips.solver.ClpSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver.get_objective_value">(hips.solver.GurobiSolver method)</a>
 </li>
       </ul></li>
-      <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.get_status">get_status() (hips.heuristics.AbstractDiving method)</a>
+      <li><a href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.get_status">get_status() (hips.heuristics._abstract_diving.AbstractDiving method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic.get_status">(hips.heuristics._heuristic.Heuristic method)</a>
+</li>
+        <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.get_status">(hips.heuristics.AbstractDiving method)</a>
+</li>
         <li><a href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump.get_status">(hips.heuristics.FeasibilityPump method)</a>
 </li>
         <li><a href="_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving.get_status">(hips.heuristics.FractionalDiving method)</a>
@@ -381,6 +413,8 @@
         <li><a href="_autosummary/hips.heuristics.TwoStageFeasibilityPump.html#hips.heuristics.TwoStageFeasibilityPump.get_status">(hips.heuristics.TwoStageFeasibilityPump method)</a>
 </li>
         <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.get_status">(hips.models.LPModel method)</a>
+</li>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.get_status">(hips.solver._abstract_solver.AbstractSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.get_status">(hips.solver.ClpSolver method)</a>
 </li>
@@ -405,10 +439,12 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/hips.heuristics.HeuristicBounds.html#hips.heuristics.HeuristicBounds">HeuristicBounds (class in hips.heuristics)</a>
+      <li><a href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic">Heuristic (class in hips.heuristics._heuristic)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/hips.heuristics.HeuristicBounds.html#hips.heuristics.HeuristicBounds">HeuristicBounds (class in hips.heuristics)</a>
+</li>
       <li><a href="_autosummary/hips.models.HIPSArray.html#hips.models.HIPSArray">HIPSArray (class in hips.models)</a>
 </li>
   </ul></td>
@@ -478,6 +514,8 @@
       <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.optimize">optimize() (hips.models.LPModel method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.optimize">(hips.solver._abstract_solver.AbstractSolver method)</a>
+</li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.optimize">(hips.solver.ClpSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver.optimize">(hips.solver.GurobiSolver method)</a>
@@ -504,6 +542,8 @@
       <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.remove_constraint">remove_constraint() (hips.models.LPModel method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.remove_constraint">(hips.solver._abstract_solver.AbstractSolver method)</a>
+</li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.remove_constraint">(hips.solver.ClpSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver.remove_constraint">(hips.solver.GurobiSolver method)</a>
@@ -512,6 +552,8 @@
       <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.remove_variable">remove_variable() (hips.models.LPModel method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.remove_variable">(hips.solver._abstract_solver.AbstractSolver method)</a>
+</li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.remove_variable">(hips.solver.ClpSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver.remove_variable">(hips.solver.GurobiSolver method)</a>
@@ -532,6 +574,8 @@
       <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.set_lp_sense">set_lp_sense() (hips.models.LPModel method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.set_lp_sense">(hips.solver._abstract_solver.AbstractSolver method)</a>
+</li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.set_lp_sense">(hips.solver.ClpSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver.set_lp_sense">(hips.solver.GurobiSolver method)</a>
@@ -544,6 +588,8 @@
       <ul>
         <li><a href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel.set_objective">(hips.models.MIPModel method)</a>
 </li>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.set_objective">(hips.solver._abstract_solver.AbstractSolver method)</a>
+</li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.set_objective">(hips.solver.ClpSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver.set_objective">(hips.solver.GurobiSolver method)</a>
@@ -554,6 +600,8 @@
       <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.set_variable_bound">set_variable_bound() (hips.models.LPModel method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.set_variable_bound">(hips.solver._abstract_solver.AbstractSolver method)</a>
+</li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.set_variable_bound">(hips.solver.ClpSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver.set_variable_bound">(hips.solver.GurobiSolver method)</a>
@@ -595,9 +643,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/hips.models.Variable.html#hips.models.Variable">Variable (class in hips.models)</a>
 </li>
-      <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.variable_solution">variable_solution() (hips.heuristics.AbstractDiving method)</a>
+      <li><a href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.variable_solution">variable_solution() (hips.heuristics._abstract_diving.AbstractDiving method)</a>
 
       <ul>
+        <li><a href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic.variable_solution">(hips.heuristics._heuristic.Heuristic method)</a>
+</li>
+        <li><a href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving.variable_solution">(hips.heuristics.AbstractDiving method)</a>
+</li>
         <li><a href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump.variable_solution">(hips.heuristics.FeasibilityPump method)</a>
 </li>
         <li><a href="_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving.variable_solution">(hips.heuristics.FractionalDiving method)</a>
@@ -611,6 +663,8 @@
         <li><a href="_autosummary/hips.heuristics.TwoStageFeasibilityPump.html#hips.heuristics.TwoStageFeasibilityPump.variable_solution">(hips.heuristics.TwoStageFeasibilityPump method)</a>
 </li>
         <li><a href="_autosummary/hips.models.LPModel.html#hips.models.LPModel.variable_solution">(hips.models.LPModel method)</a>
+</li>
+        <li><a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver.variable_solution">(hips.solver._abstract_solver.AbstractSolver method)</a>
 </li>
         <li><a href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver.variable_solution">(hips.solver.ClpSolver method)</a>
 </li>

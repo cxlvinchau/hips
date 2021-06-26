@@ -100,8 +100,10 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heuristics.html">Heuristics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_api.html">Developer API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heur/rens.html">RENS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heur/line_search_diving.html">Linear search diving</a></li>
 </ul>
 
             
@@ -171,10 +173,10 @@
             
   <div class="section" id="hips-documentation">
 <h1>HIPS Documentation<a class="headerlink" href="#hips-documentation" title="Permalink to this headline">¶</a></h1>
-<p>HIPS is a Python library for heuristically solving mixed integer programs. HIPS implements wrappers for popular linear programming
-solvers like Gurobi <span id="id1">[<a class="reference internal" href="references.html#id8" title="Gurobi Optimization, LLC. Gurobi Optimizer Reference Manual. 2021. URL: https://www.gurobi.com.">GurobiOptimizationLLC21</a>]</span> and Clp <span id="id2">[<a class="reference internal" href="references.html#id7" title="johnjforrest, Stefan Vigerske, Ted Ralphs, Lou Hafer, jpfasano, Haroldo Gambini Santos, Matthew Saltzman, h-i-gassmann, Bjarni Kristjansson, and Alan King. Coin-or/clp: version 1.17.6. April 2020. URL: https://doi.org/10.5281/zenodo.3748677, doi:10.5281/zenodo.3748677.">jVR+20</a>]</span>, and thereby allows for easily switching
-solvers. At its core, HIPS implements various well-established heuristics for mixed-integer programming, e.g. the
-feasibility pump <span id="id3">[<a class="reference internal" href="references.html#id3" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, RENS <span id="id4">[<a class="reference internal" href="references.html#id5" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span> and various diving heuristics.</p>
+<p>HIPS is a Python library for heuristically solving mixed integer programs. At its core, HIPS implements various
+well-established heuristics for mixed-integer programming, e.g. the feasibility pump <span id="id1">[<a class="reference internal" href="references.html#id3" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, RENS <span id="id2">[<a class="reference internal" href="references.html#id5" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span>
+and various diving heuristics. Further, HIPS implements wrappers for popular linear programming solvers like Gurobi
+<span id="id3">[<a class="reference internal" href="references.html#id8" title="Gurobi Optimization, LLC. Gurobi Optimizer Reference Manual. 2021. URL: https://www.gurobi.com.">GurobiOptimizationLLC21</a>]</span> and Clp <span id="id4">[<a class="reference internal" href="references.html#id7" title="johnjforrest, Stefan Vigerske, Ted Ralphs, Lou Hafer, jpfasano, Haroldo Gambini Santos, Matthew Saltzman, h-i-gassmann, Bjarni Kristjansson, and Alan King. Coin-or/clp: version 1.17.6. April 2020. URL: https://doi.org/10.5281/zenodo.3748677, doi:10.5281/zenodo.3748677.">jVR+20</a>]</span>, and thereby allows for easily switching solvers.</p>
 <p>HIPS is designed to be easily extensible and user-friendly. Adding new heuristics or solvers can be done by implementing
 the corresponding interfaces.</p>
 <p>The code for this project is on <a class="reference external" href="https://github.com/cxlvinchau/hips">GitHub</a>. Feel free to discuss any open issues with us.</p>
@@ -205,8 +207,14 @@ and <a class="reference external" href="https://en.wikipedia.org/wiki/Integer_pr
 <li class="toctree-l2"><a class="reference internal" href="api.html#loader-and-tracker">Loader and Tracker</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="dev_api.html">Developer API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev_api.html#solver-package"><code class="docutils literal notranslate"><span class="pre">solver</span></code> package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_api.html#models-package"><code class="docutils literal notranslate"><span class="pre">models</span></code> package</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heur/rens.html">RENS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heur/line_search_diving.html">Linear search diving</a></li>
 </ul>
 </div>
 </div>

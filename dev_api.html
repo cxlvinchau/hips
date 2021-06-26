@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Developer API &mdash; HIPS 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/toggleprompt.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="hips.solver._abstract_solver.AbstractSolver" href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html" />
+    <link rel="prev" title="hips.utils.Tracker" href="_autosummary/hips.utils.Tracker.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HIPS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heuristics.html">Heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solver-package"><code class="docutils literal notranslate"><span class="pre">solver</span></code> package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-a-new-solver">Adding a new solver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html">hips.solver._abstract_solver.AbstractSolver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#models-package"><code class="docutils literal notranslate"><span class="pre">models</span></code> package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-general-mip-heuristics">Adding general MIP heuristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-diving-heuristics">Adding diving heuristics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html">hips.heuristics._abstract_diving.AbstractDiving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html">hips.heuristics._heuristic.Heuristic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heur/rens.html">RENS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heur/line_search_diving.html">Linear search diving</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HIPS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Developer API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/dev_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developer-api">
+<h1>Developer API<a class="headerlink" href="#developer-api" title="Permalink to this headline">¶</a></h1>
+<p>On this page, we elaborate on the concepts of HIPS and how to extend the existing functionality. Below
+the core structure of HIPS is depicted in the UML diagram.</p>
+<img alt="_images/hips-uml.png" src="_images/hips-uml.png" />
+<p>The <code class="docutils literal notranslate"><span class="pre">solver</span></code> package contains the linear programming solvers and can easily be extended.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">models</span></code> package contains the <a class="reference internal" href="_autosummary/hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a> and
+<a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.MIPModel</span></code></a> classes and interacts with the <code class="docutils literal notranslate"><span class="pre">solver</span></code> package. The <a class="reference internal" href="_autosummary/hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a> class has a connection to a solver.
+Under the hood, whenever the linear program represented by <a class="reference internal" href="_autosummary/hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a> is changed, the changes are
+directly redirected to the concrete solver. This means that the concrete solver (Gurobi or Clp) is constantly updated and
+warm starts of the solvers are supported.</p>
+<p>Lastly, the <code class="docutils literal notranslate"><span class="pre">heuristics</span></code> package contains the different heuristic implementations.</p>
+<p>In the following sections we explain how to apply changes in the respective packages.</p>
+<div class="section" id="solver-package">
+<h2><code class="docutils literal notranslate"><span class="pre">solver</span></code> package<a class="headerlink" href="#solver-package" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">solver</span></code> package contains the different linear programming solvers supported by HIPS.
+Currently, <a class="reference internal" href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver" title="hips.solver.GurobiSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.GurobiSolver</span></code></a> and <a class="reference internal" href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver" title="hips.solver.ClpSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.ClpSolver</span></code></a> are supported.
+These classes inherit from the abstract class <a class="reference internal" href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver" title="hips.solver._abstract_solver.AbstractSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver._abstract_solver.AbstractSolver</span></code></a> and need to
+implement various methods.</p>
+<div class="section" id="adding-a-new-solver">
+<h3>Adding a new solver<a class="headerlink" href="#adding-a-new-solver" title="Permalink to this headline">¶</a></h3>
+<p>A new solver can be added by creating a class that inherits from <a class="reference internal" href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver" title="hips.solver._abstract_solver.AbstractSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver._abstract_solver.AbstractSolver</span></code></a>
+and implements the different abstract methods. Please have a look at the documentation of the class below for details.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html#hips.solver._abstract_solver.AbstractSolver" title="hips.solver._abstract_solver.AbstractSolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.solver._abstract_solver.AbstractSolver</span></code></a></p></td>
+<td><p>Abstract class/interface for concrete solver, such as Gurobi or CLP.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="models-package">
+<h2><code class="docutils literal notranslate"><span class="pre">models</span></code> package<a class="headerlink" href="#models-package" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">models</span></code> package contains all necessary classes to express linear and mixed integer programs in HIPS. As mentioned
+before, the <a class="reference internal" href="_autosummary/hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a> uses the solver interface to update the underlying linear program. Therefore, this
+has to be kept in mind when applying changes to the <code class="docutils literal notranslate"><span class="pre">models</span></code> package.</p>
+<p><code class="docutils literal notranslate"><span class="pre">heuristics</span></code> package
+The heuristics package contains the different heuristic implementations. Particularly, the two abstract classes <a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic" title="hips.heuristics._heuristic.Heuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></a>
+and <a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving" title="hips.heuristics._abstract_diving.AbstractDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving</span></code></a> are relevant when adding new heuristics.</p>
+<div class="section" id="adding-general-mip-heuristics">
+<h3>Adding general MIP heuristics<a class="headerlink" href="#adding-general-mip-heuristics" title="Permalink to this headline">¶</a></h3>
+<p>A new heuristic can be added by inheriting from the <a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic" title="hips.heuristics._heuristic.Heuristic"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></a> class. The class has
+various abstract methods that need to implemented in the child class. Of particular interest is the
+<a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic.compute" title="hips.heuristics._heuristic.Heuristic.compute"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic.compute()</span></code></a> method that needs to be implement the computation of the heuristic.
+Please have a look at the documentation of the class for details.</p>
+</div>
+<div class="section" id="adding-diving-heuristics">
+<h3>Adding diving heuristics<a class="headerlink" href="#adding-diving-heuristics" title="Permalink to this headline">¶</a></h3>
+<p>When implementing diving he</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving" title="hips.heuristics._abstract_diving.AbstractDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving</span></code></a></p></td>
+<td><p>Implements an abstract version of diving heuristics_tmp.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics._heuristic.Heuristic.html#hips.heuristics._heuristic.Heuristic" title="hips.heuristics._heuristic.Heuristic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics._heuristic.Heuristic</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html" class="btn btn-neutral float-right" title="hips.solver._abstract_solver.AbstractSolver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="_autosummary/hips.utils.Tracker.html" class="btn btn-neutral float-left" title="hips.utils.Tracker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Severin Bals and Calvin Chau.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
