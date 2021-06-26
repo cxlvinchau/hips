@@ -31,13 +31,32 @@ def _get_solver():
         return ClpSolver()
 
 
+problem_list = []
+
 TEN_TEAMS = None
+FLUGPL = None
+GR4X6 = None
 """
 10 Teams example obtained from MIPLIB 2017 (https://miplib.zib.de/instance_details_10teams.html)
 """
 
 if _solver_name is not None:
-    # TEN TEAMS example (https://miplib.zib.de/instance_details_10teams.html)
+    # TODO Add new problems here
+
+    # TEN TEAMS problem (https://miplib.zib.de/instance_details_10teams.html)
     solver = _get_solver()
     TEN_TEAMS = MIPModel(solver)
     load_mps_advanced(TEN_TEAMS, os.path.join(dir_path, "mps_files", "10teams.mps"))
+    problem_list.append(TEN_TEAMS)
+
+    # FLUGPL problem (http://miplib2017.zib.de/instance_details_flugpl.html)
+    solver = _get_solver()
+    FLUGPL = MIPModel(solver)
+    load_mps_advanced(FLUGPL, os.path.join(dir_path, "mps_files", "flugpl.mps"))
+    problem_list.append(FLUGPL)
+
+    # gr4x6 problem (https://miplib.zib.de/instance_details_gr4x6.html)
+    solver = _get_solver()
+    GR4X6 = MIPModel(solver)
+    load_mps_advanced(GR4X6, os.path.join(dir_path, "mps_files", "gr4x6.mps"))
+    problem_list.append(GR4X6)

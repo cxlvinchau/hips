@@ -21,7 +21,7 @@ class FeasibilityPumpTest(unittest.TestCase):
         :param solver: A solver, e.g. GurobiSolver()
         :return: None
         """
-        self.mip_model = MIPModel(self.solver(), binary_variables=[], integer_variables=[])
+        self.mip_model = MIPModel(self.solver())
         self.fs = FeasibilityPump(self.mip_model)
 
     def test_trivial_example(self):

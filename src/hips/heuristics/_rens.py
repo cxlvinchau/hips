@@ -51,7 +51,7 @@ class RENS(Heuristic):
             warnings.warn("RENS could not find a feasible solution")
 
     def variable_solution(self, var: Variable):
-        return self.relaxation.variable_solution(var)
+        return self.mip_solver.incumbent[var]
 
     def get_objective_value(self) -> float:
-        return self.relaxation.get_objective_value()
+        return self.mip_solver.incumbent_val
