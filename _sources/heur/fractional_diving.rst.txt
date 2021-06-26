@@ -10,7 +10,7 @@ the variable :math:`x_j` with lowest fractionality :math:`f(x_j)` with respect t
 to the closest integer value :math:`[x_j]`. This is done as follows:
 
 .. math::
-        if \indent x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
+        if \hspace*{20mm} x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
         then \indent upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
         else \indent lower\_bound(x_j) \leftarrow \lceil x_j \rceil
 
