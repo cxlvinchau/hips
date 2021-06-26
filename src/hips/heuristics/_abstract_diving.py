@@ -1,8 +1,6 @@
 import abc
 import math
-import warnings
 
-from hips import HIPSArray
 from hips.utils import is_close
 from hips.constants import LPStatus
 from hips.heuristics._heuristic import Heuristic
@@ -29,7 +27,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         feasible_solution_found = False
         self.relaxation.optimize()
         if self.relaxation.get_status() == LPStatus.INFEASIBLE:
-            warnings.warn("Problem is infeasible")
+            self.logger.warn("Problem is infeasible")
             return
         current_lp_solution = self.get_objective_value()
         self._x = {x: self.relaxation.variable_solution(x) for x in self.relaxation.vars}
@@ -42,9 +40,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         # --- LOGGING ---
         self.tracker.log("objective value", self.get_objective_value())
         # --- ------- ---
-        if feasible_solution_found:
-            return
-        while self.iteration <= max_iter:
+        while self.iteration <= max_iter and not feasible_solution_found:
             if self.current_best_objective is not None:
                 if current_lp_solution < self.current_best_objectve:
                     break
@@ -52,7 +48,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
             self._dive()
             self.relaxation.optimize()
             if self.relaxation.get_status() == LPStatus.INFEASIBLE:
-                warnings.warn("Infeasible")
+                self.logger.warn("Infeasible")
                 break
             else:
                 current_lp_solution = self.get_objective_value()
@@ -68,8 +64,11 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
             # --- LOGGING ---
             self.tracker.log("objective value", self.get_objective_value())
             # --- ------- ---
-            if feasible_solution_found:
-                break
+        if not feasible_solution_found:
+            self.logger.info("{} did not find an integer feasible solution.".format(self.__class__.__name__))
+            self.discovered_solution = None
+        else:
+            self.logger.info("{} found an integer feasible solution".format(self.__class__.__name__))
         self._revert()
 
     def _compute_fractional_index_set(self):
