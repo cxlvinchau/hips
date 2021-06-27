@@ -1,4 +1,4 @@
 include LICENSE
 include README.md
 
-recursive-include src/hips/problems/mps_files *
+recursive-include src/hips/problems/mps_files/*.mps
