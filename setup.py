@@ -10,6 +10,6 @@ setup(name="hips-mip",
       author_email="calvin.chau@tum.de",
       package_dir={"": "src"},
       packages = setuptools.find_packages(where="hips"),
-      python_requires=">=3.8",
+      python_requires=">=3.7",
       install_requires=requirements
       )
