@@ -11,5 +11,6 @@ setup(name="hips-mip",
       package_dir={"": "src"},
       packages = setuptools.find_packages(where="hips"),
       python_requires=">=3.7",
-      install_requires=requirements
+      install_requires=requirements,
+      include_package_data=True
       )
