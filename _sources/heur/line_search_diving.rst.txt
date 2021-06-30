@@ -1,5 +1,5 @@
-Linear search diving
-====================
+Line Search Diving
+==================
 
 Now we consider the line search diving heuristic as presented by :cite:`Hendel2011`. As the name suggests, this
 heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
