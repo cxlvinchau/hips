@@ -1,5 +1,5 @@
 Fractional diving
-====================
+=================
 
 :class:`hips.heuristics.FractionalDiving` is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
 integer in each dive. The idea is based on page 17 of :cite:p:`2006:berthold`. It can be used to find a quick initial solution

@@ -9,3 +9,4 @@ Heuristics
     heur/rens
     heur/fractional_diving
     heur/line_search_diving
+    heur/2stage_fp.rst
