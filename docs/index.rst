@@ -18,6 +18,17 @@ The code for this project is on `GitHub <https://github.com/cxlvinchau/hips>`_. 
 If you are not familiar with linear or mixed-integer programming, consider reading `this <https://en.wikipedia.org/wiki/Linear_programming>`_
 and `this <https://en.wikipedia.org/wiki/Integer_programming>`_ Wikipedia article.
 
+Google Colab
+------------
+Throughout the following pages, you can find `Google Colab <https://colab.research.google.com/notebooks/intro.ipynb?utm_source=scs-index>`_
+badges that look like this:
+
+.. raw:: html
+
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+
+These badges lead to code examples in Python notebooks that you can run and try out without any setup.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

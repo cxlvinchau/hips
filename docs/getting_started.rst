@@ -198,6 +198,13 @@ Thus, instead of passing lists to the constructor of :class:`hips.models.HIPSArr
 
 Mixed integer programs
 ----------------------
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/mip-example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+
 Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with additional constraints.
 
 .. math::
@@ -216,9 +223,13 @@ In HIPS can write the problem as follows:
 
 .. code-block:: python
 
+    from hips.solver import ClpSolver()
+    from hips.models import MIPModel
+    from hips import ProblemSense, VarTypes
+
     # Create solver
     solver = ClpSolver()
-    # Create LP model
+    # Create MIP model
     model = MIPModel(solver)
     # Create variables with lower bound 0
     x_1 = model.add_variable("x_1", lb=0, ub=20, var_type=VarTypes.INTEGER)
