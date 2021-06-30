@@ -182,7 +182,9 @@
             
   <div class="section" id="rens">
 <h1>RENS<a class="headerlink" href="#rens" title="Permalink to this headline">¶</a></h1>
-<p>Relaxation enforced neighborhood search, or short RENS, introduced by <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span> is a heuristic
+<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/rens-example.ipynb" target="_blank">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a><p>Relaxation enforced neighborhood search, or short RENS, introduced by <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span> is a heuristic
 for heuristically solving mixed-integer programs with binary and integer variables. The idea is to
 solve the relaxation of the problem and use the solution of the relaxed solution to introduce new bounds.</p>
 <p>W.l.o.g. suppose the feasible region of a relaxation of a problem is given by <span class="math notranslate nohighlight">\(Ax \leq b\)</span> and let <span class="math notranslate nohighlight">\(x^*\)</span> be
@@ -191,9 +193,7 @@ to the original problem and solves it using a mixed-integer program solver. Note
 gives us the best solution that can be obtained from rounding the solution of the relaxation. Observe that the introduced
 bounds do not have any effect on binary variables, except when their value in the relaxation is <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <p>In HIPS the <a class="reference internal" href="../_autosummary/hips.heuristics.RENS.html#hips.heuristics.RENS" title="hips.heuristics.RENS"><code class="xref py py-class docutils literal notranslate"><span class="pre">RENS</span></code></a> class implements this heuristic. Now we show how to use RENS in HIPS.</p>
-<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/rens-example.ipynb" target="_blank">
-    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
 <span class="kn">from</span> <span class="nn">hips.heuristics</span> <span class="kn">import</span> <span class="n">RENS</span>
 
 <span class="c1"># Load a problem</span>

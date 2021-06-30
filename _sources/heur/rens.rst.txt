@@ -1,5 +1,12 @@
 RENS
 ====
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/rens-example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+
 Relaxation enforced neighborhood search, or short RENS, introduced by :cite:p:`Berthold2013` is a heuristic
 for heuristically solving mixed-integer programs with binary and integer variables. The idea is to
 solve the relaxation of the problem and use the solution of the relaxed solution to introduce new bounds.
@@ -11,13 +18,6 @@ gives us the best solution that can be obtained from rounding the solution of th
 bounds do not have any effect on binary variables, except when their value in the relaxation is :math:`0` or :math:`1`.
 
 In HIPS the :class:`RENS <hips.heuristics.RENS>` class implements this heuristic. Now we show how to use RENS in HIPS.
-
-
-.. raw:: html
-
-    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/rens-example.ipynb" target="_blank">
-        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-    </a>
 
 .. code-block:: python
 
