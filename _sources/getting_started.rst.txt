@@ -4,6 +4,13 @@ On this page we show you how to get started with HIPS. We assume that you have s
 
 A simple linear program
 -----------------------
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/simple-lp-example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+
 Defining the program
 ____________________
 Let us start with defining a linear program in HIPS. First, we need to decide which solver we would like to use. In this
