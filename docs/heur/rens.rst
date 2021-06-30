@@ -12,6 +12,13 @@ bounds do not have any effect on binary variables, except when their value in th
 
 In HIPS the :class:`RENS <hips.heuristics.RENS>` class implements this heuristic. Now we show how to use RENS in HIPS.
 
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/rens-example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+
 .. code-block:: python
 
     from hips import load_problem
