@@ -353,7 +353,9 @@ You can find more information about NumPy <a class="reference external" href="ht
 </div>
 <div class="section" id="mixed-integer-programs">
 <h2>Mixed integer programs<a class="headerlink" href="#mixed-integer-programs" title="Permalink to this headline">¶</a></h2>
-<p>Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with additional constraints.</p>
+<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/mip-example.ipynb" target="_blank">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a><p>Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with additional constraints.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lr&#64;{}c&#64;{}r&#64;{}l}
 \text{maximize }   &amp; 2 x_1 + 4 x_2  \\
@@ -365,9 +367,13 @@ You can find more information about NumPy <a class="reference external" href="ht
 <p>Compared to the example above, we have introduced the constraint <span class="math notranslate nohighlight">\(\color{red} {x_1 \in \mathbb{Z}}\)</span>. This means
 that our program contains an integer and real variable. Thus, it is no longer a linear program, but a mixed-integer program.</p>
 <p>In HIPS can write the problem as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create solver</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips.solver</span> <span class="kn">import</span> <span class="n">ClpSolver</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">hips.models</span> <span class="kn">import</span> <span class="n">MIPModel</span>
+<span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">ProblemSense</span><span class="p">,</span> <span class="n">VarTypes</span>
+
+<span class="c1"># Create solver</span>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">ClpSolver</span><span class="p">()</span>
-<span class="c1"># Create LP model</span>
+<span class="c1"># Create MIP model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">MIPModel</span><span class="p">(</span><span class="n">solver</span><span class="p">)</span>
 <span class="c1"># Create variables with lower bound 0</span>
 <span class="n">x_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x_1&quot;</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">var_type</span><span class="o">=</span><span class="n">VarTypes</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">)</span>
