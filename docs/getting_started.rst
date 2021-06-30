@@ -110,6 +110,13 @@ The code for the second model.
 
 High-dimensional constraints
 ----------------------------
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/constraints-example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+
 As you have seen in the previous section, HIPS can work with matrices and vectors. In this section, we explain how work
 with high-dimensional constraints in more detail.
 
