@@ -229,7 +229,7 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.MIPModel.is_feasible" title="hips.models.MIPModel.is_feasible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_feasible</span></code></a>(variable_solutions)</p></td>
 <td><p>Checks whether the given solution is feasible for the MIP</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.MIPModel.set_mip_sense" title="hips.models.MIPModel.set_mip_sense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_mip_sense</span></code></a>(lp_sense)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.MIPModel.set_mip_sense" title="hips.models.MIPModel.set_mip_sense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_mip_sense</span></code></a>(mip_sense)</p></td>
 <td><p>Sets the type of the mixed-integer program.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.MIPModel.set_objective" title="hips.models.MIPModel.set_objective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_objective</span></code></a>(objective)</p></td>
@@ -281,11 +281,11 @@ class allows for specification of the variable types, i.e. continuous, binary or
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.MIPModel.set_mip_sense">
-<span class="sig-name descname"><span class="pre">set_mip_sense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lp_sense</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.set_mip_sense" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_mip_sense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_sense</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.ProblemSense.html#hips.ProblemSense" title="hips.constants.ProblemSense"><span class="pre">hips.constants.ProblemSense</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.set_mip_sense" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the type of the mixed-integer program.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lp_sense</strong> – Specifies the sense of the linear program, see <code class="xref py py-class docutils literal notranslate"><span class="pre">LPSense</span></code></p>
+<dd class="field-odd"><p><strong>mip_sense</strong> – Specifies the sense of the linear program, see <a class="reference internal" href="hips.ProblemSense.html#hips.ProblemSense" title="hips.constants.ProblemSense"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProblemSense</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

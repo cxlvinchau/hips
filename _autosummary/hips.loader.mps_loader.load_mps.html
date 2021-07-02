@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Two Stage Feasibility Pump &mdash; HIPS 0.0.1 documentation</title>
+  <title>hips.loader.mps_loader.load_mps &mdash; HIPS 0.0.1 documentation</title>
   
 
   
@@ -45,8 +45,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API Documentation" href="../api.html" />
-    <link rel="prev" title="Line Search Diving" href="line_search_diving.html" /> 
+    <link rel="next" title="hips.loader.mps_loader.load_mps_primitive" href="hips.loader.mps_loader.load_mps_primitive.html" />
+    <link rel="prev" title="hips.VariableBound" href="hips.VariableBound.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -99,16 +99,20 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation and Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../heuristics.html">Heuristics</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="simple_rounding.html">Simple Rounding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bounds.html">Bounds Heuristic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rens.html">RENS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fractional_diving.html">Fractional diving</a></li>
-<li class="toctree-l2"><a class="reference internal" href="line_search_diving.html">Line Search Diving</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Two Stage Feasibility Pump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../heuristics.html">Heuristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api.html#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#solver">Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#heuristics">Heuristics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.loader.mps_loader.load_mps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.loader.mps_loader.load_mps_primitive.html">hips.loader.mps_loader.load_mps_primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.utils.Tracker.html">hips.utils.Tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
@@ -159,15 +163,15 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../heuristics.html">Heuristics</a> &raquo;</li>
+          <li><a href="../api.html">API Documentation</a> &raquo;</li>
         
-      <li>Two Stage Feasibility Pump</li>
+      <li>hips.loader.mps_loader.load_mps</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/heur/2stage_fp.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/hips.loader.mps_loader.load_mps.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -180,16 +184,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="two-stage-feasibility-pump">
-<h1>Two Stage Feasibility Pump<a class="headerlink" href="#two-stage-feasibility-pump" title="Permalink to this headline">¶</a></h1>
-<p>The <em>Two stage Feasibility pump</em> proposed by <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Livio Bertacco, Matteo Fischetti, and Andrea Lodi. A feasibility pump heuristic for general mixed-integer problems. Discrete Optimization, 4(1):63-76, 2007. Mixed Integer Programming. URL: https://www.sciencedirect.com/science/article/pii/S1572528606000855, doi:https://doi.org/10.1016/j.disopt.2006.10.001.">BFL07</a>]</span> is an extension of the <em>feasibility pump</em> <span id="id2">[<a class="reference internal" href="../references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span> and can
-be used to solve general mixed integer programs, i.e. programs containing binary and integer variables. In contrast, the original
-feasibility pump is only designed for mixed integer programs containing binary variables only.</p>
-<p>The basic idea of this feasibility pump is to handle binary and integer variables in two different stages. In the first stage,
-the integer variables are ignored, i.e. treated as if they were continuous, and only the binary variables are considered.
-The first stage is completed once a feasible solution w.r.t. the binary variables has been found or when the maximum iteration
-has been reached. Afterwards, in the second stage, the integer variables are considered. Note that the original feasibility
-pump can also handle integer variables, but might be less suited for this purpose.</p>
+  <div class="section" id="hips-loader-mps-loader-load-mps">
+<h1>hips.loader.mps_loader.load_mps<a class="headerlink" href="#hips-loader-mps-loader-load-mps" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="hips.loader.mps_loader.load_mps">
+<span class="sig-prename descclassname"><span class="pre">hips.loader.mps_loader.</span></span><span class="sig-name descname"><span class="pre">load_mps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.loader.mps_loader.load_mps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.
+This method uses multidimensional variables to create the model.
+If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set.
+Makes use of the library <a href="#id1"><span class="problematic" id="id2">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mip_model</strong> – The mip_model, in which the MIP problem should be loaded.</p></li>
+<li><p><strong>path</strong> – The path to the .mps file. This can be either relative to the current working directory or absolute.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -198,8 +214,8 @@ pump can also handle integer variables, but might be less suited for this purpos
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="line_search_diving.html" class="btn btn-neutral float-left" title="Line Search Diving" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hips.loader.mps_loader.load_mps_primitive.html" class="btn btn-neutral float-right" title="hips.loader.mps_loader.load_mps_primitive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hips.VariableBound.html" class="btn btn-neutral float-left" title="hips.VariableBound" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
