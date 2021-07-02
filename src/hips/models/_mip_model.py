@@ -1,4 +1,4 @@
-from hips.constants import VarTypes, Comparator
+from hips.constants import VarTypes, Comparator, ProblemSense
 from hips.models import LPModel
 from hips.utils import is_close
 import numpy as np
@@ -63,13 +63,13 @@ class MIPModel:
         """
         self.lp_model.set_objective(objective)
 
-    def set_mip_sense(self, lp_sense):
+    def set_mip_sense(self, mip_sense: ProblemSense):
         """
         Sets the type of the mixed-integer program.
 
-        :param lp_sense: Specifies the sense of the linear program, see :py:class:`LPSense <hips.constants.LPSense>`
+        :param mip_sense: Specifies the sense of the linear program, see :py:class:`ProblemSense <hips.constants.ProblemSense>`
         """
-        self.lp_model.set_lp_sense(lp_sense)
+        self.lp_model.set_lp_sense(mip_sense)
 
     def __str__(self):
         return "\n".join([str(self.lp_model), str(self.binary_variables), str(self.integer_variables)])

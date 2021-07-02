@@ -71,6 +71,6 @@ ______
    :nosignatures:
    :recursive:
 
-   hips.loader.mps_loader.load_mps_advanced
+   hips.loader.mps_loader.load_mps
    hips.loader.mps_loader.load_mps_primitive
    hips.utils.Tracker
