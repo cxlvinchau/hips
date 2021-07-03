@@ -41,6 +41,7 @@ If any of the rounded points :math:`\tilde{x}` is feasible, we stop the computat
 This computation sequence is expressed by the following pseudo-algorithmic schema.
 
 .. code-block:: python
+
     x_bar = LP relaxation solution
     do
         x_tilde = [x_bar]
