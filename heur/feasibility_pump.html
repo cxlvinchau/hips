@@ -193,6 +193,12 @@ a feasible solution to an MIP without the need for an initial solution.</p>
 <p>where <span class="math notranslate nohighlight">\(\Delta\)</span> is defined as the <span class="math notranslate nohighlight">\(L_1\)</span>-Norm:</p>
 <div class="math notranslate nohighlight">
 \[\Delta(x, \tilde{x}) = \sum_{j \in I} | x_j - \tilde{x}_j |\]</div>
+<p>With the terminology introduced, we can now generate two sequences which are the core to the Feasibility Pump.
+We iteratively compute LP feasible points <span class="math notranslate nohighlight">\(\bar{x}\)</span> and round it to the respective integer feasible points
+<span class="math notranslate nohighlight">\(\tilde{x}\)</span>. Subsequent points <span class="math notranslate nohighlight">\(\bar{x}\)</span> are computed by finding th LP feasible point <span class="math notranslate nohighlight">\(x*\)</span> (computed as above)
+, which minimizes the distance from <span class="math notranslate nohighlight">\(\bar{x}\)</span> to the feasible region of the relaxation.
+If any of the rounded points <span class="math notranslate nohighlight">\(\tilde{x}\)</span> is feasible, we stop the computation and have found an integer feasible solution.</p>
+<p>This behaviour is expressed by the following pseudo-algorithmic schema.</p>
 </div>
 
 

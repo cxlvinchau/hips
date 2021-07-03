@@ -32,3 +32,13 @@ where :math:`\Delta` is defined as the :math:`L_1`-Norm:
 .. math::
     \Delta(x, \tilde{x}) = \sum_{j \in I} | x_j - \tilde{x}_j |
 
+With the terminology introduced, we can now generate two sequences which are the core to the Feasibility Pump.
+We iteratively compute LP feasible points :math:`\bar{x}` and round it to the respective integer feasible points
+:math:`\tilde{x}`. Subsequent points :math:`\bar{x}` are computed by finding th LP feasible point :math:`x*` (computed as above)
+, which minimizes the distance from :math:`\bar{x}` to the feasible region of the relaxation.
+If any of the rounded points :math:`\tilde{x}` is feasible, we stop the computation and have found an integer feasible solution.
+
+This behaviour is expressed by the following pseudo-algorithmic schema.
+
+
+
