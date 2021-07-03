@@ -8,7 +8,5 @@ Heuristics
     heur/bounds
     heur/rens
     heur/abstract_diving
-    heur/fractional_diving
-    heur/line_search_diving
     heur/feasibility_pump
-    heur/2stage_fp.rst
+    heur/2stage_fp
