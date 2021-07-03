@@ -15,7 +15,7 @@ The first one is if the current LP relaxation gets infeasible. In this case,
 the heuristic will be aborted and no MIP solution was found. The second case occurs if the heuristic exceed a predetermined
 iteration limit. In this case the heuristic will yield the best found MIP solution, if any were found.
 
-    3. The current LP relaxation solution is worse than the incumbent solution \\
+    3. The current LP relaxation solution is worse than the incumbent solution
 
 A third case can be constructed by providing an initial MIP solution to the run of the heuristic. In case the solution
 of the current LP relaxation is worse than this incumbent MIP solution, the heuristic will abort, as any further branching
