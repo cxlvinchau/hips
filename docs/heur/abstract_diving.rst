@@ -7,13 +7,16 @@ the term **diving**. At each node of the tree the heuristic decides on which var
 intuition. The specific branching condition depends on the type of heuristic.
 
 A **Diving Heuristic** will stop in two cases:
-\begin{enumerate}
-    \item The current LP relaxation is infeasible
-    \item The iteration limit is reached\\
+
+    1. The current LP relaxation is infeasible
+    2. The iteration limit is reached
+
 The first one is if the current LP relaxation gets infeasible. In this case,
 the heuristic will be aborted and no MIP solution was found. The second case occurs if the heuristic exceed a predetermined
 iteration limit. In this case the heuristic will yield the best found MIP solution, if any were found.
-    \item The current LP relaxation solution is worse than the incumbent solution \\
+
+    3. The current LP relaxation solution is worse than the incumbent solution \\
+
 A third case can be constructed by providing an initial MIP solution to the run of the heuristic. In case the solution
 of the current LP relaxation is worse than this incumbent MIP solution, the heuristic will abort, as any further branching
 can only lead to worse solutions.
@@ -40,8 +43,8 @@ the variable :math:`x_j` with lowest fractionality :math:`f(x_j)` with respect t
 to the closest integer value :math:`[x_j]`. This is done as follows:
 
 .. math::
-        \textbf{if} \qquad x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
-        \textbf{then} \qquad upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
+        \textbf{if} \quad x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
+        \textbf{then} \quad upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
         \textbf{else} \quad lower\_bound(x_j) \leftarrow \lceil x_j \rceil
 
 The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.
