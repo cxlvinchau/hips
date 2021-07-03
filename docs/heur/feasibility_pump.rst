@@ -40,11 +40,11 @@ If any of the rounded points :math:`\tilde{x}` is feasible, we stop the computat
 
 This computation sequence is expressed by the following pseudo-algorithmic schema.
 
-.. code-block:: ruby
+.. code-block:: python
     x̄ = LP relaxation solution
     do
         x̃ = [x̄]
-        x̄ = argmin{Δ(x, x̃), Ax ≤ b}
+        x̄ = argmin{Δ(x, x̃), Ax <= b}
     while(x̃ infeasible)
 
 Obviously a big difficulty of the **Feasibility Pump** is the chance of entering cylces, when reaching the same :math:`\tilde{x}`
