@@ -40,9 +40,9 @@ If any of the rounded points :math:`\tilde{x}` is feasible, we stop the computat
 
 This computation sequence is expressed by the following pseudo-algorithmic schema.
 
-.. code-block:: python
+.. parsed-literal:: python
 
-    x_bar = LP relaxation solution
+    x̄ = LP relaxation solution
     do
         x_tilde = [x_bar]
         x_bar = argmin{Delta(x, x_tilde), Ax <= b}
