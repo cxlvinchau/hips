@@ -43,9 +43,9 @@ This computation sequence is expressed by the following pseudo-algorithmic schem
 .. code-block:: ruby
     x̄ = LP relaxation solution
     do
-        \~x = [x̄]
-        x̄ = argmin{Δ(x, \~x), Ax ≤ b}
-    while(\~x infeasible)
+        x̃ = [x̄]
+        x̄ = argmin{Δ(x, x̃), Ax ≤ b}
+    while(x̃ infeasible)
 
 Obviously a big difficulty of the **Feasibility Pump** is the chance of entering cylces, when reaching the same :math:`\tilde{x}`
 twice. This means that the algorithm gets stuck and will never acquire as feasible solution. The easiest way to deal with this problem
