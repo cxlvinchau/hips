@@ -40,7 +40,10 @@ If any of the rounded points :math:`\tilde{x}` is feasible, we stop the computat
 
 This computation sequence is expressed by the following pseudo-algorithmic schema.
 
-.. parsed-literal::
+..role:: pseudo
+    :fontSize: 20
+
+.. parsed-literal:: pseudo
 
     x̄ = LP relaxation solution
     do
