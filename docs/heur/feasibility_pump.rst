@@ -43,7 +43,6 @@ This computation sequence is expressed by the following pseudo-algorithmic schem
 
 .. parsed-literal::
 
-    :font_size: 20
     x̄ = LP relaxation solution
     do
         x̃ = [x̄]
