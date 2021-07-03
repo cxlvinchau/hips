@@ -27,3 +27,37 @@ to the MIP. This allows to bound early and thus larger portions of the tree, whi
 Unfortunately **Diving Heuristics** do not always find a feasible solution. Since the size of the *branch\&bound* tree exponentially
 increases in the number of variables, the chance of success of a **Diving Heuristic** is proportionally small. Nevertheless,
 the low computational cost of these heuristics encourages their application in practise.
+
+Fractional diving
+-----------------
+
+:class:`hips.heuristics.FractionalDiving` is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
+integer in each dive. The idea is based on page 17 of :cite:p:`2006:berthold`. It can be used to find a quick initial solution
+or an efficient direction of branching in the branch and bound.
+
+The heuristic traverses one path of the branch and bound tree of the MIP model to the leaf node. At each branch of the tree,
+the variable :math:`x_j` with lowest fractionality :math:`f(x_j)` with respect to the current relaxation solution is bound
+to the closest integer value :math:`[x_j]`. This is done as follows:
+
+.. math::
+        \textbf{if} \qquad x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
+        \textbf{then} \qquad upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
+        \textbf{else} \quad lower\_bound(x_j) \leftarrow \lceil x_j \rceil
+
+The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.
+
+Line Search Diving
+------------------
+
+Now we consider the line search diving heuristic as presented by :cite:`Hendel2011`. As the name suggests, this
+heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
+explore a branch of a branch and bound tree. In :class:`hips.heuristics.LineSearchDiving`, the selected variable in each step is fixed to a value.
+
+The choice of the variable that is fixed is made as follows. Suppose :math:`x^R` is the solution found at the root
+node :math:`R` in the branch and bound algorithm. Let :math:`N` be an arbitrary node within the branch and bound tree
+(i.e. not the root node) and :math:`x^N` the corresponding solution. At :math:`N` line search diving considers the line
+between :math:`x^N` and :math:`x^R` and conceptually moves towards :math:`x^R` and checks which variable becomes integer first.
+This variable is then selected and fixed.
+
+Since our heuristic does not operate within a branch and bound algorithm, the initial variables that are fixed/selected
+are chosen randomly.
