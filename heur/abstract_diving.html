@@ -44,7 +44,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Fractional diving" href="fractional_diving.html" />
+    <link rel="prev" title="RENS" href="rens.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -94,10 +96,20 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation and Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../heuristics.html">Heuristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../heuristics.html">Heuristics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="simple_rounding.html">Simple Rounding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bounds.html">Bounds Heuristic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rens.html">RENS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Diving Heuristics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fractional_diving.html">Fractional diving</a></li>
+<li class="toctree-l2"><a class="reference internal" href="line_search_diving.html">Line Search Diving</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feasibility_pump.html">Feasibility Pump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2stage_fp.html">Two Stage Feasibility Pump</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -149,6 +161,8 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="../heuristics.html">Heuristics</a> &raquo;</li>
+        
       <li>Diving Heuristics</li>
     
     
@@ -170,18 +184,18 @@
             
   <div class="section" id="diving-heuristics">
 <h1>Diving Heuristics<a class="headerlink" href="#diving-heuristics" title="Permalink to this headline">¶</a></h1>
-<p>The following heuristics are so called <code class="docutils literal notranslate"><span class="pre">`diving</span> <span class="pre">heuristics</span></code>. The general idea of diving heuristics is to quickly
-depth first traverse the branch&amp;bound tree to reach one of its leave nodes. This quick traversal down the tree lead to
-the term <code class="docutils literal notranslate"><span class="pre">diving</span></code>. At each node of the tree the heuristic decides on which variable to branch based on some promising
+<p>The following heuristics are so called <strong>Diving Heuristics</strong>. The general idea of <strong>Diving Heuristics</strong> is to quickly
+depth first traverse the <em>branch&amp;bound</em> tree to reach one of its leave nodes. This quick traversal down the tree lead to
+the term <strong>diving</strong>. At each node of the tree the heuristic decides on which variable to branch based on some promising
 intuition. The specific branching condition depends on the type of heuristic.</p>
-<p>A diving heuristic will stop in two cases:
+<p>A <strong>Diving Heuristic</strong> will stop in two cases:
 begin{enumerate}</p>
 <blockquote>
 <div><p>item The current LP relaxation is infeasible
 item The iteration limit is reached\</p>
 </div></blockquote>
 <p>The first one is if the current LP relaxation gets infeasible. In this case,
-the heuristic will be aborted and no MIP solution was found. The second case occur if the heuristic exceed a predetermined
+the heuristic will be aborted and no MIP solution was found. The second case occurs if the heuristic exceed a predetermined
 iteration limit. In this case the heuristic will yield the best found MIP solution, if any were found.</p>
 <blockquote>
 <div><p>item The current LP relaxation solution is worse than the incumbent solution \</p>
@@ -189,13 +203,13 @@ iteration limit. In this case the heuristic will yield the best found MIP soluti
 <p>A third case can be constructed by providing an initial MIP solution to the run of the heuristic. In case the solution
 of the current LP relaxation is worse than this incumbent MIP solution, the heuristic will abort, as any further branching
 can only lead to worse solutions.</p>
-<p>Diving heuristics can be useful in many different scenarios. Since these heuristics do not require an MIP solver nor an
-incumbent MIP solution, they can be used to find a starting solutions for other heurstics. Furthermore in many cases
+<p><strong>Diving Heuristics</strong> can be useful in many different scenarios. Since these heuristics do not require an MIP solver nor an
+incumbent MIP solution, they can be used to find an initial solutions for other heuristics. Furthermore in many cases
 any we do not search for the best solution to the MIP, rather than any feasible solution.
-Furthermore diving heuristics can be used in combination with a full branch&amp;bound run, to quickly find feasible solutions
+Furthermore diving heuristics can be used in combination with a full <em>branch&amp;bound</em> run, to quickly find feasible solutions
 to the MIP. This allows to bound early and thus larger portions of the tree, which leads to major decrease in run time.</p>
-<p>Unfortunately diving heuristics do not always find a feasible solution. Since the size of the branch&amp;bound tree exponentially
-increases in the number of variables, the chance of success of a diving heurstic is proportionally small. Nevertheless,
+<p>Unfortunately <strong>Diving Heuristics</strong> do not always find a feasible solution. Since the size of the <em>branch&amp;bound</em> tree exponentially
+increases in the number of variables, the chance of success of a <strong>Diving Heuristic</strong> is proportionally small. Nevertheless,
 the low computational cost of these heuristics encourages their application in practise.</p>
 </div>
 
@@ -204,6 +218,10 @@ the low computational cost of these heuristics encourages their application in p
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="fractional_diving.html" class="btn btn-neutral float-right" title="Fractional diving" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="rens.html" class="btn btn-neutral float-left" title="RENS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
