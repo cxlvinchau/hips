@@ -8,7 +8,7 @@ a feasible solution to an MIP without the need for an initial solution. The heur
 Assume we have the following general MIP:
 
 .. math::
-    \begin{array}{lr@{}c@{}r@{}l}
+    \begin{array}{lr@{}l@{}l@{}l}
     \text{minimize }   & c^T x  \\
     \text{subject to } & Ax \le b \\
                         & x_j \in \mathbb{Z}\text{, } \forall j \in I
@@ -22,7 +22,7 @@ We define the rounding :math:`\tilde{x}` of a variable :math:`x` as :
 We search the point :math:`{x\text{*}}`, the solution to the following LP:
 
 .. math::
-    \begin{array}{lr@{}c@{}r@{}l}
+    \begin{array}{lr@{}l@{}l@{}l}
     \text{minimize }   & \Delta (x, \tilde{x})  \\
     \text{subject to } & Ax \le b,
     \end{array}
@@ -40,7 +40,7 @@ If any of the rounded points :math:`\tilde{x}` is feasible, we stop the computat
 
 This computation sequence is expressed by the following pseudo-algorithmic schema.
 
-.. parsed-literal::
+.. code-block:: ruby
     :math:`\bar{x}` = LP relaxation solution
     do
         :math:`\tilde{x}` = [:math:`\bar{x}`]

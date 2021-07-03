@@ -188,7 +188,7 @@ heuristic of HIPS. First proposed in 2005 by Fischetti et al. <span id="id1">[<a
 a feasible solution to an MIP without the need for an initial solution. The heuristic is also described in <span id="id2">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>.</p>
 <p>Assume we have the following general MIP:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{lr&#64;{}c&#64;{}r&#64;{}l}
+\[\begin{split}\begin{array}{lr&#64;{}l&#64;{}l&#64;{}l}
 \text{minimize }   &amp; c^T x  \\
 \text{subject to } &amp; Ax \le b \\
                     &amp; x_j \in \mathbb{Z}\text{, } \forall j \in I
@@ -198,7 +198,7 @@ a feasible solution to an MIP without the need for an initial solution. The heur
 \[\begin{split}\tilde{x}_j = \begin{cases} [x_j], &amp; j \in I\\ x_j, &amp; \text{otherwise} \end{cases}\end{split}\]</div>
 <p>We search the point <span class="math notranslate nohighlight">\({x\text{*}}\)</span>, the solution to the following LP:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{lr&#64;{}c&#64;{}r&#64;{}l}
+\[\begin{split}\begin{array}{lr&#64;{}l&#64;{}l&#64;{}l}
 \text{minimize }   &amp; \Delta (x, \tilde{x})  \\
 \text{subject to } &amp; Ax \le b,
 \end{array}\end{split}\]</div>
@@ -211,11 +211,6 @@ We iteratively compute LP feasible points <span class="math notranslate nohighli
 , which minimizes the distance from <span class="math notranslate nohighlight">\(\bar{x}\)</span> to the feasible region of the relaxation.
 If any of the rounded points <span class="math notranslate nohighlight">\(\tilde{x}\)</span> is feasible, we stop the computation and have found an integer feasible solution.</p>
 <p>This computation sequence is expressed by the following pseudo-algorithmic schema.</p>
-<pre class="literal-block"><span class="math notranslate nohighlight">\(\bar{x}\)</span> = LP relaxation solution
-do
-    <span class="math notranslate nohighlight">\(\tilde{x}\)</span> = [<span class="math notranslate nohighlight">\(\bar{x}\)</span>]
-    <span class="math notranslate nohighlight">\(\bar{x}\)</span> = argmin{<span class="math notranslate nohighlight">\(\Delta(x, \tilde{x}), Ax \le b}\)</span>
-while(<span class="math notranslate nohighlight">\(\tilde{x}\)</span> infeasible)</pre>
 <p>Obviously a big difficulty of the <strong>Feasibility Pump</strong> is the chance of entering cylces, when reaching the same <span class="math notranslate nohighlight">\(\tilde{x}\)</span>
 twice. This means that the algorithm gets stuck and will never acquire as feasible solution. The easiest way to deal with this problem
 is to perturb some of the integer variables in cases a cylce is detected.
