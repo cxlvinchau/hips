@@ -191,17 +191,20 @@
 depth first traverse the <em>branch&amp;bound</em> tree to reach one of its leave nodes. This quick traversal down the tree lead to
 the term <strong>diving</strong>. At each node of the tree the heuristic decides on which variable to branch based on some promising
 intuition. The specific branching condition depends on the type of heuristic.</p>
-<p>A <strong>Diving Heuristic</strong> will stop in two cases:
-begin{enumerate}</p>
+<p>A <strong>Diving Heuristic</strong> will stop in two cases:</p>
 <blockquote>
-<div><p>item The current LP relaxation is infeasible
-item The iteration limit is reached\</p>
+<div><ol class="arabic simple">
+<li><p>The current LP relaxation is infeasible</p></li>
+<li><p>The iteration limit is reached</p></li>
+</ol>
 </div></blockquote>
 <p>The first one is if the current LP relaxation gets infeasible. In this case,
 the heuristic will be aborted and no MIP solution was found. The second case occurs if the heuristic exceed a predetermined
 iteration limit. In this case the heuristic will yield the best found MIP solution, if any were found.</p>
 <blockquote>
-<div><p>item The current LP relaxation solution is worse than the incumbent solution \</p>
+<div><ol class="arabic simple" start="3">
+<li><p>The current LP relaxation solution is worse than the incumbent solution \</p></li>
+</ol>
 </div></blockquote>
 <p>A third case can be constructed by providing an initial MIP solution to the run of the heuristic. In case the solution
 of the current LP relaxation is worse than this incumbent MIP solution, the heuristic will abort, as any further branching
@@ -223,8 +226,8 @@ or an efficient direction of branching in the branch and bound.</p>
 the variable <span class="math notranslate nohighlight">\(x_j\)</span> with lowest fractionality <span class="math notranslate nohighlight">\(f(x_j)\)</span> with respect to the current relaxation solution is bound
 to the closest integer value <span class="math notranslate nohighlight">\([x_j]\)</span>. This is done as follows:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\textbf{if} \qquad x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
-\textbf{then} \qquad upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
+\[\begin{split}\textbf{if} \quad x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
+\textbf{then} \quad upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
 \textbf{else} \quad lower\_bound(x_j) \leftarrow \lceil x_j \rceil\end{split}\]</div>
 <p>The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.</p>
 </div>
