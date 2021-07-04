@@ -9,12 +9,6 @@ from hips.models import MIPModel, Variable, HIPSArray
 from hips.solver import GurobiSolver
 
 
-class BoundDirection(Enum):
-    LOWER = 0
-    UPPER = 1
-    CLOSEST = 2
-
-
 class HeuristicBounds(Heuristic):
     """
     This heuristic is implemented after the scipopt primal heuristic 'heur_bounds.h'.

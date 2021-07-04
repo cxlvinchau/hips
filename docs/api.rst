@@ -63,6 +63,7 @@ _________
    hips.VarTypes
    hips.VariableBound
    hips.HeuristicStatus
+   hips.BoundDirection
 
 
 Loader and Tracker
