@@ -226,10 +226,6 @@ class FeasibilityPump(Heuristic):
             if self.mip_model.is_feasible(
                     {var: self.relaxation.variable_solution(var) for var in self.relaxation.vars}):
                 self.logger.info("Stopping early")
-                # Remove variables
-                self._remove_added_variables()
-                # Remove constraints
-                self._remove_added_constraints()
                 break
 
             # Check cycling
@@ -279,6 +275,10 @@ class FeasibilityPump(Heuristic):
 
         # Set optimal value
         self._obj_val = self.relaxation.get_objective_value()
+        # Remove variables
+        self._remove_added_variables()
+        # Remove constraints
+        self._remove_added_constraints()
 
         # Restore original objective
         if self._original_obj:
