@@ -219,7 +219,7 @@ increases in the number of variables, the chance of success of a <strong>Diving 
 the low computational cost of these heuristics encourages their application in practise.</p>
 <div class="section" id="fractional-diving">
 <h2>Fractional diving<a class="headerlink" href="#fractional-diving" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDiving</span></code> is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
+<p><a class="reference internal" href="../_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving" title="hips.heuristics.FractionalDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDiving</span></code></a> is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
 integer in each dive. The idea is based on page 17 of <span id="id1">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>. It can be used to find a quick initial solution
 or an efficient direction of branching in the branch and bound.</p>
 <p>The heuristic traverses one path of the branch and bound tree of the MIP model to the leaf node. At each branch of the tree,
@@ -233,9 +233,9 @@ to the closest integer value <span class="math notranslate nohighlight">\([x_j]\
 </div>
 <div class="section" id="line-search-diving">
 <h2>Line Search Diving<a class="headerlink" href="#line-search-diving" title="Permalink to this headline">¶</a></h2>
-<p>Now we consider the line search diving heuristic as presented by <span id="id2">[<a class="reference internal" href="../references.html#id7" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011.">Hen11</a>]</span>. As the name suggests, this
+<p>Now we consider the <strong>Line Search Diving</strong> heuristic as presented by <span id="id2">[<a class="reference internal" href="../references.html#id7" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011.">Hen11</a>]</span>. As the name suggests, this
 heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
-explore a branch of a branch and bound tree. In <code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.LineSearchDiving</span></code>, the selected variable in each step is fixed to a value.</p>
+explore a branch of a branch and bound tree. In <a class="reference internal" href="../_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.LineSearchDiving</span></code></a>, the selected variable in each step is fixed to a value.</p>
 <p>The choice of the variable that is fixed is made as follows. Suppose <span class="math notranslate nohighlight">\(x^R\)</span> is the solution found at the root
 node <span class="math notranslate nohighlight">\(R\)</span> in the branch and bound algorithm. Let <span class="math notranslate nohighlight">\(N\)</span> be an arbitrary node within the branch and bound tree
 (i.e. not the root node) and <span class="math notranslate nohighlight">\(x^N\)</span> the corresponding solution. At <span class="math notranslate nohighlight">\(N\)</span> line search diving considers the line
