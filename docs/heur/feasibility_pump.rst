@@ -40,14 +40,7 @@ If any of the rounded points :math:`\tilde{x}` is feasible, we stop the computat
 
 This computation sequence is expressed by the following pseudo-algorithmic schema.
 
-
-.. parsed-literal::
-
-    x̄ = LP relaxation solution
-    do
-        x̃ = [x̄]
-        x̄ = argmin{Δ(x, x̃), Ax <= b}
-    while(x̃ infeasible)
+.. image:: ../img/pseudo_algorithm_fs.png
 
 Obviously a big difficulty of the **Feasibility Pump** is the chance of entering cylces, when reaching the same :math:`\tilde{x}`
 twice. This means that the algorithm gets stuck and will never acquire as feasible solution. The easiest way to deal with this problem
