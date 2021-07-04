@@ -215,7 +215,7 @@ Now, let us consider a mixed-integer program. Particularly, we consider the line
     \text{subject to } & x_1 + 2 x_2 \leq 20 \\
                        & 3 x_1 - x_2 \leq 10 \\
                        & x_1, x_2 \geq 0 \\
-                       & \color{red} {x_1 \in \mathbb{Z}}, x_2 \in \mathbb{R} \\
+                       & \color{red} {x_1 \in \mathbb{Z}}, \color{black} x_2 \in \mathbb{R} \\
     \end{array}
 
 Compared to the example above, we have introduced the constraint :math:`\color{red} {x_1 \in \mathbb{Z}}`. This means

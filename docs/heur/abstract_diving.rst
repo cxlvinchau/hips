@@ -52,7 +52,7 @@ The traversal is discontinued if any relaxation is infeasible or a feasible inte
 Line Search Diving
 ------------------
 
-Now we consider the line search diving heuristic as presented by :cite:`Hendel2011`. As the name suggests, this
+Now we consider the **Line Search Diving** heuristic as presented by :cite:`Hendel2011`. As the name suggests, this
 heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
 explore a branch of a branch and bound tree. In :class:`hips.heuristics.LineSearchDiving`, the selected variable in each step is fixed to a value.
 

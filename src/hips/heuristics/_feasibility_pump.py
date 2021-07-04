@@ -148,7 +148,7 @@ class FeasibilityPump(Heuristic):
 
         :return: None
         """
-        for var in {**self.positive_vars, **self.negative_vars}.values():
+        for var in list(self.positive_vars.values()) + list(self.negative_vars.values()):
             self.mip_model.lp_model.remove_variable(var)
         self.positive_vars = {}
         self.negative_vars = {}
@@ -275,6 +275,10 @@ class FeasibilityPump(Heuristic):
 
         # Set optimal value
         self._obj_val = self.relaxation.get_objective_value()
+        # Remove variables
+        self._remove_added_variables()
+        # Remove constraints
+        self._remove_added_constraints()
 
         # Restore original objective
         if self._original_obj:
@@ -346,6 +350,7 @@ class FeasibilityPump(Heuristic):
             return HeuristicStatus.SOL_FOUND
         else:
             return HeuristicStatus.NO_SOL_FOUND
+
 
 class TwoStageFeasibilityPump(Heuristic):
     r"""Implementation of feasibility pump with two stages
