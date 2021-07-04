@@ -3,7 +3,7 @@ import math
 from hips.heuristics._heuristic import Heuristic
 from hips.models._lp_model import ProblemSense
 from hips.models import MIPModel, HIPSArray, Variable
-from hips.utils import REL_TOLERANCE, ABS_TOLERANCE, is_close
+from hips.utils import REL_TOLERANCE, ABS_TOLERANCE, is_close, all_close
 from hips.heuristics import skip_when_clp_solver
 from hips.constants import LPStatus, HeuristicStatus
 import numpy as np
@@ -159,13 +159,11 @@ class FeasibilityPump(Heuristic):
 
         :return: True if cycled, False otherwise
         """
-
-        # TODO naive implementation for now
         for var in bin_sol:
-            if not all(is_close(bin_sol[var], self.x_tilde_bin[var])):
+            if not all_close(bin_sol[var], self.x_tilde_bin[var]):
                 return False
         for var in int_sol:
-            if not all(is_close(int_sol[var], self.x_tilde_int[var])):
+            if not all_close(int_sol[var], self.x_tilde_int[var]):
                 return False
         return True
 
@@ -175,7 +173,7 @@ class FeasibilityPump(Heuristic):
             # Check if solution is equal to previous solution
             exist_long_cycle_iteration = True
             for var in bin_sol:
-                if not all(is_close(bin_sol[var], x_tilde_bin[var])):
+                if not all_close(bin_sol[var], x_tilde_bin[var]):
                     exist_long_cycle_iteration = False
                     break
             if exist_long_cycle_iteration:
