@@ -235,6 +235,9 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.MIPModel.set_objective" title="hips.models.MIPModel.set_objective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_objective</span></code></a>(objective)</p></td>
 <td><p>Sets the objective function of the mixed-integer program.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.MIPModel.trivially_roundable" title="hips.models.MIPModel.trivially_roundable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trivially_roundable</span></code></a>()</p></td>
+<td><p>Checks if the all variables of the model are trivially roundable.</p></td>
+</tr>
 </tbody>
 </table>
 <dl class="py method">
@@ -300,6 +303,26 @@ class allows for specification of the variable types, i.e. continuous, binary or
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if solution is feasible else <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.MIPModel.trivially_roundable">
+<span class="sig-name descname"><span class="pre">trivially_roundable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.trivially_roundable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the all variables of the model are trivially roundable. If so, fix the variables to the rounded values
+and optimize, such that the corresponding objective value can be fetched.</p>
+<p>1. A variable x_j is called trivially down-roundable, if all coefficients a_ij of the corresponding column of the
+matrix A are non negative, hence A_j &gt;= 0.
+2. A variable x_j is called trivially up-roundable, if all coefficients a_ij of the corresponding column of the
+matrix A are non positive, hence A_j &lt;= 0.
+3. A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.
+- Source: Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A tuple containing the dictionaries trivially_down_roundable, trivially_up_roundable
+trivially_down_roundable:      key: Variable, element: array(Boolean)
+trivially_up_roundable:        key: Variable, element: array(Boolean)</p>
 </dd>
 </dl>
 </dd></dl>
