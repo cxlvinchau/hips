@@ -10,13 +10,6 @@ try:
 except ImportError:
     warnings.warn("CyLP does not seem to be installed")
 
-try:
-    from hips.solver._pulp_solver import PulpSolver
-except ImportError:
-    warnings.warn("Pulp does not seem to be installed")
-
-from hips.solver._scipy_solver import ScipySolver
-
-__all__ = ["GurobiSolver", "ClpSolver", "PulpSolver"]
+__all__ = ["GurobiSolver", "ClpSolver"]
 
 from hips.solver.branch_and_bound import BranchAndBound

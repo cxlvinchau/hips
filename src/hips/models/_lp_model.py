@@ -234,6 +234,15 @@ class LPModel:
                     return False
         return True
 
+    def summary(self):
+        """
+        Prints a summary of the LP model
+        """
+        solver = str(type(self.concrete_solver)).split(".")[-1].replace("'>", "")
+        num_constraints = sum([constr.lhs.dim for constr in self.constraints])
+        num_variables = sum([var.dim for var in self.vars])
+        print(f"Solver: {solver}\nSense: {self.lp_sense}\n#Constraints: {num_constraints}\n#Variables: {num_variables}")
+
 
 class Constraint:
     """Representation a linear constraint
