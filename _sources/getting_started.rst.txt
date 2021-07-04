@@ -198,8 +198,8 @@ Thus, instead of passing lists to the constructor of :class:`hips.models.HIPSArr
 >>> HIPSArray(np.array([1, 2, 3]))
 [1, 2, 3]
 
-Mixed integer programs
-----------------------
+A simple mixed integer program
+------------------------------
 
 .. raw:: html
 
@@ -254,8 +254,36 @@ Note that we have added an upper bound for variable ``x_1``. In HIPS it is neces
 because many heuristics explicitly require bounds. However, this does not actually impose a limitation, as also mentioned in
 :cite:`Fischetti2005`, because solvable mixed-integer programs cannot have unbounded variables.
 
+Solving the program using branch and bound
+__________________________________________
+As mentioned before, the :class:`MIPModel <hips.models.MIPModel>` class does not offer the possibility to directly optimize the program.
+However, it is possible to use :class:`BranchAndBound <hips.solver.BranchAndBound>`, HIPS' branch and bound implementation, to
+compute the optimal solution of the mixed-integer program. Please note that the class only implements a naive version of the
+branch and bound algorithm and is thus not suitable for solving large problems.
+
+In the following, we optimize the mixed-integer program from above. To this end, consider the code below.
+
+.. code-block:: python
+
+    from hips.solver import BranchAndBound
+
+    bb = BranchAndBound(model)
+    bb.optimize()
+
+    # Print solution
+    bb.get_incumbent()
+
+    # Print objective value
+    bb.get_incumbent_val()
+
 Loading mps files
 -----------------
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/mps-example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
 
 The previous chapters introduced how to explicitely create an MIP model.
 This approach is inpractical for most real-life problems, since the size of variable and constraints in those models can
@@ -291,3 +319,20 @@ We can use the MPS loader in HIPS as follows:
     load_mps(mip_model=model, path='path_to_mps/mps_file.mps')
     # set the optimization sense
     model.set_mip_sense(ProblemSense.MIN)
+
+Solving the program using branch and bound
+__________________________________________
+As shown above, we run the following lines to optimize the loaded model with branch and bound algorithm.
+
+.. code-block:: python
+
+    from hips.solver import BranchAndBound
+
+    bb = BranchAndBound(model)
+    bb.optimize()
+
+    # Print solution
+    bb.get_incumbent()
+
+    # Print objective value
+    bb.get_incumbent_val()

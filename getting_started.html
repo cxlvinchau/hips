@@ -109,8 +109,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#numpy-support">NumPy support</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#mixed-integer-programs">Mixed integer programs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#loading-mps-files">Loading mps files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-simple-mixed-integer-program">A simple mixed integer program</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#solving-the-program-using-branch-and-bound">Solving the program using branch and bound</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-mps-files">Loading mps files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Solving the program using branch and bound</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="heuristics.html">Heuristics</a></li>
@@ -351,8 +357,8 @@ You can find more information about NumPy <a class="reference external" href="ht
 </div>
 </div>
 </div>
-<div class="section" id="mixed-integer-programs">
-<h2>Mixed integer programs<a class="headerlink" href="#mixed-integer-programs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-simple-mixed-integer-program">
+<h2>A simple mixed integer program<a class="headerlink" href="#a-simple-mixed-integer-program" title="Permalink to this headline">¶</a></h2>
 <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/mip-example.ipynb" target="_blank">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a><p>Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with additional constraints.</p>
@@ -395,10 +401,32 @@ solver for optimization.</p>
 <p>Note that we have added an upper bound for variable <code class="docutils literal notranslate"><span class="pre">x_1</span></code>. In HIPS it is necessary to add bounds to integer variables
 because many heuristics explicitly require bounds. However, this does not actually impose a limitation, as also mentioned in
 <span id="id1">[<a class="reference internal" href="references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, because solvable mixed-integer programs cannot have unbounded variables.</p>
+<div class="section" id="solving-the-program-using-branch-and-bound">
+<h3>Solving the program using branch and bound<a class="headerlink" href="#solving-the-program-using-branch-and-bound" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned before, the <a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MIPModel</span></code></a> class does not offer the possibility to directly optimize the program.
+However, it is possible to use <a class="reference internal" href="_autosummary/hips.solver.BranchAndBound.html#hips.solver.BranchAndBound" title="hips.solver.BranchAndBound"><code class="xref py py-class docutils literal notranslate"><span class="pre">BranchAndBound</span></code></a>, HIPS’ branch and bound implementation, to
+compute the optimal solution of the mixed-integer program. Please note that the class only implements a naive version of the
+branch and bound algorithm and is thus not suitable for solving large problems.</p>
+<p>In the following, we optimize the mixed-integer program from above. To this end, consider the code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips.solver</span> <span class="kn">import</span> <span class="n">BranchAndBound</span>
+
+<span class="n">bb</span> <span class="o">=</span> <span class="n">BranchAndBound</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">bb</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+<span class="c1"># Print solution</span>
+<span class="n">bb</span><span class="o">.</span><span class="n">get_incumbent</span><span class="p">()</span>
+
+<span class="c1"># Print objective value</span>
+<span class="n">bb</span><span class="o">.</span><span class="n">get_incumbent_val</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="loading-mps-files">
 <h2>Loading mps files<a class="headerlink" href="#loading-mps-files" title="Permalink to this headline">¶</a></h2>
-<p>The previous chapters introduced how to explicitely create an MIP model.
+<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/mps-example.ipynb" target="_blank">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a><p>The previous chapters introduced how to explicitely create an MIP model.
 This approach is inpractical for most real-life problems, since the size of variable and constraints in those models can
 be very large. Therefore the HIPS module contains a Loader class, that can read models from MPS files.</p>
 <p>MPS is a file format for representing linear and mixed integer problem and is a standard in most commercial and open source
@@ -425,6 +453,22 @@ multidimensional variables. This allows the underlying solvers to make use of ve
 <span class="c1"># set the optimization sense</span>
 <span class="n">model</span><span class="o">.</span><span class="n">set_mip_sense</span><span class="p">(</span><span class="n">ProblemSense</span><span class="o">.</span><span class="n">MIN</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="section" id="id3">
+<h3>Solving the program using branch and bound<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>As shown above, we run the following lines to optimize the loaded model with branch and bound algorithm.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips.solver</span> <span class="kn">import</span> <span class="n">BranchAndBound</span>
+
+<span class="n">bb</span> <span class="o">=</span> <span class="n">BranchAndBound</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">bb</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+<span class="c1"># Print solution</span>
+<span class="n">bb</span><span class="o">.</span><span class="n">get_incumbent</span><span class="p">()</span>
+
+<span class="c1"># Print objective value</span>
+<span class="n">bb</span><span class="o">.</span><span class="n">get_incumbent_val</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
