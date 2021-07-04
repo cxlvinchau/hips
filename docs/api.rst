@@ -42,7 +42,7 @@ __________
 
    hips.heuristics.FeasibilityPump
    hips.heuristics.TwoStageFeasibilityPump
-   hips.heuristics._bounds
+   hips.heuristics.HeuristicBounds
    hips.heuristics.AbstractDiving
    hips.heuristics.FractionalDiving
    hips.heuristics.LineSearchDiving
@@ -63,6 +63,7 @@ _________
    hips.VarTypes
    hips.VariableBound
    hips.HeuristicStatus
+   hips.BoundDirection
 
 
 Loader and Tracker

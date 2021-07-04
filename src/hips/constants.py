@@ -74,3 +74,13 @@ class HeuristicStatus(Enum):
     """No solution found"""
     ERROR = 2
     """Error"""
+
+
+class BoundDirection(Enum):
+    """
+    Enum for the direction to bound in HeuristicBounds.
+    Use this exclusively for HeuristicBounds!
+    """
+    LOWER = 0
+    UPPER = 1
+    CLOSEST = 2
