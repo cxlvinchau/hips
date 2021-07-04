@@ -189,7 +189,7 @@ Although this heuristic in most cases leads to no feasible solution, it is often
 <p>The heuristic can be found in the ScipOpt library documentation under the following link:
 <a class="reference external" href="https://www.scipopt.org/doc/html/heur__bound_8h.php">heur_bound.h File Reference</a>.</p>
 <p>This heuristic fixes every integer and binary variable to a respective bound and solves the remaining Linear Program.
-There are 3 ways to use this heuristic, represent by the values of the enum <code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.BoundDirection</span></code>.
+There are 3 ways to use this heuristic, represent by the values of the enum <code class="xref py py-class docutils literal notranslate"><span class="pre">hips.constants.BoundDirection</span></code>.
 In the cases <span class="xref std std-ref">LOWER</span> or <span class="xref std std-ref">UPPER</span>,
 every integer variable is fixed to their respective lower or upper bound respectibely.
 In case <span class="xref std std-ref">CLOSEST</span> is selected, each integer variable is fixed to the bound
