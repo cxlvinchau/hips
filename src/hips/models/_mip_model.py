@@ -137,3 +137,13 @@ class MIPModel:
         """
         return self.lp_model.get_variables()
 
+    def summary(self):
+        """
+        Prints a summary of the MIP
+        """
+        self.lp_model.summary()
+        num_bin_variables = sum([var.dim for var in self.binary_variables])
+        num_int_variables = sum([var.dim for var in self.integer_variables])
+        print(f"#Binary variables: {num_bin_variables}")
+        print(f"#Integer variables: {num_int_variables}")
+
