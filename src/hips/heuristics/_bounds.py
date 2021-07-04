@@ -2,11 +2,10 @@ import numpy as np
 
 from enum import Enum
 
-from hips import HIPSArray
 from hips.constants import LPStatus, VariableBound, HeuristicStatus
 from hips.heuristics._heuristic import Heuristic
 from hips.loader.mps_loader import load_mps_primitive
-from hips.models import MIPModel, Variable
+from hips.models import MIPModel, Variable, HIPSArray
 from hips.solver import GurobiSolver
 
 

@@ -109,6 +109,7 @@ class FeasibilityPump(Heuristic):
                           var])
             # Add constraints to relaxation
             self.relaxation.add_constraint(constr, name="_combination_constr{}".format(var_id))
+            self.added_constraints.append("_combination_constr{}".format(var_id))
 
             # Increment the var counter
             self._var_counter += 1

@@ -1,8 +1,8 @@
 import warnings
 
-from hips import HIPSArray, HeuristicStatus
+from hips import HeuristicStatus
 from hips.heuristics._heuristic import Heuristic
-from hips.models import MIPModel, Variable
+from hips.models import MIPModel, Variable, HIPSArray
 import numpy as np
 
 from hips.solver.branch_and_bound import BranchAndBound

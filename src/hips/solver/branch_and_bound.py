@@ -1,8 +1,7 @@
 import warnings
 
-from hips import HIPSArray
-from hips.constants import LPStatus, VarTypes, ProblemSense
-from hips.models import MIPModel, Constraint, LPModel
+from hips.constants import LPStatus
+from hips.models import MIPModel, Constraint, HIPSArray
 from hips.utils import is_integer
 import numpy as np
 

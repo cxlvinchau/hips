@@ -1,6 +1,5 @@
 from ._abstract_diving import AbstractDiving
-from .. import HIPSArray
-from ..models import MIPModel
+from ..models import MIPModel, HIPSArray
 import numpy as np
 
 

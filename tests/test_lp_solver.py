@@ -3,7 +3,7 @@ import unittest
 from hips.constants import LPStatus
 from hips.models._lp_model import LPModel
 from hips.models._lp_model import Variable
-from hips.models._lp_model import HIPSArray
+from hips.models import HIPSArray
 from hips.solver._clp_solver import ClpSolver
 from hips.solver._gurobi_solver import GurobiSolver
 from hips.solver._scipy_solver import ScipySolver

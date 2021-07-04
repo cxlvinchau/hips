@@ -1,5 +1,5 @@
 import numpy as np
-from hips.models import HIPSArray
+import hips.models._lp_model
 from hips.utils.tracking import Tracker
 # Define global constants
 
@@ -21,11 +21,19 @@ def set_tolerance(rel_tolerance=1e-09, abs_tolerance=0.0):
 
 
 def is_close(a, b):
-    if isinstance(a, HIPSArray):
+    if isinstance(a, hips.models._lp_model.HIPSArray):
         a = a.to_numpy()
-    if isinstance(b, HIPSArray):
+    if isinstance(b, hips.models._lp_model.HIPSArray):
         b = b.to_numpy()
     return np.isclose(a, b, rtol=REL_TOLERANCE, atol=ABS_TOLERANCE)
+
+
+def all_close(a, b):
+    if isinstance(a, hips.models._lp_model.HIPSArray):
+        a = a.to_numpy()
+    if isinstance(b, hips.models._lp_model.HIPSArray):
+        b = b.to_numpy()
+    return np.allclose(a, b, rtol=REL_TOLERANCE, atol=ABS_TOLERANCE)
 
 
 def is_integer(a):

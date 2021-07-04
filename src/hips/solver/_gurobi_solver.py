@@ -1,6 +1,7 @@
 from hips.solver._abstract_solver import AbstractSolver
 from hips.constants import Comparator, VariableBound
-from hips.models._lp_model import Constraint, Variable, LinExpr, HIPSArray
+from hips.models._lp_model import Constraint, Variable, LinExpr
+from hips.models import HIPSArray
 import gurobipy as gb
 from gurobipy import GRB
 from hips.constants import LPStatus, ProblemSense

@@ -1,6 +1,8 @@
 from hips.constants import Comparator, VarTypes, LPStatus, ProblemSense, NUMERICAL_TYPES, VariableBound
 import numpy as np
 
+from hips.utils import all_close
+
 
 class LPModel:
     """Representation of a linear program
@@ -219,13 +221,17 @@ class LPModel:
         :return: ``True`` if the solution is feasible, otherwise ``False``
         """
         for constr in self.constraints:
-            if not all(constr.eval(variable_solutions)):
+            if not constr.eval(variable_solutions):
                 return False
         for variable in variable_solutions:
             if variable.lb is not None and any(variable_solutions[variable] < variable.lb):
-                return False
+                mask = variable_solutions[variable] < variable.lb
+                if not all_close(variable_solutions[variable].to_numpy()[mask], variable.lb.to_numpy()[mask]):
+                    return False
             if variable.ub is not None and any(variable_solutions[variable] > variable.ub):
-                return False
+                mask = variable_solutions[variable] > variable.ub
+                if not all_close(variable_solutions[variable].to_numpy()[mask], variable.ub.to_numpy()[mask]):
+                    return False
         return True
 
 
@@ -287,24 +293,23 @@ class Constraint:
             return np.allclose(self.rhs.to_numpy(), other.rhs.to_numpy(), rtol=1e-05, atol=1e-08)
         return False
 
-    def eval(self, variable_solutions: dict, eps=0.0002):
+    def eval(self, variable_solutions: dict):
         """Evaluate constraint
 
         This method evaluates whether constraint is satisfied under the given solution
 
         :param variable_solutions: ions: A :class:`dict` object that maps variables to their solution. The keys of this dictionary
             are instances of :class:`hips.models.Variable` and the keys are instances of :class:`hips.models.HIPSArray`
-        :param eps: Absolute error tolerance. This is only relevant for inequality constraints
         :return: ``True`` if the constraint is satisfied, otherwise ``False``
         """
         from hips.utils import is_close
         eval_lhs = self.lhs.eval(variable_solutions)
         if self.comparator == Comparator.LESS_EQUALS:
-            return eval_lhs.reshape(-1) <= (self.rhs + eps).reshape(-1)
+            return all((eval_lhs.reshape(-1) <= self.rhs.reshape(-1)) | is_close(eval_lhs.reshape(-1), self.rhs.reshape(-1)))
         if self.comparator == Comparator.GREATER_EQUALS:
-            return eval_lhs.reshape(-1) >= (self.rhs - eps).reshape(-1)
+            return all((eval_lhs.reshape(-1) >= self.rhs.reshape(-1)) | is_close(eval_lhs.reshape(-1), self.rhs.reshape(-1)))
         if self.comparator == Comparator.EQUALS:
-            return is_close(eval_lhs.reshape(-1), self.rhs.reshape(-1))
+            return all_close(eval_lhs.reshape(-1), self.rhs.reshape(-1))
         raise ValueError("Could not evaluate constraint")
 
 

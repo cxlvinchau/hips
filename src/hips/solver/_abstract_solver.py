@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 
 from hips.constants import ProblemSense, LPStatus, VariableBound
-from hips.models._lp_model import Constraint, Variable, LinExpr, HIPSArray
+from hips.models._lp_model import Constraint, Variable, LinExpr
+from hips.models import HIPSArray
 
 
 class AbstractSolver(ABC):

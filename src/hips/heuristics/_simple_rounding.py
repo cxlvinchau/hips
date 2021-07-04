@@ -1,7 +1,7 @@
 import numpy as np
-from hips import LPStatus, HIPSArray, HeuristicStatus
+from hips import LPStatus, HeuristicStatus
 from hips.heuristics._heuristic import Heuristic
-from hips.models import MIPModel, Variable
+from hips.models import MIPModel, Variable, HIPSArray
 
 
 class SimpleRounding(Heuristic):
