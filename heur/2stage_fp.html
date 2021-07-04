@@ -182,7 +182,9 @@
             
   <div class="section" id="two-stage-feasibility-pump">
 <h1>Two Stage Feasibility Pump<a class="headerlink" href="#two-stage-feasibility-pump" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>Two Stage Feasibility pump</strong> proposed by <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Livio Bertacco, Matteo Fischetti, and Andrea Lodi. A feasibility pump heuristic for general mixed-integer problems. Discrete Optimization, 4(1):63-76, 2007. Mixed Integer Programming. URL: https://www.sciencedirect.com/science/article/pii/S1572528606000855, doi:https://doi.org/10.1016/j.disopt.2006.10.001.">BFL07</a>]</span> is an extension of the <strong>Feasibility Pump</strong> <span id="id2">[<a class="reference internal" href="../references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span> and can
+<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/two-stage-fp-example.ipynb" target="_blank">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a><p>The <strong>Two Stage Feasibility pump</strong> proposed by <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Livio Bertacco, Matteo Fischetti, and Andrea Lodi. A feasibility pump heuristic for general mixed-integer problems. Discrete Optimization, 4(1):63-76, 2007. Mixed Integer Programming. URL: https://www.sciencedirect.com/science/article/pii/S1572528606000855, doi:https://doi.org/10.1016/j.disopt.2006.10.001.">BFL07</a>]</span> is an extension of the <strong>Feasibility Pump</strong> <span id="id2">[<a class="reference internal" href="../references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span> and can
 be used to solve general mixed integer programs, i.e. programs containing binary and integer variables. In contrast, the original
 feasibility pump is only designed for mixed integer programs containing binary variables only.</p>
 <p>The basic idea of this feasibility pump is to handle binary and integer variables in two different stages. In the first stage,
@@ -190,6 +192,25 @@ the integer variables are ignored, i.e. treated as if they were continuous, and 
 The first stage is completed once a feasible solution w.r.t. the binary variables has been found or when the maximum iteration
 has been reached. Afterwards, in the second stage, the integer variables are considered. Note that the original feasibility
 pump can also handle integer variables, but might be less suited for this purpose.</p>
+<p>In HIPS, the <a class="reference internal" href="../_autosummary/hips.heuristics.TwoStageFeasibilityPump.html#hips.heuristics.TwoStageFeasibilityPump" title="hips.heuristics.TwoStageFeasibilityPump"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.TwoStageFeasibilityPump</span></code></a> implements the described heuristic.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
+<span class="kn">from</span> <span class="nn">hips.heuristics</span> <span class="kn">import</span> <span class="n">TwoStageFeasibilityPump</span>
+
+<span class="n">mip</span> <span class="o">=</span> <span class="n">load_problem</span><span class="p">(</span><span class="s2">&quot;bppc8-02&quot;</span><span class="p">)</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="n">TwoStageFeasibilityPump</span><span class="p">(</span><span class="n">mip</span><span class="p">)</span>
+<span class="n">fp</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Print objective value</span>
+<span class="k">print</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">get_objective_value</span><span class="p">())</span>
+
+<span class="c1"># Print solution</span>
+<span class="k">print</span><span class="p">({</span><span class="n">var</span><span class="p">:</span> <span class="n">fp</span><span class="o">.</span><span class="n">variable_solution</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">mip</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()})</span>
+</pre></div>
+</div>
+<p>In this example we consider the <a class="reference external" href="http://miplib2017.zib.de/instance_details_bppc8-02.html">bppc8-02 problem</a>
+from MIPLIB 2017 <span id="id3">[<a class="reference internal" href="../references.html#id10" title="Ambros Gleixner, Gregor Hendel, Gerald Gamrath, Tobias Achterberg, Michael Bastubbe, Timo Berthold, Philipp M. Christophel, Kati Jarck, Thorsten Koch, Jeff Linderoth, Marco Lübbecke, Hans D. Mittelmann, Derya Ozyurt, Ted K. Ralphs, Domenico Salvagnin, and Yuji Shinano. MIPLIB 2017: Data-Driven Compilation of the 6th Mixed-Integer Programming Library. Mathematical Programming Computation, 2021. URL: https://doi.org/10.1007/s12532-020-00194-3, doi:10.1007/s12532-020-00194-3.">GHG+21</a>]</span> and use <a class="reference internal" href="../_autosummary/hips.load_problem.html#hips.load_problem" title="hips.load_problem"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.load_problem()</span></code></a> to load it. Here, <code class="docutils literal notranslate"><span class="pre">max_iter=100</span></code> means that at most
+100 iterations are spent in the first and second stage, respectively. Consequently, at most 200 iterations are computed
+in total.</p>
 </div>
 
 

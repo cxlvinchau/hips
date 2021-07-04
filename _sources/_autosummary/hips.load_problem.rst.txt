@@ -1,0 +1,6 @@
+﻿hips.load\_problem
+==================
+
+.. currentmodule:: hips
+
+.. autofunction:: load_problem

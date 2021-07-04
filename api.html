@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#solver">Solver</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.solver.GurobiSolver.html">hips.solver.GurobiSolver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.solver.ClpSolver.html">hips.solver.ClpSolver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.solver.BranchAndBound.html">hips.solver.BranchAndBound</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#heuristics">Heuristics</a><ul>
@@ -136,10 +137,10 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.BoundDirection.html">hips.BoundDirection</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#loader-and-tracker">Loader and Tracker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#loader">Loader</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps.html">hips.loader.mps_loader.load_mps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps_primitive.html">hips.loader.mps_loader.load_mps_primitive</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.utils.Tracker.html">hips.utils.Tracker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.load_problem.html">hips.load_problem</a></li>
 </ul>
 </li>
 </ul>
@@ -215,9 +216,11 @@
             
   <div class="section" id="api-documentation">
 <h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Documentation of the API.</p>
+<p>On this page we document the user API of HIPS. Each section is dedicated to one subpackage of HIPS and contains links to detailed
+descriptions of the different classes in these packages.</p>
 <div class="section" id="models">
 <h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">models</span></code> subpackage contains the different classes to model the linear and mixed-integer programs.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -247,6 +250,7 @@
 </div>
 <div class="section" id="solver">
 <h2>Solver<a class="headerlink" href="#solver" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">solver</span></code> subpackage contains the different linear programming solver and a naive branch and bound solver.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -259,11 +263,15 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver" title="hips.solver.ClpSolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.solver.ClpSolver</span></code></a></p></td>
 <td><p>Implementation of a linear programming solver using the Clp solver.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.solver.BranchAndBound.html#hips.solver.BranchAndBound" title="hips.solver.BranchAndBound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.solver.BranchAndBound</span></code></a></p></td>
+<td><p>Implementation of a naive branch and bound algorithm.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="heuristics">
 <h2>Heuristics<a class="headerlink" href="#heuristics" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">heuristics</span></code> subpackage contains the different heuristics to solve mixed-integer programs.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -296,6 +304,7 @@
 </div>
 <div class="section" id="constants">
 <h2>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">constants</span></code> subpackage contains the different enums/constants in HIPS.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -326,8 +335,9 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="loader-and-tracker">
-<h2>Loader and Tracker<a class="headerlink" href="#loader-and-tracker" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="loader">
+<h2>Loader<a class="headerlink" href="#loader" title="Permalink to this headline">¶</a></h2>
+<p>HIPS makes it easy to load MPS files and even comes with example problems to get started quickly.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -340,8 +350,8 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.loader.mps_loader.load_mps_primitive.html#hips.loader.mps_loader.load_mps_primitive" title="hips.loader.mps_loader.load_mps_primitive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.loader.mps_loader.load_mps_primitive</span></code></a></p></td>
 <td><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path. This method only uses 1-dimensional variables to create the model. If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set. Makes use of the library <a href="#id3"><span class="problematic" id="id4">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.utils.Tracker.html#hips.utils.Tracker" title="hips.utils.Tracker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.utils.Tracker</span></code></a></p></td>
-<td><p>Utility class to track heuristics_tmp</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.load_problem.html#hips.load_problem" title="hips.load_problem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.load_problem</span></code></a></p></td>
+<td><p>Loads a mixed-integer program that comes with HIPS.</p></td>
 </tr>
 </tbody>
 </table>

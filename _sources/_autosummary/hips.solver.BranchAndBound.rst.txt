@@ -1,0 +1,25 @@
+﻿hips.solver.BranchAndBound
+==========================
+
+.. currentmodule:: hips.solver
+
+.. autoclass:: BranchAndBound
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BranchAndBound.__init__
+      ~BranchAndBound.get_incumbent
+      ~BranchAndBound.get_incumbent_val
+      ~BranchAndBound.optimize
+   
+   
+
+   
+   
+   
