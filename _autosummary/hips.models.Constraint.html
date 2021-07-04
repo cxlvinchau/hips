@@ -45,7 +45,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="hips.solver.GurobiSolver" href="hips.solver.GurobiSolver.html" />
+    <link rel="next" title="hips.ProblemSense" href="hips.ProblemSense.html" />
     <link rel="prev" title="hips.models.LinExpr" href="hips.models.LinExpr.html" /> 
 </head>
 
@@ -220,23 +220,20 @@ created with the constructor but rather implicitly.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.Constraint.__init__" title="hips.models.Constraint.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(lhs, comparator, rhs)</p></td>
 <td><p>Constructor</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.Constraint.eval" title="hips.models.Constraint.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(variable_solutions[, eps])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.Constraint.eval" title="hips.models.Constraint.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(variable_solutions)</p></td>
 <td><p>Evaluate constraint</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.Constraint.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_solutions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0002</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.Constraint.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_solutions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.Constraint.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate constraint</p>
 <p>This method evaluates whether constraint is satisfied under the given solution</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>variable_solutions</strong> – ions: A <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> object that maps variables to their solution. The keys of this dictionary
-are instances of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a> and the keys are instances of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p></li>
-<li><p><strong>eps</strong> – Absolute error tolerance. This is only relevant for inequality constraints</p></li>
-</ul>
+<dd class="field-odd"><p><strong>variable_solutions</strong> – ions: A <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> object that maps variables to their solution. The keys of this dictionary
+are instances of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.Variable</span></code></a> and the keys are instances of <a class="reference internal" href="hips.models.HIPSArray.html#hips.models.HIPSArray" title="hips.models.HIPSArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.HIPSArray</span></code></a></p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the constraint is satisfied, otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
@@ -254,7 +251,7 @@ are instances of <a class="reference internal" href="hips.models.Variable.html#h
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hips.solver.GurobiSolver.html" class="btn btn-neutral float-right" title="hips.solver.GurobiSolver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hips.ProblemSense.html" class="btn btn-neutral float-right" title="hips.ProblemSense" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="hips.models.LinExpr.html" class="btn btn-neutral float-left" title="hips.models.LinExpr" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

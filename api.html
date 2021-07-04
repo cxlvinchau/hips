@@ -39,7 +39,6 @@
         <script src="_static/toggleprompt.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -111,21 +110,8 @@
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.models.Constraint.html">hips.models.Constraint</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#solver">Solver</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.solver.GurobiSolver.html">hips.solver.GurobiSolver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.solver.ClpSolver.html">hips.solver.ClpSolver</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#heuristics">Heuristics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.FeasibilityPump.html">hips.heuristics.FeasibilityPump</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.TwoStageFeasibilityPump.html">hips.heuristics.TwoStageFeasibilityPump</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.HeuristicBounds.html">hips.heuristics.HeuristicBounds</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.AbstractDiving.html">hips.heuristics.AbstractDiving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.FractionalDiving.html">hips.heuristics.FractionalDiving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.LineSearchDiving.html">hips.heuristics.LineSearchDiving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.heuristics.RENS.html">hips.heuristics.RENS</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#solver">Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#heuristics">Heuristics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.ProblemSense.html">hips.ProblemSense</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_autosummary/hips.LPStatus.html">hips.LPStatus</a></li>
@@ -252,12 +238,6 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver" title="hips.solver.GurobiSolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.solver.GurobiSolver</span></code></a></p></td>
-<td><p>Implementation of a linear programming solver using the Gurobi solver.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver" title="hips.solver.ClpSolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.solver.ClpSolver</span></code></a></p></td>
-<td><p>Implementation of a linear programming solver using the Clp solver.</p></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -269,27 +249,6 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics.FeasibilityPump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.FeasibilityPump</span></code></a></p></td>
-<td><p>Implementation of the original feasibility pump</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.TwoStageFeasibilityPump.html#hips.heuristics.TwoStageFeasibilityPump" title="hips.heuristics.TwoStageFeasibilityPump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.TwoStageFeasibilityPump</span></code></a></p></td>
-<td><p>Implementation of feasibility pump with two stages</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.HeuristicBounds.html#hips.heuristics.HeuristicBounds" title="hips.heuristics.HeuristicBounds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.HeuristicBounds</span></code></a></p></td>
-<td><p>This heuristic is implemented after the scipopt primal heuristic ‘heur_bounds.h’.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.AbstractDiving.html#hips.heuristics.AbstractDiving" title="hips.heuristics.AbstractDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.AbstractDiving</span></code></a></p></td>
-<td><p>Implements an abstract version of diving heuristics_tmp.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving" title="hips.heuristics.FractionalDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDiving</span></code></a></p></td>
-<td><p>Implements a concrete diving heuristic, that bounds the variable <span class="math notranslate nohighlight">\(x_j\)</span> with lowest fractionality <span class="math notranslate nohighlight">\(f(x_j)\)</span> to the nearest integer.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.LineSearchDiving</span></code></a></p></td>
-<td><p>Implementation of line search diving heuristic</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hips.heuristics.RENS.html#hips.heuristics.RENS" title="hips.heuristics.RENS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hips.heuristics.RENS</span></code></a></p></td>
-<td><p>Implementation of the relaxation enforced neighbourhood search (RENS)</p></td>
-</tr>
 </tbody>
 </table>
 </div>
