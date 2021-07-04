@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>hips.VariableBound &mdash; HIPS 0.0.1 documentation</title>
+  <title>hips.BoundDirection &mdash; HIPS 0.0.1 documentation</title>
   
 
   
@@ -45,8 +45,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="hips.HeuristicStatus" href="hips.HeuristicStatus.html" />
-    <link rel="prev" title="hips.VarTypes" href="hips.VarTypes.html" /> 
+    <link rel="next" title="hips.loader.mps_loader.load_mps" href="hips.loader.mps_loader.load_mps.html" />
+    <link rel="prev" title="hips.HeuristicStatus" href="hips.HeuristicStatus.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -109,9 +109,9 @@
 <li class="toctree-l3"><a class="reference internal" href="hips.LPStatus.html">hips.LPStatus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hips.Comparator.html">hips.Comparator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hips.VarTypes.html">hips.VarTypes</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.VariableBound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.VariableBound.html">hips.VariableBound</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hips.HeuristicStatus.html">hips.HeuristicStatus</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hips.BoundDirection.html">hips.BoundDirection</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.BoundDirection</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#loader-and-tracker">Loader and Tracker</a></li>
@@ -169,13 +169,13 @@
         
           <li><a href="../api.html">API Documentation</a> &raquo;</li>
         
-      <li>hips.VariableBound</li>
+      <li>hips.BoundDirection</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/_autosummary/hips.VariableBound.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/hips.BoundDirection.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -188,30 +188,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hips-variablebound">
-<h1>hips.VariableBound<a class="headerlink" href="#hips-variablebound" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hips-bounddirection">
+<h1>hips.BoundDirection<a class="headerlink" href="#hips-bounddirection" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="hips.VariableBound">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.</span></span><span class="sig-name descname"><span class="pre">VariableBound</span></span><a class="headerlink" href="#hips.VariableBound" title="Permalink to this definition">¶</a></dt>
-<dd><p>Enum for variable bound, i.e. lower bound or upper bound.</p>
+<dt class="sig sig-object py" id="hips.BoundDirection">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.</span></span><span class="sig-name descname"><span class="pre">BoundDirection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.BoundDirection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enum for the direction to bound in HeuristicBounds.
+Use this exclusively for HeuristicBounds!</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="hips.VariableBound.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.VariableBound.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="hips.BoundDirection.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.BoundDirection.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
-<p class="rubric">Methods</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hips.VariableBound.__init__" title="hips.VariableBound.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
-<td><p>Initialize self.</p></td>
-</tr>
-</tbody>
-</table>
 <p class="rubric">Attributes</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -219,25 +208,31 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hips.VariableBound.LB" title="hips.VariableBound.LB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LB</span></code></a></p></td>
-<td><p>Lower bound</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.BoundDirection.CLOSEST" title="hips.BoundDirection.CLOSEST"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CLOSEST</span></code></a></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.VariableBound.UB" title="hips.VariableBound.UB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UB</span></code></a></p></td>
-<td><p>Upper bound</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.BoundDirection.LOWER" title="hips.BoundDirection.LOWER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOWER</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.BoundDirection.UPPER" title="hips.BoundDirection.UPPER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UPPER</span></code></a></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="hips.VariableBound.LB">
-<span class="sig-name descname"><span class="pre">LB</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#hips.VariableBound.LB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lower bound</p>
-</dd></dl>
+<dt class="sig sig-object py" id="hips.BoundDirection.LOWER">
+<span class="sig-name descname"><span class="pre">LOWER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#hips.BoundDirection.LOWER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="hips.VariableBound.UB">
-<span class="sig-name descname"><span class="pre">UB</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#hips.VariableBound.UB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Upper bound</p>
-</dd></dl>
+<dt class="sig sig-object py" id="hips.BoundDirection.UPPER">
+<span class="sig-name descname"><span class="pre">UPPER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#hips.BoundDirection.UPPER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hips.BoundDirection.CLOSEST">
+<span class="sig-name descname"><span class="pre">CLOSEST</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#hips.BoundDirection.CLOSEST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -249,8 +244,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hips.HeuristicStatus.html" class="btn btn-neutral float-right" title="hips.HeuristicStatus" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="hips.VarTypes.html" class="btn btn-neutral float-left" title="hips.VarTypes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hips.loader.mps_loader.load_mps.html" class="btn btn-neutral float-right" title="hips.loader.mps_loader.load_mps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hips.HeuristicStatus.html" class="btn btn-neutral float-left" title="hips.HeuristicStatus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
