@@ -22,7 +22,7 @@ class HeuristicBounds(Heuristic):
     The scipopt library describes this as a "heuristic which fixes all integer variables to a bound (lower/upper) and solves the remaining LP ".
 
     The heuristic can be found in the scipopt library documentation under the following link:
-    hyperlink: `heur_bound.h File Reference <https://www.scipopt.org/doc/html/heur__bound_8h.php>`_.
+    hyperlink: `heur_bound.h <https://www.scipopt.org/doc/html/heur__bound_8h.php>`_.
 
     The 'CLOSEST' direction was added, to be able to fix the integer variable to the bound, closest to the initial relaxation LP solution.
     """

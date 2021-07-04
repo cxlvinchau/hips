@@ -62,6 +62,7 @@ _________
    hips.Comparator
    hips.VarTypes
    hips.VariableBound
+   hips.HeuristicStatus
 
 
 Loader and Tracker
