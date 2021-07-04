@@ -7,8 +7,34 @@ import numpy as np
 
 
 class BranchAndBound:
+    r"""Implementation of a naive branch and bound algorithm.
+
+    This class implements a naive branch and bound algorithm for solving mixed-integer programs. As the name suggests,
+    the procedure consist of two main parts, the branching and the bounding. Note that the branch and bound algorithm
+    delivers the optimal solution of the problem.
+
+    W.l.o.g., suppose we want to solve a mixed-integer program with the feasible region :math:`Ax \leq b` where we require
+    :math:`x_i \in \mathbb{Z}` for :math:`i \in I`. The branch and bound algorithm repeatedly solves the relaxation of the problem,
+    i.e. the problem without the integer constraints. If the found solution :math:`\bar x` is feasible for the original problem, we are done.
+    Otherwise, there exists a variable :math:`x_i` with :math:`i \in I` that is not integer. In the *branching step*, the procedure creates
+    two subproblems with the constraints :math:`x_i \leq \lfloor \bar x_i \rfloor` and :math:`x_i \geq \lceil \bar x_i \rceil`, respectively.
+    These subproblems are then solved with the branch and bound algorithm again. However, there is not always the need
+    to branch. If the relaxation of a subproblem has a worse objective than the current best solution, also known as incumbent solution,
+    then there is no need to explore this branch. This is the `bound` part of the procedure.
+
+    More details can be found in :cite:`gritzmann2013grundlagen`.
+    """
 
     def __init__(self, model: MIPModel, incumbent=None, incumbent_val=None, max_nodes=None):
+        """Constructor
+
+        :param model: Mixed-integer program to be optimized. Instance of :class:`hips.models.MIPModel`.
+        :param incumbent: The best known solution of the problem. If specified, there can be a significant speed up depending
+            on the quality of the provided solution. Has to be given as a :class:`dict` that maps the variables to a :class:`hips.models.HIPSArray`.
+        :param incumbent_val: The objective value of the best known solution.
+        :param max_nodes: The maximum number of nodes to visit. A small number of nodes might result in not finding any solution.
+            For larger problems, the procedure might take very long if the number of nodes is large.
+        """
         self.model = model
         self.sense = model.lp_model.lp_sense
         self.incumbent = incumbent
@@ -37,7 +63,27 @@ class BranchAndBound:
         node.backtrack()
 
     def optimize(self):
+        """Optimizes the mixed-integer program.
+        """
         self._optimize(Node(self.model))
+
+    def get_incumbent(self):
+        """Returns the incumbent
+
+        This method returns the incumbent solution. If no solution exists, ``None`` is returned.
+
+        :return: :class:`dict` mapping variables to :class:`hips.models.HIPSArray` or ``None``
+        """
+        return self.incumbent
+
+    def get_incumbent_val(self):
+        """Returns the objective value of the incumbent
+
+        This method returns the objective value of the incumbent. If no solution exists, ``None`` is returned.
+
+        :return: Objective value of incumbent or ``None``
+        """
+        return self.incumbent_val
 
 
 class Node:

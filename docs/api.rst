@@ -2,12 +2,13 @@
 
 API Documentation
 =================
-
-Documentation of the API.
-
+On this page we document the user API of HIPS. Each section is dedicated to one subpackage of HIPS and contains links to detailed
+descriptions of the different classes in these packages.
 
 Models
 ______
+The ``models`` subpackage contains the different classes to model the linear and mixed-integer programs.
+
 .. autosummary::
    :toctree: _autosummary
    :nosignatures:
@@ -24,6 +25,8 @@ ______
 
 Solver
 ______
+The ``solver`` subpackage contains the different linear programming solver and a naive branch and bound solver.
+
 .. autosummary::
    :toctree: _autosummary
    :nosignatures:
@@ -31,10 +34,13 @@ ______
 
    hips.solver.GurobiSolver
    hips.solver.ClpSolver
+   hips.solver.BranchAndBound
 
 
 Heuristics
 __________
+The ``heuristics`` subpackage contains the different heuristics to solve mixed-integer programs.
+
 .. autosummary::
    :toctree: _autosummary
    :nosignatures:
@@ -52,6 +58,8 @@ __________
 
 Constants
 _________
+The ``constants`` subpackage contains the different enums/constants in HIPS.
+
 .. autosummary::
    :toctree: _autosummary
    :nosignatures:
@@ -66,8 +74,10 @@ _________
    hips.BoundDirection
 
 
-Loader and Tracker
+Loader
 ______
+HIPS makes it easy to load MPS files and even comes with example problems to get started quickly.
+
 .. autosummary::
    :toctree: _autosummary
    :nosignatures:
@@ -75,4 +85,4 @@ ______
 
    hips.loader.mps_loader.load_mps
    hips.loader.mps_loader.load_mps_primitive
-   hips.utils.Tracker
+   hips.load_problem

@@ -49,6 +49,26 @@ def load_problem_gurobi(problem_name):
 
 
 def load_problem(problem_name):
+    """Loads a mixed-integer program that comes with HIPS.
+
+    This method returns a mixed-integer program, given a problem name. HIPS already comes with a small set of mixed-integer
+    programs. These problems were obtained from the MIPLIB 2017 :cite:`miplib2017`. The following problems can be loaded:
+
+    - ``10teams`` (https://miplib.zib.de/instance_details_10teams.html)
+    - ``bppc8-02`` (http://miplib2017.zib.de/instance_details_bppc8-02.html)
+    - ``flugpl`` (http://miplib2017.zib.de/instance_details_flugpl.html)
+    - ``gen-ip054`` (https://miplib2017.zib.de/instance_details_gen-ip054.html)
+    - ``gr4x6`` (https://miplib.zib.de/instance_details_gr4x6.html)
+
+    The listed problems were obtained from the MIPLIB 2017 (https://miplib.zib.de/index.html). We would like to thank
+    the authors and people involved for their contribution and would like to emphasize that they are not linked to or involved in HIPS,
+    nor do they endorse HIPS.
+
+    The examples are licensed under Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/.)
+
+    :param problem_name: Name of the problem. Please have a look at the list above to see which problems can be loaded
+    :return: An instance of :class:`hips.models.MIPModel`
+    """
     if _solver_name == "GUROBI":
         return load_problem_gurobi(problem_name)
     elif _solver_name == "CLP":
