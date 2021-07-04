@@ -62,6 +62,7 @@ _________
    hips.Comparator
    hips.VarTypes
    hips.VariableBound
+   hips.HeuristicStatus
 
 
 Loader and Tracker
@@ -71,6 +72,6 @@ ______
    :nosignatures:
    :recursive:
 
-   hips.loader.mps_loader.load_mps_advanced
+   hips.loader.mps_loader.load_mps
    hips.loader.mps_loader.load_mps_primitive
    hips.utils.Tracker

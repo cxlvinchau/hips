@@ -20,7 +20,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         self.discovered_solution = None
         self.fractional_index_set = set()
         self._x = None
-        self._trivially_down_roundable, self._trivially_up_roundable = mip_model._trivially_roundable()
+        self._trivially_down_roundable, self._trivially_up_roundable = mip_model.trivially_roundable()
 
     def compute(self, max_iter=100):
         current_lp_solution = None
@@ -84,8 +84,6 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         fractional_index_set = set()
         for int_var in self.integer + self.binary:
             variable_value = self.relaxation.variable_solution(int_var)
-            # FIXME
-            # Do not iterate over indices, make use of numpy methods, also maybe a dictionary would be better than set
             for i in range(int_var.dim):
                 variable_index_value = variable_value.to_numpy()[i]
                 if not is_close(variable_index_value, math.floor(variable_index_value)) and not is_close(variable_index_value, math.ceil(variable_index_value)):
