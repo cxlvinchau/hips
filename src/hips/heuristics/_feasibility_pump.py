@@ -148,7 +148,7 @@ class FeasibilityPump(Heuristic):
 
         :return: None
         """
-        for var in {**self.positive_vars, **self.negative_vars}.values():
+        for var in list(self.positive_vars.values()) + list(self.negative_vars.values()):
             self.mip_model.lp_model.remove_variable(var)
         self.positive_vars = {}
         self.negative_vars = {}
@@ -350,6 +350,7 @@ class FeasibilityPump(Heuristic):
             return HeuristicStatus.SOL_FOUND
         else:
             return HeuristicStatus.NO_SOL_FOUND
+
 
 class TwoStageFeasibilityPump(Heuristic):
     r"""Implementation of feasibility pump with two stages
