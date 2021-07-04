@@ -1,6 +1,6 @@
 Two Stage Feasibility Pump
 ==========================
-The *Two stage Feasibility pump* proposed by :cite:p:`BERTACCO200763` is an extension of the *feasibility pump* :cite:p:`Fischetti2005` and can
+The **Two Stage Feasibility pump** proposed by :cite:p:`BERTACCO200763` is an extension of the **Feasibility Pump** :cite:p:`Fischetti2005` and can
 be used to solve general mixed integer programs, i.e. programs containing binary and integer variables. In contrast, the original
 feasibility pump is only designed for mixed integer programs containing binary variables only.
 

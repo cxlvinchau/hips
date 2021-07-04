@@ -2,7 +2,7 @@ import numpy as np
 
 from enum import Enum
 
-from hips.constants import LPStatus, VariableBound, HeuristicStatus
+from hips.constants import LPStatus, VariableBound, HeuristicStatus, BoundDirection
 from hips.heuristics._heuristic import Heuristic
 from hips.loader.mps_loader import load_mps_primitive
 from hips.models import MIPModel, Variable, HIPSArray
