@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>hips.load_problem &mdash; HIPS 0.0.1 documentation</title>
+  <title>hips.loader.load_mps_primitive &mdash; HIPS 0.0.1 documentation</title>
   
 
   
@@ -45,8 +45,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Developer API" href="../dev_api.html" />
-    <link rel="prev" title="hips.loader.load_mps_primitive" href="hips.loader.load_mps_primitive.html" /> 
+    <link rel="next" title="hips.load_problem" href="hips.load_problem.html" />
+    <link rel="prev" title="hips.loader.load_mps" href="hips.loader.load_mps.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -107,8 +107,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#loader">Loader</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="hips.loader.load_mps.html">hips.loader.load_mps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hips.loader.load_mps_primitive.html">hips.loader.load_mps_primitive</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.load_problem</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">hips.loader.load_mps_primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hips.load_problem.html">hips.load_problem</a></li>
 </ul>
 </li>
 </ul>
@@ -165,13 +165,13 @@
         
           <li><a href="../api.html">API Documentation</a> &raquo;</li>
         
-      <li>hips.load_problem</li>
+      <li>hips.loader.load_mps_primitive</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/_autosummary/hips.load_problem.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/hips.loader.load_mps_primitive.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -184,31 +184,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hips-load-problem">
-<h1>hips.load_problem<a class="headerlink" href="#hips-load-problem" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hips-loader-load-mps-primitive">
+<h1>hips.loader.load_mps_primitive<a class="headerlink" href="#hips-loader-load-mps-primitive" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="hips.load_problem">
-<span class="sig-prename descclassname"><span class="pre">hips.</span></span><span class="sig-name descname"><span class="pre">load_problem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.load_problem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads a mixed-integer program that comes with HIPS.</p>
-<p>This method returns a mixed-integer program, given a problem name. HIPS already comes with a small set of mixed-integer
-programs. These problems were obtained from the MIPLIB 2017 <span id="id1">[<a class="reference internal" href="../references.html#id10" title="Ambros Gleixner, Gregor Hendel, Gerald Gamrath, Tobias Achterberg, Michael Bastubbe, Timo Berthold, Philipp M. Christophel, Kati Jarck, Thorsten Koch, Jeff Linderoth, Marco Lübbecke, Hans D. Mittelmann, Derya Ozyurt, Ted K. Ralphs, Domenico Salvagnin, and Yuji Shinano. MIPLIB 2017: Data-Driven Compilation of the 6th Mixed-Integer Programming Library. Mathematical Programming Computation, 2021. URL: https://doi.org/10.1007/s12532-020-00194-3, doi:10.1007/s12532-020-00194-3.">GHG+21</a>]</span>. The following problems can be loaded:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">10teams</span></code> (<a class="reference external" href="https://miplib.zib.de/instance_details_10teams.html">https://miplib.zib.de/instance_details_10teams.html</a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">bppc8-02</span></code> (<a class="reference external" href="http://miplib2017.zib.de/instance_details_bppc8-02.html">http://miplib2017.zib.de/instance_details_bppc8-02.html</a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">flugpl</span></code> (<a class="reference external" href="http://miplib2017.zib.de/instance_details_flugpl.html">http://miplib2017.zib.de/instance_details_flugpl.html</a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gen-ip054</span></code> (<a class="reference external" href="https://miplib2017.zib.de/instance_details_gen-ip054.html">https://miplib2017.zib.de/instance_details_gen-ip054.html</a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gr4x6</span></code> (<a class="reference external" href="https://miplib.zib.de/instance_details_gr4x6.html">https://miplib.zib.de/instance_details_gr4x6.html</a>)</p></li>
-</ul>
-<p>The listed problems were obtained from the MIPLIB 2017 (<a class="reference external" href="https://miplib.zib.de/index.html">https://miplib.zib.de/index.html</a>). We would like to thank
-the authors and people involved for their contribution and would like to emphasize that they are not linked to or involved in HIPS,
-nor do they endorse HIPS.</p>
-<p>The examples are licensed under Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (<a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a>.)</p>
+<dt class="sig sig-object py" id="hips.loader.load_mps_primitive">
+<span class="sig-prename descclassname"><span class="pre">hips.loader.</span></span><span class="sig-name descname"><span class="pre">load_mps_primitive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.loader.load_mps_primitive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.
+This method only uses 1-dimensional variables to create the model.
+If the specified .mps file does not contain a ‘BOUNDS’ section, standard bounds x ∈ [0,inf) are set.
+Makes use of the library <a href="#id1"><span class="problematic" id="id2">:py:`pysmps &lt;pysmps.smps_loader.py&gt;`</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>problem_name</strong> – Name of the problem. Please have a look at the list above to see which problems can be loaded</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mip_model</strong> – The mip_model, in which the MIP problem should be loaded.</p></li>
+<li><p><strong>path</strong> – The path to the .mps file. This can be either relative to the current working directory or absolute.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>An instance of <a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.MIPModel</span></code></a></p>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -221,8 +214,8 @@ nor do they endorse HIPS.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../dev_api.html" class="btn btn-neutral float-right" title="Developer API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="hips.loader.load_mps_primitive.html" class="btn btn-neutral float-left" title="hips.loader.load_mps_primitive" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hips.load_problem.html" class="btn btn-neutral float-right" title="hips.load_problem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hips.loader.load_mps.html" class="btn btn-neutral float-left" title="hips.loader.load_mps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

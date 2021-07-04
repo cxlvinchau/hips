@@ -1,0 +1,6 @@
+﻿hips.loader.load\_mps
+=====================
+
+.. currentmodule:: hips.loader
+
+.. autofunction:: load_mps

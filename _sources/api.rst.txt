@@ -83,6 +83,6 @@ HIPS makes it easy to load MPS files and even comes with example problems to get
    :nosignatures:
    :recursive:
 
-   hips.loader.mps_loader.load_mps
-   hips.loader.mps_loader.load_mps_primitive
+   hips.loader.load_mps
+   hips.loader.load_mps_primitive
    hips.load_problem
