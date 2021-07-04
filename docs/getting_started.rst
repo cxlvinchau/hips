@@ -269,7 +269,7 @@ sense is not specifiable in the MPS file and thus has to be set manually after l
 There are two helper functions implemented for loading an :class:`MIPModel <hips.models.MIPModel>` from an MPS file.
 
 The :func:`primitive loader<hips.loader.mps_loader.load_mps_primitive>` loads every variable of the MPS file specified
-in the \textbf{path} parameter as a 1-dimensional variable. The specified \textbf{path} is concatenated with the current
+in the \textbf{path} parameter as a 1-dimensional variable. The specified *path* is concatenated with the current
 working directory. This loader version can be used for an easier understanding and debugging of the created model. However
 the runtime of this loader suffers from inefficiency.
 

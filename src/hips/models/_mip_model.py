@@ -96,7 +96,7 @@ class MIPModel:
             return False
         return True
 
-    def _trivially_roundable(self):
+    def trivially_roundable(self):
         """
         Checks if the all variables of the model are trivially roundable. If so, fix the variables to the rounded values
         and optimize, such that the corresponding objective value can be fetched.
