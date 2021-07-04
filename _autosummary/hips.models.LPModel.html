@@ -203,7 +203,7 @@ optimize linear programs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>lp_solver</strong> – A concrete implementation of linear program solver. <code class="docutils literal notranslate"><span class="pre">lp_solver</span></code> has to be an instance of
-<code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.GurobiSolver</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.ClpSolver</span></code></p>
+<a class="reference internal" href="hips.solver.GurobiSolver.html#hips.solver.GurobiSolver" title="hips.solver.GurobiSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.GurobiSolver</span></code></a> or <a class="reference internal" href="hips.solver.ClpSolver.html#hips.solver.ClpSolver" title="hips.solver.ClpSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.ClpSolver</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -254,7 +254,10 @@ optimize linear programs.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.set_variable_bound" title="hips.models.LPModel.set_variable_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_variable_bound</span></code></a>(var, bound, value)</p></td>
 <td><p>Sets/updates the bound of a variable</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.variable_solution" title="hips.models.LPModel.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hips.models.LPModel.summary" title="hips.models.LPModel.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>()</p></td>
+<td><p>Prints a summary of the LP model</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hips.models.LPModel.variable_solution" title="hips.models.LPModel.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
 <td><p>Returns the optimal value for the given variable.</p></td>
 </tr>
 </tbody>
@@ -436,6 +439,12 @@ are instances of <a class="reference internal" href="hips.models.Variable.html#h
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the solution is feasible, otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hips.models.LPModel.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.LPModel.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a summary of the LP model</p>
 </dd></dl>
 
 </dd></dl>

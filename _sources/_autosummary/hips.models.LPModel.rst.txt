@@ -26,6 +26,7 @@
       ~LPModel.set_lp_sense
       ~LPModel.set_objective
       ~LPModel.set_variable_bound
+      ~LPModel.summary
       ~LPModel.variable_solution
    
    

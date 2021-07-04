@@ -20,6 +20,7 @@
       ~MIPModel.is_feasible
       ~MIPModel.set_mip_sense
       ~MIPModel.set_objective
+      ~MIPModel.summary
       ~MIPModel.trivially_roundable
    
    
