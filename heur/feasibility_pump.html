@@ -211,7 +211,7 @@ We iteratively compute LP feasible points <span class="math notranslate nohighli
 , which minimizes the distance from <span class="math notranslate nohighlight">\(\bar{x}\)</span> to the feasible region of the relaxation.
 If any of the rounded points <span class="math notranslate nohighlight">\(\tilde{x}\)</span> is feasible, we stop the computation and have found an integer feasible solution.</p>
 <p>This computation sequence is expressed by the following pseudo-algorithmic schema.</p>
-<img alt="heur/img/pseudo_algorithm_fs.png" src="heur/img/pseudo_algorithm_fs.png" />
+<img alt="../_images/pseudo_algorithm_fs.png" src="../_images/pseudo_algorithm_fs.png" />
 <p>Obviously a big difficulty of the <strong>Feasibility Pump</strong> is the chance of entering cylces, when reaching the same <span class="math notranslate nohighlight">\(\tilde{x}\)</span>
 twice. This means that the algorithm gets stuck and will never acquire as feasible solution. The easiest way to deal with this problem
 is to perturb some of the integer variables in cases a cylce is detected.
