@@ -11,7 +11,7 @@ The heuristic can be found in the ScipOpt library documentation under the follow
 
 This heuristic fixes every integer and binary variable to a respective bound and solves the remaining Linear Program.
 There are 3 ways to use this heuristic, represent by the values of the enum :class:`hips.constants.BoundDirection`.
-In the cases :ref:`LOWER <hips.constants.BoundDirection>` or :ref:`UPPER <hips.constants.BoundDirection>`,
+In the cases :class:`LOWER <hips.constants.BoundDirection>` or :class:`UPPER <hips.constants.BoundDirection>`,
 every integer variable is fixed to their respective lower or upper bound respectibely.
-In case :ref:`CLOSEST <hips.constants.BoundDirection>` is selected, each integer variable is fixed to the bound
+In case :class:`CLOSEST <hips.constants.BoundDirection>` is selected, each integer variable is fixed to the bound
 closest to the initial relaxation LP solution.
