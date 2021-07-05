@@ -189,16 +189,10 @@ The approach roughly follows the idea presented in <span id="id1">[<a class="ref
 only the trivially roundable variables (refer to <code class="xref py py-meth docutils literal notranslate"><span class="pre">hips.models._mip_model.trivially_roundable()</span></code>).</p>
 <p>First the LP relaxation of the model is solved resulting in the solution <span class="math notranslate nohighlight">\(\bar{x}\)</span>. Every integer or binary variable <span class="math notranslate nohighlight">\(x_j\)</span> is then rounded to the integer value
 <span class="math notranslate nohighlight">\([x_j]\)</span> closest to its value in the LP solution. The resulting MIP solution is then checked for feasibility.</p>
-<p>You can find an example in the following notebook:
-.. raw:: html</p>
-<blockquote>
-<div><dl class="simple">
-<dt>&lt;a href=”<a class="reference external" href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/simple_rounding_example.ipynb">https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/simple_rounding_example.ipynb</a>” target=”_blank”&gt;</dt><dd><p>&lt;img src=”<a class="reference external" href="https://colab.research.google.com/assets/colab-badge.svg">https://colab.research.google.com/assets/colab-badge.svg</a>” alt=”Open In Colab”/&gt;</p>
-</dd>
-</dl>
-<p>&lt;/a&gt;</p>
-</div></blockquote>
-</div>
+<p>You can find an example in the following notebook:</p>
+<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/simple_rounding_example.ipynb" target="_blank">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a></div>
 
 
            </div>

@@ -17,6 +17,7 @@ In case :class:`CLOSEST <hips.constants.BoundDirection>` is selected, each integ
 closest to the initial relaxation LP solution.
 
 You can find an example in the following notebook:
+
 .. raw:: html
 
     <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/bounds-example.ipynb" target="_blank">
