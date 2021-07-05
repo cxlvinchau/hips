@@ -50,6 +50,7 @@ to the closest integer value :math:`[x_j]`. This is done as follows:
 The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.
 
 You can find an example in the following notebook:
+
 .. raw:: html
 
     <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/fractional_diving_example.ipynb" target="_blank">

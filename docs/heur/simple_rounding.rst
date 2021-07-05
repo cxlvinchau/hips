@@ -10,6 +10,7 @@ First the LP relaxation of the model is solved resulting in the solution :math:`
 :math:`[x_j]` closest to its value in the LP solution. The resulting MIP solution is then checked for feasibility.
 
 You can find an example in the following notebook:
+
 .. raw:: html
 
     <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/simple_rounding_example.ipynb" target="_blank">
