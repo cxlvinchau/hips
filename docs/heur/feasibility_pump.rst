@@ -63,3 +63,26 @@ that ensures that the original objective function is still regarded. The paramet
 of the **Feasibility Pump** as a value between 0 and 1, denoting how much respect we pay to the original objective function.
 The higher the :math:`\alpha`, the more we optimize towards the original objective.
 
+Example
+-------
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+
+.. code-block:: python
+
+    from hips import load_problem
+    from hips.heuristics._feasibility_pump import FeasibilityPump
+
+    # Load the model
+    mip_model = load_problem("10teams")
+    # Create the Feasibility Pump
+    heur = FeasibilityPump(mip_model, t=15)
+    heur.compute(max_iter=1000)
+    # Inspect the solution
+    print("Status: {}".format(heur.get_status()))
+    print("Found solution: {}".format(heur.get_objective_value()))
+    heur.tracker.plot("feasibility objective")

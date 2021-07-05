@@ -15,3 +15,10 @@ In the cases :class:`LOWER <hips.constants.BoundDirection>` or :class:`UPPER <hi
 every integer variable is fixed to their respective lower or upper bound respectibely.
 In case :class:`CLOSEST <hips.constants.BoundDirection>` is selected, each integer variable is fixed to the bound
 closest to the initial relaxation LP solution.
+
+You can find an example in the following notebook:
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/bounds-example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
