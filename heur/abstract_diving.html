@@ -105,8 +105,14 @@
 <li class="toctree-l2"><a class="reference internal" href="bounds.html">Bounds Heuristic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rens.html">RENS</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Diving Heuristics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fractional-diving">Fractional diving</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#line-search-diving">Line Search Diving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fractional-diving">Fractional diving</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#line-search-diving">Line Search Diving</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="feasibility_pump.html">Feasibility Pump</a></li>
@@ -219,21 +225,53 @@ increases in the number of variables, the chance of success of a <strong>Diving 
 the low computational cost of these heuristics encourages their application in practice.</p>
 <div class="section" id="fractional-diving">
 <h2>Fractional diving<a class="headerlink" href="#fractional-diving" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving" title="hips.heuristics.FractionalDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDiving</span></code></a> is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
+<p>Fractional diving is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
 integer in each dive. The idea is based on page 17 of <span id="id1">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>. It can be used to find a quick initial solution
-or an efficient direction of branching in the branch and bound.</p>
+or an efficient direction of branching in the branch and bound. In HIPS the heuristic is implemented in the <a class="reference internal" href="../_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving" title="hips.heuristics.FractionalDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDiving</span></code></a> class.</p>
 <p>The heuristic traverses one path of the branch and bound tree of the MIP model to the leaf node. At each branch of the tree,
-the variable <span class="math notranslate nohighlight">\(x_j\)</span> with lowest fractionality <span class="math notranslate nohighlight">\(f(x_j)\)</span> with respect to the current relaxation solution is bound
+the variable <span class="math notranslate nohighlight">\(x_j\)</span> with the lowest fractionality <span class="math notranslate nohighlight">\(f(x_j)\)</span> with respect to the current relaxation solution is bounded
 to the closest integer value <span class="math notranslate nohighlight">\([x_j]\)</span>. This is done as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\textbf{if} \quad x_j - \lfloor x_j \rfloor \le \lceil x_j \rceil - x_j\\
 \textbf{then} \quad upper\_bound(x_j) \leftarrow \lfloor x_j \rfloor\\
 \textbf{else} \quad lower\_bound(x_j) \leftarrow \lceil x_j \rceil\end{split}\]</div>
 <p>The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.</p>
-<p>You can find an example in the following notebook:</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/fractional_diving_example.ipynb" target="_blank">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a></div>
+</a><p>In this example we consider a simple mixed-integer program. The example can also be found on Google Colab.</p>
+<p>First, we define a method that creates the model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">HIPSArray</span><span class="p">,</span> <span class="n">VarTypes</span><span class="p">,</span> <span class="n">ProblemSense</span>
+<span class="kn">from</span> <span class="nn">hips.models</span> <span class="kn">import</span> <span class="n">MIPModel</span>
+<span class="kn">from</span> <span class="nn">hips.solver</span> <span class="kn">import</span> <span class="n">GurobiSolver</span>
+<span class="kn">from</span> <span class="nn">hips.heuristics</span> <span class="kn">import</span> <span class="n">FractionalDiving</span>
+
+<span class="k">def</span> <span class="nf">build_model</span><span class="p">(</span><span class="n">mip_model</span><span class="p">):</span>
+    <span class="c1"># Create variables</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">mip_model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">VarTypes</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># Add constraints</span>
+    <span class="n">mip_model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">HIPSArray</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">mip_model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">HIPSArray</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="c1"># Set objective and problem sense</span>
+    <span class="n">mip_model</span><span class="o">.</span><span class="n">set_objective</span><span class="p">(</span><span class="n">HIPSArray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">mip_model</span><span class="o">.</span><span class="n">set_mip_sense</span><span class="p">(</span><span class="n">ProblemSense</span><span class="o">.</span><span class="n">MAX</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Afterwards, we instantiate the model, apply the heuristic and output the found solution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mip_model</span> <span class="o">=</span> <span class="n">MIPModel</span><span class="p">(</span><span class="n">GurobiSolver</span><span class="p">())</span>
+<span class="n">build_model</span><span class="p">(</span><span class="n">mip_model</span><span class="p">)</span>
+
+<span class="n">heur</span> <span class="o">=</span> <span class="n">FractionalDiving</span><span class="p">(</span><span class="n">mip_model</span><span class="p">)</span>
+<span class="n">heur</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Status: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">heur</span><span class="o">.</span><span class="n">get_status</span><span class="p">()))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Found solution: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">heur</span><span class="o">.</span><span class="n">get_objective_value</span><span class="p">()))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;With Variable values: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">({</span><span class="n">var</span><span class="p">:</span> <span class="n">heur</span><span class="o">.</span><span class="n">variable_solution</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">mip_model</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()}))</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="line-search-diving">
 <h2>Line Search Diving<a class="headerlink" href="#line-search-diving" title="Permalink to this headline">¶</a></h2>
 <p>Now we consider the <strong>Line Search Diving</strong> heuristic as presented by <span id="id2">[<a class="reference internal" href="../references.html#id7" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011.">Hen11</a>]</span>. As the name suggests, this
@@ -246,6 +284,30 @@ between <span class="math notranslate nohighlight">\(x^N\)</span> and <span clas
 This variable is then selected and fixed.</p>
 <p>Since our heuristic does not operate within a branch and bound algorithm, the initial variables that are fixed/selected
 are chosen randomly.</p>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/line_search_diving_example.ipynb" target="_blank">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
+<span class="kn">from</span> <span class="nn">hips.heuristics</span> <span class="kn">import</span> <span class="n">LineSearchDiving</span>
+
+<span class="c1"># Load problem</span>
+<span class="n">mip_model</span> <span class="o">=</span> <span class="n">load_problem</span><span class="p">(</span><span class="s2">&quot;osorio-cta&quot;</span><span class="p">)</span>
+
+<span class="c1"># Instantiate diving heuristic</span>
+<span class="n">diver</span> <span class="o">=</span> <span class="n">LineSearchDiving</span><span class="p">(</span><span class="n">mip_model</span><span class="p">)</span>
+<span class="c1"># Deactivate trivial rounding</span>
+<span class="n">diver</span><span class="o">.</span><span class="n">_round_trivially</span> <span class="o">=</span> <span class="k">lambda</span> <span class="p">:</span> <span class="bp">False</span>
+<span class="c1"># Start computation</span>
+<span class="n">diver</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+<span class="c1"># Output solution</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Status: {diver.get_status()}&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Found solution: {diver.get_objective_value()}&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;With Variable values: { {var: diver.variable_solution(var) for var in mip_model.get_variables()} }&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 

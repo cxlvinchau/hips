@@ -34,12 +34,12 @@ the low computational cost of these heuristics encourages their application in p
 Fractional diving
 -----------------
 
-:class:`hips.heuristics.FractionalDiving` is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
+Fractional diving is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
 integer in each dive. The idea is based on page 17 of :cite:p:`2006:berthold`. It can be used to find a quick initial solution
-or an efficient direction of branching in the branch and bound.
+or an efficient direction of branching in the branch and bound. In HIPS the heuristic is implemented in the :class:`hips.heuristics.FractionalDiving` class.
 
 The heuristic traverses one path of the branch and bound tree of the MIP model to the leaf node. At each branch of the tree,
-the variable :math:`x_j` with lowest fractionality :math:`f(x_j)` with respect to the current relaxation solution is bound
+the variable :math:`x_j` with the lowest fractionality :math:`f(x_j)` with respect to the current relaxation solution is bounded
 to the closest integer value :math:`[x_j]`. This is done as follows:
 
 .. math::
@@ -49,7 +49,8 @@ to the closest integer value :math:`[x_j]`. This is done as follows:
 
 The traversal is discontinued if any relaxation is infeasible or a feasible integer solution is found.
 
-You can find an example in the following notebook:
+Example
+_______
 
 .. raw:: html
 
@@ -57,9 +58,43 @@ You can find an example in the following notebook:
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
 
+In this example we consider a simple mixed-integer program. The example can also be found on Google Colab.
+
+First, we define a method that creates the model.
+
+.. code-block:: python
+
+    from hips import HIPSArray, VarTypes, ProblemSense
+    from hips.models import MIPModel
+    from hips.solver import GurobiSolver
+    from hips.heuristics import FractionalDiving
+
+    def build_model(mip_model):
+        # Create variables
+        x = mip_model.add_variable("x", VarTypes.INTEGER, lb=0, ub=float("inf"), dim=2)
+        # Add constraints
+        mip_model.add_constraint(HIPSArray([-3,2])*x <= 2)
+        mip_model.add_constraint(HIPSArray([2,2])*x <= 7)
+        # Set objective and problem sense
+        mip_model.set_objective(HIPSArray([1,2])*x)
+        mip_model.set_mip_sense(ProblemSense.MAX)
+
+Afterwards, we instantiate the model, apply the heuristic and output the found solution.
+
+.. code-block:: python
+
+    mip_model = MIPModel(GurobiSolver())
+    build_model(mip_model)
+
+    heur = FractionalDiving(mip_model)
+    heur.compute()
+
+    print("Status: {}".format(heur.get_status()))
+    print("Found solution: {}".format(heur.get_objective_value()))
+    print("With Variable values: {}".format({var: heur.variable_solution(var) for var in mip_model.get_variables()}))
+
 Line Search Diving
 ------------------
-
 Now we consider the **Line Search Diving** heuristic as presented by :cite:`Hendel2011`. As the name suggests, this
 heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
 explore a branch of a branch and bound tree. In :class:`hips.heuristics.LineSearchDiving`, the selected variable in each step is fixed to a value.
@@ -72,3 +107,32 @@ This variable is then selected and fixed.
 
 Since our heuristic does not operate within a branch and bound algorithm, the initial variables that are fixed/selected
 are chosen randomly.
+
+Example
+_______
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/line_search_diving_example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+
+.. code-block:: python
+
+    from hips import load_problem
+    from hips.heuristics import LineSearchDiving
+
+    # Load problem
+    mip_model = load_problem("osorio-cta")
+
+    # Instantiate diving heuristic
+    diver = LineSearchDiving(mip_model)
+    # Deactivate trivial rounding
+    diver._round_trivially = lambda : False
+    # Start computation
+    diver.compute()
+
+    # Output solution
+    print(f"Status: {diver.get_status()}")
+    print(f"Found solution: {diver.get_objective_value()}")
+    print(f"With Variable values: { {var: diver.variable_solution(var) for var in mip_model.get_variables()} }")
