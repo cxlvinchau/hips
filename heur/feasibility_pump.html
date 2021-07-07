@@ -186,9 +186,9 @@
             
   <div class="section" id="feasibility-pump">
 <h1>Feasibility Pump<a class="headerlink" href="#feasibility-pump" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>Feasibility Pump</strong> is the heuristic is responsible for the idea to this module and therefore the core
-heuristic of HIPS. First proposed in 2005 by Fischetti et al. <span id="id1">[<a class="reference internal" href="../references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, the <strong>Feasibility Pump</strong> aims to compute
-a feasible solution to an MIP without the need for an initial solution. The heuristic is also described in <span id="id2">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>.</p>
+<p>The <strong>Feasibility Pump</strong>, proposed in 2005 by Fischetti et al. <span id="id1">[<a class="reference internal" href="../references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, aims to compute
+a feasible solution to an MIP without the need for an initial solution. The heuristic is an integral part of HIPS
+and has significantly influenced and inspired the implementation of this library. The heuristic is also described in <span id="id2">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>.</p>
 <p>Assume we have the following general MIP:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lr&#64;{}l&#64;{}l&#64;{}l}
@@ -196,10 +196,10 @@ a feasible solution to an MIP without the need for an initial solution. The heur
 \text{subject to } &amp; Ax \le b \\
                     &amp; x_j \in \mathbb{Z}\text{, } \forall j \in I
 \end{array}\end{split}\]</div>
-<p>We define the rounding <span class="math notranslate nohighlight">\(\tilde{x}\)</span> of a variable <span class="math notranslate nohighlight">\(x\)</span> as :</p>
+<p>We define the rounding <span class="math notranslate nohighlight">\(\tilde{x}\)</span> of a variable <span class="math notranslate nohighlight">\(x\)</span> as:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\tilde{x}_j = \begin{cases} [x_j], &amp; j \in I\\ x_j, &amp; \text{otherwise} \end{cases}\end{split}\]</div>
-<p>We search the point <span class="math notranslate nohighlight">\({x\text{*}}\)</span>, the solution to the following LP:</p>
+<p>Note that <span class="math notranslate nohighlight">\([ \cdot ]\)</span> denotes the rounding to nearest integer. Then, we search the point <span class="math notranslate nohighlight">\({x\text{*}}\)</span>, the solution to the following LP:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lr&#64;{}l&#64;{}l&#64;{}l}
 \text{minimize }   &amp; \Delta (x, \tilde{x})  \\
@@ -208,11 +208,11 @@ a feasible solution to an MIP without the need for an initial solution. The heur
 <p>where <span class="math notranslate nohighlight">\(\Delta\)</span> is defined as the <span class="math notranslate nohighlight">\(L_1\)</span>-Norm:</p>
 <div class="math notranslate nohighlight">
 \[\Delta(x, \tilde{x}) = \sum_{j \in I} | x_j - \tilde{x}_j |\]</div>
-<p>With the terminology introduced, we can now generate two sequences which are the core to the <strong>Feasibility Pump</strong>.
+<p>With the terminology introduced, we can now generate two sequences which are the core of the <strong>Feasibility Pump</strong>.
 We iteratively compute LP feasible points <span class="math notranslate nohighlight">\(\bar{x}\)</span> and round it to the respective integer feasible points
-<span class="math notranslate nohighlight">\(\tilde{x}\)</span>. Subsequent points <span class="math notranslate nohighlight">\(\bar{x}\)</span> are computed by finding th LP feasible point <span class="math notranslate nohighlight">\({x\text{*}}\)</span> (computed as above)
-, which minimizes the distance from <span class="math notranslate nohighlight">\(\bar{x}\)</span> to the feasible region of the relaxation.
-If any of the rounded points <span class="math notranslate nohighlight">\(\tilde{x}\)</span> is feasible, we stop the computation and have found an integer feasible solution.</p>
+<span class="math notranslate nohighlight">\(\tilde{x}\)</span>. Subsequent points <span class="math notranslate nohighlight">\(\bar{x}\)</span> are computed by finding the LP feasible point <span class="math notranslate nohighlight">\({x\text{*}}\)</span> (computed as above)
+, which minimizes the distance from <span class="math notranslate nohighlight">\(\tilde{x}\)</span> to the feasible region of the relaxation.
+If a point <span class="math notranslate nohighlight">\(\bar{x}\)</span> is feasible to the original MIP, we stop the computation and have found an integer feasible solution.</p>
 <p>This computation sequence is expressed by the following pseudo-algorithmic schema.</p>
 <img alt="../_images/pseudo_algorithm_fs.png" src="../_images/pseudo_algorithm_fs.png" />
 <p>Obviously a big difficulty of the <strong>Feasibility Pump</strong> is the chance of entering cylces, when reaching the same <span class="math notranslate nohighlight">\(\tilde{x}\)</span>
@@ -220,17 +220,17 @@ twice. This means that the algorithm gets stuck and will never acquire as feasib
 is to perturb some of the integer variables in cases a cylce is detected.
 The implementation in the <a class="reference internal" href="../_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics._feasibility_pump.FeasibilityPump"><code class="xref py py-class docutils literal notranslate"><span class="pre">Feasibility</span> <span class="pre">Pump</span></code></a> maintains two types
 of cylce detection. The perturbation actions follow the rules described by Fischetti et al. <span id="id3">[<a class="reference internal" href="../references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>.</p>
-<p>In case we reach a cycle of length 1 (i.e. <span class="math notranslate nohighlight">\(\tilde{x}^i\)</span> = <span class="math notranslate nohighlight">\(\tilde{x}^{i+1}\)</span>) the algorithm, the
-T binary variables of the current integer solution <span class="math notranslate nohighlight">\(\tilde{x}\)</span> with highest distance <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j|\)</span> are flipped and fixed for the calculation of the next
-<span class="math notranslate nohighlight">\(\bar{x}\)</span>. The number T of variables to flip is uniformally chosen from the range <span class="math notranslate nohighlight">\(( \lfloor \frac{t}{2} \rfloor , \lfloor 1.5t \rfloor )\)</span>.
+<p>In case we reach a cycle of length 1 (i.e. <span class="math notranslate nohighlight">\(\tilde{x}^{(i)}\)</span> = <span class="math notranslate nohighlight">\(\tilde{x}^{(i+1)}\)</span>) in the algorithm, the
+T binary variables of the current integer solution <span class="math notranslate nohighlight">\(\tilde{x}\)</span> with highest distance <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j|\)</span> are flipped for the calculation of the next
+<span class="math notranslate nohighlight">\(\bar{x}\)</span>. The number T of variables to flip is uniformly chosen from the range <span class="math notranslate nohighlight">\(( \lfloor \frac{t}{2} \rfloor , \lfloor 1.5t \rfloor )\)</span>.
 The parameter <span class="math notranslate nohighlight">\(t\)</span> can be specified when initializing the <strong>Feasibility Pump</strong>. By default <span class="math notranslate nohighlight">\(t\)</span> will be assigned with <span class="math notranslate nohighlight">\(\lceil \frac{n}{2} \rceil\)</span>,
 with <span class="math notranslate nohighlight">\(n\)</span> the number of binary variables in the model.</p>
-<p>In case a cycle of length <span class="math notranslate nohighlight">\(1 &lt; l \le 3\)</span> is detected we uniformally chose a value <span class="math notranslate nohighlight">\({\rho}_j \in [-0.3, 0.7]\)</span> for
+<p>In case a cycle of length <span class="math notranslate nohighlight">\(1 &lt; l \le 3\)</span> is detected, we uniformly choose a value <span class="math notranslate nohighlight">\({\rho}_j \in [-0.3, 0.7]\)</span> for
 each binary variable <span class="math notranslate nohighlight">\(x_j\)</span> with <span class="math notranslate nohighlight">\(j \in I\)</span>. We then decide for each of those variables to flip the corresponding <span class="math notranslate nohighlight">\(\tilde{x}_j\)</span>
 if <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j| + max(0, {\rho}_j) &gt; 0.5\)</span>.</p>
-<p>To ensure that we do not only find any integer feasible solution, but a good one, the implementation addds a constraint,
-that ensures that the original objective function is still regarded. The parameter <span class="math notranslate nohighlight">\(\alpha\)</span> can be set on initialization
-of the <strong>Feasibility Pump</strong> as a value between 0 and 1, denoting how much respect we pay to the original objective function.
+<p>To find a high quality solution, the implementation offers the possibility to add a constraint
+that ensures that the original objective function is still considered. The parameter <span class="math notranslate nohighlight">\(\alpha\)</span> can be set on initialization
+of the <strong>Feasibility Pump</strong> as a value between 0 and 1, corresponding to how much we take the original objective function into consideration.
 The higher the <span class="math notranslate nohighlight">\(\alpha\)</span>, the more we optimize towards the original objective.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
