@@ -346,7 +346,7 @@ class FeasibilityPump(Heuristic):
         return self._original_obj.eval(self._x).reshape(-1).to_numpy()[0]
 
     def get_status(self):
-        if self.mip_model.is_feasible({var: self.relaxation.variable_solution(var) for var in self.relaxation.vars}):
+        if self.mip_model.is_feasible({var: self.variable_solution(var) for var in self.relaxation.vars}):
             return HeuristicStatus.SOL_FOUND
         else:
             return HeuristicStatus.NO_SOL_FOUND
