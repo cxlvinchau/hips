@@ -186,11 +186,11 @@
             
   <div class="section" id="rens">
 <h1>RENS<a class="headerlink" href="#rens" title="Permalink to this headline">¶</a></h1>
-<p>Relaxation enforced neighborhood search, or short RENS, introduced by <span id="id1">[<a class="reference internal" href="../references.html#id6" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span> is a heuristic
+<p>Relaxation enforced neighborhood search, or short <strong>RENS</strong>, introduced by <span id="id1">[<a class="reference internal" href="../references.html#id6" title="Timo Berthold. Rens – the optimal rounding. Mathematical Programming Computation, 6:, 01 2013. doi:10.1007/s12532-013-0060-9.">Ber13</a>]</span> is a heuristic
 for heuristically solving mixed-integer programs with binary and integer variables. The idea is to
 solve the relaxation of the problem and use the solution of the relaxed solution to introduce new bounds.</p>
 <p>W.l.o.g. suppose the feasible region of a relaxation of a problem is given by <span class="math notranslate nohighlight">\(Ax \leq b\)</span> and let <span class="math notranslate nohighlight">\(x^*\)</span> be
-the optimal solution of the problem. RENS adds the constraints <span class="math notranslate nohighlight">\({x \leq \lceil x^* \rceil}\)</span> and <span class="math notranslate nohighlight">\({x \geq \lfloor x^* \rfloor}\)</span>
+the optimal solution of the problem. <strong>RENS</strong> adds the constraints <span class="math notranslate nohighlight">\({x \leq \lceil x^* \rceil}\)</span> and <span class="math notranslate nohighlight">\({x \geq \lfloor x^* \rfloor}\)</span>
 to the original problem and solves it using a mixed-integer program solver. Note that the computed solution, if it exists,
 gives us the best solution that can be obtained from rounding the solution of the relaxation. Observe that the introduced
 bounds do not have any effect on binary variables, except when their value in the relaxation is <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>.</p>
@@ -198,7 +198,7 @@ bounds do not have any effect on binary variables, except when their value in th
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/rens-example.ipynb" target="_blank">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a><p>In HIPS the <a class="reference internal" href="../_autosummary/hips.heuristics.RENS.html#hips.heuristics.RENS" title="hips.heuristics.RENS"><code class="xref py py-class docutils literal notranslate"><span class="pre">RENS</span></code></a> class implements this heuristic. Now we show how to use RENS in HIPS.</p>
+</a><p>In HIPS the <a class="reference internal" href="../_autosummary/hips.heuristics.RENS.html#hips.heuristics.RENS" title="hips.heuristics.RENS"><code class="xref py py-class docutils literal notranslate"><span class="pre">RENS</span></code></a> class implements this heuristic. Now we show how to use <strong>RENS</strong> in HIPS.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
 <span class="kn">from</span> <span class="nn">hips.heuristics</span> <span class="kn">import</span> <span class="n">RENS</span>
 
@@ -218,9 +218,9 @@ bounds do not have any effect on binary variables, except when their value in th
 from MIPLIB 2017 <span id="id2">[<a class="reference internal" href="../references.html#id10" title="Ambros Gleixner, Gregor Hendel, Gerald Gamrath, Tobias Achterberg, Michael Bastubbe, Timo Berthold, Philipp M. Christophel, Kati Jarck, Thorsten Koch, Jeff Linderoth, Marco Lübbecke, Hans D. Mittelmann, Derya Ozyurt, Ted K. Ralphs, Domenico Salvagnin, and Yuji Shinano. MIPLIB 2017: Data-Driven Compilation of the 6th Mixed-Integer Programming Library. Mathematical Programming Computation, 2021. URL: https://doi.org/10.1007/s12532-020-00194-3, doi:10.1007/s12532-020-00194-3.">GHG+21</a>]</span> and use <a class="reference internal" href="../_autosummary/hips.load_problem.html#hips.load_problem" title="hips.load_problem"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.load_problem()</span></code></a> to load it.
 The problem has 30 variables, of which all are integer, and 27 constraints. After loading the problem, we can simply
 instantiate <a class="reference internal" href="../_autosummary/hips.heuristics.RENS.html#hips.heuristics.RENS" title="hips.heuristics.RENS"><code class="xref py py-class docutils literal notranslate"><span class="pre">RENS</span></code></a> with it and then call the <a class="reference internal" href="../_autosummary/hips.heuristics.RENS.html#hips.heuristics.RENS.compute" title="hips.heuristics.RENS.compute"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute</span></code></a>
-method. In RENS, the <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> argument correspond to the maximum number of nodes we want to visit in the branch
+method. In <strong>RENS</strong>, the <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> argument correspond to the maximum number of nodes we want to visit in the branch
 and bound tree. The smaller the number, the earlier the computation terminates. However, when the maximum number of
-nodes is set too small, RENS might not be able to find a feasible solution at all. Further, a larger maximum number
+nodes is set too small, <strong>RENS</strong> might not be able to find a feasible solution at all. Further, a larger maximum number
 of nodes potentially results in a solution with a better objective.</p>
 </div>
 </div>
