@@ -93,7 +93,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
     def _round_trivially(self):
         """
         Checks if the current solution of the relaxation is trivially roundable according to
-        :func:`mip_model._trivially_roundable <hips.models._mip_model.MIPModel._trivially_roundable>`.
+        :func:`mip_model.trivially_roundable <hips.models._mip_model.MIPModel.trivially_roundable>`.
         If so, it sets the discovered solution to the corresponding objective value of the rounded solution.
 
         :return: True, if current relaxation solution is trivially roundable, else False
