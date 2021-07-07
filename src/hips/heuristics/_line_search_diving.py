@@ -32,9 +32,9 @@ class LineSearchDiving(AbstractDiving):
         for var, idx in self.fractional_index_set:
             current_val, root_val = self._x[var].array[idx], self.root_node_solution[var].array[idx]
             if current_val < root_val:
-                q[(var, idx)] = (current_val - np.floor(current_val))/(root_val - current_val)
+                q[(var, idx)] = (current_val - np.floor(current_val)) / (root_val - current_val)
             elif current_val > root_val:
-                q[(var, idx)] = (np.ceil(current_val) - current_val)/(current_val - root_val)
+                q[(var, idx)] = (np.ceil(current_val) - current_val) / (current_val - root_val)
         if len(q) == 0:
             # Randomly fix variable if there are no difference between root and current solution
             var, idx = self.rng.choice(list(self.fractional_index_set), replace=False, size=1)[0]
@@ -65,8 +65,6 @@ class LineSearchDiving(AbstractDiving):
                 self.relaxation.add_constraint(constr)
                 self.added_constraints.append(constr)
 
-
     def revert(self):
-        pass
-        # TODO
-        # Currently, added constraints are not removed
+        for constr in self.added_constraints:
+            self.relaxation.remove_constraint(constraint=constr)

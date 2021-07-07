@@ -117,13 +117,16 @@ _______
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
 
+In the following, we consider the `gr4x6 <https://miplib.zib.de/instance_details_gr4x6.html>`_ problem from MIPLIB 2017 :cite:`miplib2017`.
+The problem is already part of HIPS, so there is no need to download any files.
+
 .. code-block:: python
 
     from hips import load_problem
     from hips.heuristics import LineSearchDiving
 
     # Load problem
-    mip_model = load_problem("osorio-cta")
+    mip_model = load_problem("gr4x6")
 
     # Instantiate diving heuristic
     diver = LineSearchDiving(mip_model)
