@@ -28,3 +28,4 @@ from hips.heuristics._abstract_diving import AbstractDiving
 from hips.heuristics._fractional_diving import FractionalDiving
 from hips.heuristics._line_search_diving import LineSearchDiving
 from hips.heuristics._rens import RENS
+from hips.heuristics._simple_rounding import SimpleRounding
