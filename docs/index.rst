@@ -13,8 +13,6 @@ and various diving heuristics. Further, HIPS implements wrappers for popular lin
 HIPS is designed to be easily extensible and user-friendly. Adding new heuristics or solvers can be done by implementing
 the corresponding interfaces.
 
-The code for this project is on `GitHub <https://github.com/cxlvinchau/hips>`_. Feel free to discuss any open issues with us.
-
 If you are not familiar with linear or mixed-integer programming, consider reading `this <https://en.wikipedia.org/wiki/Linear_programming>`_
 and `this <https://en.wikipedia.org/wiki/Integer_programming>`_ Wikipedia article.
 
@@ -30,6 +28,15 @@ badges that look like this:
 These badges lead to code examples in Python notebooks that you can run and try out without any setup. In addition,
 the examples on Google Colab are often more detailed and contain additional code. Thus, we strongly recommend the usage of Google
 Colab.
+
+Source code
+-----------
+The code for this project is on `GitHub <https://github.com/cxlvinchau/hips>`_. Feel free to discuss any open issues or suggestions with us.
+
+Authors
+=======
+HIPS is developed and maintained by Severin Bals and `Calvin Chau <https://cxlvinchau.github.io/>`_ from the
+`Department of Informatics <https://www.in.tum.de/en/cover-page/>`_ at the `Technical University of Munich <https://www.tum.de/en/>`_.
 
 .. toctree::
    :maxdepth: 2
@@ -48,8 +55,3 @@ Indices and tables
 
 * :ref:`genindex`
 * :ref:`search`
-
-Authors
-=======
-HIPS is developed and maintained by Severin Bals and `Calvin Chau <https://cxlvinchau.github.io/>`_ from the
-`Department of Informatics <https://www.in.tum.de/en/cover-page/>`_ at the `Technical University of Munich <https://www.tum.de/en/>`_.

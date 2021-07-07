@@ -25,7 +25,7 @@ The ``models`` subpackage contains the different classes to model the linear and
 
 Solver
 ______
-The ``solver`` subpackage contains the different linear programming solver and a naive branch and bound solver.
+The ``solver`` subpackage contains the different linear programming solvers and a naive branch and bound solver.
 
 .. autosummary::
    :toctree: _autosummary
