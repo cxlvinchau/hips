@@ -3,7 +3,7 @@ import math
 from hips.heuristics._heuristic import Heuristic
 from hips.models._lp_model import ProblemSense
 from hips.models import MIPModel, HIPSArray, Variable
-from hips.utils import REL_TOLERANCE, ABS_TOLERANCE, is_close, all_close
+from hips.utils import is_close, all_close
 from hips.heuristics import skip_when_clp_solver
 from hips.constants import LPStatus, HeuristicStatus
 import numpy as np

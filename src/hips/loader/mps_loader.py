@@ -9,7 +9,7 @@ import numpy as np
 import pysmps.smps_loader as loader
 from hips.models._mip_model import MIPModel
 from hips.models._lp_model import HIPSArray
-from hips.constants import VarTypes, ProblemSense
+from hips.constants import VarTypes
 
 
 def _bounds_set(path):

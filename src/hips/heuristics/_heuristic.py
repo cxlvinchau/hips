@@ -3,7 +3,6 @@ import logging
 logging.basicConfig(level=logging.INFO)
 from hips.models import Variable, MIPModel
 from hips.utils.tracking import Tracker
-from hips.constants import HeuristicStatus
 
 
 class Heuristic(metaclass=abc.ABCMeta):

@@ -1,11 +1,10 @@
 from hips.solver._abstract_solver import AbstractSolver
 from hips.constants import Comparator, VariableBound
-from hips.models._lp_model import Constraint, Variable, LinExpr
+from hips.models._lp_model import Constraint, Variable
 from hips.models import HIPSArray
 import gurobipy as gb
 from gurobipy import GRB
 from hips.constants import LPStatus, ProblemSense
-import numpy as np
 
 
 class GurobiSolver(AbstractSolver):
