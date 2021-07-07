@@ -26,8 +26,8 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         current_lp_solution = None
         feasible_solution_found = False
         self.relaxation.optimize()
-        if self.relaxation.get_status() == LPStatus.INFEASIBLE:
-            self.logger.warn("Problem is infeasible")
+        if self.relaxation.get_status() != LPStatus.OPTIMAL:
+            self.logger.warn("Problem is infeasible or unbounded")
             return
         current_lp_solution = self.get_objective_value()
         self._x = {x: self.relaxation.variable_solution(x) for x in self.relaxation.vars}
