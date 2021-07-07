@@ -119,6 +119,12 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#the-documentation">The documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#editing-the-documentation">Editing the documentation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -269,6 +275,41 @@ used during the computations of another heuristic.</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="section" id="the-documentation">
+<h2>The documentation<a class="headerlink" href="#the-documentation" title="Permalink to this headline">¶</a></h2>
+<p>It is good practice to document the code of a project and provide explanations on how to use it. The documentation of HIPS
+is generated with <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a>. Please familiarize yourself with Sphinx before working
+on the documentation.</p>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>The documentation is located in the <code class="docutils literal notranslate"><span class="pre">docs</span></code> folder. To work with the documentation, you need to install the requirements listed
+in <code class="docutils literal notranslate"><span class="pre">docs/requirements.txt</span></code>. Please have a look at <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/index.html">Sphinx extensions</a>
+for more details.</p>
+</div>
+<div class="section" id="building-the-documentation">
+<h3>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
+<p>Navigate into the <code class="docutils literal notranslate"><span class="pre">docs</span></code> folder and run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">clean</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>to ensure that the documentation is completely rebuilt.</p>
+</div>
+<div class="section" id="editing-the-documentation">
+<h3>Editing the documentation<a class="headerlink" href="#editing-the-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The documentation itself is written in <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">reStructuredText</a>
+markup language. This also means that the docstrings have to adhere to this format.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Commits on the main branch trigger a <a class="reference external" href="https://github.com/cxlvinchau/hips/actions/workflows/main.yml">GitHub action</a> that automatically
+builds and deploys the documentation. Particularly, this means that there is no need to setup Sphinx locally, although
+it is generally recommended.</p>
+</div>
 </div>
 </div>
 </div>

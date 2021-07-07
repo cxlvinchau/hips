@@ -79,3 +79,42 @@ used during the computations of another heuristic.
 
    hips.heuristics._abstract_diving.AbstractDiving
    hips.heuristics._heuristic.Heuristic
+
+
+The documentation
+-----------------
+It is good practice to document the code of a project and provide explanations on how to use it. The documentation of HIPS
+is generated with `Sphinx <https://www.sphinx-doc.org/en/master/>`_. Please familiarize yourself with Sphinx before working
+on the documentation.
+
+Setup
+_____
+The documentation is located in the ``docs`` folder. To work with the documentation, you need to install the requirements listed
+in ``docs/requirements.txt``. Please have a look at `Sphinx extensions <https://www.sphinx-doc.org/en/master/usage/extensions/index.html>`_
+for more details.
+
+Building the documentation
+__________________________
+Navigate into the ``docs`` folder and run
+
+.. code-block::
+
+    make html
+
+or
+
+.. code-block::
+
+    make clean html
+
+to ensure that the documentation is completely rebuilt.
+
+Editing the documentation
+_________________________
+The documentation itself is written in `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_
+markup language. This also means that the docstrings have to adhere to this format.
+
+.. note::
+    Commits on the main branch trigger a `GitHub action <https://github.com/cxlvinchau/hips/actions/workflows/main.yml>`_ that automatically
+    builds and deploys the documentation. Particularly, this means that there is no need to setup Sphinx locally, although
+    it is generally recommended.
