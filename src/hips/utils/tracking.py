@@ -1,6 +1,6 @@
+import warnings
 from typing import Union
 
-import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -33,9 +33,13 @@ class Tracker:
         :param metric: Metric that should be plotted
         :param x: x value, by default the iteration is used, any specified metric in the :func:`log` method also works.
         """
-        values = [value_dict[metric] for value_dict in self._metrics[metric]]
-        x_values = [value_dict[x] for value_dict in self._metrics[metric]]
-        plt.plot(x_values, values, marker='o', markersize=5)
-        plt.xlabel(x)
-        plt.ylabel(metric)
-        plt.show()
+        try:
+            import matplotlib.pyplot as plt
+            values = [value_dict[metric] for value_dict in self._metrics[metric]]
+            x_values = [value_dict[x] for value_dict in self._metrics[metric]]
+            plt.plot(x_values, values, marker='o', markersize=5)
+            plt.xlabel(x)
+            plt.ylabel(metric)
+            plt.show()
+        except ImportError:
+            warnings.warn("Matplotlib is not installed!")
