@@ -22,21 +22,22 @@ of the current LP relaxation is worse than this incumbent MIP solution, the heur
 can only lead to worse solutions.
 
 **Diving Heuristics** can be useful in many different scenarios. Since these heuristics do not require an MIP solver nor an
-incumbent MIP solution, they can be used to find an initial solution for other heuristics. Furthermore, in many cases we do
+incumbent MIP solution, they can be used to find an initial solution for other heuristics. Although, in many cases we do
 not search for the best solution to the MIP, but rather only a feasible solution.
 Furthermore, diving heuristics can be used in combination with a full *branch\&bound* run, to quickly find feasible solutions
-to the MIP. This means that the bounding can be done early, thereby ignoring larger portions of the tree and leading to a major decrease in run time.
+to the MIP. This means that the bounding can be done early, thereby ignoring larger portions of the tree and leading to
+a major decrease in computation time.
 
 Unfortunately **Diving Heuristics** do not always find a feasible solution. Since the size of the *branch\&bound* tree exponentially
-increases in the number of variables, the chance of success of a **Diving Heuristic** is proportionally small. Nevertheless,
+increases in the number of variables, the chance of a **Diving Heuristic** finding a successful path is proportionally small. Nevertheless,
 the low computational cost of these heuristics encourages their application in practice.
 
 Fractional diving
 -----------------
 
-Fractional diving is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
-integer in each dive. The idea is based on page 17 of :cite:p:`2006:berthold`. It can be used to find a quick initial solution
-or an efficient direction of branching in the branch and bound. In HIPS the heuristic is implemented in the :class:`hips.heuristics.FractionalDiving` class.
+**Fractional Diving** is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
+integer as its branching condition. The idea is based on page 17 of :cite:p:`2006:berthold`. It can be used to find a quick initial solution
+or an efficient direction of branching in the *branch&bound*. In HIPS the heuristic is implemented in the :class:`FractionalDiving <hips.heuristics.FractionalDiving>` class.
 
 The heuristic traverses one path of the branch and bound tree of the MIP model to the leaf node. At each branch of the tree,
 the variable :math:`x_j` with the lowest fractionality :math:`f(x_j)` with respect to the current relaxation solution is bounded
@@ -79,7 +80,7 @@ First, we define a method that creates the model.
         mip_model.set_objective(HIPSArray([1,2])*x)
         mip_model.set_mip_sense(ProblemSense.MAX)
 
-Afterwards, we instantiate the model, apply the heuristic and output the found solution.
+Afterwards, we instantiate the model, apply the heuristic and print the found solution.
 
 .. code-block:: python
 
@@ -97,7 +98,7 @@ Line Search Diving
 ------------------
 Now we consider the **Line Search Diving** heuristic as presented by :cite:`Hendel2011`. As the name suggests, this
 heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
-explore a branch of a branch and bound tree. In :class:`hips.heuristics.LineSearchDiving`, the selected variable in each step is fixed to a value.
+explore a path in the branch and bound tree. In :class:`LineSearchDiving <hips.heuristics.LineSearchDiving>`, the selected variable in each step is fixed to a value.
 
 The choice of the variable that is fixed is made as follows. Suppose :math:`x^R` is the solution found at the root
 node :math:`R` in the branch and bound algorithm. Let :math:`N` be an arbitrary node within the branch and bound tree
@@ -105,7 +106,7 @@ node :math:`R` in the branch and bound algorithm. Let :math:`N` be an arbitrary 
 between :math:`x^N` and :math:`x^R` and conceptually moves towards :math:`x^R` and checks which variable becomes integer first.
 This variable is then selected and fixed.
 
-Since our heuristic does not operate within a branch and bound algorithm, the initial variables that are fixed/selected
+Since our heuristic does not operate within a branch and bound algorithm, the initial variables to fix/select
 are chosen randomly.
 
 Example

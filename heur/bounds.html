@@ -185,24 +185,25 @@
             
   <div class="section" id="bounds-heuristic">
 <h1>Bounds Heuristic<a class="headerlink" href="#bounds-heuristic" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>Bounds Heuristic</strong> is implemented according to the scipopt primal heuristic <code class="docutils literal notranslate"><span class="pre">heur_bounds.h</span></code>.
+<p>The <strong>Bounds Heuristic</strong> is implemented according to the ScipOpt primal heuristic <code class="docutils literal notranslate"><span class="pre">heur_bounds.h</span></code>.
 The <a class="reference external" href="https://www.scipopt.org/doc/html/heur__bound_8h.php">ScipOpt</a> library describes it as a
 “heuristic which fixes all integer variables to a bound (lower/upper) and solves the remaining LP”.
 Although this heuristic leads to no feasible solution in most cases, it is often a good entry point, as it is very efficiently computable.</p>
 <p>The heuristic can be found in the ScipOpt library documentation under the following link:
-<a class="reference external" href="https://www.scipopt.org/doc/html/heur__bound_8h.php">heur_bound.h File Reference</a>. In HIPS the heuristic is
+<a class="reference external" href="https://www.scipopt.org/doc/html/heur__bound_8h.php">heur_bound.h</a>. In HIPS the heuristic is
 implemented by <a class="reference internal" href="../_autosummary/hips.heuristics.HeuristicBounds.html#hips.heuristics.HeuristicBounds" title="hips.heuristics.HeuristicBounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.HeuristicBounds</span></code></a>.</p>
 <p>This heuristic fixes every integer and binary variable to a respective bound and solves the remaining linear program.
 There are 3 ways to use this heuristic, represented by the values of the enum <a class="reference internal" href="../_autosummary/hips.BoundDirection.html#hips.BoundDirection" title="hips.constants.BoundDirection"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.constants.BoundDirection</span></code></a>.
+The direction can be specified using the <code class="docutils literal notranslate"><span class="pre">direction</span></code> parameter.
 In the cases <a class="reference internal" href="../_autosummary/hips.BoundDirection.html#hips.BoundDirection" title="hips.constants.BoundDirection"><code class="xref py py-class docutils literal notranslate"><span class="pre">LOWER</span></code></a> or <a class="reference internal" href="../_autosummary/hips.BoundDirection.html#hips.BoundDirection" title="hips.constants.BoundDirection"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPPER</span></code></a>,
-every integer variable is fixed to their respective lower or upper bound, respectively.
+every integer variable is fixed to their lower or upper bound, respectively.
 In case <a class="reference internal" href="../_autosummary/hips.BoundDirection.html#hips.BoundDirection" title="hips.constants.BoundDirection"><code class="xref py py-class docutils literal notranslate"><span class="pre">CLOSEST</span></code></a> is selected, each integer variable is fixed to the bound
 closest to the initial relaxation LP solution.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/bounds-example.ipynb" target="_blank">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a><p>Now let us consider a simple example where apply the <strong>Bounds Heuristic</strong>. The example can also be found on Google Colab.
+</a><p>Now let us consider a simple example where we apply the <strong>Bounds Heuristic</strong>. The example can also be found on Google Colab.
 First, we define a method that creates a simple mixed-integer program. Afterwards, we try out the different bound settings.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">HIPSArray</span><span class="p">,</span> <span class="n">VarTypes</span><span class="p">,</span> <span class="n">ProblemSense</span><span class="p">,</span> <span class="n">BoundDirection</span>
 <span class="kn">from</span> <span class="nn">hips.models</span> <span class="kn">import</span> <span class="n">MIPModel</span>

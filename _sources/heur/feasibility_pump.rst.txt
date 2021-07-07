@@ -107,7 +107,7 @@ Example 2
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
 
-Now we consider another problem, namely the `22433 teams <https://miplib.zib.de/instance_details_22433.html>`_ problem from MIPLIB 2017 :cite:`miplib2017`.
+Now we consider another problem, namely the `22433 <https://miplib.zib.de/instance_details_22433.html>`_ problem from MIPLIB 2017 :cite:`miplib2017`.
 
 .. code-block:: python
 

@@ -1,19 +1,20 @@
 Bounds Heuristic
 ================
 
-The **Bounds Heuristic** is implemented according to the scipopt primal heuristic ``heur_bounds.h``.
+The **Bounds Heuristic** is implemented according to the ScipOpt primal heuristic ``heur_bounds.h``.
 The `ScipOpt <https://www.scipopt.org/doc/html/heur__bound_8h.php>`_ library describes it as a
 "heuristic which fixes all integer variables to a bound (lower/upper) and solves the remaining LP".
 Although this heuristic leads to no feasible solution in most cases, it is often a good entry point, as it is very efficiently computable.
 
 The heuristic can be found in the ScipOpt library documentation under the following link:
-`heur_bound.h File Reference <https://www.scipopt.org/doc/html/heur__bound_8h.php>`_. In HIPS the heuristic is
+`heur_bound.h <https://www.scipopt.org/doc/html/heur__bound_8h.php>`_. In HIPS the heuristic is
 implemented by :class:`hips.heuristics.HeuristicBounds`.
 
 This heuristic fixes every integer and binary variable to a respective bound and solves the remaining linear program.
 There are 3 ways to use this heuristic, represented by the values of the enum :class:`hips.constants.BoundDirection`.
+The direction can be specified using the ``direction`` parameter.
 In the cases :class:`LOWER <hips.constants.BoundDirection>` or :class:`UPPER <hips.constants.BoundDirection>`,
-every integer variable is fixed to their respective lower or upper bound, respectively.
+every integer variable is fixed to their lower or upper bound, respectively.
 In case :class:`CLOSEST <hips.constants.BoundDirection>` is selected, each integer variable is fixed to the bound
 closest to the initial relaxation LP solution.
 
@@ -26,7 +27,7 @@ Example
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
 
-Now let us consider a simple example where apply the **Bounds Heuristic**. The example can also be found on Google Colab.
+Now let us consider a simple example where we apply the **Bounds Heuristic**. The example can also be found on Google Colab.
 First, we define a method that creates a simple mixed-integer program. Afterwards, we try out the different bound settings.
 
 .. code-block:: python

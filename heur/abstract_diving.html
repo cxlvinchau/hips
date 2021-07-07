@@ -216,18 +216,19 @@ iteration limit. In this case, the heuristic will yield the best found MIP solut
 of the current LP relaxation is worse than this incumbent MIP solution, the heuristic will abort, as any further branching
 can only lead to worse solutions.</p>
 <p><strong>Diving Heuristics</strong> can be useful in many different scenarios. Since these heuristics do not require an MIP solver nor an
-incumbent MIP solution, they can be used to find an initial solution for other heuristics. Furthermore, in many cases we do
+incumbent MIP solution, they can be used to find an initial solution for other heuristics. Although, in many cases we do
 not search for the best solution to the MIP, but rather only a feasible solution.
 Furthermore, diving heuristics can be used in combination with a full <em>branch&amp;bound</em> run, to quickly find feasible solutions
-to the MIP. This means that the bounding can be done early, thereby ignoring larger portions of the tree and leading to a major decrease in run time.</p>
+to the MIP. This means that the bounding can be done early, thereby ignoring larger portions of the tree and leading to
+a major decrease in computation time.</p>
 <p>Unfortunately <strong>Diving Heuristics</strong> do not always find a feasible solution. Since the size of the <em>branch&amp;bound</em> tree exponentially
-increases in the number of variables, the chance of success of a <strong>Diving Heuristic</strong> is proportionally small. Nevertheless,
+increases in the number of variables, the chance of a <strong>Diving Heuristic</strong> finding a successful path is proportionally small. Nevertheless,
 the low computational cost of these heuristics encourages their application in practice.</p>
 <div class="section" id="fractional-diving">
 <h2>Fractional diving<a class="headerlink" href="#fractional-diving" title="Permalink to this headline">¶</a></h2>
-<p>Fractional diving is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
-integer in each dive. The idea is based on page 17 of <span id="id1">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>. It can be used to find a quick initial solution
-or an efficient direction of branching in the branch and bound. In HIPS the heuristic is implemented in the <a class="reference internal" href="../_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving" title="hips.heuristics.FractionalDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.FractionalDiving</span></code></a> class.</p>
+<p><strong>Fractional Diving</strong> is a diving heuristic, that bounds the integer variable with lowest fractionality to the nearest
+integer as its branching condition. The idea is based on page 17 of <span id="id1">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>. It can be used to find a quick initial solution
+or an efficient direction of branching in the <em>branch&amp;bound</em>. In HIPS the heuristic is implemented in the <a class="reference internal" href="../_autosummary/hips.heuristics.FractionalDiving.html#hips.heuristics.FractionalDiving" title="hips.heuristics.FractionalDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">FractionalDiving</span></code></a> class.</p>
 <p>The heuristic traverses one path of the branch and bound tree of the MIP model to the leaf node. At each branch of the tree,
 the variable <span class="math notranslate nohighlight">\(x_j\)</span> with the lowest fractionality <span class="math notranslate nohighlight">\(f(x_j)\)</span> with respect to the current relaxation solution is bounded
 to the closest integer value <span class="math notranslate nohighlight">\([x_j]\)</span>. This is done as follows:</p>
@@ -258,7 +259,7 @@ to the closest integer value <span class="math notranslate nohighlight">\([x_j]\
     <span class="n">mip_model</span><span class="o">.</span><span class="n">set_mip_sense</span><span class="p">(</span><span class="n">ProblemSense</span><span class="o">.</span><span class="n">MAX</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Afterwards, we instantiate the model, apply the heuristic and output the found solution.</p>
+<p>Afterwards, we instantiate the model, apply the heuristic and print the found solution.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mip_model</span> <span class="o">=</span> <span class="n">MIPModel</span><span class="p">(</span><span class="n">GurobiSolver</span><span class="p">())</span>
 <span class="n">build_model</span><span class="p">(</span><span class="n">mip_model</span><span class="p">)</span>
 
@@ -276,13 +277,13 @@ to the closest integer value <span class="math notranslate nohighlight">\([x_j]\
 <h2>Line Search Diving<a class="headerlink" href="#line-search-diving" title="Permalink to this headline">¶</a></h2>
 <p>Now we consider the <strong>Line Search Diving</strong> heuristic as presented by <span id="id2">[<a class="reference internal" href="../references.html#id7" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011.">Hen11</a>]</span>. As the name suggests, this
 heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
-explore a branch of a branch and bound tree. In <a class="reference internal" href="../_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics.LineSearchDiving</span></code></a>, the selected variable in each step is fixed to a value.</p>
+explore a path in the branch and bound tree. In <a class="reference internal" href="../_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">LineSearchDiving</span></code></a>, the selected variable in each step is fixed to a value.</p>
 <p>The choice of the variable that is fixed is made as follows. Suppose <span class="math notranslate nohighlight">\(x^R\)</span> is the solution found at the root
 node <span class="math notranslate nohighlight">\(R\)</span> in the branch and bound algorithm. Let <span class="math notranslate nohighlight">\(N\)</span> be an arbitrary node within the branch and bound tree
 (i.e. not the root node) and <span class="math notranslate nohighlight">\(x^N\)</span> the corresponding solution. At <span class="math notranslate nohighlight">\(N\)</span> line search diving considers the line
 between <span class="math notranslate nohighlight">\(x^N\)</span> and <span class="math notranslate nohighlight">\(x^R\)</span> and conceptually moves towards <span class="math notranslate nohighlight">\(x^R\)</span> and checks which variable becomes integer first.
 This variable is then selected and fixed.</p>
-<p>Since our heuristic does not operate within a branch and bound algorithm, the initial variables that are fixed/selected
+<p>Since our heuristic does not operate within a branch and bound algorithm, the initial variables to fix/select
 are chosen randomly.</p>
 <div class="section" id="id3">
 <h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>

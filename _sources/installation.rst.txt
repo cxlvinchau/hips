@@ -1,6 +1,6 @@
 Installation and Requirements
 =============================
-In the following we describe how to setup a environment to work with HIPS. HIPS needs at least Python 3.8 to work properly.
+In the following we describe how to setup an environment to work with HIPS. HIPS needs at least Python 3.8 to work properly.
 
 1. Creating a virtual environment (optional)
 --------------------------------------------
