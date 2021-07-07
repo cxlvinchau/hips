@@ -2,7 +2,8 @@
 
 Getting Started
 ===============
-On this page we show you how to get started with HIPS. We assume that you have successfully completed the setup.
+On this page we show you how to get started with HIPS. We assume that you have successfully completed the setup and
+installations as described in the previous chapter.
 
 A simple linear program
 -----------------------
@@ -86,7 +87,7 @@ Optimizing the program
 ______________________
 Now, let us optimize the program and output the objective value and values for the variables.
 
-The code for the first model.
+This is done as follows for the one-dimensional model:
 
 .. code-block:: python
 
@@ -98,7 +99,7 @@ The code for the first model.
     print(f"x_1: {model.variable_solution(x_1)}")
     print(f"x_2: {model.variable_solution(x_2)}")
 
-The code for the second model.
+The following prints the values of the multi-dimensional model:
 
 .. code-block:: python
 
@@ -119,7 +120,7 @@ High-dimensional constraints
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
 
-As you have seen in the previous section, HIPS can work with matrices and vectors. In this section, we explain how work
+As you have seen in the previous section, HIPS can work with matrices and vectors. In this section, we explain how to work
 with high-dimensional constraints in more detail.
 
 Generally, we can express high-dimensional constraints with multiple variables in HIPS, i.e. we can express constraints
@@ -129,7 +130,7 @@ of the following type:
 
     A_1 x_1 + \dots + A_n x_n \ \mathrm{?} \ b
 
-where :math:`b \in \mathbb{Q}^m`, :math:`\mathrm{?} \in \{\leq, =, \geq\}` :math:`A_i \in \mathbb{Q}^{m \times d_i}` and
+where :math:`b \in \mathbb{Q}^m`, :math:`\mathrm{?} \in \{\leq, =, \geq\}`, :math:`A_i \in \mathbb{Q}^{m \times d_i}` and
 variable :math:`x_i` has dimension :math:`d_i`.
 
 Consider the example below:
@@ -219,7 +220,7 @@ Now, let us consider a mixed-integer program. Particularly, we consider the line
     \end{array}
 
 Compared to the example above, we have introduced the constraint :math:`\color{red} {x_1 \in \mathbb{Z}}`. This means
-that our program contains an integer and real variable. Thus, it is no longer a linear program, but a mixed-integer program.
+that our program contains an integer and a real variable. Thus, it is no longer a linear program, but a mixed-integer program.
 
 In HIPS we can write the problem as follows:
 
@@ -276,7 +277,7 @@ In the following, we optimize the mixed-integer program from above. To this end,
     # Print objective value
     bb.get_incumbent_val()
 
-Loading mps files
+Loading .mps files
 -----------------
 
 .. raw:: html
@@ -286,24 +287,24 @@ Loading mps files
     </a>
 
 The previous chapters introduced how to explicitely create an MIP model.
-This approach is inpractical for most real-life problems, since the size of variable and constraints in those models can
+This approach is inpractical for most real-life problems, since the number of variable and constraints in those models can
 be very large. Therefore the HIPS module contains a Loader class, that can read models from MPS files.
 
-MPS is a file format for representing linear and mixed integer problem and is a standard in most commercial and open source
+MPS (Mathematical Programming System) is a file format for representing linear and mixed integer problem and is a standard in most commercial and open source
 solvers. It is column-oriented which makes it rather human-inreadable. An elaborate explanation of the format and its various
 header sections can be found in :cite:`the official Gurobi documentation<gurobi-mps>`. It should be noted, that the optimization
-sense is not specifiable in the MPS file and thus has to be set manually after loading.
+sense is not specifiable in the MPS format and thus has to be set manually after loading.
 
-There are two helper functions implemented for loading an :class:`MIPModel <hips.models.MIPModel>` from an MPS file.
+There are two helper functions implemented in HIPS for loading an :class:`MIPModel <hips.models.MIPModel>` from an MPS file.
 
-The :func:`primitive loader<hips.loader.mps_loader.load_mps_primitive>` loads every variable of the MPS file specified
-in the \textbf{path} parameter as a 1-dimensional variable. The specified *path* is concatenated with the current
-working directory. This loader version can be used for an easier understanding and debugging of the created model. However
-the runtime of this loader suffers from inefficiency.
+The :func:`primitive loader<hips.loader.load_mps_primitive>` loads every variable of the MPS file specified
+in the *path* parameter as a 1-dimensional variable. The specified *path* is concatenated with the current
+working directory. This loader version can be used for easy understanding and debugging of the created model. However
+the runtime of this loader suffers from computational inefficiency.
 
-The second :func:`loader<hips.loader.mps_loader.load_mps>` loads the continuous, integer and binary variables as
-multidimensional variables. This allows the underlying solvers to make use of vectorization. Therefore this loader is about
-10 times more runtime efficient than the primitive version.
+The second :func:`loader<hips.loader.load_mps>` loads the continuous, integer and binary variables as
+multidimensional variables. This allows the underlying solvers to make use of vectorization. Therefore this loader is
+much more runtime efficient than the primitive version.
 
 We can use the MPS loader in HIPS as follows:
 
@@ -315,7 +316,7 @@ We can use the MPS loader in HIPS as follows:
 
     # create an mip model with an underlying solver
     model = MIPModel(ClpSolver())
-    # load the problem specified in the mps file at the path parameter into our model
+    # load the problem specified in the .mps file at the path parameter into our model
     load_mps(mip_model=model, path='path_to_mps/mps_file.mps')
     # set the optimization sense
     model.set_mip_sense(ProblemSense.MIN)
