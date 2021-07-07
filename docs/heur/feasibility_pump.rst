@@ -63,14 +63,17 @@ that ensures that the original objective function is still considered. The param
 of the **Feasibility Pump** as a value between 0 and 1, corresponding to how much we take the original objective function into consideration.
 The higher the :math:`\alpha`, the more we optimize towards the original objective.
 
-Example
--------
+Example 1
+---------
 
 .. raw:: html
 
-    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_example.ipynb" target="_blank">
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_10_teams_example.ipynb" target="_blank">
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
+
+In the example below, we consider the `10 teams <https://miplib.zib.de/instance_details_10teams.html>`_ problem from MIPLIB 2017 :cite:`miplib2017`.
+A more detailed version of the example can be found on Google Colab.
 
 .. code-block:: python
 
@@ -86,3 +89,20 @@ Example
     print("Status: {}".format(heur.get_status()))
     print("Found solution: {}".format(heur.get_objective_value()))
     heur.tracker.plot("feasibility objective")
+
+The figure below depicts the feasibility objective during a single run of the feasibility pump. Recall that the objective
+in the feasibility pump corresponds to the L1 distance between the LP solution and the rounded solution.
+
+.. image:: ../img/fp-objective.png
+
+Observe that the objective value decreases and suddenly increases after the 400th iteration. This indicates that the feasibility
+pump got stuck and perturbed the values to resolve the cycle. Consequently, the objective value is suddenly increased.
+
+Example 2
+---------
+
+.. raw:: html
+
+    <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_22433_example.ipynb" target="_blank">
+        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>

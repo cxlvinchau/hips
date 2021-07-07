@@ -27,7 +27,9 @@ badges that look like this:
 
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 
-These badges lead to code examples in Python notebooks that you can run and try out without any setup.
+These badges lead to code examples in Python notebooks that you can run and try out without any setup. In addition,
+the examples on Google Colab are often more detailed and contain additional code. Thus, we strongly recommend the usage of Google
+Colab.
 
 .. toctree::
    :maxdepth: 2

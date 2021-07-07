@@ -60,6 +60,7 @@ def load_problem(problem_name):
     - ``gen-ip054`` (https://miplib2017.zib.de/instance_details_gen-ip054.html)
     - ``gr4x6`` (https://miplib.zib.de/instance_details_gr4x6.html)
     - ``osorio-cta`` (http://miplib.zib.de/instance_details_osorio-cta.html)
+    - ``22433`` (https://miplib.zib.de/instance_details_22433.html)
 
     The listed problems were obtained from the MIPLIB 2017 (https://miplib.zib.de/index.html). We would like to thank
     the authors and people involved for their contribution and would like to emphasize that they are not linked to or involved in HIPS,
