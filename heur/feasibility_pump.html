@@ -106,7 +106,8 @@
 <li class="toctree-l2"><a class="reference internal" href="rens.html">RENS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="abstract_diving.html">Diving Heuristics</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Feasibility Pump</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1">Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2">Example 2</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="2stage_fp.html">Two Stage Feasibility Pump</a></li>
@@ -232,11 +233,13 @@ if <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j| + 
 that ensures that the original objective function is still considered. The parameter <span class="math notranslate nohighlight">\(\alpha\)</span> can be set on initialization
 of the <strong>Feasibility Pump</strong> as a value between 0 and 1, corresponding to how much we take the original objective function into consideration.
 The higher the <span class="math notranslate nohighlight">\(\alpha\)</span>, the more we optimize towards the original objective.</p>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_example.ipynb" target="_blank">
+<div class="section" id="example-1">
+<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_10_teams_example.ipynb" target="_blank">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
+</a><p>In the example below, we consider the <a class="reference external" href="https://miplib.zib.de/instance_details_10teams.html">10 teams</a> problem from MIPLIB 2017 <span id="id4">[<a class="reference internal" href="../references.html#id10" title="Ambros Gleixner, Gregor Hendel, Gerald Gamrath, Tobias Achterberg, Michael Bastubbe, Timo Berthold, Philipp M. Christophel, Kati Jarck, Thorsten Koch, Jeff Linderoth, Marco Lübbecke, Hans D. Mittelmann, Derya Ozyurt, Ted K. Ralphs, Domenico Salvagnin, and Yuji Shinano. MIPLIB 2017: Data-Driven Compilation of the 6th Mixed-Integer Programming Library. Mathematical Programming Computation, 2021. URL: https://doi.org/10.1007/s12532-020-00194-3, doi:10.1007/s12532-020-00194-3.">GHG+21</a>]</span>.
+A more detailed version of the example can be found on Google Colab.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
 <span class="kn">from</span> <span class="nn">hips.heuristics._feasibility_pump</span> <span class="kn">import</span> <span class="n">FeasibilityPump</span>
 
 <span class="c1"># Load the model</span>
@@ -250,7 +253,17 @@ The higher the <span class="math notranslate nohighlight">\(\alpha\)</span>, the
 <span class="n">heur</span><span class="o">.</span><span class="n">tracker</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;feasibility objective&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The figure below depicts the feasibility objective during a single run of the feasibility pump. Recall that the objective
+in the feasibility pump corresponds to the L1 distance between the LP solution and the rounded solution.</p>
+<img alt="../_images/fp-objective.png" src="../_images/fp-objective.png" />
+<p>Observe that the objective value decreases and suddenly increases after the 400th iteration. This indicates that the feasibility
+pump got stuck and perturbed the values to resolve the cycle. Consequently, the objective value is suddenly increased.</p>
 </div>
+<div class="section" id="example-2">
+<h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_22433_example.ipynb" target="_blank">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a></div>
 </div>
 
 
