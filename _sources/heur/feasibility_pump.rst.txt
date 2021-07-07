@@ -106,3 +106,20 @@ Example 2
     <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_22433_example.ipynb" target="_blank">
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
+
+Now we consider another problem, namely the `22433 teams <https://miplib.zib.de/instance_details_22433.html>`_ problem from MIPLIB 2017 :cite:`miplib2017`.
+
+.. code-block:: python
+
+    from hips import load_problem
+    from hips.heuristics._feasibility_pump import FeasibilityPump
+
+    # Load the model
+    mip_model = load_problem("22433")
+    # Create the Feasibility Pump
+    heur = FeasibilityPump(mip_model, t=15)
+    heur.compute(max_iter=1000)
+    # Inspect the solution
+    print("Status: {}".format(heur.get_status()))
+    print("Found solution: {}".format(heur.get_objective_value()))
+    heur.tracker.plot("feasibility objective")

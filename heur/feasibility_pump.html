@@ -263,7 +263,22 @@ pump got stuck and perturbed the values to resolve the cycle. Consequently, the 
 <h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
 <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_22433_example.ipynb" target="_blank">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a></div>
+</a><p>Now we consider another problem, namely the <a class="reference external" href="https://miplib.zib.de/instance_details_22433.html">22433 teams</a> problem from MIPLIB 2017 <span id="id6">[<a class="reference internal" href="../references.html#id10" title="Ambros Gleixner, Gregor Hendel, Gerald Gamrath, Tobias Achterberg, Michael Bastubbe, Timo Berthold, Philipp M. Christophel, Kati Jarck, Thorsten Koch, Jeff Linderoth, Marco Lübbecke, Hans D. Mittelmann, Derya Ozyurt, Ted K. Ralphs, Domenico Salvagnin, and Yuji Shinano. MIPLIB 2017: Data-Driven Compilation of the 6th Mixed-Integer Programming Library. Mathematical Programming Computation, 2021. URL: https://doi.org/10.1007/s12532-020-00194-3, doi:10.1007/s12532-020-00194-3.">GHG+21</a>]</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
+<span class="kn">from</span> <span class="nn">hips.heuristics._feasibility_pump</span> <span class="kn">import</span> <span class="n">FeasibilityPump</span>
+
+<span class="c1"># Load the model</span>
+<span class="n">mip_model</span> <span class="o">=</span> <span class="n">load_problem</span><span class="p">(</span><span class="s2">&quot;22433&quot;</span><span class="p">)</span>
+<span class="c1"># Create the Feasibility Pump</span>
+<span class="n">heur</span> <span class="o">=</span> <span class="n">FeasibilityPump</span><span class="p">(</span><span class="n">mip_model</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">heur</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># Inspect the solution</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Status: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">heur</span><span class="o">.</span><span class="n">get_status</span><span class="p">()))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Found solution: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">heur</span><span class="o">.</span><span class="n">get_objective_value</span><span class="p">()))</span>
+<span class="n">heur</span><span class="o">.</span><span class="n">tracker</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;feasibility objective&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
