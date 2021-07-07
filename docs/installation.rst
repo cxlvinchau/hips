@@ -79,19 +79,7 @@ COIN-OR dependencies have to be installed.
 
 3. Installing HIPS
 -------------------
-Finally, we can install HIPS. There are two ways to install HIPS, either from the Python Package Index or from the GitHub repository.
-
-Installing from the Python Package Index
-________________________________________
-The installation is straightforward. Run the following line to install HIPS:
-
-.. code-block::
-
-    pip install hips-mip
-
-Installing from the GitHub repository
-_____________________________________
-For the latest version of HIPS, we can install the version from the repository.
+Finally, we can install HIPS. For the latest version of HIPS, we can simply install the version from the repository.
 
 .. code-block::
 

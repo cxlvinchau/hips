@@ -1,6 +1,6 @@
 .. _getting-started-label:
 
-Getting started
+Getting Started
 ===============
 On this page we show you how to get started with HIPS. We assume that you have successfully completed the setup.
 
