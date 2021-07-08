@@ -25,6 +25,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install gurobipy
+    - name: Install CyLP
+      run: |
+        sudo apt-get install -y git pkg-config coinor-libcbc-dev coinor-libosi-dev coinor-libcoinutils-dev coinor-libcgl-dev
+        export COIN_INSTALL_DIR=/usr/
+        pip install --pre cylp
     - name: Test with unittest
       run: |
         cd src

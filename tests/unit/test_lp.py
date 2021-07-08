@@ -2,11 +2,11 @@ import unittest
 
 from parameterized import parameterized_class
 
-from hips import GurobiSolver, ProblemSense, HIPSArray
+from hips import GurobiSolver, ProblemSense, HIPSArray, ClpSolver
 from hips.models import LPModel
 
 
-@parameterized_class("solver", [[solver] for solver in [GurobiSolver]])
+@parameterized_class("solver", [[solver] for solver in [GurobiSolver, ClpSolver]])
 class TestLPModel(unittest.TestCase):
 
     def setUp(self) -> None:

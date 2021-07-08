@@ -3,7 +3,7 @@ from parameterized import parameterized_class
 
 from hips.heuristics._feasibility_pump import FeasibilityPump
 from hips.constants import VarTypes
-from hips.solver import GurobiSolver
+from hips.solver import GurobiSolver, ClpSolver
 from hips.models._lp_model import LPModel
 from hips.models._mip_model import MIPModel
 from hips.constants import ProblemSense
@@ -11,7 +11,7 @@ import numpy as np
 from hips.models import HIPSArray
 
 
-@parameterized_class("solver", [[solver] for solver in [GurobiSolver]])
+@parameterized_class("solver", [[solver] for solver in [GurobiSolver, ClpSolver]])
 class FeasibilityPumpTest(unittest.TestCase):
 
     def setUp(self) -> None:
