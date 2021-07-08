@@ -36,7 +36,7 @@ jobs:
         cd src
         python -m xmlrunner discover -s ../tests/unit -o ../tests/junit-reports
     - name: Run integration tests
-      run |
+      run: |
         python -m xmlrunner discover -s ../tests/integration -o ../tests/junit-reports
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
