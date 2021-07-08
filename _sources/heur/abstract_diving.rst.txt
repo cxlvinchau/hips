@@ -30,7 +30,7 @@ a major decrease in computation time.
 
 Unfortunately **Diving Heuristics** do not always find a feasible solution. Since the size of the *branch\&bound* tree exponentially
 increases in the number of variables, the chance of a **Diving Heuristic** finding a successful path is proportionally small. Nevertheless,
-the low computational cost of these heuristics encourages their application in practice.
+the low computational cost of these heuristics justifies their application in practice.
 
 Fractional diving
 -----------------

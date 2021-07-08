@@ -217,22 +217,24 @@ If a point <span class="math notranslate nohighlight">\(\bar{x}\)</span> is feas
 <p>This computation sequence is expressed by the following pseudo-algorithmic schema.</p>
 <img alt="../_images/pseudo_algorithm_fs.png" src="../_images/pseudo_algorithm_fs.png" />
 <p>Obviously a big difficulty of the <strong>Feasibility Pump</strong> is the chance of entering cylces, when reaching the same <span class="math notranslate nohighlight">\(\tilde{x}\)</span>
-twice. This means that the algorithm gets stuck and will never acquire as feasible solution. The easiest way to deal with this problem
+twice. This means that the algorithm gets stuck and will never acquire a feasible solution. The easiest way to deal with this problem
 is to perturb some of the integer variables in cases a cylce is detected.
-The implementation in the <a class="reference internal" href="../_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics._feasibility_pump.FeasibilityPump"><code class="xref py py-class docutils literal notranslate"><span class="pre">Feasibility</span> <span class="pre">Pump</span></code></a> maintains two types
+The implementation in the <a class="reference internal" href="../_autosummary/hips.heuristics.FeasibilityPump.html#hips.heuristics.FeasibilityPump" title="hips.heuristics.FeasibilityPump"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeasibilityPump</span></code></a> maintains two types
 of cylce detection. The perturbation actions follow the rules described by Fischetti et al. <span id="id3">[<a class="reference internal" href="../references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>.</p>
 <p>In case we reach a cycle of length 1 (i.e. <span class="math notranslate nohighlight">\(\tilde{x}^{(i)}\)</span> = <span class="math notranslate nohighlight">\(\tilde{x}^{(i+1)}\)</span>) in the algorithm, the
-T binary variables of the current integer solution <span class="math notranslate nohighlight">\(\tilde{x}\)</span> with highest distance <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j|\)</span> are flipped for the calculation of the next
-<span class="math notranslate nohighlight">\(\bar{x}\)</span>. The number T of variables to flip is uniformly chosen from the range <span class="math notranslate nohighlight">\(( \lfloor \frac{t}{2} \rfloor , \lfloor 1.5t \rfloor )\)</span>.
+<span class="math notranslate nohighlight">\(T\)</span> binary variables of the current integer solution <span class="math notranslate nohighlight">\(\tilde{x}\)</span> with highest distance <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j|\)</span> are flipped for the calculation of the next
+<span class="math notranslate nohighlight">\(\bar{x}\)</span>. The number <span class="math notranslate nohighlight">\(T\)</span> of variables to flip is uniformly chosen from the range <span class="math notranslate nohighlight">\(( \lfloor \frac{t}{2} \rfloor , \lfloor 1.5t \rfloor )\)</span>.
 The parameter <span class="math notranslate nohighlight">\(t\)</span> can be specified when initializing the <strong>Feasibility Pump</strong>. By default <span class="math notranslate nohighlight">\(t\)</span> will be assigned with <span class="math notranslate nohighlight">\(\lceil \frac{n}{2} \rceil\)</span>,
 with <span class="math notranslate nohighlight">\(n\)</span> the number of binary variables in the model.</p>
 <p>In case a cycle of length <span class="math notranslate nohighlight">\(1 &lt; l \le 3\)</span> is detected, we uniformly choose a value <span class="math notranslate nohighlight">\({\rho}_j \in [-0.3, 0.7]\)</span> for
 each binary variable <span class="math notranslate nohighlight">\(x_j\)</span> with <span class="math notranslate nohighlight">\(j \in I\)</span>. We then decide for each of those variables to flip the corresponding <span class="math notranslate nohighlight">\(\tilde{x}_j\)</span>
 if <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j| + max(0, {\rho}_j) &gt; 0.5\)</span>.</p>
 <p>To find a high quality solution, the implementation offers the possibility to add a constraint
-that ensures that the original objective function is still considered. The parameter <span class="math notranslate nohighlight">\(\alpha\)</span> can be set on initialization
-of the <strong>Feasibility Pump</strong> as a value between 0 and 1, corresponding to how much we take the original objective function into consideration.
-The higher the <span class="math notranslate nohighlight">\(\alpha\)</span>, the more we optimize towards the original objective.</p>
+that ensures that the original objective function is still considered. In the case of a minimization problem a
+constraint <span class="math notranslate nohighlight">\(c^\top x \leq \alpha \cdot c^\top \bar x^{(0)} + (1-\alpha) \cdot c^\top \bar x\)</span> is introduced, where <span class="math notranslate nohighlight">\(\bar x\)</span>
+corresponds to the current LP feasible solution. Note that in the case of maximization, we have <span class="math notranslate nohighlight">\(\geq\)</span> instead of <span class="math notranslate nohighlight">\(\leq\)</span>.
+The parameter <span class="math notranslate nohighlight">\(\alpha\)</span> can be set on initialization of the <strong>Feasibility Pump</strong> as a value between 0 and 1,
+corresponding to how much we take the original objective function into consideration. The higher the <span class="math notranslate nohighlight">\(\alpha\)</span>, the more we optimize towards the original objective.</p>
 <div class="section" id="example-1">
 <h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
 <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/feasibility_pump_10_teams_example.ipynb" target="_blank">
@@ -255,7 +257,7 @@ A more detailed version of the example can be found on Google Colab.</p>
 </div>
 <p>The figure below depicts the feasibility objective during a single run of the feasibility pump. Recall that the objective
 in the feasibility pump corresponds to the L1 distance between the LP solution and the rounded solution.</p>
-<img alt="../_images/fp-objective.png" src="../_images/fp-objective.png" />
+<img alt="../_images/fp-objective-10teams.png" src="../_images/fp-objective-10teams.png" />
 <p>Observe that the objective value decreases and suddenly increases after the 400th iteration. This indicates that the feasibility
 pump got stuck and perturbed the values to resolve the cycle. Consequently, the objective value is suddenly increased.</p>
 </div>
@@ -278,6 +280,9 @@ pump got stuck and perturbed the values to resolve the cycle. Consequently, the 
 <span class="n">heur</span><span class="o">.</span><span class="n">tracker</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;feasibility objective&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<img alt="../_images/fp-objective-22433.png" src="../_images/fp-objective-22433.png" />
+<p>In this example a solution is found much quicker. It can be seen that the fluctuations are not as strong as in the previous
+example.</p>
 </div>
 </div>
 

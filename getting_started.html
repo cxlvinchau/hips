@@ -117,6 +117,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id3">Solving the program using branch and bound</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#example-mixed-integer-programs-from-miplib2017">Example mixed-integer programs from MIPLIB2017</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="heuristics.html">Heuristics</a></li>
@@ -362,7 +363,7 @@ You can find more information about NumPy <a class="reference external" href="ht
 <h2>A simple mixed integer program<a class="headerlink" href="#a-simple-mixed-integer-program" title="Permalink to this headline">¶</a></h2>
 <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/mip-example.ipynb" target="_blank">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a><p>Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with additional constraints.</p>
+</a><p>Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with an additional constraint.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{lr&#64;{}c&#64;{}r&#64;{}l}
 \text{maximize }   &amp; 2 x_1 + 4 x_2  \\
@@ -401,7 +402,7 @@ However, in contrast, the <a class="reference internal" href="_autosummary/hips.
 solver for optimization.</p>
 <p>Note that we have added an upper bound for variable <code class="docutils literal notranslate"><span class="pre">x_1</span></code>. In HIPS it is necessary to add bounds to integer variables
 because many heuristics explicitly require bounds. However, this does not actually impose a limitation, as also mentioned in
-<span id="id1">[<a class="reference internal" href="references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, because solvable mixed-integer programs cannot have unbounded variables.</p>
+<span id="id1">[<a class="reference internal" href="references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span>, because an optimal solution to a solvable mixed-integer program has to be finite.</p>
 <div class="section" id="solving-the-program-using-branch-and-bound">
 <h3>Solving the program using branch and bound<a class="headerlink" href="#solving-the-program-using-branch-and-bound" title="Permalink to this headline">¶</a></h3>
 <p>As mentioned before, the <a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MIPModel</span></code></a> class does not offer the possibility to directly optimize the program.
@@ -427,25 +428,26 @@ branch and bound algorithm and is thus not suitable for solving large problems.<
 <h2>Loading .mps files<a class="headerlink" href="#loading-mps-files" title="Permalink to this headline">¶</a></h2>
 <a href="https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/mps-example.ipynb" target="_blank">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a><p>The previous chapters introduced how to explicitely create an MIP model.
-This approach is inpractical for most real-life problems, since the number of variable and constraints in those models can
-be very large. Therefore the HIPS module contains a Loader class, that can read models from MPS files.</p>
-<p>MPS (Mathematical Programming System) is a file format for representing linear and mixed integer problem and is a standard in most commercial and open source
-solvers. It is column-oriented which makes it rather human-inreadable. An elaborate explanation of the format and its various
+</a><p>The previous sections introduced how to explicitly create an MIP model.
+This approach is impractical for most real-life problems, since the number of variable and constraints in those models can
+be very large. Therefore, HIPS provides utility functions to read models from MPS files.</p>
+<p>MPS (Mathematical Programming System) is a file format for representing linear and mixed-integer problem and is a standard in most commercial and open-source
+solvers. It is column-oriented which makes it rather difficult to read for humans. An elaborate explanation of the format and its various
 header sections can be found in <span id="id2">[<a class="reference internal" href="references.html#id3" title="LLC Gurobi Optimization. Mps format. URL: https://www.gurobi.com/documentation/9.1/refman/mps_format.html.">GO</a>]</span>. It should be noted, that the optimization
-sense is not specifiable in the MPS format and thus has to be set manually after loading.</p>
-<p>There are two helper functions implemented in HIPS for loading an <a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MIPModel</span></code></a> from an MPS file.</p>
+sense is not specifiable in the MPS format and, thus, has to be set manually after loading.</p>
+<p>There are two utility functions implemented in HIPS for loading an MPS file into a <a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MIPModel</span></code></a>.</p>
 <p>The <a class="reference internal" href="_autosummary/hips.loader.load_mps_primitive.html#hips.loader.load_mps_primitive" title="hips.loader.load_mps_primitive"><code class="xref py py-func docutils literal notranslate"><span class="pre">primitive</span> <span class="pre">loader</span></code></a> loads every variable of the MPS file specified
-in the <em>path</em> parameter as a 1-dimensional variable. The specified <em>path</em> is concatenated with the current
+in the <code class="docutils literal notranslate"><span class="pre">path</span></code> parameter as a 1-dimensional variable. The specified <code class="docutils literal notranslate"><span class="pre">path</span></code> is concatenated with the current
 working directory. This loader version can be used for easy understanding and debugging of the created model. However
 the runtime of this loader suffers from computational inefficiency.</p>
 <p>The second <a class="reference internal" href="_autosummary/hips.loader.load_mps.html#hips.loader.load_mps" title="hips.loader.load_mps"><code class="xref py py-func docutils literal notranslate"><span class="pre">loader</span></code></a> loads the continuous, integer and binary variables as
-multidimensional variables. This allows the underlying solvers to make use of vectorization. Therefore this loader is
-much more runtime efficient than the primitive version.</p>
+multidimensional variables. This allows the underlying solvers to make use of vectorization. Therefore, this loader is
+much more efficient than the primitive version.</p>
 <p>We can use the MPS loader in HIPS as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips.solver</span> <span class="kn">import</span> <span class="n">ClpSolver</span>
 <span class="kn">from</span> <span class="nn">hips.models</span> <span class="kn">import</span> <span class="n">MIPModel</span>
 <span class="kn">from</span> <span class="nn">hips.loader</span> <span class="kn">import</span> <span class="n">load_mps</span>
+<span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">ProblemSense</span>
 
 <span class="c1"># create an mip model with an underlying solver</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">MIPModel</span><span class="p">(</span><span class="n">ClpSolver</span><span class="p">())</span>
@@ -470,6 +472,31 @@ much more runtime efficient than the primitive version.</p>
 <span class="n">bb</span><span class="o">.</span><span class="n">get_incumbent_val</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="example-mixed-integer-programs-from-miplib2017">
+<h2>Example mixed-integer programs from MIPLIB2017<a class="headerlink" href="#example-mixed-integer-programs-from-miplib2017" title="Permalink to this headline">¶</a></h2>
+<p>The MIPLIB2017 <span id="id4">[<a class="reference internal" href="references.html#id10" title="Ambros Gleixner, Gregor Hendel, Gerald Gamrath, Tobias Achterberg, Michael Bastubbe, Timo Berthold, Philipp M. Christophel, Kati Jarck, Thorsten Koch, Jeff Linderoth, Marco Lübbecke, Hans D. Mittelmann, Derya Ozyurt, Ted K. Ralphs, Domenico Salvagnin, and Yuji Shinano. MIPLIB 2017: Data-Driven Compilation of the 6th Mixed-Integer Programming Library. Mathematical Programming Computation, 2021. URL: https://doi.org/10.1007/s12532-020-00194-3, doi:10.1007/s12532-020-00194-3.">GHG+21</a>]</span> is a collection of real-world mixed-integer programs. HIPS already comes with a selection
+of problems from the collection to help you get started faster.</p>
+<p>The following problems can be easily loaded:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">10teams</span></code> (<a class="reference external" href="https://miplib.zib.de/instance_details_10teams.html">https://miplib.zib.de/instance_details_10teams.html</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bppc8-02</span></code> (<a class="reference external" href="http://miplib2017.zib.de/instance_details_bppc8-02.html">http://miplib2017.zib.de/instance_details_bppc8-02.html</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flugpl</span></code> (<a class="reference external" href="http://miplib2017.zib.de/instance_details_flugpl.html">http://miplib2017.zib.de/instance_details_flugpl.html</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gen-ip054</span></code> (<a class="reference external" href="https://miplib2017.zib.de/instance_details_gen-ip054.html">https://miplib2017.zib.de/instance_details_gen-ip054.html</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gr4x6</span></code> (<a class="reference external" href="https://miplib.zib.de/instance_details_gr4x6.html">https://miplib.zib.de/instance_details_gr4x6.html</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">osorio-cta</span></code> (<a class="reference external" href="http://miplib.zib.de/instance_details_osorio-cta.html">http://miplib.zib.de/instance_details_osorio-cta.html</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">22433</span></code> (<a class="reference external" href="https://miplib.zib.de/instance_details_22433.html">https://miplib.zib.de/instance_details_22433.html</a>)</p></li>
+</ul>
+<p>We would like to thank the authors and people involved for their contribution and would like to emphasize that they are not linked to or involved in HIPS,
+nor do they endorse HIPS. The examples are licensed under Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (<a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a>).</p>
+<p>In order to load a problem, we simply pass the problem name to <a class="reference internal" href="_autosummary/hips.load_problem.html#hips.load_problem" title="hips.load_problem"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.load_problem()</span></code></a> and it automatically returns a <a class="reference internal" href="_autosummary/hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models.MIPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MIPModel</span></code></a>
+containing the problem. By default, the function tries to use the <a class="reference internal" href="_autosummary/hips.solver.GurobiSolver.html#hips.solver.GurobiSolver" title="hips.solver.GurobiSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.GurobiSolver</span></code></a>. If this fails, the <a class="reference internal" href="_autosummary/hips.solver.ClpSolver.html#hips.solver.ClpSolver" title="hips.solver.ClpSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.solver.ClpSolver</span></code></a> is used.
+The code below loads the <code class="docutils literal notranslate"><span class="pre">10teams</span></code> problem.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hips</span> <span class="kn">import</span> <span class="n">load_problem</span>
+
+<span class="n">mip_model</span> <span class="o">=</span> <span class="n">load_problem</span><span class="p">(</span><span class="s2">&quot;10teams&quot;</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>

@@ -39,6 +39,7 @@
         <script src="../_static/toggleprompt.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -195,7 +196,7 @@
 <dd><p>Representation of a mixed-integer program</p>
 <p>Represents a mixed-integer program. In contrast to the <code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code>, this
 class allows for specification of the variable types, i.e. continuous, binary or integer. Under the hood, the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code> is used.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code> is used. By default, a maximization problem is solved.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.MIPModel.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.__init__" title="Permalink to this definition">¶</a></dt>
@@ -315,15 +316,17 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <span class="sig-name descname"><span class="pre">trivially_roundable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.trivially_roundable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the all variables of the model are trivially roundable. If so, fix the variables to the rounded values
 and optimize, such that the corresponding objective value can be fetched.</p>
-<p>1. A variable x_j is called trivially down-roundable, if all coefficients a_ij of the corresponding column of the
-matrix A are non negative, hence A_j &gt;= 0.
-2. A variable x_j is called trivially up-roundable, if all coefficients a_ij of the corresponding column of the
-matrix A are non positive, hence A_j &lt;= 0.
-3. A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.
-- Source: Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;</p>
+<p>1. A variable <span class="math notranslate nohighlight">\(x_j\)</span> is called trivially down-roundable, if all coefficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> of the corresponding column of the
+matrix <span class="math notranslate nohighlight">\(A\)</span> are non negative, hence <span class="math notranslate nohighlight">\(A_j \geq 0\)</span>.
+2. A variable <span class="math notranslate nohighlight">\(x_j\)</span> is called trivially up-roundable, if all coefficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> of the corresponding column of the
+matrix <span class="math notranslate nohighlight">\(A\)</span> are non positive, hence <span class="math notranslate nohighlight">\(A_j \leq 0\)</span>.
+3. A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A tuple containing the dictionaries trivially_down_roundable, trivially_up_roundable
+<dt class="field-odd">Source</dt>
+<dd class="field-odd"><p>Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple containing the dictionaries trivially_down_roundable, trivially_up_roundable
 trivially_down_roundable:      key: Variable, element: array(Boolean)
 trivially_up_roundable:        key: Variable, element: array(Boolean)</p>
 </dd>
