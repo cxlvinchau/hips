@@ -254,12 +254,12 @@ Please have a look at the documentation of the class for details.</p>
 <a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving" title="hips.heuristics._abstract_diving.AbstractDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving</span></code></a> class and implement the abstract methods there.
 Particularly, only the <a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.dive" title="hips.heuristics._abstract_diving.AbstractDiving.dive"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving.dive()</span></code></a> and
 <a class="reference internal" href="_autosummary/hips.heuristics._abstract_diving.AbstractDiving.html#hips.heuristics._abstract_diving.AbstractDiving.revert" title="hips.heuristics._abstract_diving.AbstractDiving.revert"><code class="xref py py-func docutils literal notranslate"><span class="pre">hips.heuristics._abstract_diving.AbstractDiving.revert()</span></code></a> methods need to be overriden.</p>
-<p>The <em>dive</em> method should be overwritten to follow the specific branching condition of the diving heuristic to be implemented.
+<p>The <em>dive</em> method should be overridden to follow the specific branching condition of the diving heuristic to be implemented.
 This means <code class="xref py py-func docutils literal notranslate"><span class="pre">adding</span></code> either a new constraint or
 <code class="xref py py-func docutils literal notranslate"><span class="pre">setting</span></code> the bound of a variable to restrict the feasible region
 to the corresponding subproblem.</p>
 <p>The <em>revert</em> method should be implemented to revert the MIP model to the state before any diving has happened. This method will
-be called at the end of a diving heuristic run, independent of the outcome. This behaviour is vital in case the heuristic would be
+be called at the end of a diving heuristic run, independent of the outcome. This behaviour is vital in case the heuristic is
 used during the computations of another heuristic.</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -298,7 +298,7 @@ for more details.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">clean</span> <span class="n">html</span>
 </pre></div>
 </div>
-<p>to ensure that the documentation is completely rebuilt.</p>
+<p>to ensure that the documentation is completely rebuilt. The built documentation can then be found in <code class="docutils literal notranslate"><span class="pre">docs/_build/html</span></code>.</p>
 </div>
 <div class="section" id="editing-the-documentation">
 <h3>Editing the documentation<a class="headerlink" href="#editing-the-documentation" title="Permalink to this headline">¶</a></h3>

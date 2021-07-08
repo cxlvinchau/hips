@@ -196,7 +196,7 @@
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">AbstractDiving</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.AbstractDiving" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements an abstract version of diving heuristics_tmp. It consists of a general framework for
 branch-and-bound-tree traversal and stopping criteria. The branching criteria should be implemented in a
-corresponding subclass. This implementation roughly follows the algorithm seen in :cite:t:’2006:berthold’ on page 17.</p>
+corresponding subclass. This implementation roughly follows the algorithm seen in <span id="id1">Berthold [<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span> on page 17.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.heuristics.AbstractDiving.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.AbstractDiving.__init__" title="Permalink to this definition">¶</a></dt>
@@ -226,7 +226,7 @@ corresponding subclass. This implementation roughly follows the algorithm seen i
 <td><p>Returns the status of the heuristic, either that a solution was found, no solution was found or that the heuristic encountered an error</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hips.heuristics.AbstractDiving.revert" title="hips.heuristics.AbstractDiving.revert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">revert</span></code></a>()</p></td>
-<td><p>This method is used to revert any changes (fixing or bounding variables), that the heuristic may have applied to the model while diving down one B&amp;B tree branch.</p></td>
+<td><p>This method is used to revert any changes (fixing or bounding variables) that the heuristic may have applied to the model while diving down one B&amp;B tree branch.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hips.heuristics.AbstractDiving.variable_solution" title="hips.heuristics.AbstractDiving.variable_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_solution</span></code></a>(var)</p></td>
 <td><p>Return the solution found by the heuristic</p></td>
@@ -249,23 +249,13 @@ corresponding subclass. This implementation roughly follows the algorithm seen i
 <em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">dive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.AbstractDiving.dive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dive down the B&amp;B tree. Specific diving heuristics_tmp have to override this method according to the
 heuristics_tmp branching approach.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.heuristics.AbstractDiving.revert">
 <em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">revert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.AbstractDiving.revert" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method is used to revert any changes (fixing or bounding variables), that the heuristic may have applied
+<dd><p>This method is used to revert any changes (fixing or bounding variables) that the heuristic may have applied
 to the model while diving down one B&amp;B tree branch.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">

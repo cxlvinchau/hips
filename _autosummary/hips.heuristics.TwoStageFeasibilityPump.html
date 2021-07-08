@@ -197,7 +197,7 @@
 <dd><p>Implementation of feasibility pump with two stages</p>
 <p>This class implements a version of the feasibility pump that is applicable to general mixed integer programs, i.e.
 programs containing binary and integer variables, as proposed by <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Livio Bertacco, Matteo Fischetti, and Andrea Lodi. A feasibility pump heuristic for general mixed-integer problems. Discrete Optimization, 4(1):63-76, 2007. Mixed Integer Programming. URL: https://www.sciencedirect.com/science/article/pii/S1572528606000855, doi:https://doi.org/10.1016/j.disopt.2006.10.001.">BFL07</a>]</span>. In contrast, the original
-feasibility pump :cite:p:<a href="#id2"><span class="problematic" id="id3">`</span></a>Fischetti2005 is only designed for mixed integer programs containing binary variables only. However, note that our
+feasibility pump <span id="id2">[<a class="reference internal" href="../references.html#id4" title="Matteo Fischetti, Fred Glover, and Andrea Lodi. The feasibility pump. Mathematical Programming, 104(1):91-104, Sep 2005. URL: https://doi.org/10.1007/s10107-004-0570-3, doi:10.1007/s10107-004-0570-3.">FGL05</a>]</span> is only designed for mixed integer programs containing binary variables only. However, note that our
 implementation of the original feasibility pump is able to work with general mixed-integer programs.</p>
 <p>The basic idea of this feasibility pump is to handle binary and integer variables in two different stages. In the first stage,
 the integer variables are ignored, i.e. treated as if they were continuous, and only the binary variables are considered.
