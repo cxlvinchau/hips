@@ -1,6 +1,5 @@
 import unittest
 
-from hips.constants import LPStatus
 from hips.models._lp_model import LPModel
 from hips.models._lp_model import Variable
 from hips.solver._clp_solver import ClpSolver
@@ -37,9 +36,7 @@ class LPTest(unittest.TestCase):
         import os
         print(os.getcwd())
 
-    def test_add_remove_variable(self ): #model: LPModel
-        solver = GurobiSolver()
-        model = LPModel(solver)
+    def test_add_remove_variable(self , model):
         test_var_name = "test_var_name"
         test_dims = [1, 7, 10]
         for test_dim in test_dims:
@@ -72,7 +69,7 @@ class LPTest(unittest.TestCase):
                 self.assertEqual(len(model.vars), vars_size, "TEST4 failed: The number of variables decreased," +
                                                             " even though no variable should have been removed.")
 
-    def test_add_remove_constraint(self): #, model: LPModel
+    def test_add_remove_constraint(self):
         solver = GurobiSolver()
         model = LPModel(solver)
         test_dims = [1, 7, 10]
@@ -140,39 +137,13 @@ class LPTest(unittest.TestCase):
     def test_set_objective(self, model: LPModel):
         pass
 
-    def test_clp_scipy(self):
-
-        solver = ClpSolver()
-        model = LPModel(solver)
-        fill_model_standard_problem(model)
-        model.optimize()
-        res2 = model.get_objective_value()
-
-        message = "Scipy LP solution differs from CoinOr LP solution"
-        self.assertAlmostEqual(res1, res2, None, message, 0.001)
-
-    def test_infeasible(self):
-
-        solver = ClpSolver()
-        model = LPModel(solver)
-        fill_model_infeasible_problem(model)
-        model.optimize()
-        status = model.get_status()
-        self.assertEqual(status, LPStatus.INFEASIBLE, "Clp model returned unexpected status")
-
-        solver = GurobiSolver()
-        model = LPModel(solver)
-        fill_model_infeasible_problem(model)
-        model.optimize()
-        status = model.get_status()
-        self.assertEqual(status, LPStatus.INFEASIBLE, "Gurobi model returned unexpected status")
-
-
 if __name__ == '__main__':
-    concrete_solvers = [GurobiSolver(), ClpSolver()]
-    for concrete_solver in concrete_solvers:
-        test_model = LPModel(concrete_solver)
-        LPTest.test_add_remove_variable(test_model)
-        LPTest.test_add_remove_constraint(test_model)
-        LPTest.test_set_objective(test_model)
+    # Test with Gurobi
+    LPTest.test_add_remove_variable(LPModel(GurobiSolver()))
+    LPTest.test_add_remove_constraint(LPModel(GurobiSolver()))
+    LPTest.test_set_objective(LPModel(GurobiSolver()))
+    # Test with Clp
+    LPTest.test_add_remove_variable(LPModel(ClpSolver()))
+    LPTest.test_add_remove_constraint(LPModel(ClpSolver()))
+    LPTest.test_set_objective(LPModel(ClpSolver()))
     unittest.main()
