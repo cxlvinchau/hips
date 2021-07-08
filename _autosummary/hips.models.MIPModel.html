@@ -317,13 +317,15 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <dd><p>Checks if the all variables of the model are trivially roundable. If so, fix the variables to the rounded values
 and optimize, such that the corresponding objective value can be fetched.</p>
 <p>1. A variable <span class="math notranslate nohighlight">\(x_j\)</span> is called trivially down-roundable, if all coefficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> of the corresponding column of the
-matrix <span class="math notranslate nohighlight">\(A\)</span> are non negative, hence <span class="math notranslate nohighlight">\(A_j \geq 0\)</span>.
-2. A variable <span class="math notranslate nohighlight">\(x_j\)</span> is called trivially up-roundable, if all coefficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> of the corresponding column of the
-matrix <span class="math notranslate nohighlight">\(A\)</span> are non positive, hence <span class="math notranslate nohighlight">\(A_j \leq 0\)</span>.
-3. A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.</p>
+matrix <span class="math notranslate nohighlight">\(A\)</span> are non negative, hence <span class="math notranslate nohighlight">\(A_j \geq 0\)</span>.</p>
+<p>2. A variable <span class="math notranslate nohighlight">\(x_j\)</span> is called trivially up-roundable, if all coefficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> of the corresponding column of the
+matrix <span class="math notranslate nohighlight">\(A\)</span> are non positive, hence <span class="math notranslate nohighlight">\(A_j \leq 0\)</span>.</p>
+<ol class="arabic simple" start="3">
+<li><p>A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.</p></li>
+</ol>
 <dl class="field-list simple">
 <dt class="field-odd">Source</dt>
-<dd class="field-odd"><p>Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;</p>
+<dd class="field-odd"><p><span id="id1">[<a class="reference internal" href="../references.html#id2" title="Timo Berthold. Primal heuristics for mixed integer programs. Master's thesis, Technische Universität Berlin, 2006. URL: https://opus4.kobv.de/opus4-zib/files/1029/Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf.">Ber06</a>]</span>; Page 3, Definition 1.5;</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A tuple containing the dictionaries trivially_down_roundable, trivially_up_roundable
