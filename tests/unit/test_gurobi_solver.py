@@ -10,7 +10,8 @@ from hips.models._lp_model import Variable
 def create_gurobi_model_standard_problem() -> gb.Model:
     """Creates a gurobi model for the standard problem. Only use gurobipy methods to ensure independence of our program code."""
     model = gb.Model()
-    x, y, z = model.addVar(vtype=GRB.CONTINUOUS, name="x"), model.addVar(vtype=GRB.CONTINUOUS, name="y"), model.addVar(vtype=GRB.CONTINUOUS, name="z")
+    x, y, z = model.addVar(vtype=GRB.CONTINUOUS, name="x"), model.addVar(vtype=GRB.CONTINUOUS, name="y"), model.addVar(
+        vtype=GRB.CONTINUOUS, name="z")
     constraint1 = x + y + z <= 10
     constraint2 = x + y + z <= 20
     constraint3 = 1 * x <= 5
@@ -23,6 +24,7 @@ def create_gurobi_model_standard_problem() -> gb.Model:
     model.setObjective(10 * x + y + z)
     return model
 
+
 class GurobiSolverTest(unittest.TestCase):
 
     def test_add_remove_variable(self):
@@ -31,9 +33,11 @@ class GurobiSolverTest(unittest.TestCase):
         test_var = Variable("t", id=10)
         """Test adding a variable and immediately removing it"""
         gurobi_solver.add_variable(test_var)
-        self.assertNotEqual(gurobi_solver.model.getVarByName("var"+str(test_var.id)+"[0]"), None, "The variable could not be added to the model.")
+        self.assertNotEqual(gurobi_solver.model.getVarByName("var" + str(test_var.id) + "[0]"), None,
+                            "The variable could not be added to the model.")
         gurobi_solver.remove_variable(test_var)
-        self.assertEqual(gurobi_solver.model.getVarByName("var"+str(test_var.id)+"[0]"), None, "The variable could not be removed from the model.")
+        self.assertEqual(gurobi_solver.model.getVarByName("var" + str(test_var.id) + "[0]"), None,
+                         "The variable could not be removed from the model.")
         gurobi_solver.model = create_gurobi_model_standard_problem()
 
     def test_add_remove_constraint(self):
@@ -46,15 +50,11 @@ class GurobiSolverTest(unittest.TestCase):
         test_name = "test_constraint"
         """Test adding the constraint"""
         gurobi_solver.add_constraint(constraint=test_constraint, name=test_name)
-        self.assertNotEqual(gurobi_solver.model.getConstrByName(test_name), None, "The constraint was not added to the gurobi model")
+        self.assertNotEqual(gurobi_solver.model.getConstrByName(test_name), None,
+                            "The constraint was not added to the gurobi model")
         """Test removing the constraint"""
         gurobi_solver.remove_constraint(name=test_name)
 
     if __name__ == '__main__':
         test_add_remove_variable()
         test_add_remove_constraint()
-
-
-
-
-

@@ -51,6 +51,9 @@ class TestLPModel(unittest.TestCase):
         # Assert solution feasible
         self.assertTrue(self.model.is_feasible({var: self.model.variable_solution(var) for var in self.model.get_variables()}))
 
+    def test_add_and_remove_constraints(self):
+        self.model.add_variable("test")
+
 if __name__ == '__main__':
 
     unittest.main()

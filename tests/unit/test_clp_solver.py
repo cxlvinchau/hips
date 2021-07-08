@@ -10,7 +10,7 @@ class ClpSolverTest(unittest.TestCase):
 
     def setUp(self):
         self.solver = ClpSolver()
-        self.mip_model = MIPModel(self.solver, binary_variables=[], integer_variables=[])
+        self.mip_model = MIPModel(self.solver)
 
     def test_add_variable(self):
         return
