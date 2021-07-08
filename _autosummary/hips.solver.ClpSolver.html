@@ -114,7 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api.html#tracker">Tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -194,6 +194,11 @@
 <p>Implementation of a linear programming solver using Clp <span id="id1">[<a class="reference internal" href="../references.html#id8" title="johnjforrest, Stefan Vigerske, Ted Ralphs, Lou Hafer, jpfasano, Haroldo Gambini Santos, Matthew Saltzman, h-i-gassmann, Bjarni Kristjansson, and Alan King. Coin-or/clp: version 1.17.6. April 2020. URL: https://doi.org/10.5281/zenodo.3748677, doi:10.5281/zenodo.3748677.">jVR+20</a>]</span>, more specifically CyLP.
 Note that the ClpSolver may require special attention when it comes to removing variables because the implementation
 of CyLP is not particularly stable. See open GitHub issues: <a class="reference external" href="https://github.com/coin-or/CyLP/issues">https://github.com/coin-or/CyLP/issues</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In CyLP, when working with a one dimensional variable that is part of a higher-dimensional constraint, special attention is
+required. This is an <a class="reference external" href="https://github.com/coin-or/CyLP/issues/22">open GitHub issue</a>.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.solver.ClpSolver.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.ClpSolver.__init__" title="Permalink to this definition">¶</a></dt>

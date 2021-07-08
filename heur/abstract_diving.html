@@ -120,7 +120,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -275,7 +275,7 @@ to the closest integer value <span class="math notranslate nohighlight">\([x_j]\
 </div>
 <div class="section" id="line-search-diving">
 <h2>Line Search Diving<a class="headerlink" href="#line-search-diving" title="Permalink to this headline">¶</a></h2>
-<p>Now we consider the <strong>Line Search Diving</strong> heuristic as presented by <span id="id2">[<a class="reference internal" href="../references.html#id7" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011.">Hen11</a>]</span>. As the name suggests, this
+<p>Now we consider the <strong>Line Search Diving</strong> heuristic as presented by <span id="id2">[<a class="reference internal" href="../references.html#id7" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011. URL: https://opus4.kobv.de/opus4-zib/files/1332/bachelor_thesis_main.pdf.">Hen11</a>]</span>. As the name suggests, this
 heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
 explore a path in the branch and bound tree. In <a class="reference internal" href="../_autosummary/hips.heuristics.LineSearchDiving.html#hips.heuristics.LineSearchDiving" title="hips.heuristics.LineSearchDiving"><code class="xref py py-class docutils literal notranslate"><span class="pre">LineSearchDiving</span></code></a>, the selected variable in each step is fixed to a value.</p>
 <p>The choice of the variable that is fixed is made as follows. Suppose <span class="math notranslate nohighlight">\(x^R\)</span> is the solution found at the root

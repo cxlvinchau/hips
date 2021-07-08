@@ -115,7 +115,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api.html#tracker">Tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -203,7 +203,7 @@ two subproblems with the constraints <span class="math notranslate nohighlight">
 These subproblems are then solved with the branch and bound algorithm again. However, there is not always the need
 to branch. If the relaxation of a subproblem has a worse objective than the current best solution, also known as incumbent solution,
 then there is no need to explore this branch. This is the <cite>bound</cite> part of the procedure.</p>
-<p>More details can be found in <span id="id1">[<a class="reference internal" href="../references.html#id11" title="P. Gritzmann. Grundlagen der Mathematischen Optimierung: Diskrete Strukturen, Komplexitätstheorie, Konvexitätstheorie, Lineare Optimierung, Simplex-Algorithmus, Dualität. Aufbaukurs Mathematik. Springer Fachmedien Wiesbaden, 2013. ISBN 9783834820112. URL: https://books.google.de/books?id=KcWX\_amvzm0C.">Gri13</a>]</span>.</p>
+<p>More details can be found in <span id="id1">[<a class="reference internal" href="../references.html#id11" title="P. Gritzmann. Grundlagen der Mathematischen Optimierung: Diskrete Strukturen, Komplexitätstheorie, Konvexitätstheorie, Lineare Optimierung, Simplex-Algorithmus, Dualität. Aufbaukurs Mathematik. Springer Fachmedien Wiesbaden, 2013. ISBN 9783834820112. URL: https://www.springer.com/de/book/9783528072902.">Gri13</a>]</span>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.solver.BranchAndBound.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">incumbent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incumbent_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.solver.BranchAndBound.__init__" title="Permalink to this definition">¶</a></dt>

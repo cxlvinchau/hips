@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Developer API &mdash; HIPS 0.0.1 documentation</title>
+  <title>Developer Documentation &mdash; HIPS 0.0.1 documentation</title>
   
 
   
@@ -101,7 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heuristics.html">Heuristics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer API</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#solver-package"><code class="docutils literal notranslate"><span class="pre">solver</span></code> package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#adding-a-new-solver">Adding a new solver</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/hips.solver._abstract_solver.AbstractSolver.html">hips.solver._abstract_solver.AbstractSolver</a></li>
@@ -119,7 +119,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#the-documentation">The documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-sphinx-documentation">The Sphinx documentation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#editing-the-documentation">Editing the documentation</a></li>
@@ -176,7 +177,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Developer API</li>
+      <li>Developer Documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -195,10 +196,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="developer-api">
-<h1>Developer API<a class="headerlink" href="#developer-api" title="Permalink to this headline">¶</a></h1>
-<p>On this page, we elaborate on the concepts of HIPS and how to extend the existing functionality. Below
-the core structure of HIPS is depicted in the UML diagram.</p>
+  <div class="section" id="developer-documentation">
+<h1>Developer Documentation<a class="headerlink" href="#developer-documentation" title="Permalink to this headline">¶</a></h1>
+<p>On this page, we elaborate on the concepts of HIPS and how to extend the existing functionality. Further, we explain how
+HIPS can be tested and how the documentation can be updated and built.</p>
+<p>Below the core structure of HIPS is depicted in the UML diagram.</p>
 <img alt="_images/hips-uml.png" src="_images/hips-uml.png" />
 <p>The <code class="docutils literal notranslate"><span class="pre">solver</span></code> package contains the linear programming solvers and can easily be extended.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">models</span></code> package contains the <a class="reference internal" href="_autosummary/hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">hips.models.LPModel</span></code></a> and
@@ -277,8 +279,29 @@ used during the computations of another heuristic.</p>
 </table>
 </div>
 </div>
-<div class="section" id="the-documentation">
-<h2>The documentation<a class="headerlink" href="#the-documentation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>We have introduced two different types of tests for HIPS, <cite>unit</cite> and <cite>integration</cite> tests. The unit tests, as the name
+suggests, test various units of HIPS in a separate way. They are located in <code class="docutils literal notranslate"><span class="pre">tests/unit</span></code>. The integration tests test
+the interplay between the different components of HIPS, particularly the integration tests cover the testing of the heuristics.
+The integration tests are located in <code class="docutils literal notranslate"><span class="pre">tests/integration</span></code>.</p>
+<p>To run the tests, navigate into <code class="docutils literal notranslate"><span class="pre">src</span></code> and then run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">unittest</span> <span class="n">discover</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="n">tests</span><span class="o">/</span><span class="n">unit</span>
+</pre></div>
+</div>
+<p>to run the unit tests or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">unittest</span> <span class="n">discover</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="n">tests</span><span class="o">/</span><span class="n">integration</span>
+</pre></div>
+</div>
+<p>to run the integration tests.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Commits on the main branch trigger a <a class="reference external" href="https://github.com/cxlvinchau/hips/actions/workflows/test.yml">GitHub action</a> that automatically
+runs the unit and integration tests.</p>
+</div>
+</div>
+<div class="section" id="the-sphinx-documentation">
+<h2>The Sphinx documentation<a class="headerlink" href="#the-sphinx-documentation" title="Permalink to this headline">¶</a></h2>
 <p>It is good practice to document the code of a project and provide explanations on how to use it. The documentation of HIPS
 is generated with <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a>. Please familiarize yourself with Sphinx before working
 on the documentation.</p>

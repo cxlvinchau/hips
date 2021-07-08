@@ -1,7 +1,9 @@
-Developer API
-=============
-On this page, we elaborate on the concepts of HIPS and how to extend the existing functionality. Below
-the core structure of HIPS is depicted in the UML diagram.
+Developer Documentation
+=======================
+On this page, we elaborate on the concepts of HIPS and how to extend the existing functionality. Further, we explain how
+HIPS can be tested and how the documentation can be updated and built.
+
+Below the core structure of HIPS is depicted in the UML diagram.
 
 .. image:: img/hips-uml.png
 
@@ -81,8 +83,34 @@ used during the computations of another heuristic.
    hips.heuristics._heuristic.Heuristic
 
 
-The documentation
------------------
+Testing
+-------
+We have introduced two different types of tests for HIPS, `unit` and `integration` tests. The unit tests, as the name
+suggests, test various units of HIPS in a separate way. They are located in ``tests/unit``. The integration tests test
+the interplay between the different components of HIPS, particularly the integration tests cover the testing of the heuristics.
+The integration tests are located in ``tests/integration``.
+
+To run the tests, navigate into ``src`` and then run
+
+.. code-block::
+
+    python -m unittest discover -s ../tests/unit
+
+to run the unit tests or
+
+.. code-block::
+
+    python -m unittest discover -s ../tests/integration
+
+to run the integration tests.
+
+.. note::
+    Commits on the main branch trigger a `GitHub action <https://github.com/cxlvinchau/hips/actions/workflows/test.yml>`_ that automatically
+    runs the unit and integration tests.
+
+
+The Sphinx documentation
+------------------------
 It is good practice to document the code of a project and provide explanations on how to use it. The documentation of HIPS
 is generated with `Sphinx <https://www.sphinx-doc.org/en/master/>`_. Please familiarize yourself with Sphinx before working
 on the documentation.

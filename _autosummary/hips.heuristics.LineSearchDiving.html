@@ -120,7 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api.html#tracker">Tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_api.html">Developer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
@@ -197,7 +197,7 @@
 <dt class="sig sig-object py" id="hips.heuristics.LineSearchDiving">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.heuristics.</span></span><span class="sig-name descname"><span class="pre">LineSearchDiving</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mip_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="hips.models.MIPModel.html#hips.models.MIPModel" title="hips.models._mip_model.MIPModel"><span class="pre">hips.models._mip_model.MIPModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_best_objective</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.heuristics.LineSearchDiving" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of line search diving heuristic</p>
-<p>This class implements the line search diving heuristic as presented by <span id="id1">[<a class="reference internal" href="../references.html#id7" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011.">Hen11</a>]</span>. As the name suggests, this
+<p>This class implements the line search diving heuristic as presented by <span id="id1">[<a class="reference internal" href="../references.html#id7" title="Gregor Hendel. New rounding and propagation heuristics for mixed integer programming. 2011. URL: https://opus4.kobv.de/opus4-zib/files/1332/bachelor_thesis_main.pdf.">Hen11</a>]</span>. As the name suggests, this
 heuristic follows the general structure of a diving heuristic, i.e. bounds are introduced or variables are fixed to
 explore a branch of a branch and bound tree. In this implementation, the selected variable in each step is fixed to a value.</p>
 <p>The choice of the variable that is fixed is made as follows. Suppose <span class="math notranslate nohighlight">\(x^R\)</span> is the solution found at the root
