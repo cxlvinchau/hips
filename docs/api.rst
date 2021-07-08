@@ -86,3 +86,15 @@ HIPS makes it easy to load MPS files and even comes with example problems to get
    hips.loader.load_mps
    hips.loader.load_mps_primitive
    hips.load_problem
+
+Tracker
+_______
+This class supports methods for logging intermediate values of the heuristics and plotting them as a line graph.
+
+.. autosummary::
+   :toctree: _autosummary
+   :nosignatures:
+   :recursive:
+
+   hips.utils.Tracker
+
