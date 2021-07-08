@@ -103,11 +103,13 @@ class MIPModel:
 
         1. A variable :math:`x_j` is called trivially down-roundable, if all coefficients :math:`a_{ij}` of the corresponding column of the
         matrix :math:`A` are non negative, hence :math:`A_j \geq 0`.
+
         2. A variable :math:`x_j` is called trivially up-roundable, if all coefficients :math:`a_{ij}` of the corresponding column of the
         matrix :math:`A` are non positive, hence :math:`A_j \leq 0`.
+
         3. A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.
 
-        :Source: Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;
+        :Source: :cite:`2006:berthold`; Page 3, Definition 1.5;
 
         :return: A tuple containing the dictionaries trivially_down_roundable, trivially_up_roundable
                  trivially_down_roundable:      key: Variable, element: array(Boolean)

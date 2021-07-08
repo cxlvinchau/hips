@@ -82,5 +82,8 @@ class BoundDirection(Enum):
     Use this exclusively for HeuristicBounds!
     """
     LOWER = 0
+    """Bound variables to their lower bound"""
     UPPER = 1
+    """Bound variables to their upper bound"""
     CLOSEST = 2
+    """Bound variables to their closest bound w.r.t the relaxation solution"""

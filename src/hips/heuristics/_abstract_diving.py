@@ -116,8 +116,8 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def dive(self):
         """
-        Dive down the B&B tree. Specific diving heuristics_tmp have to override this method according to the
-        heuristics_tmp branching approach.
+        Dive down the B&B tree. Specific diving heuristics have to override this method according to the
+        heuristics branching approach.
         """
         pass
 

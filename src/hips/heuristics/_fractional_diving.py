@@ -19,7 +19,7 @@ class FractionalDiving(AbstractDiving):
 
     def dive(self):
         """
-        Compute the variable from the self.fractional_index_set with the lowest fractionality and bound it to the
+        Compute the variable from the `self.fractional_index_set` with the lowest fractionality and bound it to the
         nearest integer.
         """
         fractionality = {}
@@ -47,7 +47,7 @@ class FractionalDiving(AbstractDiving):
 
     def revert(self):
         """
-        Reverts the bounds set by the _dive() method to the start state of the heuristic.
+        Reverts the bounds set by the :func:`dive <hips.heuristics.FractionalDiving.dive>` method to the start state of the heuristic.
         """
         for var_bound, old_value in self.revert_bounds.items():
             self.relaxation.set_variable_bound(var_bound[0], var_bound[1], old_value)
