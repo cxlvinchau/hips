@@ -16,6 +16,10 @@ class ClpSolver(AbstractSolver):
     Implementation of a linear programming solver using Clp :cite:`johnjforrest_2020_3748677`, more specifically CyLP.
     Note that the ClpSolver may require special attention when it comes to removing variables because the implementation
     of CyLP is not particularly stable. See open GitHub issues: https://github.com/coin-or/CyLP/issues.
+
+    .. warning::
+        In CyLP, when working with a one dimensional variable that is part of a higher-dimensional constraint, special attention is
+        required. This is an `open GitHub issue <https://github.com/coin-or/CyLP/issues/22>`_.
     """
 
     def __init__(self):

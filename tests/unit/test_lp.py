@@ -2,12 +2,14 @@ import unittest
 
 from parameterized import parameterized_class
 
-from hips import GurobiSolver, ProblemSense, HIPSArray, ClpSolver
+from hips import GurobiSolver, ProblemSense, HIPSArray, ClpSolver, LPStatus, load_problem_gurobi
 from hips.models import LPModel
+
+import numpy as np
 
 
 @parameterized_class("solver", [[solver] for solver in [GurobiSolver, ClpSolver]])
-class TestLPModel(unittest.TestCase):
+class LPModelTest(unittest.TestCase):
 
     def setUp(self) -> None:
         """
@@ -52,7 +54,33 @@ class TestLPModel(unittest.TestCase):
         self.assertTrue(self.model.is_feasible({var: self.model.variable_solution(var) for var in self.model.get_variables()}))
 
     def test_add_and_remove_constraints(self):
-        self.model.add_variable("test")
+        for idx, dim in enumerate([1, 100, 200]):
+            # Add constr
+            x = self.model.add_variable(f"x{dim}", dim=dim)
+            constr = HIPSArray(np.identity(dim)) * x <= HIPSArray(np.ones(dim))
+            self.model.add_constraint(constr)
+            self.assertEqual(len(self.model.constraints), 1)
+            # Remove constr
+            self.model.remove_constraint(constraint=constr)
+            self.assertEqual(len(self.model.constraints), 0)
+
+    def test_unbounded_model(self):
+        x = self.model.add_variable("x", dim=2)
+        self.model.set_objective(HIPSArray([1, 1]) * x)
+        self.model.set_lp_sense(ProblemSense.MAX)
+        self.model.optimize()
+
+        self.assertEqual(self.model.get_status(), LPStatus.UNBOUNDED)
+
+    def test_infeasible_model(self):
+        x = self.model.add_variable("x", dim=2)
+        self.model.set_objective(HIPSArray([1, 1]) * x)
+        self.model.set_lp_sense(ProblemSense.MAX)
+        self.model.add_constraint(x <= -1)
+        self.model.optimize()
+
+        self.assertEqual(self.model.get_status(), LPStatus.INFEASIBLE)
+
 
 if __name__ == '__main__':
 
