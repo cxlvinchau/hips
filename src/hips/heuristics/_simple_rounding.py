@@ -15,13 +15,13 @@ class SimpleRounding(Heuristic):
 
     def compute(self, max_iter=None):
         self.relaxation.optimize()
-        if (self.relaxation.get_status() == LPStatus.INFEASIBLE):
-            raise Exception("The specified MIP's relaxation has no feasible solution.")
+        if (self.relaxation.get_status() != LPStatus.OPTIMAL):
+            raise Exception("LP relaxation does not have an optimal solution.")
         for var in self.binary + self.integer:
             var_value = self.relaxation.variable_solution(var).to_numpy()
             self._x[var] = HIPSArray(np.rint(var_value))
         if self.mip_model.is_feasible(self._x):
-            self.logger.info("SimpleRounding found an integer feasible solution")
+            self.logger.info("SimpleRounding found an integer feasible solution.")
         else:
             self.logger.info("SimpleRounding did not find an integer feasible solution.")
 

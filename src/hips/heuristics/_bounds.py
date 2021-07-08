@@ -37,6 +37,8 @@ class HeuristicBounds(Heuristic):
                 self.relaxation.set_variable_bound(int_var, VariableBound.UB, fixed_value)
         elif self.direction == BoundDirection.CLOSEST:
             self.relaxation.optimize()
+            if self.relaxation.get_status() != LPStatus.OPTIMAL:
+                raise Exception("LP relaxation does not have an optimal solution.")
             for var in self.binary + self.integer:
                 var_value = self.relaxation.variable_solution(var).to_numpy()
                 fixed_value = HIPSArray(np.rint(var_value))

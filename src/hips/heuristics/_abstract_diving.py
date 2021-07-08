@@ -47,7 +47,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
             self.iteration += 1
             self.dive()
             self.relaxation.optimize()
-            if self.relaxation.get_status() == LPStatus.INFEASIBLE:
+            if self.relaxation.get_status() != LPStatus.OPTIMAL:
                 self.logger.warn("Problem is Infeasible")
                 self.discovered_solution = None
                 return
