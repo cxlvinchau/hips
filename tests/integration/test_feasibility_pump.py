@@ -1,6 +1,7 @@
 import unittest
 from parameterized import parameterized_class
 
+from hips import load_problem_clp
 from hips.heuristics._feasibility_pump import FeasibilityPump
 from hips.constants import VarTypes
 from hips.solver import GurobiSolver, ClpSolver
@@ -83,6 +84,14 @@ class FeasibilityPumpTest(unittest.TestCase):
                 self.mip_model.add_constraint(lin_expr <= r.randint(10, 1000))
         self.mip_model.set_mip_sense(ProblemSense.MAX)
         self.fs.compute(max_iter=100)
+
+    def test_22433(self):
+        if isinstance(self.solver(), GurobiSolver):
+            return
+        mip_model = load_problem_clp("10teams")
+        # Create the Feasibility Pump
+        heur = FeasibilityPump(mip_model, t=15, seed=1)
+        heur.compute(max_iter=1000)
 
 
 if __name__ == '__main__':

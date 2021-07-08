@@ -26,7 +26,7 @@ class SimpleRoundingTest(unittest.TestCase):
 
     def test_example_1(self):
         # Create model with GurobiSolver
-        mip_model = MIPModel(GurobiSolver())
+        mip_model = MIPModel(self.concrete_solver)
         # Create variable
         x = mip_model.add_variable("x", VarTypes.INTEGER, lb=0, ub=float("inf"), dim=2)
         # Add constraints

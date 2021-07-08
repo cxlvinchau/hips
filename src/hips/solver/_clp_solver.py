@@ -8,6 +8,7 @@ from hips.constants import Comparator, VariableBound
 from hips.constants import LPStatus
 from hips.models import HIPSArray, Variable
 
+import numpy as np
 
 class ClpSolver(AbstractSolver):
     """Implementation of a linear programming solver using the Clp solver.
