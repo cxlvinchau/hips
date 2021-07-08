@@ -37,10 +37,11 @@ jobs:
         python -m xmlrunner discover -s ../tests/unit -o ../tests/junit-reports
     - name: Run integration tests
       run: |
+        cd src
         python -m xmlrunner discover -s ../tests/integration -o ../tests/junit-reports
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
       with:
-        files: ../tests/junit-reports/*.xml
+        files: tests/junit-reports/*.xml
 

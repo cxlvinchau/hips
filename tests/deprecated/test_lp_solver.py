@@ -3,10 +3,8 @@ import unittest
 from hips.constants import LPStatus
 from hips.models._lp_model import LPModel
 from hips.models._lp_model import Variable
-from hips.models import HIPSArray
 from hips.solver._clp_solver import ClpSolver
 from hips.solver._gurobi_solver import GurobiSolver
-from hips.solver._scipy_solver import ScipySolver
 
 
 def fill_model_standard_problem(model):
@@ -143,11 +141,6 @@ class LPTest(unittest.TestCase):
         pass
 
     def test_clp_scipy(self):
-        solver = ScipySolver()
-        model = LPModel(solver)
-        fill_model_standard_problem(model)
-        model.optimize()
-        res1 = model.get_objective_value()
 
         solver = ClpSolver()
         model = LPModel(solver)
@@ -159,12 +152,6 @@ class LPTest(unittest.TestCase):
         self.assertAlmostEqual(res1, res2, None, message, 0.001)
 
     def test_infeasible(self):
-        solver = ScipySolver()
-        model = LPModel(solver)
-        fill_model_infeasible_problem(model)
-        model.optimize()
-        status = model.get_status()
-        self.assertEqual(status, LPStatus.INFEASIBLE, "Scipy model returned unexpected status")
 
         solver = ClpSolver()
         model = LPModel(solver)
@@ -182,7 +169,7 @@ class LPTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    concrete_solvers = [GurobiSolver(), ClpSolver(), ScipySolver()]
+    concrete_solvers = [GurobiSolver(), ClpSolver()]
     for concrete_solver in concrete_solvers:
         test_model = LPModel(concrete_solver)
         LPTest.test_add_remove_variable(test_model)
