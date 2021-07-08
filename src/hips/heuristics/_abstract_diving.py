@@ -86,7 +86,8 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
             variable_value = self.relaxation.variable_solution(int_var)
             for i in range(int_var.dim):
                 variable_index_value = variable_value.to_numpy()[i]
-                if not is_close(variable_index_value, math.floor(variable_index_value)) and not is_close(variable_index_value, math.ceil(variable_index_value)):
+                if not is_close(variable_index_value, math.floor(variable_index_value)) and not is_close(
+                        variable_index_value, math.ceil(variable_index_value)):
                     fractional_index_set.add((int_var, i))
         self.fractional_index_set = fractional_index_set
 
@@ -99,7 +100,8 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         :return: True, if current relaxation solution is trivially roundable, else False
         """
         for frac_var in self.fractional_index_set:
-            if not self._trivially_down_roundable[frac_var[0]][frac_var[1]] and not self._trivially_up_roundable[frac_var[0]][frac_var[1]]:
+            if not self._trivially_down_roundable[frac_var[0]][frac_var[1]] and not \
+            self._trivially_up_roundable[frac_var[0]][frac_var[1]]:
                 return False
         for frac_var in self.fractional_index_set:
             # Case down-roundable:
@@ -136,7 +138,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         return self.discovered_solution
 
     def get_status(self):
-        if (self.relaxation.get_status() == LPStatus.ERROR):
+        if self.relaxation.get_status() == LPStatus.ERROR:
             return HeuristicStatus.ERROR
         elif self.discovered_solution is None:
             return HeuristicStatus.NO_SOL_FOUND

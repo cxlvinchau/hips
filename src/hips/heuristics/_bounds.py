@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 
 from hips.constants import LPStatus, VariableBound, HeuristicStatus, BoundDirection
@@ -49,7 +51,7 @@ class HeuristicBounds(Heuristic):
 
     def get_objective_value(self) -> float:
         if self.relaxation.get_status() == LPStatus.INFEASIBLE:
-            print("WARNING: The fixed variables led to an empty feasible region.")
+            warnings.warn("WARNING: The fixed variables led to an empty feasible region.")
             return float("NaN")
         return self.relaxation.get_objective_value()
 

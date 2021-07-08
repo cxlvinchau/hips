@@ -20,7 +20,7 @@ class SimpleRounding(Heuristic):
         for var in self.binary + self.integer:
             var_value = self.relaxation.variable_solution(var).to_numpy()
             self._x[var] = HIPSArray(np.rint(var_value))
-        if (self.mip_model.is_feasible(self._x)):
+        if self.mip_model.is_feasible(self._x):
             self.logger.info("SimpleRounding found an integer feasible solution")
         else:
             self.logger.info("SimpleRounding did not find an integer feasible solution.")
