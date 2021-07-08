@@ -6,7 +6,5 @@ HIPS is a Python library for heuristically solving mixed integer programs. At it
 
 HIPS is designed to be easily extensible and user-friendly. Adding new heuristics or solvers can be done by implementing the corresponding interfaces.
 
-If you are not familiar with linear or mixed-integer programming, consider reading this and this Wikipedia article.
-
 ## Authors
 Severin Bals (Technical University of Munich) and Calvin Chau (Technical University of Munich)
