@@ -10,7 +10,7 @@ class MIPModel:
 
     Represents a mixed-integer program. In contrast to the :py:class:`LPModel <hips.models.lp_model.LPModel>`, this
     class allows for specification of the variable types, i.e. continuous, binary or integer. Under the hood, the
-    :py:class:`LPModel <hips.models.lp_model.LPModel>` is used.
+    :py:class:`LPModel <hips.models.lp_model.LPModel>` is used. By default, a maximization problem is solved.
     """
 
     def __init__(self, solver):
@@ -101,12 +101,13 @@ class MIPModel:
         Checks if the all variables of the model are trivially roundable. If so, fix the variables to the rounded values
         and optimize, such that the corresponding objective value can be fetched.
 
-        1. A variable x_j is called trivially down-roundable, if all coefficients a_ij of the corresponding column of the
-        matrix A are non negative, hence A_j >= 0.
-        2. A variable x_j is called trivially up-roundable, if all coefficients a_ij of the corresponding column of the
-        matrix A are non positive, hence A_j <= 0.
+        1. A variable :math:`x_j` is called trivially down-roundable, if all coefficients :math:`a_{ij}` of the corresponding column of the
+        matrix :math:`A` are non negative, hence :math:`A_j \geq 0`.
+        2. A variable :math:`x_j` is called trivially up-roundable, if all coefficients :math:`a_{ij}` of the corresponding column of the
+        matrix :math:`A` are non positive, hence :math:`A_j \leq 0`.
         3. A variable is called trivially roundable, if it is trivially down-roundable or trivially up-roundable.
-        - Source: Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;
+
+        :Source: Berthold_Primal_Heuristics_For_Mixed_Integer_Programs.pdf; Page 3, Definition 1.5;
 
         :return: A tuple containing the dictionaries trivially_down_roundable, trivially_up_roundable
                  trivially_down_roundable:      key: Variable, element: array(Boolean)

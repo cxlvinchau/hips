@@ -208,7 +208,7 @@ A simple mixed integer program
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
 
-Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with additional constraints.
+Now, let us consider a mixed-integer program. Particularly, we consider the linear program from above with an additional constraint.
 
 .. math::
     \begin{array}{lr@{}c@{}r@{}l}
@@ -253,7 +253,7 @@ solver for optimization.
 
 Note that we have added an upper bound for variable ``x_1``. In HIPS it is necessary to add bounds to integer variables
 because many heuristics explicitly require bounds. However, this does not actually impose a limitation, as also mentioned in
-:cite:`Fischetti2005`, because solvable mixed-integer programs cannot have unbounded variables.
+:cite:`Fischetti2005`, because an optimal solution to a solvable mixed-integer program has to be finite.
 
 Solving the program using branch and bound
 __________________________________________
@@ -286,25 +286,25 @@ Loading .mps files
         <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
 
-The previous chapters introduced how to explicitely create an MIP model.
-This approach is inpractical for most real-life problems, since the number of variable and constraints in those models can
-be very large. Therefore the HIPS module contains a Loader class, that can read models from MPS files.
+The previous sections introduced how to explicitly create an MIP model.
+This approach is impractical for most real-life problems, since the number of variable and constraints in those models can
+be very large. Therefore, HIPS provides utility functions to read models from MPS files.
 
-MPS (Mathematical Programming System) is a file format for representing linear and mixed integer problem and is a standard in most commercial and open source
-solvers. It is column-oriented which makes it rather human-inreadable. An elaborate explanation of the format and its various
+MPS (Mathematical Programming System) is a file format for representing linear and mixed-integer problem and is a standard in most commercial and open-source
+solvers. It is column-oriented which makes it rather difficult to read for humans. An elaborate explanation of the format and its various
 header sections can be found in :cite:`the official Gurobi documentation<gurobi-mps>`. It should be noted, that the optimization
-sense is not specifiable in the MPS format and thus has to be set manually after loading.
+sense is not specifiable in the MPS format and, thus, has to be set manually after loading.
 
-There are two helper functions implemented in HIPS for loading an :class:`MIPModel <hips.models.MIPModel>` from an MPS file.
+There are two utility functions implemented in HIPS for loading an MPS file into a :class:`MIPModel <hips.models.MIPModel>`.
 
 The :func:`primitive loader<hips.loader.load_mps_primitive>` loads every variable of the MPS file specified
-in the *path* parameter as a 1-dimensional variable. The specified *path* is concatenated with the current
+in the ``path`` parameter as a 1-dimensional variable. The specified ``path`` is concatenated with the current
 working directory. This loader version can be used for easy understanding and debugging of the created model. However
 the runtime of this loader suffers from computational inefficiency.
 
 The second :func:`loader<hips.loader.load_mps>` loads the continuous, integer and binary variables as
-multidimensional variables. This allows the underlying solvers to make use of vectorization. Therefore this loader is
-much more runtime efficient than the primitive version.
+multidimensional variables. This allows the underlying solvers to make use of vectorization. Therefore, this loader is
+much more efficient than the primitive version.
 
 We can use the MPS loader in HIPS as follows:
 
@@ -313,6 +313,7 @@ We can use the MPS loader in HIPS as follows:
     from hips.solver import ClpSolver
     from hips.models import MIPModel
     from hips.loader import load_mps
+    from hips import ProblemSense
 
     # create an mip model with an underlying solver
     model = MIPModel(ClpSolver())
@@ -337,3 +338,31 @@ As shown above, we run the following lines to optimize the loaded model with bra
 
     # Print objective value
     bb.get_incumbent_val()
+
+Example mixed-integer programs from MIPLIB2017
+----------------------------------------------
+The MIPLIB2017 :cite:`miplib2017` is a collection of real-world mixed-integer programs. HIPS already comes with a selection
+of problems from the collection to help you get started faster.
+
+The following problems can be easily loaded:
+
+- ``10teams`` (https://miplib.zib.de/instance_details_10teams.html)
+- ``bppc8-02`` (http://miplib2017.zib.de/instance_details_bppc8-02.html)
+- ``flugpl`` (http://miplib2017.zib.de/instance_details_flugpl.html)
+- ``gen-ip054`` (https://miplib2017.zib.de/instance_details_gen-ip054.html)
+- ``gr4x6`` (https://miplib.zib.de/instance_details_gr4x6.html)
+- ``osorio-cta`` (http://miplib.zib.de/instance_details_osorio-cta.html)
+- ``22433`` (https://miplib.zib.de/instance_details_22433.html)
+
+We would like to thank the authors and people involved for their contribution and would like to emphasize that they are not linked to or involved in HIPS,
+nor do they endorse HIPS. The examples are licensed under Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/).
+
+In order to load a problem, we simply pass the problem name to :func:`hips.load_problem` and it automatically returns a :class:`MIPModel <hips.models.MIPModel>`
+containing the problem. By default, the function tries to use the :class:`hips.solver.GurobiSolver`. If this fails, the :class:`hips.solver.ClpSolver` is used.
+The code below loads the ``10teams`` problem.
+
+.. code-block:: python
+
+    from hips import load_problem
+
+    mip_model = load_problem("10teams")

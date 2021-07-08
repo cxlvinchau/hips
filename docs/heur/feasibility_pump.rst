@@ -43,14 +43,14 @@ This computation sequence is expressed by the following pseudo-algorithmic schem
 .. image:: ../img/pseudo_algorithm_fs.png
 
 Obviously a big difficulty of the **Feasibility Pump** is the chance of entering cylces, when reaching the same :math:`\tilde{x}`
-twice. This means that the algorithm gets stuck and will never acquire as feasible solution. The easiest way to deal with this problem
+twice. This means that the algorithm gets stuck and will never acquire a feasible solution. The easiest way to deal with this problem
 is to perturb some of the integer variables in cases a cylce is detected.
-The implementation in the :class:`Feasibility Pump<hips.heuristics._feasibility_pump.FeasibilityPump>` maintains two types
+The implementation in the :class:`FeasibilityPump <hips.heuristics.FeasibilityPump>` maintains two types
 of cylce detection. The perturbation actions follow the rules described by Fischetti et al. :cite:`Fischetti2005`.
 
 In case we reach a cycle of length 1 (i.e. :math:`\tilde{x}^{(i)}` = :math:`\tilde{x}^{(i+1)}`) in the algorithm, the
-T binary variables of the current integer solution :math:`\tilde{x}` with highest distance :math:`|{x\text{*}}_j - \tilde{x}_j|` are flipped for the calculation of the next
-:math:`\bar{x}`. The number T of variables to flip is uniformly chosen from the range :math:`( \lfloor \frac{t}{2} \rfloor , \lfloor 1.5t \rfloor )`.
+:math:`T` binary variables of the current integer solution :math:`\tilde{x}` with highest distance :math:`|{x\text{*}}_j - \tilde{x}_j|` are flipped for the calculation of the next
+:math:`\bar{x}`. The number :math:`T` of variables to flip is uniformly chosen from the range :math:`( \lfloor \frac{t}{2} \rfloor , \lfloor 1.5t \rfloor )`.
 The parameter :math:`t` can be specified when initializing the **Feasibility Pump**. By default :math:`t` will be assigned with :math:`\lceil \frac{n}{2} \rceil`,
 with :math:`n` the number of binary variables in the model.
 
@@ -59,9 +59,11 @@ each binary variable :math:`x_j` with :math:`j \in I`. We then decide for each o
 if :math:`|{x\text{*}}_j - \tilde{x}_j| + max(0, {\rho}_j) > 0.5`.
 
 To find a high quality solution, the implementation offers the possibility to add a constraint
-that ensures that the original objective function is still considered. The parameter :math:`\alpha` can be set on initialization
-of the **Feasibility Pump** as a value between 0 and 1, corresponding to how much we take the original objective function into consideration.
-The higher the :math:`\alpha`, the more we optimize towards the original objective.
+that ensures that the original objective function is still considered. In the case of a minimization problem a
+constraint :math:`c^\top x \leq \alpha \cdot c^\top \bar x^{(0)} + (1-\alpha) \cdot c^\top \bar x` is introduced, where :math:`\bar x`
+corresponds to the current LP feasible solution. Note that in the case of maximization, we have :math:`\geq` instead of :math:`\leq`.
+The parameter :math:`\alpha` can be set on initialization of the **Feasibility Pump** as a value between 0 and 1,
+corresponding to how much we take the original objective function into consideration. The higher the :math:`\alpha`, the more we optimize towards the original objective.
 
 Example 1
 ---------
@@ -93,7 +95,7 @@ A more detailed version of the example can be found on Google Colab.
 The figure below depicts the feasibility objective during a single run of the feasibility pump. Recall that the objective
 in the feasibility pump corresponds to the L1 distance between the LP solution and the rounded solution.
 
-.. image:: ../img/fp-objective.png
+.. image:: ../img/fp-objective-10teams.png
 
 Observe that the objective value decreases and suddenly increases after the 400th iteration. This indicates that the feasibility
 pump got stuck and perturbed the values to resolve the cycle. Consequently, the objective value is suddenly increased.
@@ -123,3 +125,9 @@ Now we consider another problem, namely the `22433 <https://miplib.zib.de/instan
     print("Status: {}".format(heur.get_status()))
     print("Found solution: {}".format(heur.get_objective_value()))
     heur.tracker.plot("feasibility objective")
+
+
+.. image:: ../img/fp-objective-22433.png
+
+In this example a solution is found much quicker. It can be seen that the fluctuations are not as strong as in the previous
+example.

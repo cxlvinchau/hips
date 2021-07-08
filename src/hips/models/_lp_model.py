@@ -8,7 +8,7 @@ class LPModel:
     """Representation of a linear program
 
     This class implements a representation of a linear program. It provides a simple interface to create, update and
-    optimize linear programs.
+    optimize linear programs. By default, a maximization problem is solved.
     """
 
     def __init__(self, lp_solver):
