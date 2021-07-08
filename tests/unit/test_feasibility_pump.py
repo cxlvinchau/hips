@@ -41,7 +41,7 @@ class FeasibilityPumpTest(unittest.TestCase):
         x = self.mip_model.add_variable("x", var_type=VarTypes.BINARY, lb=4, ub=10, dim=50)
         y = self.mip_model.add_variable("y", var_type=VarTypes.BINARY, dim=60)
         self.mip_model.add_constraint(HIPSArray(np.identity(50)) * x + HIPSArray((50, 60)) * y <= 10)
-        self.mip_model.set_objective(x + y)
+        self.mip_model.set_objective(x)
         self.mip_model.set_mip_sense(ProblemSense.MIN)
         # Run feasibility pump
         self.fs.compute(max_iter=10)
