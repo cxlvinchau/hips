@@ -1,42 +1,14 @@
 import unittest
 
-from hips.models._lp_model import LPModel
-from hips.models._lp_model import Variable
-from hips.solver._clp_solver import ClpSolver
-from hips.solver._gurobi_solver import GurobiSolver
-
-
-def fill_model_standard_problem(model):
-    x, y, z = model.add_variable("x"), model.add_variable("y"), model.add_variable("z")
-    constraint = x + y + z <= 10
-    constraint2 = x + y + z <= 20
-    constraint3 = 1 * x <= 5
-    model.add_constraint(constraint)
-    model.add_constraint(constraint2)
-    model.add_constraint(constraint3)
-    model.add_constraint(1 * x >= 0)
-    model.add_constraint(1 * y >= 0)
-    model.add_constraint(1 * z >= 0)
-    model.set_objective(10 * x + y + z)
-    return [x, y, z]
-
-def fill_model_infeasible_problem(model):
-    x = model.add_variable("x")
-    y = model.add_variable("y")
-    model.add_constraint(1*x >= 2)
-    model.add_constraint(1*x <= 1)
-    model.add_constraint(1*y <= 10)
-    model.set_objective(10.0*x + y)
-    return x
+from hips.models import LPModel
+from hips.models import Variable
+from hips.solver import GurobiSolver
 
 
 class LPTest(unittest.TestCase):
 
-    def test_t(self):
-        import os
-        print(os.getcwd())
-
-    def test_add_remove_variable(self , model):
+    def test_add_remove_variable(self):
+        model = LPModel(GurobiSolver())
         test_var_name = "test_var_name"
         test_dims = [1, 7, 10]
         for test_dim in test_dims:
@@ -70,8 +42,7 @@ class LPTest(unittest.TestCase):
                                                             " even though no variable should have been removed.")
 
     def test_add_remove_constraint(self):
-        solver = GurobiSolver()
-        model = LPModel(solver)
+        model = LPModel(GurobiSolver())
         test_dims = [1, 7, 10]
         for test_dim in test_dims:
             test_constraint_name = "test_constraint_name"
@@ -134,16 +105,6 @@ class LPTest(unittest.TestCase):
             """TEST CLEANUP"""
             model.remove_variable(test_var)
 
-    def test_set_objective(self, model: LPModel):
-        pass
 
 if __name__ == '__main__':
-    # Test with Gurobi
-    LPTest.test_add_remove_variable(LPModel(GurobiSolver()))
-    LPTest.test_add_remove_constraint(LPModel(GurobiSolver()))
-    LPTest.test_set_objective(LPModel(GurobiSolver()))
-    # Test with Clp
-    LPTest.test_add_remove_variable(LPModel(ClpSolver()))
-    LPTest.test_add_remove_constraint(LPModel(ClpSolver()))
-    LPTest.test_set_objective(LPModel(ClpSolver()))
     unittest.main()
