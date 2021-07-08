@@ -7,7 +7,7 @@ from hips.models import MIPModel, Variable, HIPSArray
 
 class HeuristicBounds(Heuristic):
     """
-    This heuristic is implemented after the scipopt primal heuristic 'heur_bounds.h'.
+    This heuristic is implemented according to the scipopt primal heuristic 'heur_bounds.h'.
     The scipopt library describes this as a "heuristic which fixes all integer variables to a bound (lower/upper) and solves the remaining LP ".
 
     The heuristic can be found in the scipopt library documentation under the following link:

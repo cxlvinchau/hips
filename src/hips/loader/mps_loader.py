@@ -29,8 +29,8 @@ def load_mps_primitive(mip_model: MIPModel, path):
     """
     Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.
     This method only uses 1-dimensional variables to create the model.
-    If the specified .mps file does not contain a 'BOUNDS' section, standard bounds x ∈ [0,inf) are set.
-    Makes use of the library :py:`pysmps <pysmps.smps_loader.py>`.
+    If the specified .mps file does not contain a 'BOUNDS' section, standard bounds :math:`x \in [0,\infty)` are set.
+    Makes use of the `pysmps <https://github.com/jmaerte/pysmps>`_ library.
 
     :param mip_model: The mip_model, in which the MIP problem should be loaded.
     :param path: The path to the .mps file. This can be either relative to the current working directory or absolute.
@@ -79,8 +79,8 @@ def load_mps(mip_model: MIPModel, path):
     """
     Loads a MIP problem in MPS or COR format into the given mip_model, specified by either the absolute or relative path.
     This method uses multidimensional variables to create the model.
-    If the specified .mps file does not contain a 'BOUNDS' section, standard bounds x ∈ [0,inf) are set.
-    Makes use of the library :py:`pysmps <pysmps.smps_loader.py>`.
+    If the specified .mps file does not contain a `BOUNDS` section, standard bounds :math:`x \in [0,\infty)` are set.
+    Makes use of the `pysmps <https://github.com/jmaerte/pysmps>`_ library.
 
     :param mip_model: The mip_model, in which the MIP problem should be loaded.
     :param path: The path to the .mps file. This can be either relative to the current working directory or absolute.

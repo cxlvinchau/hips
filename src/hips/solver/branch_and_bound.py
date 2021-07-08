@@ -10,7 +10,7 @@ class BranchAndBound:
     r"""Implementation of a naive branch and bound algorithm.
 
     This class implements a naive branch and bound algorithm for solving mixed-integer programs. As the name suggests,
-    the procedure consist of two main parts, the branching and the bounding. Note that the branch and bound algorithm
+    the procedure consists of two main parts, the branching and the bounding. Note that the branch and bound algorithm
     delivers the optimal solution of the problem.
 
     W.l.o.g., suppose we want to solve a mixed-integer program with the feasible region :math:`Ax \leq b` where we require

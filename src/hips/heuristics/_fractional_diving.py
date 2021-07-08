@@ -21,8 +21,6 @@ class FractionalDiving(AbstractDiving):
         """
         Compute the variable from the self.fractional_index_set with the lowest fractionality and bound it to the
         nearest integer.
-
-        :return:
         """
         fractionality = {}
         for frac_var in self.fractional_index_set:
@@ -50,8 +48,6 @@ class FractionalDiving(AbstractDiving):
     def revert(self):
         """
         Reverts the bounds set by the _dive() method to the start state of the heuristic.
-
-        :return:
         """
         for var_bound, old_value in self.revert_bounds.items():
             self.relaxation.set_variable_bound(var_bound[0], var_bound[1], old_value)

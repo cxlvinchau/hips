@@ -33,7 +33,6 @@ class RENS(Heuristic):
         Execute the computation of RENS
 
         :param max_iter: The maximum number of nodes that are visited in the Branch and Bound search.
-        :return:
         """
         # Compute relaxation
         self.relaxation.optimize()

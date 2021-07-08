@@ -11,7 +11,7 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
     """
     Implements an abstract version of diving heuristics_tmp. It consists of a general framework for
     branch-and-bound-tree traversal and stopping criteria. The branching criteria should be implemented in a
-    corresponding subclass. This implementation roughly follows the algorithm seen in :cite:t:'2006:berthold' on page 17.
+    corresponding subclass. This implementation roughly follows the algorithm seen in :cite:t:`2006:berthold` on page 17.
     """
 
     def __init__(self, mip_model: MIPModel, current_best_objective: float = None):
@@ -118,18 +118,14 @@ class AbstractDiving(Heuristic, metaclass=abc.ABCMeta):
         """
         Dive down the B&B tree. Specific diving heuristics_tmp have to override this method according to the
         heuristics_tmp branching approach.
-
-        :return:
         """
         pass
 
     @abc.abstractmethod
     def revert(self):
         """
-        This method is used to revert any changes (fixing or bounding variables), that the heuristic may have applied
+        This method is used to revert any changes (fixing or bounding variables) that the heuristic may have applied
         to the model while diving down one B&B tree branch.
-
-        :return:
         """
         pass
 

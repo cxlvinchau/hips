@@ -62,13 +62,13 @@ When implementing new diving heuristics, it might be more appropriate to inherit
 Particularly, only the :func:`hips.heuristics._abstract_diving.AbstractDiving.dive` and
 :func:`hips.heuristics._abstract_diving.AbstractDiving.revert` methods need to be overriden.
 
-The *dive* method should be overwritten to follow the specific branching condition of the diving heuristic to be implemented.
+The *dive* method should be overridden to follow the specific branching condition of the diving heuristic to be implemented.
 This means :func:`adding <hips.models._mip_model.MIPModel.add_constraint>` either a new constraint or
 :func:`setting <hips.models._lp_model.LPModel.set_variable_bound>` the bound of a variable to restrict the feasible region
 to the corresponding subproblem.
 
 The *revert* method should be implemented to revert the MIP model to the state before any diving has happened. This method will
-be called at the end of a diving heuristic run, independent of the outcome. This behaviour is vital in case the heuristic would be
+be called at the end of a diving heuristic run, independent of the outcome. This behaviour is vital in case the heuristic is
 used during the computations of another heuristic.
 
 
@@ -107,7 +107,7 @@ or
 
     make clean html
 
-to ensure that the documentation is completely rebuilt.
+to ensure that the documentation is completely rebuilt. The built documentation can then be found in ``docs/_build/html``.
 
 Editing the documentation
 _________________________

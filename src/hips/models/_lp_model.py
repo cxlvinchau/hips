@@ -549,7 +549,7 @@ class HIPSArray:
         Constructor
 
         :param arg: Either an array-like object or a :class:`tuple`. In the former case the created :class:`hips.models.HIPSArray`
-            object's array will correspond the argument. In the latter case, the instance contains an array with ones with specified
+            object's array will correspond to the argument. In the latter case, the instance contains an array with ones with specified
             shape
         """
         if type(arg) in [list, np.ndarray]:

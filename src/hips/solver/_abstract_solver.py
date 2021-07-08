@@ -28,7 +28,6 @@ class AbstractSolver(ABC):
 
         :param name: Name of the constraint
         :param constraint: Constraint to be deleted
-        :return:
         """
 
     @abstractmethod
