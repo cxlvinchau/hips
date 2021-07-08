@@ -39,9 +39,11 @@ jobs:
       run: |
         cd src
         python -m xmlrunner discover -s ../tests/integration -o ../tests/junit-reports
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
-      if: always()
-      with:
-        files: tests/junit-reports/*.xml
+    - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: JEST Tests            # Name of the check run which will be created
+          path: tests/junit-reports/*.xml    # Path to test results
+          reporter: jest-junit        #
 
