@@ -20,7 +20,7 @@ class Heuristic(metaclass=abc.ABCMeta):
     """
 
     def __init__(self, mip_model: MIPModel):
-        self.logger = logging.getLogger("heuristics_tmp")
+        self.logger = logging.getLogger("heuristics")
         self.mip_model = mip_model
         self.relaxation = mip_model.lp_model
         self.binary = mip_model.binary_variables

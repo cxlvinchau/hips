@@ -3,7 +3,7 @@ from hips import GUROBI_AVAILABLE, CLP_AVAILABLE
 
 def skip_when_clp_solver(func):
     """
-    Decorator to be used in heuristics_tmp when certain steps need to be skipped for ClpSolver because of compatibility
+    Decorator to be used in heuristics when certain steps need to be skipped for ClpSolver because of compatibility
     reasons
     :param func: The function to be decorated
     :return: function

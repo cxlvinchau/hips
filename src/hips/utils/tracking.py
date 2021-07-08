@@ -6,7 +6,7 @@ import numpy as np
 
 class Tracker:
     """
-    Utility class to track heuristics_tmp
+    Utility class to track heuristics
     """
 
     def __init__(self, heuristic):
