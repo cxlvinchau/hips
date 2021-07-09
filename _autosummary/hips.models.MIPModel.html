@@ -195,9 +195,9 @@
 <dt class="sig sig-object py" id="hips.models.MIPModel">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hips.models.</span></span><span class="sig-name descname"><span class="pre">MIPModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representation of a mixed-integer program</p>
-<p>Represents a mixed-integer program. In contrast to the <code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code>, this
+<p>Represents a mixed-integer program. In contrast to the <a class="reference internal" href="hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code></a>, this
 class allows for specification of the variable types, i.e. continuous, binary or integer. Under the hood, the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code> is used. By default, a maximization problem is solved.</p>
+<a class="reference internal" href="hips.models.LPModel.html#hips.models.LPModel" title="hips.models.LPModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LPModel</span></code></a> is used. By default, a maximization problem is solved.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hips.models.MIPModel.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hips.models.MIPModel.__init__" title="Permalink to this definition">¶</a></dt>
@@ -251,7 +251,7 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <dd><p>Adds a linear constraint to the mixed-integer program.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>constraint</strong> – Constraint of type <code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></p>
+<dd class="field-odd"><p><strong>constraint</strong> – Constraint of type <a class="reference internal" href="hips.models.Constraint.html#hips.models.Constraint" title="hips.models.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -264,14 +264,14 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – Name of the variable</p></li>
-<li><p><strong>var_type</strong> – Type of the variable, either continuous, binary or integer. See <a class="reference internal" href="hips.VarTypes.html#hips.VarTypes" title="hips.constants.VarTypes"><code class="xref py py-class docutils literal notranslate"><span class="pre">VarTypes</span></code></a>.</p></li>
+<li><p><strong>var_type</strong> – Type of the variable, either continuous, binary or integer. See <a class="reference internal" href="hips.VarTypes.html#hips.VarTypes" title="hips.VarTypes"><code class="xref py py-class docutils literal notranslate"><span class="pre">VarTypes</span></code></a>.</p></li>
 <li><p><strong>lb</strong> – Lower bound of the variable, by default 0.</p></li>
 <li><p><strong>ub</strong> – Upper bound of the variable, by default the variable is unbounded. Note that an integer variable has to be bounded from above.</p></li>
 <li><p><strong>dim</strong> – dimension of the variable, by default 1</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A variable, instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></p>
+<dd class="field-even"><p>A variable, instance of <a class="reference internal" href="hips.models.Variable.html#hips.models.Variable" title="hips.models.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -282,7 +282,7 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <dd><p>Sets the objective function of the mixed-integer program.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>objective</strong> – A linear expression of type <code class="xref py py-class docutils literal notranslate"><span class="pre">LinExpr</span></code></p>
+<dd class="field-odd"><p><strong>objective</strong> – A linear expression of type <a class="reference internal" href="hips.models.LinExpr.html#hips.models.LinExpr" title="hips.models.LinExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinExpr</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -293,7 +293,7 @@ class allows for specification of the variable types, i.e. continuous, binary or
 <dd><p>Sets the type of the mixed-integer program.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mip_sense</strong> – Specifies the sense of the linear program, see <a class="reference internal" href="hips.ProblemSense.html#hips.ProblemSense" title="hips.constants.ProblemSense"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProblemSense</span></code></a></p>
+<dd class="field-odd"><p><strong>mip_sense</strong> – Specifies the sense of the linear program, see <a class="reference internal" href="hips.ProblemSense.html#hips.ProblemSense" title="hips.ProblemSense"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProblemSense</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
