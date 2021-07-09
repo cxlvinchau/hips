@@ -55,7 +55,7 @@ class AbstractSolver(ABC):
         :param bound: Specifies if the lower (VariableBound.LB) or upper (VariableBound.UB) bound is set. Either
             :attr:`hips.VariableBound.LB` or :attr:`hips.VariableBound.UB`.
         :param value: The value to set as the new bound on the variable. Needs to be an instance of
-            :class:`HIPSArray <hips.models.HIPSArrays>`.
+            :class:`HIPSArray <hips.models.HIPSArray>`.
         """
 
     def set_objective(self, objective: LinExpr):
@@ -68,9 +68,9 @@ class AbstractSolver(ABC):
 
     def set_lp_sense(self, lp_sense: ProblemSense):
         """
-        Sets the type of the LP, either LPSense.MAX or LPSense.MIN
+        Sets the type of the LP, either ProblemSense.MAX or ProblemSense.MIN
 
-        :param lp_sense: Either :class:`LPSense.MAX <hips.constants.LPSense>` or :class:`LPSense.MIN <hips.constants.LPSense>`
+        :param lp_sense: Either :class:`ProblemSense.MAX <hips.ProblemSense>` or :class:`ProblemSense.MIN <hips.ProblemSense>`
         """
         self.lp_sense = lp_sense
 

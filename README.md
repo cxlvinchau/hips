@@ -1,10 +1,9 @@
 # HIPS
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Documentation](https://github.com/cxlvinchau/hips/actions/workflows/main.yml/badge.svg)](https://cxlvinchau.github.io/hips) [![Test](https://github.com/cxlvinchau/hips/actions/workflows/test.yml/badge.svg)](https://github.com/cxlvinchau/hips/actions/workflows/test.yml) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/cxlvinchau/hips-examples/blob/main/notebooks/mip-example.ipynb)
 
+HIPS is a Python library that implements various well-established heuristics for mixed-integer programming, e.g. the feasibility pump [[FGL05]](https://cxlvinchau.github.io/hips/references.html#id4), RENS [[Ber13]](https://cxlvinchau.github.io/hips/references.html#id6) and multiple diving heuristics. Since many heuristics rely on a linear programming solver, HIPS implements wrappers for powerful solvers like Gurobi [[GurobiOptimizationLLC21]](https://cxlvinchau.github.io/hips/references.html#id9) and Clp [[jVR+20]](https://cxlvinchau.github.io/hips/references.html#id8). Thus, a great strength of HIPS is its ability to switch solvers for different use cases.
 
-HIPS is a Python library for heuristically solving mixed integer programs. At its core, HIPS implements various well-established heuristics for mixed-integer programming, e.g. the feasibility pump [[FGL05]](https://cxlvinchau.github.io/hips/references.html#id4), RENS [[Ber13]](https://cxlvinchau.github.io/hips/references.html#id6) and various diving heuristics. Further, HIPS implements wrappers for popular linear programming solvers like Gurobi [[GurobiOptimizationLLC21]](https://cxlvinchau.github.io/hips/references.html#id9) and Clp [[jVR+20]](https://cxlvinchau.github.io/hips/references.html#id8), and thereby allows for easily switching solvers.
-
-HIPS is designed to be easily extensible and user-friendly. Adding new heuristics or solvers can be done by implementing the corresponding interfaces.
+Primarily, HIPS is targeted at an academic audience and facilitates the implementation of new heuristics. It is designed to be easily extensible and user-friendly. Further, it is straightforward to add new linear programming solvers by implementing the corresponding interface.
 
 ## Authors
 Severin Bals (Technical University of Munich) and Calvin Chau (Technical University of Munich)

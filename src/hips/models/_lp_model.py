@@ -157,7 +157,7 @@ class LPModel:
 
         This method specifies the sense of the linear program, i.e. whether the program should be minimized or maximized.
 
-        :param lp_sense: The sense of the linear program. Enum of :class:`hips.constants.ProblemSense`
+        :param lp_sense: The sense of the linear program. Enum of :class:`hips.ProblemSense`
         """
         if lp_sense not in [ProblemSense.MAX, ProblemSense.MIN]:
             raise Exception("Illegal LP type")

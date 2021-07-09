@@ -8,9 +8,9 @@ import math
 class MIPModel:
     """Representation of a mixed-integer program
 
-    Represents a mixed-integer program. In contrast to the :py:class:`LPModel <hips.models.lp_model.LPModel>`, this
+    Represents a mixed-integer program. In contrast to the :py:class:`LPModel <hips.models.LPModel>`, this
     class allows for specification of the variable types, i.e. continuous, binary or integer. Under the hood, the
-    :py:class:`LPModel <hips.models.lp_model.LPModel>` is used. By default, a maximization problem is solved.
+    :py:class:`LPModel <hips.models.LPModel>` is used. By default, a maximization problem is solved.
     """
 
     def __init__(self, solver):
@@ -27,7 +27,7 @@ class MIPModel:
         """
         Adds a linear constraint to the mixed-integer program.
 
-        :param constraint: Constraint of type :py:class:`Constraint <hips.models.lp_model.Constraint>`
+        :param constraint: Constraint of type :py:class:`Constraint <hips.models.Constraint>`
         """
         self.lp_model.add_constraint(constraint)
 
@@ -36,11 +36,11 @@ class MIPModel:
         Adds a variable to the mixed-integer program.
 
         :param name: Name of the variable
-        :param var_type: Type of the variable, either continuous, binary or integer. See :py:class:`VarTypes <hips.constants.VarTypes>`.
+        :param var_type: Type of the variable, either continuous, binary or integer. See :py:class:`VarTypes <hips.VarTypes>`.
         :param lb: Lower bound of the variable, by default 0.
         :param ub: Upper bound of the variable, by default the variable is unbounded. Note that an integer variable has to be bounded from above.
         :param dim: dimension of the variable, by default 1
-        :return: A variable, instance of :py:class:`Variable <hips.models.lp_model.Variable>`
+        :return: A variable, instance of :py:class:`Variable <hips.models.Variable>`
         """
         # Set bounds for binary variables
         if var_type == VarTypes.BINARY:
@@ -59,7 +59,7 @@ class MIPModel:
         """
         Sets the objective function of the mixed-integer program.
 
-        :param objective: A linear expression of type :py:class:`LinExpr <hips.models.lp_model.LinExpr>`
+        :param objective: A linear expression of type :py:class:`LinExpr <hips.models.LinExpr>`
         """
         self.lp_model.set_objective(objective)
 
@@ -67,7 +67,7 @@ class MIPModel:
         """
         Sets the type of the mixed-integer program.
 
-        :param mip_sense: Specifies the sense of the linear program, see :py:class:`ProblemSense <hips.constants.ProblemSense>`
+        :param mip_sense: Specifies the sense of the linear program, see :py:class:`ProblemSense <hips.ProblemSense>`
         """
         self.lp_model.set_lp_sense(mip_sense)
 
