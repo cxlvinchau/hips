@@ -56,7 +56,7 @@ with :math:`n` the number of binary variables in the model.
 
 In case a cycle of length :math:`1 < l \le 3` is detected, we uniformly choose a value :math:`{\rho}_j \in [-0.3, 0.7]` for
 each binary variable :math:`x_j` with :math:`j \in I`. We then decide for each of those variables to flip the corresponding :math:`\tilde{x}_j`
-if :math:`|{x\text{*}}_j - \tilde{x}_j| + max(0, {\rho}_j) > 0.5`.
+if :math:`|{x\text{*}}_j - \tilde{x}_j| + \max{}(0, {\rho}_j) > 0.5`.
 
 To find a high quality solution, the implementation offers the possibility to add a constraint
 that ensures that the original objective function is still considered. In the case of a minimization problem a
