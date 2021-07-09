@@ -228,7 +228,7 @@ The parameter <span class="math notranslate nohighlight">\(t\)</span> can be spe
 with <span class="math notranslate nohighlight">\(n\)</span> the number of binary variables in the model.</p>
 <p>In case a cycle of length <span class="math notranslate nohighlight">\(1 &lt; l \le 3\)</span> is detected, we uniformly choose a value <span class="math notranslate nohighlight">\({\rho}_j \in [-0.3, 0.7]\)</span> for
 each binary variable <span class="math notranslate nohighlight">\(x_j\)</span> with <span class="math notranslate nohighlight">\(j \in I\)</span>. We then decide for each of those variables to flip the corresponding <span class="math notranslate nohighlight">\(\tilde{x}_j\)</span>
-if <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j| + max(0, {\rho}_j) &gt; 0.5\)</span>.</p>
+if <span class="math notranslate nohighlight">\(|{x\text{*}}_j - \tilde{x}_j| + \max{}(0, {\rho}_j) &gt; 0.5\)</span>.</p>
 <p>To find a high quality solution, the implementation offers the possibility to add a constraint
 that ensures that the original objective function is still considered. In the case of a minimization problem a
 constraint <span class="math notranslate nohighlight">\(c^\top x \leq \alpha \cdot c^\top \bar x^{(0)} + (1-\alpha) \cdot c^\top \bar x\)</span> is introduced, where <span class="math notranslate nohighlight">\(\bar x\)</span>
